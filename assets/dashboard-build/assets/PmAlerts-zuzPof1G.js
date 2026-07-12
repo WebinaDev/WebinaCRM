@@ -1,0 +1,1 @@
+import{nt as e,rt as t,sr as n}from"./dashboard-shared-D_JWNhgb.js";var r=n();function i({error:n,success:i}){return(0,r.jsxs)(r.Fragment,{children:[n?(0,r.jsx)(e,{variant:`destructive`,children:(0,r.jsx)(t,{children:n})}):null,i?(0,r.jsx)(e,{children:(0,r.jsx)(t,{children:i})}):null]})}export{i as t};

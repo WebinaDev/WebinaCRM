@@ -1,0 +1,44 @@
+import { useTranslation } from 'react-i18next'
+
+import { formatNumber } from '@/lib/formatNumber'
+import { cn } from '@/lib/utils'
+
+export type StatusCount = { slug: string; label: string; count: number }
+
+type OrderStatusTabsProps = {
+  counts: StatusCount[]
+  active: string
+  onChange: (slug: string) => void
+  locale: string
+}
+
+export function OrderStatusTabs({ counts, active, onChange, locale }: OrderStatusTabsProps) {
+  const { t, i18n } = useTranslation()
+  const loc = locale || i18n.language
+
+  if (counts.length === 0) return null
+
+  return (
+    <div className="flex flex-wrap gap-1 border-b border-border pb-3">
+      {counts.map((item, idx) => {
+        const isActive = active === item.slug || (active === '' && item.slug === 'all')
+        return (
+          <span key={item.slug} className="inline-flex items-center gap-1">
+            {idx > 0 ? <span className="text-muted-foreground px-1">|</span> : null}
+            <button
+              type="button"
+              className={cn(
+                'rounded-md px-2 py-1 text-sm transition-colors',
+                isActive ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:text-foreground',
+              )}
+              onClick={() => onChange(item.slug === 'all' ? '' : item.slug)}
+            >
+              {item.slug === 'all' ? t('orders.tabAll') : item.label}{' '}
+              <span className="opacity-80">({formatNumber(item.count, loc)})</span>
+            </button>
+          </span>
+        )
+      })}
+    </div>
+  )
+}

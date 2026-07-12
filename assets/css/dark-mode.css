@@ -1,0 +1,561 @@
+/**
+ * Dark Mode Theme for WebinoCRM
+ * Comprehensive dark theme styling
+ * NOTE: This file should ONLY apply in dark mode, not in light mode
+ */
+
+/* Light Mode - Ensure proper backgrounds (only when NOT in dark mode) */
+/* Reset any dark mode CSS variables in light mode */
+html:not([data-theme-mode="dark"]):not([data-theme="dark"]) {
+    --bg-primary: #f9fafb;
+    --bg-secondary: #ffffff;
+    --bg-tertiary: #f5f6f7;
+    --text-primary: #212b37;
+    --text-secondary: #4d5875;
+    --text-muted: #6e829f;
+    --border-color: #e0e7ff;
+    /* Override styles.css dark mode variables */
+    --body-bg-rgb: 249, 250, 252;
+    --body-bg-rgb2: 255, 255, 255;
+    --default-body-bg-color: #f9fafb;
+    --custom-white: #ffffff;
+    --menu-bg: #ffffff;
+    --header-bg: #ffffff;
+    --form-control-bg: #ffffff;
+    --input-border: #dee7f1;
+    --default-text-color: #212b37;
+    --default-border: #ecf3fb;
+}
+
+html:not([data-theme-mode="dark"]):not([data-theme="dark"]) body {
+    background-color: #f9fafb;
+    background-color: var(--default-body-bg-color, #f9fafb);
+    color: #212b37;
+}
+
+html:not([data-theme-mode="dark"]):not([data-theme="dark"]) .webinocrm-container,
+html:not([data-theme-mode="dark"]):not([data-theme="dark"]) .card,
+html:not([data-theme-mode="dark"]):not([data-theme="dark"]) .postbox,
+html:not([data-theme-mode="dark"]):not([data-theme="dark"]) .main-content,
+html:not([data-theme-mode="dark"]):not([data-theme="dark"]) .page {
+    background-color: #ffffff;
+    background-color: var(--custom-white, #ffffff);
+    color: #212b37;
+}
+
+/* Sidebar in Light Mode */
+html:not([data-theme-mode="dark"]):not([data-theme="dark"]) .app-sidebar,
+html:not([data-theme-mode="dark"]):not([data-theme="dark"]) .webinocrm-sidebar,
+html:not([data-theme-mode="dark"]):not([data-theme="dark"]) .webino-sidebar,
+html:not([data-theme-mode="dark"]):not([data-theme="dark"]) .main-sidebar,
+html:not([data-theme-mode="dark"]):not([data-theme="dark"]) .customer-sidebar {
+    background-color: #ffffff;
+    background-color: var(--menu-bg, #ffffff);
+    border-color: var(--menu-border-color, #e2e6f1);
+}
+
+html:not([data-theme-mode="dark"]):not([data-theme="dark"]) .app-sidebar .side-menu__item,
+html:not([data-theme-mode="dark"]):not([data-theme="dark"]) .webinocrm-sidebar .menu-item,
+html:not([data-theme-mode="dark"]):not([data-theme="dark"]) .webino-sidebar__menu-link {
+    color: var(--menu-prime-color, #61748f);
+}
+
+html:not([data-theme-mode="dark"]):not([data-theme="dark"]) .app-sidebar .side-menu__item:hover,
+html:not([data-theme-mode="dark"]):not([data-theme="dark"]) .webinocrm-sidebar .menu-item:hover,
+html:not([data-theme-mode="dark"]):not([data-theme="dark"]) .webino-sidebar__menu-link:hover {
+    background-color: var(--list-hover-focus-bg, #f5f6f7);
+    color: var(--primary-color, rgb(92, 103, 247));
+}
+
+html:not([data-theme-mode="dark"]):not([data-theme="dark"]) .app-sidebar .main-sidebar-header {
+    background-color: #ffffff;
+    background-color: var(--menu-bg, #ffffff);
+    border-color: var(--menu-border-color, #e2e6f1);
+}
+
+/* Only apply dark mode styles when data-theme-mode="dark" is set */
+html[data-theme-mode="dark"],
+html[data-theme="dark"] {
+    /* Color Variables - Only in dark mode */
+    --bg-primary: #1a1a2e;
+    --bg-secondary: #16213e;
+    --bg-tertiary: #0f3460;
+    --text-primary: #e8e8e8;
+    --text-secondary: #b4b4b4;
+    --text-muted: #808080;
+    --border-color: #2d3748;
+    --primary-color: #4CAF50;
+    --secondary-color: #2196F3;
+    --accent-color: #FF5722;
+    --success-color: #28a745;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --info-color: #17a2b8;
+}
+
+/* Keep compatibility with shadcn-style class-based dark mode. */
+html.dark {
+    --bg-primary: #1a1a2e;
+    --bg-secondary: #16213e;
+    --bg-tertiary: #0f3460;
+    --text-primary: #e8e8e8;
+    --text-secondary: #b4b4b4;
+    --text-muted: #808080;
+    --border-color: #2d3748;
+    --primary-color: #4CAF50;
+    --secondary-color: #2196F3;
+    --accent-color: #FF5722;
+    --success-color: #28a745;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --info-color: #17a2b8;
+}
+
+/* Base Elements - Only in dark mode */
+html[data-theme-mode="dark"] body,
+html[data-theme="dark"] body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+html[data-theme-mode="dark"] .webinocrm-container,
+html[data-theme-mode="dark"] .card,
+html[data-theme-mode="dark"] .postbox,
+html[data-theme="dark"] .webinocrm-container,
+html[data-theme="dark"] .card,
+html[data-theme="dark"] .postbox {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+    border-color: var(--border-color);
+}
+
+/* Typography */
+html[data-theme-mode="dark"] h1, html[data-theme="dark"] h1, 
+html[data-theme-mode="dark"] h2, html[data-theme="dark"] h2, 
+html[data-theme-mode="dark"] h3, html[data-theme="dark"] h3, 
+html[data-theme-mode="dark"] h4, html[data-theme="dark"] h4, 
+html[data-theme-mode="dark"] h5, html[data-theme="dark"] h5, 
+html[data-theme-mode="dark"] h6, html[data-theme="dark"] h6 {
+    color: var(--text-primary);
+}
+
+html[data-theme-mode="dark"] p, html[data-theme="dark"] p,
+html[data-theme-mode="dark"] span, html[data-theme="dark"] span,
+html[data-theme-mode="dark"] label, html[data-theme="dark"] label {
+    color: var(--text-secondary);
+}
+
+/* Forms */
+html[data-theme-mode="dark"] input[type="text"], html[data-theme="dark"] input[type="text"],
+html[data-theme-mode="dark"] input[type="email"], html[data-theme="dark"] input[type="email"],
+html[data-theme-mode="dark"] input[type="password"], html[data-theme="dark"] input[type="password"],
+html[data-theme-mode="dark"] input[type="number"], html[data-theme="dark"] input[type="number"],
+html[data-theme-mode="dark"] input[type="date"], html[data-theme="dark"] input[type="date"],
+html[data-theme-mode="dark"] input[type="tel"], html[data-theme="dark"] input[type="tel"],
+html[data-theme-mode="dark"] textarea, html[data-theme="dark"] textarea,
+html[data-theme-mode="dark"] select, html[data-theme="dark"] select {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+    border-color: var(--border-color);
+}
+
+html[data-theme-mode="dark"] input:focus, html[data-theme="dark"] input:focus,
+html[data-theme-mode="dark"] textarea:focus, html[data-theme="dark"] textarea:focus,
+html[data-theme-mode="dark"] select:focus, html[data-theme="dark"] select:focus {
+    background-color: var(--bg-secondary);
+    border-color: var(--primary-color);
+    color: var(--text-primary);
+}
+
+html[data-theme-mode="dark"] input::placeholder, html[data-theme="dark"] input::placeholder,
+html[data-theme-mode="dark"] textarea::placeholder, html[data-theme="dark"] textarea::placeholder {
+    color: var(--text-muted);
+}
+
+/* Buttons */
+html[data-theme-mode="dark"] .btn, html[data-theme="dark"] .btn {
+    border-color: var(--border-color);
+}
+
+html[data-theme-mode="dark"] .btn-primary, html[data-theme="dark"] .btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+html[data-theme-mode="dark"] .btn-secondary, html[data-theme="dark"] .btn-secondary {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+html[data-theme-mode="dark"] .btn-secondary:hover, html[data-theme="dark"] .btn-secondary:hover {
+    background-color: var(--bg-secondary);
+}
+
+/* Tables */
+html[data-theme-mode="dark"] table, html[data-theme="dark"] table {
+    color: var(--text-primary);
+}
+
+html[data-theme-mode="dark"] table thead, html[data-theme="dark"] table thead {
+    background-color: var(--bg-tertiary);
+}
+
+html[data-theme-mode="dark"] table tbody tr, html[data-theme="dark"] table tbody tr {
+    background-color: var(--bg-secondary);
+    border-bottom-color: var(--border-color);
+}
+
+html[data-theme-mode="dark"] table tbody tr:hover, html[data-theme="dark"] table tbody tr:hover {
+    background-color: var(--bg-tertiary);
+}
+
+/* Sidebar */
+html[data-theme-mode="dark"] .webinocrm-sidebar,
+html[data-theme="dark"] .webinocrm-sidebar {
+    background-color: var(--bg-secondary);
+    border-right-color: var(--border-color);
+}
+
+html[data-theme-mode="dark"] .webinocrm-sidebar .menu-item,
+html[data-theme="dark"] .webinocrm-sidebar .menu-item {
+    color: var(--text-secondary);
+}
+
+html[data-theme-mode="dark"] .webinocrm-sidebar .menu-item:hover,
+html[data-theme-mode="dark"] .webinocrm-sidebar .menu-item.active,
+html[data-theme="dark"] .webinocrm-sidebar .menu-item:hover,
+html[data-theme="dark"] .webinocrm-sidebar .menu-item.active {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+/* Header */
+html[data-theme-mode="dark"] .webinocrm-header, html[data-theme="dark"] .webinocrm-header {
+    background-color: var(--bg-secondary);
+    border-bottom-color: var(--border-color);
+}
+
+/* Cards */
+html[data-theme-mode="dark"] .webino-card, html[data-theme="dark"] .webino-card {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-color);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+html[data-theme-mode="dark"] .webino-card-header, html[data-theme="dark"] .webino-card-header {
+    background-color: var(--bg-tertiary);
+    border-bottom-color: var(--border-color);
+}
+
+/* Modal */
+html[data-theme-mode="dark"] .modal-content, html[data-theme="dark"] .modal-content {
+    background-color: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+html[data-theme-mode="dark"] .modal-header, html[data-theme="dark"] .modal-header {
+    background-color: var(--bg-tertiary);
+    border-bottom-color: var(--border-color);
+}
+
+html[data-theme-mode="dark"] .modal-footer, html[data-theme="dark"] .modal-footer {
+    border-top-color: var(--border-color);
+}
+
+/* Dropdown */
+html[data-theme-mode="dark"] .dropdown-menu, html[data-theme="dark"] .dropdown-menu {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-color);
+}
+
+html[data-theme-mode="dark"] .dropdown-item, html[data-theme="dark"] .dropdown-item {
+    color: var(--text-primary);
+}
+
+html[data-theme-mode="dark"] .dropdown-item:hover, html[data-theme="dark"] .dropdown-item:hover {
+    background-color: var(--bg-tertiary);
+}
+
+/* Badges */
+html[data-theme-mode="dark"] .badge, html[data-theme="dark"] .badge {
+    border: 1px solid var(--border-color);
+}
+
+/* Alerts */
+html[data-theme-mode="dark"] .alert, html[data-theme="dark"] .alert {
+    border-color: var(--border-color);
+}
+
+html[data-theme-mode="dark"] .alert-success, html[data-theme="dark"] .alert-success {
+    background-color: rgba(40, 167, 69, 0.2);
+    color: #7fda89;
+}
+
+html[data-theme-mode="dark"] .alert-warning, html[data-theme="dark"] .alert-warning {
+    background-color: rgba(255, 193, 7, 0.2);
+    color: #ffd966;
+}
+
+html[data-theme-mode="dark"] .alert-danger, html[data-theme="dark"] .alert-danger {
+    background-color: rgba(220, 53, 69, 0.2);
+    color: #f08a99;
+}
+
+html[data-theme-mode="dark"] .alert-info, html[data-theme="dark"] .alert-info {
+    background-color: rgba(23, 162, 184, 0.2);
+    color: #6dcde8;
+}
+
+/* Kanban Board */
+html[data-theme-mode="dark"] .kanban-column, html[data-theme="dark"] .kanban-column {
+    background-color: var(--bg-tertiary);
+}
+
+html[data-theme-mode="dark"] .kanban-card, html[data-theme="dark"] .kanban-card {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-color);
+}
+
+/* Chat */
+html[data-theme-mode="dark"] .chat-container, html[data-theme="dark"] .chat-container {
+    background-color: var(--bg-secondary);
+}
+
+html[data-theme-mode="dark"] .chat-message, html[data-theme="dark"] .chat-message {
+    background-color: var(--bg-tertiary);
+}
+
+html[data-theme-mode="dark"] .chat-message.own-message, html[data-theme="dark"] .chat-message.own-message {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* Code */
+html[data-theme-mode="dark"] code, html[data-theme="dark"] code,
+html[data-theme-mode="dark"] p, html[data-theme="dark"] pre {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+    border-color: var(--border-color);
+}
+
+/* Scrollbar */
+html[data-theme-mode="dark"] ::-webkit-scrollbar, html[data-theme="dark"] ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+html[data-theme-mode="dark"] ::-webkit-scrollbar-track, html[data-theme="dark"] ::-webkit-scrollbar-track {
+    background: var(--bg-primary);
+}
+
+html[data-theme-mode="dark"] ::-webkit-scrollbar-thumb, html[data-theme="dark"] ::-webkit-scrollbar-thumb {
+    background: var(--webino-primary-color, #845adf);
+    border-radius: 5px;
+}
+
+html[data-theme-mode="dark"] ::-webkit-scrollbar-thumb:hover, html[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+    background: var(--webino-primary-color, #845adf);
+    opacity: 0.8;
+}
+
+/* Loading */
+html[data-theme-mode="dark"] .spinner-border, html[data-theme="dark"] .spinner-border {
+    border-color: var(--text-muted);
+    border-right-color: var(--primary-color);
+}
+
+/* Links */
+html[data-theme-mode="dark"] a, html[data-theme="dark"] a {
+    color: var(--primary-color);
+}
+
+html[data-theme-mode="dark"] a:hover, html[data-theme="dark"] a:hover {
+    color: var(--secondary-color);
+}
+
+/* Toggle Switch - Only in dark mode */
+html[data-theme-mode="dark"] .dark-mode-toggle,
+html[data-theme="dark"] .dark-mode-toggle {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1000;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 50px;
+    padding: 10px 15px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+
+html[data-theme-mode="dark"] .dark-mode-toggle:hover,
+html[data-theme="dark"] .dark-mode-toggle:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.3);
+}
+
+html[data-theme-mode="dark"] .dark-mode-toggle i,
+html[data-theme="dark"] .dark-mode-toggle i {
+    font-size: 20px;
+    transition: transform 0.3s ease;
+}
+
+html[data-theme-mode="dark"] .dark-mode-toggle:hover i,
+html[data-theme="dark"] .dark-mode-toggle:hover i {
+    transform: rotate(20deg);
+}
+
+/* Transitions - Only for specific elements in dark mode */
+html[data-theme-mode="dark"] .card,
+html[data-theme-mode="dark"] .btn,
+html[data-theme-mode="dark"] input,
+html[data-theme-mode="dark"] select,
+html[data-theme-mode="dark"] textarea,
+html[data-theme="dark"] .card,
+html[data-theme="dark"] .btn,
+html[data-theme="dark"] input,
+html[data-theme="dark"] select,
+html[data-theme="dark"] textarea {
+    transition: background-color 0.3s ease, 
+                color 0.3s ease, 
+                border-color 0.3s ease;
+}
+
+/* Chart Colors */
+html[data-theme-mode="dark"] .apexcharts-text, html[data-theme="dark"] .apexcharts-text {
+    fill: var(--text-primary);
+}
+
+html[data-theme-mode="dark"] .apexcharts-gridline, html[data-theme="dark"] .apexcharts-gridline {
+    stroke: var(--border-color);
+}
+
+html[data-theme-mode="dark"] .apexcharts-tooltip, html[data-theme="dark"] .apexcharts-tooltip {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    border-color: var(--border-color);
+}
+
+/* Dashboard Widgets */
+html[data-theme-mode="dark"] .dashboard-widget, html[data-theme="dark"] .dashboard-widget {
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+    border-color: var(--border-color);
+}
+
+html[data-theme-mode="dark"] .stat-card, html[data-theme="dark"] .stat-card {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-color);
+}
+
+/* Timeline */
+html[data-theme-mode="dark"] .timeline-item, html[data-theme="dark"] .timeline-item {
+    background-color: var(--bg-secondary);
+    border-left-color: var(--primary-color);
+}
+
+html[data-theme-mode="dark"] .timeline-item::before, html[data-theme="dark"] .timeline-item::before {
+    background-color: var(--primary-color);
+    box-shadow: 0 0 0 4px var(--bg-primary);
+}
+
+/* Empty States */
+html[data-theme-mode="dark"] .empty-state, html[data-theme="dark"] .empty-state {
+    background-color: var(--bg-secondary);
+    color: var(--text-secondary);
+}
+
+/* File Upload */
+html[data-theme-mode="dark"] .file-upload-area, html[data-theme="dark"] .file-upload-area {
+    background-color: var(--bg-tertiary);
+    border-color: var(--border-color);
+    color: var(--text-secondary);
+}
+
+html[data-theme-mode="dark"] .file-upload-area.dragover, html[data-theme="dark"] .file-upload-area.dragover {
+    background-color: var(--bg-secondary);
+    border-color: var(--primary-color);
+}
+
+/* Notification Badge */
+html[data-theme-mode="dark"] .notification-badge, html[data-theme="dark"] .notification-badge {
+    background-color: var(--danger-color);
+    color: white;
+}
+
+/* Progress Bar */
+html[data-theme-mode="dark"] .progress, html[data-theme="dark"] .progress {
+    background-color: var(--bg-tertiary);
+}
+
+/* Breadcrumbs */
+html[data-theme-mode="dark"] .breadcrumb, html[data-theme="dark"] .breadcrumb {
+    background-color: var(--bg-secondary);
+}
+
+html[data-theme-mode="dark"] .breadcrumb-item, html[data-theme="dark"] .breadcrumb-item {
+    color: var(--text-secondary);
+}
+
+html[data-theme-mode="dark"] .breadcrumb-item.active, html[data-theme="dark"] .breadcrumb-item.active {
+    color: var(--text-primary);
+}
+
+/* Tabs */
+html[data-theme-mode="dark"] .nav-tabs, html[data-theme="dark"] .nav-tabs {
+    border-bottom-color: var(--border-color);
+}
+
+html[data-theme-mode="dark"] .nav-tabs, html[data-theme="dark"] .nav-tabs .nav-link {
+    color: var(--text-secondary);
+    border-color: transparent;
+}
+
+html[data-theme-mode="dark"] .nav-tabs, html[data-theme="dark"] .nav-tabs .nav-link:hover {
+    border-color: var(--border-color);
+}
+
+html[data-theme-mode="dark"] .nav-tabs, html[data-theme="dark"] .nav-tabs .nav-link.active {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-color) var(--border-color) var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+/* Pagination */
+html[data-theme-mode="dark"] .pagination, html[data-theme="dark"] .pagination .page-link {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-color);
+    color: var(--text-primary);
+}
+
+html[data-theme-mode="dark"] .pagination, html[data-theme="dark"] .pagination .page-link:hover {
+    background-color: var(--bg-tertiary);
+}
+
+html[data-theme-mode="dark"] .pagination, html[data-theme="dark"] .pagination .page-item.active .page-link {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+/* Calendar */
+html[data-theme-mode="dark"] .fc, html[data-theme="dark"] .fc {
+    background-color: var(--bg-secondary);
+}
+
+html[data-theme-mode="dark"] .fc-toolbar, html[data-theme="dark"] .fc-toolbar {
+    color: var(--text-primary);
+}
+
+html[data-theme-mode="dark"] .fc-daygrid-day, html[data-theme="dark"] .fc-daygrid-day {
+    background-color: var(--bg-secondary);
+    border-color: var(--border-color);
+}
+
+html[data-theme-mode="dark"] .fc-daygrid-day-number, html[data-theme="dark"] .fc-daygrid-day-number {
+    color: var(--text-primary);
+}
+
+html[data-theme-mode="dark"] .fc-event, html[data-theme="dark"] .fc-event {
+    border-color: var(--border-color);
+}
+

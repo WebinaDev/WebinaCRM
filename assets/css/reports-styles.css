@@ -1,0 +1,292 @@
+/**
+ * Reports Styles - WebinoCRM
+ * Additional styling for advanced reports dashboard
+ */
+
+/* LTR Input for dates */
+.ltr-input {
+    direction: ltr;
+    text-align: left;
+}
+
+/* Stats Cards Enhancement */
+.card.border {
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.card.border:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+/* Chart Containers */
+canvas {
+    max-height: 400px;
+}
+
+/* Table Enhancements */
+.table-responsive {
+    border-radius: 8px;
+}
+
+.table thead {
+    background-color: #f8f9fa;
+    color: var(--default-text-color, #212b37);
+}
+
+.table thead th {
+    border: none;
+    padding: 15px;
+    font-weight: 600;
+}
+
+.table tbody tr {
+    transition: all 0.2s ease;
+}
+
+.table tbody tr:hover {
+    background-color: rgba(132, 90, 223, 0.05);
+    transform: scale(1.01);
+}
+
+/* Progress Bars */
+.progress {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    transition: width 0.6s ease;
+}
+
+/* Badge Enhancements */
+.badge {
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 6px;
+}
+
+/* Avatar Enhancements */
+.avatar {
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: #6c757d;
+}
+
+.empty-state i {
+    font-size: 64px;
+    color: #dee2e6;
+    margin-bottom: 20px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .card.border .card-body {
+        padding: 15px;
+    }
+    
+    .card-title {
+        font-size: 14px;
+    }
+    
+    .table {
+        font-size: 12px;
+    }
+    
+    canvas {
+        max-height: 250px;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .btn, .nav-tabs, .card-header .btn-group {
+        display: none;
+    }
+    
+    .card {
+        page-break-inside: avoid;
+    }
+    
+    canvas {
+        max-height: 300px;
+    }
+}
+
+/* Loading Spinner */
+.spinner-border {
+    width: 2rem;
+    height: 2rem;
+    border-width: 0.25em;
+}
+
+/* SweetAlert2 RTL Support */
+.swal2-popup {
+    direction: rtl;
+    text-align: right;
+}
+
+.swal2-title {
+    font-family: 'IRANSans', sans-serif;
+}
+
+.swal2-content {
+    font-family: 'IRANSans', sans-serif;
+}
+
+/* Date Range Filters */
+.date-filter-container {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+/* Chart Legends */
+.chart-legend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.chart-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.chart-legend-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+}
+
+/* Retrospective Cards */
+.card.bg-success-transparent,
+.card.bg-warning-transparent,
+.card.bg-info-transparent {
+    transition: all 0.3s ease;
+}
+
+.card.bg-success-transparent:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(40, 167, 69, 0.2);
+}
+
+.card.bg-warning-transparent:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(255, 193, 7, 0.2);
+}
+
+.card.bg-info-transparent:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(23, 162, 184, 0.2);
+}
+
+/* KPI Cards Animations */
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+.avatar.avatar-lg {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* Export Buttons */
+.btn-group .btn {
+    transition: all 0.3s ease;
+}
+
+.btn-group .btn:hover {
+    transform: scale(1.05);
+}
+
+/* Tab Navigation */
+.nav-tabs-header .nav-link {
+    font-weight: 600;
+    color: #6c757d;
+    border: none;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.nav-tabs-header .nav-link:hover {
+    color: var(--webino-primary-color, #845adf);
+    border-bottom-color: rgba(var(--webino-primary-rgb, 132, 90, 223), 0.3);
+}
+
+.nav-tabs-header .nav-link.active {
+    color: var(--webino-primary-color, #845adf);
+    border-bottom-color: var(--webino-primary-color, #845adf);
+    background: transparent;
+}
+
+/* Gradient Backgrounds */
+.bg-gradient-primary {
+    background: linear-gradient(135deg, var(--webino-primary-color, #845adf) 0%, var(--webino-primary-color-dark, #9575de) 100%);
+}
+
+.bg-gradient-success {
+    background: linear-gradient(135deg, #28a745 0%, #3cbd5b 100%);
+}
+
+.bg-gradient-warning {
+    background: linear-gradient(135deg, #ffc107 0%, #ffce3a 100%);
+}
+
+.bg-gradient-danger {
+    background: linear-gradient(135deg, #dc3545 0%, #e4525f 100%);
+}
+
+.bg-gradient-info {
+    background: linear-gradient(135deg, #17a2b8 0%, #2eb3c8 100%);
+}
+
+/* Smooth Scroll */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Chart Container Shadow */
+.card-body canvas {
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05));
+}
+
+/* Number Animation (would be enhanced with JS) */
+.animated-number {
+    font-variant-numeric: tabular-nums;
+}
+
+/* Custom Scrollbar for Tables */
+.table-responsive::-webkit-scrollbar {
+    height: 8px;
+}
+
+.table-responsive::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+    background: var(--webino-primary-color, #845adf);
+    border-radius: 10px;
+}
+
+.table-responsive::-webkit-scrollbar-thumb:hover {
+    background: var(--webino-primary-color, #845adf);
+    opacity: 0.8;
+}
+

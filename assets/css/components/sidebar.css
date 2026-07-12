@@ -1,0 +1,226 @@
+/**
+ * Sidebar Component Styles
+ * 
+ * Styles for the dashboard sidebar component
+ *
+ * @package WebinoCRM
+ * @since 2.1.0
+ */
+
+/* Sidebar Container */
+.webino-sidebar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 260px;
+	height: 100vh;
+	background: var(--sidebar-bg, #fff);
+	border-right: 1px solid var(--border-color, #e9ecef);
+	transition: transform 0.3s ease;
+	z-index: 1040;
+	overflow-y: auto;
+}
+
+[dir="rtl"] .webino-sidebar {
+	left: auto;
+	right: 0;
+	border-right: none;
+	border-left: 1px solid var(--border-color, #e9ecef);
+}
+
+.webino-sidebar--closed {
+	transform: translateX(-100%);
+}
+
+[dir="rtl"] .webino-sidebar--closed {
+	transform: translateX(100%);
+}
+
+/* Sidebar Header */
+.webino-sidebar__header {
+	padding: 1.5rem 1rem;
+	border-bottom: 1px solid var(--border-color, #e9ecef);
+}
+
+.webino-sidebar__logo {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	text-decoration: none;
+	color: var(--text-color, #212529);
+}
+
+.webino-sidebar__logo-image {
+	max-height: 36px;
+	width: auto;
+}
+
+.webino-sidebar__logo-text {
+	font-size: 1.25rem;
+	font-weight: 600;
+	color: var(--primary-color, #5b6ce3);
+}
+
+/* Menu */
+.webino-sidebar__menu {
+	padding: 1rem 0;
+	list-style: none;
+	margin: 0;
+}
+
+.webino-sidebar__menu-item {
+	margin-bottom: 0.25rem;
+}
+
+.webino-sidebar__menu-link {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	padding: 0.75rem 1rem;
+	color: var(--text-muted, #6c757d);
+	text-decoration: none;
+	transition: all 0.2s;
+	border-radius: 0.375rem;
+	margin: 0 0.5rem;
+}
+
+.webino-sidebar__menu-link:hover {
+	background-color: var(--bg-light, #f8f9fa);
+	color: var(--primary-color, #5b6ce3);
+}
+
+.webino-sidebar__menu-link--active {
+	background-color: var(--primary-color, #5b6ce3);
+	color: #fff;
+}
+
+.webino-sidebar__menu-link--active:hover {
+	background-color: var(--primary-color-dark, #4a5dcb);
+	color: #fff;
+}
+
+.webino-sidebar__menu-icon {
+	font-size: 1.25rem;
+	width: 24px;
+	text-align: center;
+}
+
+.webino-sidebar__menu-label {
+	flex: 1;
+	font-size: 0.9375rem;
+	font-weight: 500;
+}
+
+.webino-sidebar__menu-arrow {
+	font-size: 1rem;
+	transition: transform 0.2s;
+}
+
+/* Submenu */
+.webino-sidebar__submenu {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	max-height: 0;
+	overflow: hidden;
+	transition: max-height 0.3s ease;
+}
+
+.webino-sidebar__menu-item--open > .webino-sidebar__submenu {
+	max-height: 1000px;
+}
+
+.webino-sidebar__menu-item--open > .webino-sidebar__menu-link .webino-sidebar__menu-arrow {
+	transform: rotate(180deg);
+}
+
+.webino-sidebar__submenu .webino-sidebar__menu-link {
+	padding-left: 3rem;
+	font-size: 0.875rem;
+}
+
+[dir="rtl"] .webino-sidebar__submenu .webino-sidebar__menu-link {
+	padding-left: 1rem;
+	padding-right: 3rem;
+}
+
+/* Scrollbar */
+.webino-sidebar::-webkit-scrollbar {
+	width: 6px;
+}
+
+.webino-sidebar::-webkit-scrollbar-track {
+	background: transparent;
+}
+
+.webino-sidebar::-webkit-scrollbar-thumb {
+	background: var(--webino-primary-color, #845adf);
+	border-radius: 3px;
+}
+
+.webino-sidebar::-webkit-scrollbar-thumb:hover {
+	background: var(--webino-primary-color, #845adf);
+	opacity: 0.8;
+}
+
+/* Dark Mode */
+[data-theme-mode="dark"] .webino-sidebar {
+	background: var(--sidebar-bg-dark, #1a1a1e);
+	border-right-color: rgba(255, 255, 255, 0.1);
+}
+
+[dir="rtl"][data-theme-mode="dark"] .webino-sidebar {
+	border-left-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme-mode="dark"] .webino-sidebar__logo {
+	color: rgba(255, 255, 255, 0.9);
+}
+
+[data-theme-mode="dark"] .webino-sidebar__menu-link {
+	color: rgba(255, 255, 255, 0.7);
+}
+
+[data-theme-mode="dark"] .webino-sidebar__menu-link:hover {
+	background-color: rgba(255, 255, 255, 0.05);
+	color: var(--primary-color, #5b6ce3);
+}
+
+[data-theme-mode="dark"] .webino-sidebar__menu-link--active {
+	background-color: var(--primary-color, #5b6ce3);
+	color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+	.webino-sidebar {
+		transform: translateX(-100%);
+	}
+	
+	[dir="rtl"] .webino-sidebar {
+		transform: translateX(100%);
+	}
+	
+	.webino-sidebar--open {
+		transform: translateX(0);
+	}
+}
+
+/* Overlay for mobile */
+.webino-sidebar-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.5);
+	z-index: 1039;
+	display: none;
+}
+
+@media (max-width: 992px) {
+	.webino-sidebar-overlay--active {
+		display: block;
+	}
+}
+

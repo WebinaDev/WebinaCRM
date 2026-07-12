@@ -1,0 +1,2471 @@
+# Persian (فارسی) Translation for WebinoCRM
+# Copyright (C) 2025 WebinoCRM
+# This file is distributed under the same license as the WebinoCRM plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: WebinoCRM 2.1.0\n"
+"Report-Msgid-Bugs-To: https://webinoco.com/support\n"
+"PO-Revision-Date: 2025-01-01 00:00+0000\n"
+"Last-Translator: Arsalan Arghavan <contact@arsalanarghavan.ir>\n"
+"Language-Team: Persian <fa@li.org>\n"
+"Language: fa_IR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
+"X-Generator: Manual\n"
+"X-Domain: webinocrm\n"
+
+#: Header Component
+msgid "Guest"
+msgstr "مهمان"
+
+msgid "System Manager"
+msgstr "مدیر سیستم"
+
+msgid "Finance Manager"
+msgstr "مدیر مالی"
+
+msgid "Team Member"
+msgstr "عضو تیم"
+
+msgid "Customer"
+msgstr "مشتری"
+
+msgid "User"
+msgstr "کاربر"
+
+msgid "Search..."
+msgstr "جستجو..."
+
+msgid "Persian"
+msgstr "فارسی"
+
+msgid "English"
+msgstr "انگلیسی"
+
+msgid "Notifications"
+msgstr "اعلانات"
+
+msgid "No notifications"
+msgstr "اعلانی وجود ندارد"
+
+msgid "View All"
+msgstr "مشاهده همه"
+
+msgid "My Profile"
+msgstr "پروفایل من"
+
+msgid "Settings"
+msgstr "تنظیمات"
+
+msgid "Logout"
+msgstr "خروج"
+
+msgid "Logo"
+msgstr "لوگو"
+
+msgid "WebinoCRM"
+msgstr "سامانه وبینو"
+
+msgid "WebinoERP"
+msgstr "سامانه وبینو"
+
+msgid "No results found"
+msgstr "نتیجه‌ای یافت نشد"
+
+msgid "Loading..."
+msgstr "در حال بارگذاری..."
+
+#: Sidebar Component
+msgid "Dashboard"
+msgstr "داشبورد"
+
+msgid "Projects"
+msgstr "پروژه‌ها"
+
+msgid "Contracts"
+msgstr "قراردادها"
+
+msgid "Invoices"
+msgstr "پیش‌فاکتورها"
+
+msgid "Tickets"
+msgstr "تیکت‌ها"
+
+msgid "Tasks"
+msgstr "وظایف"
+
+msgid "Appointments"
+msgstr "قرارملاقات‌ها"
+
+msgid "Leads"
+msgstr "سرنخ‌ها"
+
+msgid "Customers"
+msgstr "مشتریان"
+
+msgid "Staff"
+msgstr "کارکنان"
+
+msgid "Reports"
+msgstr "گزارشات"
+
+msgid "My Projects"
+msgstr "پروژه‌های من"
+
+msgid "My Tasks"
+msgstr "وظایف من"
+
+msgid "My Contracts"
+msgstr "قراردادهای من"
+
+msgid "My Invoices"
+msgstr "پیش‌فاکتورهای من"
+
+msgid "Support Tickets"
+msgstr "تیکت‌های پشتیبانی"
+
+msgid "Toggle Sidebar"
+msgstr "تغییر وضعیت سایدبار"
+
+#: Footer Component
+msgid "Webino Institute"
+msgstr "موسسه پازلینگ"
+
+msgid "%1$s © Designed with %2$s by %3$s"
+msgstr "%1$s © طراحی شده با %2$s توسط %3$s"
+
+msgid "All rights reserved"
+msgstr "تمامی حقوق محفوظ است"
+
+#: Dashboard Wrapper
+msgid "Page not found."
+msgstr "صفحه یافت نشد."
+
+#: Common
+msgid "Hide Sidebar"
+msgstr "مخفی کردن سایدبار"
+
+msgid "Search"
+msgstr "جستجو"
+
+msgid "Home"
+msgstr "خانه"
+
+msgid "Main Menu"
+msgstr "منوی اصلی"
+
+msgid "Main"
+msgstr "اصلی"
+
+msgid "All Projects"
+msgstr "همه پروژه‌ها"
+
+msgid "Finance"
+msgstr "مالی"
+
+msgid "Support"
+msgstr "پشتیبانی"
+
+msgid "People"
+msgstr "افراد"
+
+msgid "All Reports"
+msgstr "همه گزارشات"
+
+msgid "General Settings"
+msgstr "تنظیمات عمومی"
+
+msgid "System"
+msgstr "سیستم"
+
+msgid "Licenses"
+msgstr "لایسنس‌ها"
+
+msgid "Logs"
+msgstr "لاگ‌ها"
+
+msgid "Consultations"
+msgstr "مشاوره‌ها"
+
+msgid "Services & Products"
+msgstr "سرویس‌ها و محصولات"
+
+msgid "Subscriptions & Services"
+msgstr "اشتراک‌ها و سرویس‌ها"
+
+msgid "Marketing"
+msgstr "بازاریابی"
+
+msgid "Campaigns (Coming Soon)"
+msgstr "کمپین‌ها (به‌زودی)"
+
+msgid "View Site"
+msgstr "مشاهده سایت"
+
+msgid "Unread"
+msgstr "خوانده نشده"
+
+msgid "Account"
+msgstr "حساب کاربری"
+
+msgid "Email"
+msgstr "ایمیل"
+
+msgid "File Manager"
+msgstr "مدیریت فایل"
+
+msgid "Switcher"
+msgstr "تنظیمات ظاهری"
+
+msgid "OK"
+msgstr "تأیید"
+
+msgid "Success"
+msgstr "موفق"
+
+msgid "Error"
+msgstr "خطا"
+
+msgid "A server error occurred."
+msgstr "یک خطای سرور رخ داد."
+
+#: Dashboard System Manager
+msgid "Project Management"
+msgstr "مدیریت پروژه‌ها"
+
+msgid "Manage projects easily with our one-click solution and simplify your workflow."
+msgstr "پروژه‌ها را به‌راحتی با راهکار یک‌کلیکی ما مدیریت کنید و جریان کاری خود را ساده‌تر نمایید."
+
+msgid "Manage Now"
+msgstr "هم‌اکنون مدیریت کن"
+
+msgid "Team"
+msgstr "تیم"
+
+msgid "Name"
+msgstr "نام"
+
+msgid "Status"
+msgstr "وضعیت"
+
+msgid "Progress"
+msgstr "پیشرفت"
+
+msgid "Actions"
+msgstr "عملیات"
+
+msgid "Team Lead"
+msgstr "سرپرست تیم"
+
+msgid "Online"
+msgstr "آنلاین"
+
+msgid "Offline"
+msgstr "آفلاین"
+
+msgid "Assign"
+msgstr "اختصاص"
+
+msgid "View"
+msgstr "مشاهده"
+
+msgid "New Projects"
+msgstr "پروژه های جدید"
+
+msgid "Completed"
+msgstr "تکمیل شده"
+
+msgid "In Progress"
+msgstr "پروژه‌های در حال انجام"
+
+msgid "Pending"
+msgstr "پروژه های معلق"
+
+msgid "Project Statistics"
+msgstr "آمار پروژه"
+
+msgid "Last Week"
+msgstr "هفته گذشته"
+
+msgid "Today"
+msgstr "امروز"
+
+msgid "Last Month"
+msgstr "ماه گذشته"
+
+msgid "Last Year"
+msgstr "سال گذشته"
+
+msgid "Total Revenue"
+msgstr "کل درآمد"
+
+msgid "Increased"
+msgstr "افزایش یافته"
+
+msgid "Total Projects"
+msgstr "کل پروژه ها"
+
+msgid "Running Projects List"
+msgstr "فهرست پروژه‌های در حال اجرا"
+
+msgid "Get Information"
+msgstr "دریافت اطلاعات"
+
+msgid "Monthly Goals"
+msgstr "اهداف ماهانه"
+
+msgid "Daily Tasks"
+msgstr "وظایف روزانه"
+
+msgid "Download"
+msgstr "دانلود"
+
+msgid "Import"
+msgstr "ورود اطلاعات"
+
+msgid "Export"
+msgstr "خروجی"
+
+msgid "No tasks scheduled for today"
+msgstr "هیچ وظیفه‌ای برای امروز برنامه‌ریزی نشده است"
+
+msgid "View Details"
+msgstr "مشاهده جزئیات"
+
+msgid "Projects Summary"
+msgstr "خلاصه پروژه‌ها"
+
+msgid "Search here..."
+msgstr "اینجا جستجو کنید"
+
+msgid "Sort By"
+msgstr "مرتب‌سازی بر اساس"
+
+msgid "New"
+msgstr "جدید"
+
+msgid "Popular"
+msgstr "محبوب"
+
+msgid "Related"
+msgstr "مرتبط"
+
+msgid "#"
+msgstr "ردیف"
+
+msgid "Project Title"
+msgstr "عنوان پروژه"
+
+msgid "Assigned Team"
+msgstr "تیم اختصاص یافته"
+
+msgid "Due Date"
+msgstr "تاریخ انجام"
+
+msgid "Are you sure?"
+msgstr "آیا مطمئن هستید؟"
+
+msgid "Showing %d items"
+msgstr "نمایش %d مورد"
+
+msgid "Page navigation"
+msgstr "ناوبری صفحه"
+
+msgid "Previous"
+msgstr "قبلی"
+
+msgid "Next"
+msgstr "بعدی"
+
+msgid "Tasks Summary"
+msgstr "خلاصه وظایف"
+
+msgid "Task Completion Rate"
+msgstr "نرخ تکمیل وظایف"
+
+msgid "Within scheduled time"
+msgstr "در بازه زمانی مقرر"
+
+msgid "Filter"
+msgstr "فیلتر"
+
+msgid "Share"
+msgstr "اشتراک‌گذاری"
+
+msgid "No running projects"
+msgstr "هیچ پروژه در حال اجرایی وجود ندارد"
+
+msgid "Revenue"
+msgstr "درآمد"
+
+msgid "چند لحظه پیش"
+msgstr "چند لحظه پیش"
+
+msgid "%d minute ago"
+msgstr "%d دقیقه پیش"
+
+msgid "%d minutes ago"
+msgstr "%d دقیقه پیش"
+
+msgid "%d hour ago"
+msgstr "%d ساعت پیش"
+
+msgid "%d hours ago"
+msgstr "%d ساعت پیش"
+
+msgid "%d day ago"
+msgstr "%d روز پیش"
+
+msgid "%d days ago"
+msgstr "%d روز پیش"
+
+msgid "%d week ago"
+msgstr "%d هفته پیش"
+
+msgid "%d weeks ago"
+msgstr "%d هفته پیش"
+
+msgid "%d month ago"
+msgstr "%d ماه پیش"
+
+msgid "%d months ago"
+msgstr "%d ماه پیش"
+
+msgid "%d year ago"
+msgstr "%d سال پیش"
+
+msgid "%d years ago"
+msgstr "%d سال پیش"
+
+msgid "تومان"
+msgstr "تومان"
+
+msgid "میلیارد"
+msgstr "میلیارد"
+
+msgid "میلیون"
+msgstr "میلیون"
+
+msgid "هزار"
+msgstr "هزار"
+
+msgid "بایت"
+msgstr "بایت"
+
+msgid "کیلوبایت"
+msgstr "کیلوبایت"
+
+msgid "مگابایت"
+msgstr "مگابایت"
+
+msgid "گیگابایت"
+msgstr "گیگابایت"
+
+msgid "بعدی"
+msgstr "بعدی"
+
+msgid "قبلی"
+msgstr "قبلی"
+
+msgid "امروز"
+msgstr "امروز"
+
+msgid "تأیید"
+msgstr "تأیید"
+
+msgid "پاک کردن"
+msgstr "پاک کردن"
+
+msgid "%d کالا برای شمارش آماده شد"
+msgstr "%d کالا برای شمارش آماده شد"
+
+msgid "%s ago"
+msgstr "%s ago"
+
+msgid "A CRM core update is already in progress."
+msgstr "A CRM core update is already in progress."
+
+msgid "Account not found."
+msgstr "Account not found."
+
+msgid "Add New Epic"
+msgstr "Add New Epic"
+
+msgid "Add New Label"
+msgstr "Add New Label"
+
+msgid "Admin alert — order {order_number} ({status_label}). Event: %s"
+msgstr "Admin alert — order {order_number} ({status_label}). Event: %s"
+
+msgid "All Labels"
+msgstr "All Labels"
+
+msgid "Analytics"
+msgstr "Analytics"
+
+msgid "Appointment"
+msgstr "Appointment"
+
+msgid "Asset URL missing."
+msgstr "Asset URL missing."
+
+msgid "Balance updated."
+msgstr "Balance updated."
+
+msgid "Bale messenger bot for WooCommerce."
+msgstr "Bale messenger bot for WooCommerce."
+
+msgid "Bale shop bot"
+msgstr "Bale shop bot"
+
+msgid "Basalam"
+msgstr "Basalam"
+
+msgid "Built-in"
+msgstr "Built-in"
+
+msgid "Bundled pricing engine for WooCommerce (WFCP)."
+msgstr "Bundled pricing engine for WooCommerce (WFCP)."
+
+msgid "CRM core package is missing required paths: %s"
+msgstr "CRM core package is missing required paths: %s"
+
+msgid "CRM core package is not configured in CRM."
+msgstr "CRM core package is not configured in CRM."
+
+msgid "CRM plugin core package (SPA + PHP). Updated via licensed sites only."
+msgstr "CRM plugin core package (SPA + PHP). Updated via licensed sites only."
+
+msgid "Closed"
+msgstr "Closed"
+
+msgid "Code: {code}"
+msgstr "Code: {code}"
+
+msgid "Connected to Gitea."
+msgstr "Connected to Gitea."
+
+msgid "Connection failed."
+msgstr "Connection failed."
+
+msgid "Contract"
+msgstr "Contract"
+
+msgid "Could not create Gitea release."
+msgstr "Could not create Gitea release."
+
+msgid "Could not create order."
+msgstr "Could not create order."
+
+msgid "Could not create repository."
+msgstr "Could not create repository."
+
+msgid "Could not download source archive from Gitea."
+msgstr "Could not download source archive from Gitea."
+
+msgid "Could not open module ZIP."
+msgstr "Could not open module ZIP."
+
+msgid "Could not open update ZIP."
+msgstr "Could not open update ZIP."
+
+msgid "Could not read ZIP file."
+msgstr "Could not read ZIP file."
+
+msgid "Could not read version from CRM update package."
+msgstr "Could not read version from CRM update package."
+
+msgid "Could not save category."
+msgstr "Could not save category."
+
+msgid "Could not save module."
+msgstr "Could not save module."
+
+msgid "Could not save release."
+msgstr "Could not save release."
+
+msgid "Could not store package ZIP."
+msgstr "Could not store package ZIP."
+
+msgid "Could not write package ZIP."
+msgstr "Could not write package ZIP."
+
+msgid "Credit top-up"
+msgstr "Credit top-up"
+
+msgid "Customer name"
+msgstr "Customer name"
+
+msgid "Customer phone"
+msgstr "Customer phone"
+
+msgid "Dashboard build files are missing on the server."
+msgstr "Dashboard build files are missing on the server."
+
+msgid "Dashboard core package is not configured in CRM."
+msgstr "Dashboard core package is not configured in CRM."
+
+msgid "Dashboard is unavailable. Run: cd client && npm install && npm run build"
+msgstr "Dashboard is unavailable. Run: cd client && npm install && npm run build"
+
+msgid "Dashboard plugin core package (SPA + PHP). Updated via licensed sites only."
+msgstr "Dashboard plugin core package (SPA + PHP). Updated via licensed sites only."
+
+msgid "Deleted."
+msgstr "Deleted."
+
+msgid "DigiPay UPG"
+msgstr "DigiPay UPG"
+
+msgid "Digikala Seller Open API integration module for products, inventory, and orders."
+msgstr "Digikala Seller Open API integration module for products, inventory, and orders."
+
+msgid "Digikala Sellers"
+msgstr "Digikala Sellers"
+
+msgid "Domain is required."
+msgstr "Domain is required."
+
+msgid "Downgrading CRM core is not allowed."
+msgstr "Downgrading CRM core is not allowed."
+
+msgid "Edit Label"
+msgstr "Edit Label"
+
+msgid "Epic"
+msgstr "Epic"
+
+msgid "Epics"
+msgstr "Epics"
+
+msgid "Failed to copy update files."
+msgstr "Failed to copy update files."
+
+msgid "Forbidden"
+msgstr "Forbidden"
+
+msgid "Form"
+msgstr "Form"
+
+msgid "Forms"
+msgstr "Forms"
+
+msgid "Full Basalam integration for gateway, wallet, subscriptions, and webhooks."
+msgstr "Full Basalam integration for gateway, wallet, subscriptions, and webhooks."
+
+msgid "Full Zarinpal payment gateway integration for WooCommerce."
+msgstr "Full Zarinpal payment gateway integration for WooCommerce."
+
+msgid "Gitea is not configured."
+msgstr "Gitea is not configured."
+
+msgid "Gitea request failed."
+msgstr "Gitea request failed."
+
+msgid "Gitea settings saved."
+msgstr "Gitea settings saved."
+
+msgid "High"
+msgstr "High"
+
+msgid "Insufficient SMS credit."
+msgstr "Insufficient SMS credit."
+
+msgid "Insufficient SMS credit. Please top up."
+msgstr "Insufficient SMS credit. Please top up."
+
+msgid "Integrated DigiPay gateways for WooCommerce (BPG, CPG, Wallet, IPG)."
+msgstr "Integrated DigiPay gateways for WooCommerce (BPG, CPG, Wallet, IPG)."
+
+msgid "Invalid OTP code."
+msgstr "Invalid OTP code."
+
+msgid "Invalid amount."
+msgstr "Invalid amount."
+
+msgid "Invalid id."
+msgstr "Invalid id."
+
+msgid "Invalid module price."
+msgstr "Invalid module price."
+
+msgid "Invalid or expired token."
+msgstr "Invalid or expired token."
+
+msgid "Invalid release id."
+msgstr "Invalid release id."
+
+msgid "Invalid repository name."
+msgstr "Invalid repository name."
+
+msgid "Invalid server response."
+msgstr "Invalid server response."
+
+msgid "Label"
+msgstr "Label"
+
+msgid "Labels"
+msgstr "Labels"
+
+msgid "License is not active for this domain."
+msgstr "License is not active for this domain."
+
+msgid "Log"
+msgstr "Log"
+
+msgid "Login OTP is disabled."
+msgstr "Login OTP is disabled."
+
+msgid "Logs & Notifications"
+msgstr "Logs & Notifications"
+
+msgid "Low"
+msgstr "Low"
+
+msgid "Low stock threshold"
+msgstr "Low stock threshold"
+
+msgid "Manual adjustment"
+msgstr "Manual adjustment"
+
+msgid "Marketplace module: %s"
+msgstr "Marketplace module: %s"
+
+msgid "Medium"
+msgstr "Medium"
+
+msgid "Message is required."
+msgstr "Message is required."
+
+msgid "ModirPayamak API key is not configured."
+msgstr "کلید API را در تنظیمات وارد و مدیرپیامک را فعال کنید."
+
+msgid "ModirPayamak is not enabled on CRM."
+msgstr "ModirPayamak is not enabled on CRM."
+
+msgid "ModirPayamak is not enabled."
+msgstr "ModirPayamak is not enabled."
+
+msgid "Module ZIP contract failed. Missing required paths: %s"
+msgstr "Module ZIP contract failed. Missing required paths: %s"
+
+msgid "Module ZIP is empty."
+msgstr "Module ZIP is empty."
+
+msgid "Module not found."
+msgstr "Module not found."
+
+msgid "Name and amount are required."
+msgstr "Name and amount are required."
+
+msgid "Name is required."
+msgstr "Name is required."
+
+msgid "New Label Name"
+msgstr "New Label Name"
+
+msgid "No Epic"
+msgstr "No Epic"
+
+msgid "No subscribers."
+msgstr "No subscribers."
+
+msgid "OTP code"
+msgstr "OTP code"
+
+msgid "OTP expired or not found."
+msgstr "OTP expired or not found."
+
+msgid "Open"
+msgstr "Open"
+
+msgid "Order ID"
+msgstr "Order ID"
+
+msgid "Order not found."
+msgstr "Order not found."
+
+msgid "Order number"
+msgstr "Order number"
+
+msgid "Order status"
+msgstr "Order status"
+
+msgid "Order total"
+msgstr "Order total"
+
+msgid "Order {order_id}: status updated to {status_label}."
+msgstr "Order {order_id}: status updated to {status_label}."
+
+msgid "Organizational Positions"
+msgstr "Organizational Positions"
+
+msgid "Package ZIP is not available for this release."
+msgstr "Package ZIP is not available for this release."
+
+msgid "Package file is not available."
+msgstr "Package file is not available."
+
+msgid "Package must be a ZIP file."
+msgstr "Package must be a ZIP file."
+
+msgid "Package not found."
+msgstr "Package not found."
+
+msgid "Path is required."
+msgstr "Path is required."
+
+msgid "Pattern sync failed."
+msgstr "Pattern sync failed."
+
+msgid "Payment cancelled."
+msgstr "Payment cancelled."
+
+msgid "Payment gateway is not configured."
+msgstr "Payment gateway is not configured."
+
+msgid "Payment request failed."
+msgstr "Payment request failed."
+
+msgid "Payment verification failed."
+msgstr "Payment verification failed."
+
+msgid "Phone is required."
+msgstr "Phone is required."
+
+msgid "Popular Labels"
+msgstr "Popular Labels"
+
+msgid "Post barcode"
+msgstr "Post barcode"
+
+msgid "Pro 500k"
+msgstr "Pro 500k"
+
+msgid "Pro-forma Invoice"
+msgstr "Pro-forma Invoice"
+
+msgid "Pro-forma Invoices"
+msgstr "Pro-forma Invoices"
+
+msgid "Product URL"
+msgstr "Product URL"
+
+msgid "Product name"
+msgstr "Product name"
+
+msgid "Project"
+msgstr "Project"
+
+msgid "Project Status"
+msgstr "Project Status"
+
+msgid "Purchase required for this module."
+msgstr "Purchase required for this module."
+
+msgid "Refund failed send"
+msgstr "Refund failed send"
+
+msgid "Registration OTP is disabled."
+msgstr "Registration OTP is disabled."
+
+msgid "Registration code: {code}"
+msgstr "Registration code: {code}"
+
+msgid "Release asset file is not readable."
+msgstr "Release asset file is not readable."
+
+msgid "Release deleted."
+msgstr "Release deleted."
+
+msgid "Release not found."
+msgstr "Release not found."
+
+msgid "Release package ZIP is missing or unreadable."
+msgstr "Release package ZIP is missing or unreadable."
+
+msgid "Release published."
+msgstr "Release published."
+
+msgid "Release saved."
+msgstr "Release saved."
+
+msgid "Repository ready."
+msgstr "Repository ready."
+
+msgid "Request failed."
+msgstr "Request failed."
+
+msgid "SMS account is suspended."
+msgstr "SMS account is suspended."
+
+msgid "SMS credit: %s"
+msgstr "SMS credit: %s"
+
+msgid "SMS marketing panel for the dashboard."
+msgstr "SMS marketing panel for the dashboard."
+
+msgid "SMS panel"
+msgstr "SMS panel"
+
+msgid "SMS send"
+msgstr "SMS send"
+
+msgid "SMS send failed."
+msgstr "SMS send failed."
+
+msgid "Saved."
+msgstr "Saved."
+
+msgid "Search Labels"
+msgstr "Search Labels"
+
+msgid "Server error"
+msgstr "Server error"
+
+msgid "Site SMS is disabled."
+msgstr "Site SMS is disabled."
+
+msgid "Site URL"
+msgstr "Site URL"
+
+msgid "Site name"
+msgstr "Site name"
+
+msgid "Slug is required for package upload."
+msgstr "Slug is required for package upload."
+
+msgid "SnappPay Gateway"
+msgstr "SnappPay Gateway"
+
+msgid "SnappPay WooCommerce gateway integration module with Searchwise feed."
+msgstr "SnappPay WooCommerce gateway integration module with Searchwise feed."
+
+msgid "Source directory is missing."
+msgstr "Source directory is missing."
+
+msgid "Sprint"
+msgstr "Sprint"
+
+msgid "Sprints"
+msgstr "Sprints"
+
+msgid "Standard 200k"
+msgstr "Standard 200k"
+
+msgid "Starter 50k"
+msgstr "Starter 50k"
+
+msgid "Status label"
+msgstr "Status label"
+
+msgid "Stock quantity"
+msgstr "Stock quantity"
+
+msgid "Story Points"
+msgstr "Story Points"
+
+msgid "Tag name is required."
+msgstr "Tag name is required."
+
+msgid "Task"
+msgstr "Task"
+
+msgid "Task Category"
+msgstr "Task Category"
+
+msgid "Task Details"
+msgstr "Task Details"
+
+msgid "Task Priority"
+msgstr "Task Priority"
+
+msgid "Task Status"
+msgstr "Task Status"
+
+msgid "Telegram bot for WooCommerce."
+msgstr "Telegram bot for WooCommerce."
+
+msgid "Telegram shop bot"
+msgstr "Telegram shop bot"
+
+msgid "Template not found."
+msgstr "Template not found."
+
+msgid "The SMS service for sending reminders is not configured correctly. Please <a href=\"%s\">check your settings</a>."
+msgstr "The SMS service for sending reminders is not configured correctly. Please <a href=\"%s\">check your settings</a>."
+
+msgid "Ticket"
+msgstr "Ticket"
+
+msgid "Ticket Status"
+msgstr "Ticket Status"
+
+msgid "Too many OTP attempts."
+msgstr "Too many OTP attempts."
+
+msgid "Too many requests."
+msgstr "Too many requests."
+
+msgid "Torob Products Extractor"
+msgstr "Torob Products Extractor"
+
+msgid "Torob WooCommerce product extraction and tracking integration."
+msgstr "Torob WooCommerce product extraction and tracking integration."
+
+msgid "TorobPay Gateway"
+msgstr "TorobPay Gateway"
+
+msgid "TorobPay WooCommerce gateway integration module."
+msgstr "TorobPay WooCommerce gateway integration module."
+
+msgid "Tracking code"
+msgstr "Tracking code"
+
+msgid "Unknown accounting action."
+msgstr "Unknown accounting action."
+
+msgid "Unknown action."
+msgstr "Unknown action."
+
+msgid "Unknown order SMS event."
+msgstr "Unknown order SMS event."
+
+msgid "Update Label"
+msgstr "Update Label"
+
+msgid "Update ZIP does not contain webinocrm/webinocrm.php."
+msgstr "Update ZIP does not contain webinocrm/webinocrm.php."
+
+msgid "Upload assets/dashboard-build from: cd client && npm run build"
+msgstr "Upload assets/dashboard-build from: cd client && npm run build"
+
+msgid "Verification failed."
+msgstr "Verification failed."
+
+msgid "Visitor and page analytics-module for the dashboard."
+msgstr "Visitor and page analytics-module for the dashboard."
+
+msgid "Waiting for Customer"
+msgstr "Waiting for Customer"
+
+msgid "Waiting for Support"
+msgstr "Waiting for Support"
+
+msgid "Webina Woo Core Pricing"
+msgstr "Webina Woo Core Pricing"
+
+msgid "Webino Dashboard core"
+msgstr "Webino Dashboard core"
+
+msgid "WebinoCRM core"
+msgstr "WebinoCRM core"
+
+msgid "You do not have permission to access this dashboard."
+msgstr "You do not have permission to access this dashboard."
+
+msgid "You do not have permission to update CRM core."
+msgstr "You do not have permission to update CRM core."
+
+msgid "ZIP contract validation passed."
+msgstr "ZIP contract validation passed."
+
+msgid "ZIP file is not readable."
+msgstr "ZIP file is not readable."
+
+msgid "Zarinpal Gateway"
+msgstr "Zarinpal Gateway"
+
+msgid "ZipArchive extension is not available on CRM server."
+msgstr "ZipArchive extension is not available on CRM server."
+
+msgid "ZipArchive is not available on this server."
+msgstr "ZipArchive is not available on this server."
+
+msgid "chat_id الزامی است."
+msgstr "chat_id الزامی است."
+
+msgid "آمار بازدید"
+msgstr "آمار بازدید"
+
+msgid "ابتدا یک سال مالی تعریف کنید."
+msgstr "ابتدا یک سال مالی تعریف کنید."
+
+msgid "اتوماسیون WebinoCRM"
+msgstr "اتوماسیون WebinoCRM"
+
+msgid "ارتباط با مشتری"
+msgstr "ارتباط با مشتری"
+
+msgid "ارجاع با موفقیت انجام شد."
+msgstr "ارجاع با موفقیت انجام شد."
+
+msgid "ارسال انبوه انجام شد."
+msgstr "ارسال انبوه انجام شد."
+
+msgid "ارسال به CRM (WebinoCRM)"
+msgstr "ارسال به CRM (WebinoCRM)"
+
+msgid "ارسال پیامک"
+msgstr "ارسال پیامک"
+
+msgid "اسناد"
+msgstr "اسناد"
+
+msgid "اسناد حسابداری"
+msgstr "اسناد حسابداری"
+
+msgid "اشتراک با موفقیت به قرارداد تبدیل شد."
+msgstr "اشتراک با موفقیت به قرارداد تبدیل شد."
+
+msgid "اشتراک فاقد مشتری است."
+msgstr "اشتراک فاقد مشتری است."
+
+msgid "اشتراک یافت نشد."
+msgstr "اشتراک یافت نشد."
+
+msgid "اشخاص (طرف‌های حساب)"
+msgstr "اشخاص (طرف‌های حساب)"
+
+msgid "اطلاعات ارسالی نامعتبر است."
+msgstr "اطلاعات ارسالی نامعتبر است."
+
+msgid "اطلاعات فرم به بخش سرنخ‌های WebinoCRM ارسال می‌شود."
+msgstr "اطلاعات فرم به بخش سرنخ‌های WebinoCRM ارسال می‌شود."
+
+msgid "اطلاعات ناقص است."
+msgstr "اطلاعات ناقص است."
+
+msgid "اطلاعات ناقص."
+msgstr "اطلاعات ناقص."
+
+msgid "اطلاعات پیوند ناقص است."
+msgstr "اطلاعات پیوند ناقص است."
+
+msgid "افزودن جایگاه جدید"
+msgstr "افزودن جایگاه جدید"
+
+msgid "افزودن جدید"
+msgstr "افزودن جدید"
+
+msgid "افزودن سرنخ جدید"
+msgstr "افزودن سرنخ جدید"
+
+msgid "افزودن قالب تسک جدید"
+msgstr "افزودن قالب تسک جدید"
+
+msgid "افزودن قالب پروژه جدید"
+msgstr "افزودن قالب پروژه جدید"
+
+msgid "افزودن مشاوره جدید"
+msgstr "افزودن مشاوره جدید"
+
+msgid "افزودن وضعیت جدید"
+msgstr "افزودن وضعیت جدید"
+
+msgid "افزودن پاسخ جدید"
+msgstr "افزودن پاسخ جدید"
+
+msgid "افزونه WooCommerce Subscriptions فعال نیست."
+msgstr "افزونه WooCommerce Subscriptions فعال نیست."
+
+msgid "افزونه ووکامرس فعال نیست."
+msgstr "افزونه ووکامرس فعال نیست."
+
+msgid "امکان تأیید فاکتور وجود ندارد (فقط پیش‌نویس قابل تأیید است)."
+msgstr "امکان تأیید فاکتور وجود ندارد (فقط پیش‌نویس قابل تأیید است)."
+
+msgid "امکان ثبت رسید/پرداخت وجود ندارد (فقط پیش‌نویس)."
+msgstr "امکان ثبت رسید/پرداخت وجود ندارد (فقط پیش‌نویس)."
+
+msgid "امکان ثبت سند وجود ندارد."
+msgstr "امکان ثبت سند وجود ندارد."
+
+msgid "امکان حذف این حساب وجود ندارد."
+msgstr "امکان حذف این حساب وجود ندارد."
+
+msgid "امکان حذف این سال مالی وجود ندارد (دارای سند است)."
+msgstr "امکان حذف این سال مالی وجود ندارد (دارای سند است)."
+
+msgid "امکان حذف حساب وجود ندارد (در رسید/پرداخت استفاده شده)."
+msgstr "امکان حذف حساب وجود ندارد (در رسید/پرداخت استفاده شده)."
+
+msgid "امکان حذف دسته وجود ندارد (دارای زیردسته یا شخص است)."
+msgstr "امکان حذف دسته وجود ندارد (دارای زیردسته یا شخص است)."
+
+msgid "امکان حذف دسته وجود ندارد (دارای زیردسته یا کالا است)."
+msgstr "امکان حذف دسته وجود ندارد (دارای زیردسته یا کالا است)."
+
+msgid "امکان حذف سند وجود ندارد."
+msgstr "امکان حذف سند وجود ندارد."
+
+msgid "امکان حذف شخص وجود ندارد."
+msgstr "امکان حذف شخص وجود ندارد."
+
+msgid "امکان حذف فاکتور وجود ندارد (فقط پیش‌نویس)."
+msgstr "امکان حذف فاکتور وجود ندارد (فقط پیش‌نویس)."
+
+msgid "امکان حذف لیست قیمت وجود ندارد."
+msgstr "امکان حذف لیست قیمت وجود ندارد."
+
+msgid "امکان حذف مدیر اصلی سایت وجود ندارد."
+msgstr "امکان حذف مدیر اصلی سایت وجود ندارد."
+
+msgid "امکان حذف واحد وجود ندارد (در کالاها استفاده شده)."
+msgstr "امکان حذف واحد وجود ندارد (در کالاها استفاده شده)."
+
+msgid "امکان حذف وجود ندارد (فقط پیش‌نویس)."
+msgstr "امکان حذف وجود ندارد (فقط پیش‌نویس)."
+
+msgid "امکان حذف چک وجود ندارد."
+msgstr "امکان حذف چک وجود ندارد."
+
+msgid "امکان حذف کالا وجود ندارد."
+msgstr "امکان حذف کالا وجود ندارد."
+
+msgid "امکان ویرایش فاکتور وجود ندارد (فقط پیش‌نویس)."
+msgstr "امکان ویرایش فاکتور وجود ندارد (فقط پیش‌نویس)."
+
+msgid "امکان ویرایش وجود ندارد (فقط پیش‌نویس)."
+msgstr "امکان ویرایش وجود ندارد (فقط پیش‌نویس)."
+
+msgid "انبار الزامی است"
+msgstr "انبار الزامی است"
+
+msgid "انبار با موفقیت ایجاد شد"
+msgstr "انبار با موفقیت ایجاد شد"
+
+msgid "انبار با موفقیت به‌روزرسانی شد"
+msgstr "انبار با موفقیت به‌روزرسانی شد"
+
+msgid "انبار با موفقیت حذف شد"
+msgstr "انبار با موفقیت حذف شد"
+
+msgid "انبار پیش‌فرض تعریف نشده"
+msgstr "انبار پیش‌فرض تعریف نشده"
+
+msgid "انبارگردانی با موفقیت ایجاد شد"
+msgstr "انبارگردانی با موفقیت ایجاد شد"
+
+msgid "انبارگردانی با موفقیت تکمیل شد"
+msgstr "انبارگردانی با موفقیت تکمیل شد"
+
+msgid "انبارگردانی با موفقیت ثبت شد"
+msgstr "انبارگردانی با موفقیت ثبت شد"
+
+msgid "انبارگردانی باید تکمیل شده باشد"
+msgstr "انبارگردانی باید تکمیل شده باشد"
+
+msgid "انبارگردانی یافت نشد"
+msgstr "انبارگردانی یافت نشد"
+
+msgid "انتخاب کنید"
+msgstr "انتخاب کنید"
+
+msgid "اولویت تیکت"
+msgstr "اولویت تیکت"
+
+msgid "اگر این کاربر مدیر دپارتمان است، دپارتمان‌هایی که مدیریت می‌کند را انتخاب کنید. پروژه‌های آن دپارتمان را می‌تواند به کارمند ارجاع دهد."
+msgstr "اگر این کاربر مدیر دپارتمان است، دپارتمان‌هایی که مدیریت می‌کند را انتخاب کنید. پروژه‌های آن دپارتمان را می‌تواند به کارمند ارجاع دهد."
+
+msgid "اگر تنظیم شود، تسک‌ها از این قالب ساخته می‌شوند."
+msgstr "اگر تنظیم شود، تسک‌ها از این قالب ساخته می‌شوند."
+
+msgid "ایمیل الزامی است."
+msgstr "ایمیل الزامی است."
+
+msgid "این URL را در پنل بله برای ربات خود setWebhook کنید."
+msgstr "این URL را در پنل بله برای ربات خود setWebhook کنید."
+
+msgid "این اشتراک قبلاً به قرارداد تبدیل شده است."
+msgstr "این اشتراک قبلاً به قرارداد تبدیل شده است."
+
+msgid "این ایمیل قبلاً ثبت شده است."
+msgstr "این ایمیل قبلاً ثبت شده است."
+
+msgid "این تسک روزانه برای تمام کارمندانی که این جایگاه شغلی را دارند ساخته خواهد شد."
+msgstr "این تسک روزانه برای تمام کارمندانی که این جایگاه شغلی را دارند ساخته خواهد شد."
+
+msgid "این محصول (خدمت) پس از فروش، کدام قالب پروژه را ایجاد کند؟"
+msgstr "این محصول (خدمت) پس از فروش، کدام قالب پروژه را ایجاد کند؟"
+
+msgid "این نام کاربری قبلاً ثبت شده است."
+msgstr "این نام کاربری قبلاً ثبت شده است."
+
+msgid "این وضعیت از قبل وجود دارد."
+msgstr "این وضعیت از قبل وجود دارد."
+
+msgid "این کاربر شناسه بله ثبت‌شده ندارد."
+msgstr "این کاربر شناسه بله ثبت‌شده ندارد."
+
+msgid "این کاربر هنوز به ربات بله متصل نشده است."
+msgstr "این کاربر هنوز به ربات بله متصل نشده است."
+
+msgid "این کد ملی قبلاً ثبت شده است."
+msgstr "این کد ملی قبلاً ثبت شده است."
+
+msgid "این کمپین به %d سرنخ متصل است. برای حذف، گزینه جدا کردن سرنخ‌ها را تأیید کنید."
+msgstr "این کمپین به %d سرنخ متصل است. برای حذف، گزینه جدا کردن سرنخ‌ها را تأیید کنید."
+
+msgid "بازارچه / محصولات"
+msgstr "بازارچه / محصولات"
+
+msgid "بدنهٔ درخواست JSON معتبر نیست."
+msgstr "بدنهٔ درخواست JSON معتبر نیست."
+
+msgid "بدون ارجاع"
+msgstr "بدون ارجاع"
+
+msgid "برای افزودن سریع، لطفاً ابتدا برد را بر اساس پروژه و کارمند فیلتر کنید."
+msgstr "برای افزودن سریع، لطفاً ابتدا برد را بر اساس پروژه و کارمند فیلتر کنید."
+
+msgid "برای این ایمیل تعداد درخواست کد بیش از حد مجاز است."
+msgstr "برای این ایمیل تعداد درخواست کد بیش از حد مجاز است."
+
+msgid "برای این شماره تعداد درخواست کد بیش از حد مجاز است."
+msgstr "برای این شماره تعداد درخواست کد بیش از حد مجاز است."
+
+msgid "برای تنظیم رمز ابتدا با کد تأیید وارد شوید."
+msgstr "برای تنظیم رمز ابتدا با کد تأیید وارد شوید."
+
+msgid "برای ساخت تسک‌های خودکار، \"روزانه\" را انتخاب کنید."
+msgstr "برای ساخت تسک‌های خودکار، \"روزانه\" را انتخاب کنید."
+
+msgid "برای کاربر جدید، وارد کردن رمز عبور ضروری است."
+msgstr "برای کاربر جدید، وارد کردن رمز عبور ضروری است."
+
+msgid "بروزرسانی جایگاه"
+msgstr "بروزرسانی جایگاه"
+
+msgid "برچسب‌های پروژه"
+msgstr "برچسب‌های پروژه"
+
+msgid "بسته شارژ"
+msgstr "بسته شارژ"
+
+msgid "بله"
+msgstr "بله"
+
+msgid "تاریخ پایان نمی‌تواند قبل از تاریخ شروع باشد."
+msgstr "تاریخ پایان نمی‌تواند قبل از تاریخ شروع باشد."
+
+msgid "تایمر از سر گرفته شد."
+msgstr "تایمر از سر گرفته شد."
+
+msgid "تایمر شروع شد."
+msgstr "تایمر شروع شد."
+
+msgid "تایمر متوقف شد."
+msgstr "تایمر متوقف شد."
+
+msgid "تایمر متوقف موقت شد."
+msgstr "تایمر متوقف موقت شد."
+
+msgid "تب تنظیمات نامعتبر است."
+msgstr "تب تنظیمات نامعتبر است."
+
+msgid "ترجیح با موفقیت ذخیره شد."
+msgstr "ترجیح با موفقیت ذخیره شد."
+
+msgid "تسک با موفقیت اضافه شد و اطلاع‌رسانی‌ها ارسال گردید."
+msgstr "تسک با موفقیت اضافه شد و اطلاع‌رسانی‌ها ارسال گردید."
+
+msgid "تسک با موفقیت حذف شد."
+msgstr "تسک با موفقیت حذف شد."
+
+msgid "تسک سریع با موفقیت اضافه شد."
+msgstr "تسک سریع با موفقیت اضافه شد."
+
+msgid "تعداد تلاش‌ها بیش از حد مجاز است."
+msgstr "تعداد تلاش‌ها بیش از حد مجاز است."
+
+msgid "تعداد تلاش‌های ثبت‌نام بیش از حد مجاز است. لطفاً بعداً تلاش کنید."
+msgstr "تعداد تلاش‌های ثبت‌نام بیش از حد مجاز است. لطفاً بعداً تلاش کنید."
+
+msgid "تعداد تلاش‌های مجاز تمام شده است. لطفاً کد جدید درخواست کنید."
+msgstr "تعداد تلاش‌های مجاز تمام شده است. لطفاً کد جدید درخواست کنید."
+
+msgid "تعداد تلاش‌های ورود بیش از حد مجاز است. لطفاً بعداً تلاش کنید."
+msgstr "تعداد تلاش‌های ورود بیش از حد مجاز است. لطفاً بعداً تلاش کنید."
+
+msgid "تعداد درخواست بیش از حد مجاز است."
+msgstr "تعداد درخواست بیش از حد مجاز است."
+
+msgid "تعداد درخواست کد بیش از حد مجاز است. لطفاً بعداً تلاش کنید."
+msgstr "تعداد درخواست کد بیش از حد مجاز است. لطفاً بعداً تلاش کنید."
+
+msgid "تعداد درخواست‌ها بیش از حد مجاز است."
+msgstr "تعداد درخواست‌ها بیش از حد مجاز است."
+
+msgid "تغییر وضعیت انجام نشد."
+msgstr "تغییر وضعیت انجام نشد."
+
+msgid "تغییرات با موفقیت ذخیره شد."
+msgstr "تغییرات با موفقیت ذخیره شد."
+
+msgid "تلفنی"
+msgstr "تلفنی"
+
+msgid "تمام جایگاه‌ها"
+msgstr "تمام جایگاه‌ها"
+
+msgid "تمام فیلدها الزامی است."
+msgstr "تمام فیلدها الزامی است."
+
+msgid "تنظیمات"
+msgstr "تنظیمات"
+
+msgid "تنظیمات آمار بازدید ذخیره شد."
+msgstr "تنظیمات آمار بازدید ذخیره شد."
+
+msgid "تنظیمات احراز هویت با موفقیت ذخیره شد."
+msgstr "تنظیمات احراز هویت با موفقیت ذخیره شد."
+
+msgid "تنظیمات استایل ذخیره شد."
+msgstr "تنظیمات استایل ذخیره شد."
+
+msgid "تنظیمات اعلانات ذخیره شد."
+msgstr "تنظیمات اعلانات ذخیره شد."
+
+msgid "تنظیمات حسابداری"
+msgstr "تنظیمات حسابداری"
+
+msgid "تنظیمات درگاه پرداخت ذخیره شد."
+msgstr "تنظیمات درگاه پرداخت ذخیره شد."
+
+msgid "تنظیمات ذخیره شد."
+msgstr "تنظیمات ذخیره شد."
+
+msgid "تنظیمات عمومی"
+msgstr "تنظیمات عمومی"
+
+msgid "تنظیمات قالب تسک"
+msgstr "تنظیمات قالب تسک"
+
+msgid "تنظیمات مدیرپیامک"
+msgstr "تنظیمات مدیرپیامک"
+
+msgid "تنظیمات مدیرپیامک ذخیره شد."
+msgstr "تنظیمات مدیرپیامک ذخیره شد."
+
+msgid "تنظیمات پیامک با موفقیت ذخیره شد."
+msgstr "تنظیمات پیامک با موفقیت ذخیره شد."
+
+msgid "تیکت‌ها"
+msgstr "تیکت‌ها"
+
+msgid "تیکت‌های پشتیبانی"
+msgstr "تیکت‌های پشتیبانی"
+
+msgid "ثبت نشده"
+msgstr "ثبت نشده"
+
+msgid "ثبت‌نام با موفقیت انجام شد."
+msgstr "ثبت‌نام با موفقیت انجام شد."
+
+msgid "ثبت‌نام در این سایت غیرفعال است."
+msgstr "ثبت‌نام در این سایت غیرفعال است."
+
+msgid "جایگاه سازمانی"
+msgstr "جایگاه سازمانی"
+
+msgid "جایگاه‌های سازمانی"
+msgstr "جایگاه‌های سازمانی"
+
+msgid "جستجوی جایگاه"
+msgstr "جستجوی جایگاه"
+
+msgid "جستجوی سرنخ"
+msgstr "جستجوی سرنخ"
+
+msgid "جمع بدهکار و بستانکار برابر نیست یا خطای دیگر."
+msgstr "جمع بدهکار و بستانکار برابر نیست یا خطای دیگر."
+
+msgid "حجم فایل بیش از حد مجاز است (حداکثر 10MB)."
+msgstr "حجم فایل بیش از حد مجاز است (حداکثر 10MB)."
+
+msgid "حساب و سال مالی الزامی است."
+msgstr "حساب و سال مالی الزامی است."
+
+msgid "حساب یافت نشد."
+msgstr "حساب یافت نشد."
+
+msgid "حسابداری"
+msgstr "حسابداری"
+
+msgid "حساب‌های بانک/صندوق"
+msgstr "حساب‌های بانک/صندوق"
+
+msgid "حضوری"
+msgstr "حضوری"
+
+msgid "حواله با موفقیت ایجاد شد"
+msgstr "حواله با موفقیت ایجاد شد"
+
+msgid "حواله با موفقیت ثبت شد"
+msgstr "حواله با موفقیت ثبت شد"
+
+msgid "حواله یافت نشد"
+msgstr "حواله یافت نشد"
+
+msgid "خدمات و محصولات"
+msgstr "خدمات و محصولات"
+
+msgid "خطا در ارسال ایمیل. لطفاً بعداً تلاش کنید."
+msgstr "خطا در ارسال ایمیل. لطفاً بعداً تلاش کنید."
+
+msgid "خطا در ارسال پیامک. لطفاً بعداً تلاش کنید."
+msgstr "خطا در ارسال پیامک. لطفاً بعداً تلاش کنید."
+
+msgid "خطا در ارسال پیامک. لطفاً تنظیمات سرویس پیامک و لاگ‌های سرور را بررسی کنید."
+msgstr "خطا در ارسال پیامک. لطفاً تنظیمات سرویس پیامک و لاگ‌های سرور را بررسی کنید."
+
+msgid "خطا در افزودن سطر"
+msgstr "خطا در افزودن سطر"
+
+msgid "خطا در ایجاد انبار"
+msgstr "خطا در ایجاد انبار"
+
+msgid "خطا در ایجاد انبارگردانی"
+msgstr "خطا در ایجاد انبارگردانی"
+
+msgid "خطا در ایجاد تسک."
+msgstr "خطا در ایجاد تسک."
+
+msgid "خطا در ایجاد حساب (احتمالاً کد تکراری است)."
+msgstr "خطا در ایجاد حساب (احتمالاً کد تکراری است)."
+
+msgid "خطا در ایجاد حساب کاربری. لطفاً مجدداً تلاش کنید."
+msgstr "خطا در ایجاد حساب کاربری. لطفاً مجدداً تلاش کنید."
+
+msgid "خطا در ایجاد حساب."
+msgstr "خطا در ایجاد حساب."
+
+msgid "خطا در ایجاد حواله"
+msgstr "خطا در ایجاد حواله"
+
+msgid "خطا در ایجاد دسته کالا."
+msgstr "خطا در ایجاد دسته کالا."
+
+msgid "خطا در ایجاد دسته."
+msgstr "خطا در ایجاد دسته."
+
+msgid "خطا در ایجاد رسید"
+msgstr "خطا در ایجاد رسید"
+
+msgid "خطا در ایجاد رسید/پرداخت (حساب یا سال مالی نامعتبر)."
+msgstr "خطا در ایجاد رسید/پرداخت (حساب یا سال مالی نامعتبر)."
+
+msgid "خطا در ایجاد سال مالی."
+msgstr "خطا در ایجاد سال مالی."
+
+msgid "خطا در ایجاد شخص."
+msgstr "خطا در ایجاد شخص."
+
+msgid "خطا در ایجاد فاکتور (سال مالی یا طرف حساب نامعتبر)."
+msgstr "خطا در ایجاد فاکتور (سال مالی یا طرف حساب نامعتبر)."
+
+msgid "خطا در ایجاد قالب."
+msgstr "خطا در ایجاد قالب."
+
+msgid "خطا در ایجاد قرارداد."
+msgstr "خطا در ایجاد قرارداد."
+
+msgid "خطا در ایجاد لیست قیمت."
+msgstr "خطا در ایجاد لیست قیمت."
+
+msgid "خطا در ایجاد واحد."
+msgstr "خطا در ایجاد واحد."
+
+msgid "خطا در ایجاد کالا (احتمالاً کد تکراری است)."
+msgstr "خطا در ایجاد کالا (احتمالاً کد تکراری است)."
+
+msgid "خطا در به‌روزرسانی انبار"
+msgstr "خطا در به‌روزرسانی انبار"
+
+msgid "خطا در تغییر وضعیت: %s"
+msgstr "خطا در تغییر وضعیت: %s"
+
+msgid "خطا در ثبت تراکنش"
+msgstr "خطا در ثبت تراکنش"
+
+msgid "خطا در ثبت نظر."
+msgstr "خطا در ثبت نظر."
+
+msgid "خطا در ثبت چک (شماره، بانک، طرف حساب و سررسید الزامی است)."
+msgstr "خطا در ثبت چک (شماره، بانک، طرف حساب و سررسید الزامی است)."
+
+msgid "خطا در حذف انبار"
+msgstr "خطا در حذف انبار"
+
+msgid "خطا در حذف تسک."
+msgstr "خطا در حذف تسک."
+
+msgid "خطا در حذف ورودی."
+msgstr "خطا در حذف ورودی."
+
+msgid "خطا در حذف کمپین."
+msgstr "خطا در حذف کمپین."
+
+msgid "خطا در خروجی."
+msgstr "خطا در خروجی."
+
+msgid "خطا در ذخیره تنظیمات."
+msgstr "خطا در ذخیره تنظیمات."
+
+msgid "خطا در ذخیره پیش‌فرض‌ها."
+msgstr "خطا در ذخیره پیش‌فرض‌ها."
+
+msgid "خطا در ذخیره‌سازی اطلاعات کاربر: %s"
+msgstr "خطا در ذخیره‌سازی اطلاعات کاربر: %s"
+
+msgid "خطا در ذخیره‌سازی."
+msgstr "خطا در ذخیره‌سازی."
+
+msgid "خطا در ویرایش چک."
+msgstr "خطا در ویرایش چک."
+
+msgid "خطای امنیتی."
+msgstr "خطای امنیتی."
+
+msgid "خطای امنیتی. لطفاً صفحه را رفرش کنید."
+msgstr "خطای امنیتی. لطفاً صفحه را رفرش کنید."
+
+msgid "خطای دسترسی."
+msgstr "خطای دسترسی."
+
+msgid "خطایی در به‌روزرسانی سرنخ رخ داد."
+msgstr "خطایی در به‌روزرسانی سرنخ رخ داد."
+
+msgid "خطایی در ثبت سرنخ رخ داد."
+msgstr "خطایی در ثبت سرنخ رخ داد."
+
+msgid "خطایی در حذف سرنخ رخ داد."
+msgstr "خطایی در حذف سرنخ رخ داد."
+
+msgid "خطایی در هنگام به‌روزرسانی وضعیت رخ داد: %s"
+msgstr "خطایی در هنگام به‌روزرسانی وضعیت رخ داد: %s"
+
+msgid "خطایی در هنگام حذف کاربر رخ داد."
+msgstr "خطایی در هنگام حذف کاربر رخ داد."
+
+msgid "خطوط"
+msgstr "خطوط"
+
+msgid "خوانده شد."
+msgstr "خوانده شد."
+
+msgid "داده ارسال پیام نامعتبر است."
+msgstr "داده ارسال پیام نامعتبر است."
+
+msgid "داشبورد"
+msgstr "داشبورد"
+
+msgid "داشبورد حسابداری"
+msgstr "داشبورد حسابداری"
+
+msgid "داشبورد پیشفرض"
+msgstr "داشبورد پیشفرض"
+
+msgid "درخواست نامعتبر."
+msgstr "درخواست نامعتبر."
+
+msgid "درخواست نامعتبر. لطفاً صفحه را رفرش کنید."
+msgstr "درخواست نامعتبر. لطفاً صفحه را رفرش کنید."
+
+msgid "دسترسی رد شد"
+msgstr "دسترسی رد شد"
+
+msgid "دسترسی غیرمجاز یا اطلاعات ناقص."
+msgstr "دسترسی غیرمجاز یا اطلاعات ناقص."
+
+msgid "دسترسی غیرمجاز."
+msgstr "دسترسی غیرمجاز."
+
+msgid "دسته‌بندی (برای اتوماسیون):"
+msgstr "دسته‌بندی (برای اتوماسیون):"
+
+msgid "دسته‌بندی تسک"
+msgstr "دسته‌بندی تسک"
+
+msgid "دسته‌های بازارچه"
+msgstr "دسته‌های بازارچه"
+
+msgid "دفتر کل / معین"
+msgstr "دفتر کل / معین"
+
+msgid "دفترچه"
+msgstr "دفترچه"
+
+msgid "دپارتمان والد"
+msgstr "دپارتمان والد"
+
+msgid "دپارتمان والد:"
+msgstr "دپارتمان والد:"
+
+msgid "دپارتمان پیشفرض"
+msgstr "دپارتمان پیشفرض"
+
+msgid "ربات کسب و کار وبینا برای ثبت سفارش و پرداخت به ووکامرس نیاز دارد."
+msgstr "ربات کسب و کار وبینا برای ثبت سفارش و پرداخت به ووکامرس نیاز دارد."
+
+msgid "ربات کسب‌وکار"
+msgstr "ربات کسب‌وکار"
+
+msgid "ربات‌ها"
+msgstr "ربات‌ها"
+
+msgid "رسید با موفقیت ایجاد شد"
+msgstr "رسید با موفقیت ایجاد شد"
+
+msgid "رسید با موفقیت ثبت شد"
+msgstr "رسید با موفقیت ثبت شد"
+
+msgid "رسید و پرداخت"
+msgstr "رسید و پرداخت"
+
+msgid "رسید یافت نشد"
+msgstr "رسید یافت نشد"
+
+msgid "رسید/پرداخت یافت نشد."
+msgstr "رسید/پرداخت یافت نشد."
+
+msgid "رفتن به داشبورد"
+msgstr "رفتن به داشبورد"
+
+msgid "رمز عبور اشتباه است."
+msgstr "رمز عبور اشتباه است."
+
+msgid "رمز عبور با موفقیت تنظیم شد."
+msgstr "رمز عبور با موفقیت تنظیم شد."
+
+msgid "رمز عبور باید حداقل 6 کاراکتر باشد."
+msgstr "رمز عبور باید حداقل 6 کاراکتر باشد."
+
+msgid "رمز عبور و تکرار آن الزامی است."
+msgstr "رمز عبور و تکرار آن الزامی است."
+
+msgid "رمز عبور و تکرار آن یکسان نیست."
+msgstr "رمز عبور و تکرار آن یکسان نیست."
+
+msgid "روزانه (مثل اینستاگرام)"
+msgstr "روزانه (مثل اینستاگرام)"
+
+msgid "زمان با موفقیت ثبت شد."
+msgstr "زمان با موفقیت ثبت شد."
+
+msgid "زمان‌سنجی"
+msgstr "زمان‌سنجی"
+
+msgid "ساعت وارد شده باید بزرگتر از صفر باشد."
+msgstr "ساعت وارد شده باید بزرگتر از صفر باشد."
+
+msgid "سال مالی"
+msgstr "سال مالی"
+
+msgid "سال مالی انتخاب نشده."
+msgstr "سال مالی انتخاب نشده."
+
+msgid "سایر"
+msgstr "سایر"
+
+msgid "سرنخ #%1$d به %2$s ارجاع داده شد."
+msgstr "سرنخ #%1$d به %2$s ارجاع داده شد."
+
+msgid "سرنخ با موفقیت ثبت شد."
+msgstr "سرنخ با موفقیت ثبت شد."
+
+msgid "سرنخ با موفقیت حذف شد."
+msgstr "سرنخ با موفقیت حذف شد."
+
+msgid "سرنخ بله"
+msgstr "سرنخ بله"
+
+msgid "سرنخ جدید از فرم «%1$s»: %2$s %3$s"
+msgstr "سرنخ جدید از فرم «%1$s»: %2$s %3$s"
+
+msgid "سرنخ یافت نشد."
+msgstr "سرنخ یافت نشد."
+
+msgid "سرنخ‌ها"
+msgstr "سرنخ‌ها"
+
+msgid "سرور پکیج (Gitea)"
+msgstr "سرور پکیج (Gitea)"
+
+msgid "سرویس بارگذاری کدینگ در دسترس نیست."
+msgstr "سرویس بارگذاری کدینگ در دسترس نیست."
+
+msgid "سرویس پیامک به درستی پیکربندی نشده است."
+msgstr "سرویس پیامک به درستی پیکربندی نشده است."
+
+msgid "سرویس پیامک به درستی پیکربندی نشده است. لطفاً به بخش تنظیمات مراجعه کنید."
+msgstr "سرویس پیامک به درستی پیکربندی نشده است. لطفاً به بخش تنظیمات مراجعه کنید."
+
+msgid "سطر با موفقیت اضافه شد"
+msgstr "سطر با موفقیت اضافه شد"
+
+msgid "سفارش شارژ"
+msgstr "سفارش شارژ"
+
+msgid "سفارش‌های بازارچه"
+msgstr "سفارش‌های بازارچه"
+
+msgid "سند به اشتراک گذاشته شد."
+msgstr "سند به اشتراک گذاشته شد."
+
+msgid "سند به‌روزرسانی شد."
+msgstr "سند به‌روزرسانی شد."
+
+msgid "سند حذف شد."
+msgstr "سند حذف شد."
+
+msgid "سند یافت نشد."
+msgstr "سند یافت نشد."
+
+msgid "سیستم و تنظیمات"
+msgstr "سیستم و تنظیمات"
+
+msgid "شخص یافت نشد."
+msgstr "شخص یافت نشد."
+
+msgid "شما اجازه انتقال وظیفه به این وضعیت را ندارید."
+msgstr "شما اجازه انتقال وظیفه به این وضعیت را ندارید."
+
+msgid "شما اجازه حذف این تسک را ندارید."
+msgstr "شما اجازه حذف این تسک را ندارید."
+
+msgid "شما اجازه حذف این کاربر را ندارید."
+msgstr "شما اجازه حذف این کاربر را ندارید."
+
+msgid "شما دسترسی لازم برای انجام این کار را ندارید."
+msgstr "شما دسترسی لازم برای انجام این کار را ندارید."
+
+msgid "شما دسترسی لازم برای این عملیات را ندارید."
+msgstr "شما دسترسی لازم برای این عملیات را ندارید."
+
+msgid "شما دسترسی لازم برای حذف کاربر را ندارید."
+msgstr "شما دسترسی لازم برای حذف کاربر را ندارید."
+
+msgid "شما دسترسی لازم برای مدیریت کاربران را ندارید."
+msgstr "شما دسترسی لازم برای مدیریت کاربران را ندارید."
+
+msgid "شما دسترسی لازم برای مشاهده این پروژه را ندارید."
+msgstr "شما دسترسی لازم برای مشاهده این پروژه را ندارید."
+
+msgid "شما دسترسی لازم را ندارید."
+msgstr "شما دسترسی لازم را ندارید."
+
+msgid "شما نمی‌توانید حساب کاربری خود را حذف کنید."
+msgstr "شما نمی‌توانید حساب کاربری خود را حذف کنید."
+
+msgid "شمارش با موفقیت ثبت شد"
+msgstr "شمارش با موفقیت ثبت شد"
+
+msgid "شماره تلفن الزامی است."
+msgstr "شماره تلفن الزامی است."
+
+msgid "شماره موبایل با حساب کاربری جاری مطابقت ندارد."
+msgstr "شماره موبایل با حساب کاربری جاری مطابقت ندارد."
+
+msgid "شماره موبایل برای این کاربر ثبت نشده است."
+msgstr "شماره موبایل برای این کاربر ثبت نشده است."
+
+msgid "شناسه اشتراک نامعتبر است."
+msgstr "شناسه اشتراک نامعتبر است."
+
+msgid "شناسه تایمر نامعتبر است."
+msgstr "شناسه تایمر نامعتبر است."
+
+msgid "شناسه سرنخ نامعتبر است."
+msgstr "شناسه سرنخ نامعتبر است."
+
+msgid "شناسه سند نامعتبر است."
+msgstr "شناسه سند نامعتبر است."
+
+msgid "شناسه محصول نامعتبر است."
+msgstr "شناسه محصول نامعتبر است."
+
+msgid "شناسه ورودی نامعتبر است."
+msgstr "شناسه ورودی نامعتبر است."
+
+msgid "شناسه وضعیت نامعتبر است."
+msgstr "شناسه وضعیت نامعتبر است."
+
+msgid "شناسه وظیفه نامعتبر است."
+msgstr "شناسه وظیفه نامعتبر است."
+
+msgid "شناسه پیام نامعتبر است."
+msgstr "شناسه پیام نامعتبر است."
+
+msgid "شناسه کاربر یا متن پیام نامعتبر است."
+msgstr "شناسه کاربر یا متن پیام نامعتبر است."
+
+msgid "صادره خودکار برای فاکتور فروش #%s"
+msgstr "صادره خودکار برای فاکتور فروش #%s"
+
+msgid "طول شماره موبایل باید %d رقم باشد."
+msgstr "طول شماره موبایل باید %d رقم باشد."
+
+msgid "عملیات نامعتبر."
+msgstr "عملیات نامعتبر."
+
+msgid "عنوان کمپین الزامی است."
+msgstr "عنوان کمپین الزامی است."
+
+msgid "فاکتور یافت نشد."
+msgstr "فاکتور یافت نشد."
+
+msgid "فاکتورها"
+msgstr "فاکتورها"
+
+msgid "فایل با موفقیت آپلود شد."
+msgstr "فایل با موفقیت آپلود شد."
+
+msgid "فایل حذف شد."
+msgstr "فایل حذف شد."
+
+msgid "فایلی انتخاب نشده است."
+msgstr "فایلی انتخاب نشده است."
+
+msgid "فرم Elementor"
+msgstr "فرم Elementor"
+
+msgid "فرمت ایمیل صحیح نیست."
+msgstr "فرمت ایمیل صحیح نیست."
+
+msgid "فرمت شماره موبایل صحیح نیست. (مثال: 09123456789)"
+msgstr "فرمت شماره موبایل صحیح نیست. (مثال: 09123456789)"
+
+msgid "فرمت فایل مجاز نیست."
+msgstr "فرمت فایل مجاز نیست."
+
+msgid "فعال"
+msgstr "فعال"
+
+msgid "فقط حواله‌های پیش‌نویس قابل ثبت هستند"
+msgstr "فقط حواله‌های پیش‌نویس قابل ثبت هستند"
+
+msgid "فقط رسیدهای پیش‌نویس قابل ثبت هستند"
+msgstr "فقط رسیدهای پیش‌نویس قابل ثبت هستند"
+
+msgid "فیلدهای الزامی انجام نشد"
+msgstr "فیلدهای الزامی انجام نشد"
+
+msgid "قالب با موفقیت ذخیره شد."
+msgstr "قالب با موفقیت ذخیره شد."
+
+msgid "قالب تسک"
+msgstr "قالب تسک"
+
+msgid "قالب تسک (اولویت بالاتر از قالب پروژه)"
+msgstr "قالب تسک (اولویت بالاتر از قالب پروژه)"
+
+msgid "قالب تسک با موفقیت به محصول متصل شد."
+msgstr "قالب تسک با موفقیت به محصول متصل شد."
+
+msgid "قالب پروژه"
+msgstr "قالب پروژه"
+
+msgid "قالب‌های تسک"
+msgstr "قالب‌های تسک"
+
+msgid "قالب‌های پروژه"
+msgstr "قالب‌های پروژه"
+
+msgid "قرار ملاقات‌ها"
+msgstr "قرار ملاقات‌ها"
+
+msgid "قرارداد اشتراک #%1$d - %2$s"
+msgstr "قرارداد اشتراک #%1$d - %2$s"
+
+msgid "قرارداد یافت نشد."
+msgstr "قرارداد یافت نشد."
+
+msgid "قراردادها"
+msgstr "قراردادها"
+
+msgid "قراردادهای من"
+msgstr "قراردادهای من"
+
+msgid "قسط با موفقیت پرداخت شد"
+msgstr "قسط با موفقیت پرداخت شد"
+
+msgid "لاگ‌ها"
+msgstr "لاگ‌ها"
+
+msgid "لایسنس‌های مارکت‌پلیس"
+msgstr "لایسنس‌های مارکت‌پلیس"
+
+msgid "لطفاً فیلدهای ضروری (نام خانوادگی، ایمیل و نقش) را پر کنید."
+msgstr "لطفاً فیلدهای ضروری (نام خانوادگی، ایمیل و نقش) را پر کنید."
+
+msgid "لطفاً وارد شوید."
+msgstr "لطفاً وارد شوید."
+
+msgid "لطفاً پروژه و مسئول تسک را انتخاب کنید."
+msgstr "لطفاً پروژه و مسئول تسک را انتخاب کنید."
+
+msgid "لیست قیمت نامعتبر است."
+msgstr "لیست قیمت نامعتبر است."
+
+msgid "لیست قیمت یافت نشد."
+msgstr "لیست قیمت یافت نشد."
+
+msgid "ماهانه"
+msgstr "ماهانه"
+
+msgid "ماژول Analytics در دسترس نیست."
+msgstr "ماژول Analytics در دسترس نیست."
+
+msgid "ماژول اسناد در دسترس نیست."
+msgstr "ماژول اسناد در دسترس نیست."
+
+msgid "ماژول زمان‌سنجی در دسترس نیست."
+msgstr "ماژول زمان‌سنجی در دسترس نیست."
+
+msgid "ماژول نامعتبر است."
+msgstr "ماژول نامعتبر است."
+
+msgid "ماژول چت در دسترس نیست."
+msgstr "ماژول چت در دسترس نیست."
+
+msgid "متن نظر الزامی است."
+msgstr "متن نظر الزامی است."
+
+msgid "متن نمی‌تواند خالی باشد."
+msgstr "متن نمی‌تواند خالی باشد."
+
+msgid "متن پیام الزامی است."
+msgstr "متن پیام الزامی است."
+
+msgid "متن پیام نمی‌تواند خالی باشد."
+msgstr "متن پیام نمی‌تواند خالی باشد."
+
+msgid "متوقف"
+msgstr "متوقف"
+
+msgid "محصول و تعداد الزامی است"
+msgstr "محصول و تعداد الزامی است"
+
+msgid "محصول یافت نشد."
+msgstr "محصول یافت نشد."
+
+msgid "مدیرپیامک"
+msgstr "مدیرپیامک"
+
+msgid "مدیریت پروژه"
+msgstr "مدیریت پروژه"
+
+msgid "مرتبط با"
+msgstr "مرتبط با"
+
+msgid "مسئول وظیفه با موفقیت به‌روزرسانی شد."
+msgstr "مسئول وظیفه با موفقیت به‌روزرسانی شد."
+
+msgid "مسدود شده توسط"
+msgstr "مسدود شده توسط"
+
+msgid "مسدود می‌کند"
+msgstr "مسدود می‌کند"
+
+msgid "مشاوره"
+msgstr "مشاوره"
+
+msgid "مشاوره‌ها"
+msgstr "مشاوره‌ها"
+
+msgid "مشتری '%s' یک قسط برای پروژه '%s' پرداخت کرد."
+msgstr "مشتری '%s' یک قسط برای پروژه '%s' پرداخت کرد."
+
+msgid "مشتری با موفقیت از سرنخ ایجاد شد."
+msgstr "مشتری با موفقیت از سرنخ ایجاد شد."
+
+msgid "مشتری به تیکت '%s' پاسخ داد."
+msgstr "مشتری به تیکت '%s' پاسخ داد."
+
+msgid "مشتریان"
+msgstr "مشتریان"
+
+msgid "مشتریان پیامک"
+msgstr "مشتریان پیامک"
+
+msgid "مقدار حالت نمایش نامعتبر است."
+msgstr "مقدار حالت نمایش نامعتبر است."
+
+msgid "مقدار زبان نامعتبر است."
+msgstr "مقدار زبان نامعتبر است."
+
+msgid "مقدار وضعیت نوار کناری نامعتبر است."
+msgstr "مقدار وضعیت نوار کناری نامعتبر است."
+
+msgid "مقدار یا نام ترجیح نامعتبر است."
+msgstr "مقدار یا نام ترجیح نامعتبر است."
+
+msgid "منابع ورود"
+msgstr "منابع ورود"
+
+msgid "منبع ورود"
+msgstr "منبع ورود"
+
+msgid "مهمان"
+msgstr "مهمان"
+
+msgid "موجودی کافی نیست"
+msgstr "موجودی کافی نیست"
+
+msgid "نام انبار الزامی است"
+msgstr "نام انبار الزامی است"
+
+msgid "نام ترجیح مجاز نیست."
+msgstr "نام ترجیح مجاز نیست."
+
+msgid "نام جایگاه جدید"
+msgstr "نام جایگاه جدید"
+
+msgid "نام وضعیت نمی‌تواند خالی باشد."
+msgstr "نام وضعیت نمی‌تواند خالی باشد."
+
+msgid "نام پوشه الزامی است."
+msgstr "نام پوشه الزامی است."
+
+msgid "نام کاربری معتبر نیست."
+msgstr "نام کاربری معتبر نیست."
+
+msgid "نام کاربری و رمز عبور الزامی است."
+msgstr "نام کاربری و رمز عبور الزامی است."
+
+msgid "نام کاربری، ایمیل، شماره موبایل یا کد ملی یافت نشد."
+msgstr "نام کاربری، ایمیل، شماره موبایل یا کد ملی یافت نشد."
+
+msgid "نام کمپین و متن پیام الزامی است."
+msgstr "نام کمپین و متن پیام الزامی است."
+
+msgid "نام، نام خانوادگی و شماره موبایل ضروری هستند."
+msgstr "نام، نام خانوادگی و شماره موبایل ضروری هستند."
+
+msgid "نام، نام خانوادگی و موبایل سرنخ الزامی هستند."
+msgstr "نام، نام خانوادگی و موبایل سرنخ الزامی هستند."
+
+msgid "نامشخص"
+msgstr "نامشخص"
+
+msgid "نتایج مشاوره"
+msgstr "نتایج مشاوره"
+
+msgid "نتیجه مشاوره"
+msgstr "نتیجه مشاوره"
+
+msgid "نقش مسئول (برای اتوماسیون):"
+msgstr "نقش مسئول (برای اتوماسیون):"
+
+msgid "نمودار حساب‌ها"
+msgstr "نمودار حساب‌ها"
+
+msgid "نوع تراکنش نامعتبر است"
+msgstr "نوع تراکنش نامعتبر است"
+
+msgid "نوع تنظیمات مشخص نیست."
+msgstr "نوع تنظیمات مشخص نیست."
+
+msgid "نوع ثبت‌نام نامعتبر است."
+msgstr "نوع ثبت‌نام نامعتبر است."
+
+msgid "نوع خدمت (تکرار تسک)"
+msgstr "نوع خدمت (تکرار تسک)"
+
+msgid "هر دقیقه"
+msgstr "هر دقیقه"
+
+msgid "هفتگی"
+msgstr "هفتگی"
+
+msgid "همه سرنخ‌ها"
+msgstr "همه سرنخ‌ها"
+
+msgid "همه لاگ‌های سیستم حذف شد."
+msgstr "همه لاگ‌های سیستم حذف شد."
+
+msgid "هیچکدام"
+msgstr "هیچکدام"
+
+msgid "هیچکدام (پروژه‌ای ساخته نشود)"
+msgstr "هیچکدام (پروژه‌ای ساخته نشود)"
+
+msgid "وب"
+msgstr "وب"
+
+msgid "ورود"
+msgstr "ورود"
+
+msgid "ورود خودکار با این روش غیرفعال است. از کد تأیید یا رمز عبور استفاده کنید."
+msgstr "ورود خودکار با این روش غیرفعال است. از کد تأیید یا رمز عبور استفاده کنید."
+
+msgid "ورود موفقیت‌آمیز بود."
+msgstr "ورود موفقیت‌آمیز بود."
+
+msgid "ورودی حذف شد."
+msgstr "ورودی حذف شد."
+
+msgid "وضعیت با موفقیت به‌روزرسانی شد."
+msgstr "وضعیت با موفقیت به‌روزرسانی شد."
+
+msgid "وضعیت با موفقیت حذف شد."
+msgstr "وضعیت با موفقیت حذف شد."
+
+msgid "وضعیت تسک به‌روزرسانی شد."
+msgstr "وضعیت تسک به‌روزرسانی شد."
+
+msgid "وضعیت سرنخ"
+msgstr "وضعیت سرنخ"
+
+msgid "وضعیت قرار"
+msgstr "وضعیت قرار"
+
+msgid "وضعیت قرارداد"
+msgstr "وضعیت قرارداد"
+
+msgid "وضعیت مورد نظر یافت نشد."
+msgstr "وضعیت مورد نظر یافت نشد."
+
+msgid "وضعیت نامعتبر است."
+msgstr "وضعیت نامعتبر است."
+
+msgid "وضعیت پروژه"
+msgstr "وضعیت پروژه"
+
+msgid "وضعیت‌های سرنخ"
+msgstr "وضعیت‌های سرنخ"
+
+msgid "وضعیت‌های قرار"
+msgstr "وضعیت‌های قرار"
+
+msgid "وضعیت‌های قرارداد"
+msgstr "وضعیت‌های قرارداد"
+
+msgid "وضعیت‌های پروژه"
+msgstr "وضعیت‌های پروژه"
+
+msgid "وظایف"
+msgstr "وظایف"
+
+msgid "وظایف با موفقیت به‌روزرسانی شدند."
+msgstr "وظایف با موفقیت به‌روزرسانی شدند."
+
+msgid "وظایف من"
+msgstr "وظایف من"
+
+msgid "وظیفه به‌روزرسانی شد."
+msgstr "وظیفه به‌روزرسانی شد."
+
+msgid "وظیفه منبع یافت نشد."
+msgstr "وظیفه منبع یافت نشد."
+
+msgid "وظیفه یافت نشد."
+msgstr "وظیفه یافت نشد."
+
+msgid "ویرایش جایگاه"
+msgstr "ویرایش جایگاه"
+
+msgid "ویرایش سرنخ"
+msgstr "ویرایش سرنخ"
+
+msgid "ویرایش وضعیت"
+msgstr "ویرایش وضعیت"
+
+msgid "ویرایش پاسخ آماده"
+msgstr "ویرایش پاسخ آماده"
+
+msgid "پاسخ آماده"
+msgstr "پاسخ آماده"
+
+msgid "پاسخ به تیکت شما"
+msgstr "پاسخ به تیکت شما"
+
+msgid "پاسخ مشتری به تیکت"
+msgstr "پاسخ مشتری به تیکت"
+
+msgid "پاسخ‌های آماده"
+msgstr "پاسخ‌های آماده"
+
+msgid "پایان‌یافته"
+msgstr "پایان‌یافته"
+
+msgid "پترن Regex نامعتبر است."
+msgstr "پترن Regex نامعتبر است."
+
+msgid "پترن‌ها"
+msgstr "پترن‌ها"
+
+msgid "پرداخت شما برای قسط پروژه '%s' موفقیت آمیز بود. کد رهگیری: %s"
+msgstr "پرداخت شما برای قسط پروژه '%s' موفقیت آمیز بود. کد رهگیری: %s"
+
+msgid "پرداخت قسط شماره %d پروژه %s"
+msgstr "پرداخت قسط شماره %d پروژه %s"
+
+msgid "پرداخت موفق قسط"
+msgstr "پرداخت موفق قسط"
+
+msgid "پروفایل من"
+msgstr "پروفایل من"
+
+msgid "پروژه یافت نشد."
+msgstr "پروژه یافت نشد."
+
+msgid "پروژه‌ها"
+msgstr "پروژه‌ها"
+
+msgid "پروژه‌های ایجادشده از این محصول به این دپارتمان تخصیص داده می‌شوند."
+msgstr "پروژه‌های ایجادشده از این محصول به این دپارتمان تخصیص داده می‌شوند."
+
+msgid "پروژه‌های من"
+msgstr "پروژه‌های من"
+
+msgid "پشتیبانی به تیکت شما با موضوع '%s' پاسخ داد."
+msgstr "پشتیبانی به تیکت شما با موضوع '%s' پاسخ داد."
+
+msgid "پنل پیامکی"
+msgstr "پنل پیامکی"
+
+msgid "پوشه ایجاد شد."
+msgstr "پوشه ایجاد شد."
+
+msgid "پیام ارسال شد."
+msgstr "پیام ارسال شد."
+
+msgid "پیام بله ارسال شد."
+msgstr "پیام بله ارسال شد."
+
+msgid "پیام حذف شد."
+msgstr "پیام حذف شد."
+
+msgid "پیامک با موفقیت ارسال شد."
+msgstr "پیامک با موفقیت ارسال شد."
+
+msgid "پیش‌فاکتورها"
+msgstr "پیش‌فاکتورها"
+
+msgid "پیش‌فاکتورهای من"
+msgstr "پیش‌فاکتورهای من"
+
+msgid "پیش‌نویس"
+msgstr "پیش‌نویس"
+
+msgid "پیوند با موفقیت ایجاد شد."
+msgstr "پیوند با موفقیت ایجاد شد."
+
+msgid "پیوند با موفقیت حذف شد."
+msgstr "پیوند با موفقیت حذف شد."
+
+msgid "پیوند یافت نشد."
+msgstr "پیوند یافت نشد."
+
+msgid "چت تیمی"
+msgstr "چت تیمی"
+
+msgid "چک یافت نشد."
+msgstr "چک یافت نشد."
+
+msgid "چک‌ها"
+msgstr "چک‌ها"
+
+msgid "کاربر انتخاب شده معتبر نیست."
+msgstr "کاربر انتخاب شده معتبر نیست."
+
+msgid "کاربر با موفقیت حذف شد."
+msgstr "کاربر با موفقیت حذف شد."
+
+msgid "کاربر یافت نشد."
+msgstr "کاربر یافت نشد."
+
+msgid "کاربران IPPanel"
+msgstr "کاربران IPPanel"
+
+msgid "کاربری با این ایمیل از قبل وجود دارد."
+msgstr "کاربری با این ایمیل از قبل وجود دارد."
+
+msgid "کارکنان"
+msgstr "کارکنان"
+
+msgid "کالا و خدمات"
+msgstr "کالا و خدمات"
+
+msgid "کالا یافت نشد."
+msgstr "کالا یافت نشد."
+
+msgid "کانال ایجاد شد."
+msgstr "کانال ایجاد شد."
+
+msgid "کد تایید اشتباه است. (%d تلاش باقی‌مانده)"
+msgstr "کد تایید اشتباه است. (%d تلاش باقی‌مانده)"
+
+msgid "کد تایید به ایمیل شما ارسال شد."
+msgstr "کد تایید به ایمیل شما ارسال شد."
+
+msgid "کد تایید به شماره موبایل شما ارسال شد."
+msgstr "کد تایید به شماره موبایل شما ارسال شد."
+
+msgid "کد تایید منقضی شده است. لطفاً کد جدید درخواست کنید."
+msgstr "کد تایید منقضی شده است. لطفاً کد جدید درخواست کنید."
+
+msgid "کد ملی باید ۱۰ رقم باشد."
+msgstr "کد ملی باید ۱۰ رقم باشد."
+
+msgid "کمپین"
+msgstr "کمپین"
+
+msgid "کمپین با موفقیت ایجاد شد."
+msgstr "کمپین با موفقیت ایجاد شد."
+
+msgid "کمپین با موفقیت به‌روزرسانی شد."
+msgstr "کمپین با موفقیت به‌روزرسانی شد."
+
+msgid "کمپین حذف شد."
+msgstr "کمپین حذف شد."
+
+msgid "کمپین یافت نشد."
+msgstr "کمپین یافت نشد."
+
+msgid "کمپین‌ها"
+msgstr "کمپین‌ها"
+
+msgid "گزارش ارسال"
+msgstr "گزارش ارسال"
+
+msgid "گزارشات"
+msgstr "گزارشات"
+
+msgid "گزارشات مالی"
+msgstr "گزارشات مالی"
+
+msgid "گزارشات کلی"
+msgstr "گزارشات کلی"
+
+msgid "یک خطای سیستمی در هنگام ارسال پیامک رخ داد. جزئیات خطا در لاگ سرور ثبت شد."
+msgstr "یک خطای سیستمی در هنگام ارسال پیامک رخ داد. جزئیات خطا در لاگ سرور ثبت شد."
+
+msgid "یک خطای سیستمی در هنگام افزودن وضعیت سرنخ رخ داد."
+msgstr "یک خطای سیستمی در هنگام افزودن وضعیت سرنخ رخ داد."
+
+msgid "یک خطای سیستمی در هنگام تغییر وضعیت سرنخ رخ داد."
+msgstr "یک خطای سیستمی در هنگام تغییر وضعیت سرنخ رخ داد."
+
+msgid "یک خطای سیستمی در هنگام ثبت سرنخ رخ داد."
+msgstr "یک خطای سیستمی در هنگام ثبت سرنخ رخ داد."
+
+msgid "یک خطای سیستمی در هنگام حذف سرنخ رخ داد."
+msgstr "یک خطای سیستمی در هنگام حذف سرنخ رخ داد."
+
+msgid "یک خطای سیستمی در هنگام حذف وضعیت سرنخ رخ داد."
+msgstr "یک خطای سیستمی در هنگام حذف وضعیت سرنخ رخ داد."
+
+msgid "یک خطای سیستمی در هنگام ویرایش سرنخ رخ داد."
+msgstr "یک خطای سیستمی در هنگام ویرایش سرنخ رخ داد."
+
+msgid "یک خطای سیستمی رخ داد."
+msgstr "یک خطای سیستمی رخ داد."
+
+msgid "یکبار (مثل سایت)"
+msgstr "یکبار (مثل سایت)"

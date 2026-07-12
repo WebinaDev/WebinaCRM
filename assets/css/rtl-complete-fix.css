@@ -1,0 +1,1064 @@
+/**
+ * RTL/LTR Complete Fix - اصلاح کامل راست‌چین و چپ‌چین
+ * این فایل تضمین می‌کنه که همه چیز برای هر دو جهت درست کار کنه
+ * Version: 3.1.0 - Using for sidebar positioning to override base theme
+ */
+
+/* ========================================
+   HTML & Body - RTL (Higher Specificity)
+   ======================================== */
+
+html[dir="rtl"] {
+    direction: rtl;
+}
+
+html[dir="rtl"] body {
+    direction: rtl;
+    text-align: right;
+}
+
+/* ========================================
+   HTML & Body - LTR (Higher Specificity)
+   ======================================== */
+
+html[dir="ltr"] {
+    direction: ltr;
+}
+
+html[dir="ltr"] body {
+    direction: ltr;
+    text-align: left;
+}
+
+/* ========================================
+   Container های اصلی - RTL
+   ======================================== */
+
+html[dir="rtl"] .page,
+html[dir="rtl"] .main-content,
+html[dir="rtl"] .app-content,
+html[dir="rtl"] .container,
+html[dir="rtl"] .container-fluid,
+html[dir="rtl"] .main-header-container {
+    direction: rtl;
+}
+
+/* ========================================
+   Container های اصلی - LTR
+   ======================================== */
+
+html[dir="ltr"] .page,
+html[dir="ltr"] .main-content,
+html[dir="ltr"] .app-content,
+html[dir="ltr"] .container,
+html[dir="ltr"] .container-fluid,
+html[dir="ltr"] .main-header-container {
+    direction: ltr;
+}
+
+/* ========================================
+   Header - RTL (Higher Specificity)
+   ======================================== */
+
+html[dir="rtl"] .app-header,
+html[dir="rtl"] .header-content-left,
+html[dir="rtl"] .header-content-right {
+    direction: rtl;
+}
+
+/* header-content-left باید سمت راست باشه در RTL */
+html[dir="rtl"] .main-header-container .header-content-left {
+    order: 1;
+}
+
+html[dir="rtl"] .main-header-container .header-content-right {
+    order: 0;
+}
+
+html[dir="rtl"] .main-header-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* ========================================
+   Header - LTR (Higher Specificity)
+   ======================================== */
+
+html[dir="ltr"] .app-header,
+html[dir="ltr"] .header-content-left,
+html[dir="ltr"] .header-content-right {
+    direction: ltr;
+}
+
+/* header-content-left باید سمت چپ باشه در LTR */
+html[dir="ltr"] .main-header-container .header-content-left {
+    order: 0;
+}
+
+html[dir="ltr"] .main-header-container .header-content-right {
+    order: 1;
+}
+
+html[dir="ltr"] .main-header-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* ========================================
+   Sidebar - RTL (Higher Specificity - Override styles.css)
+   ======================================== */
+
+html[dir="rtl"] .app-sidebar,
+html[dir="rtl"] body .app-sidebar,
+html[dir="rtl"] body.page .app-sidebar,
+html[dir="rtl"][data-nav-layout="vertical"] .app-sidebar,
+html[dir="rtl"][data-nav-layout="vertical"] body .app-sidebar,
+html[dir="rtl"][data-nav-layout="vertical"] body.page .app-sidebar,
+html[dir="rtl"] [data-nav-layout="vertical"] .app-sidebar,
+html[dir="rtl"] [data-nav-layout="vertical"] body .app-sidebar,
+html[dir="rtl"][data-nav-layout="vertical"] .app-sidebar.sticky,
+html[dir="rtl"][data-nav-layout="vertical"] body .app-sidebar.sticky,
+html[dir="rtl"][data-nav-layout="vertical"][data-toggled] .app-sidebar,
+html[dir="rtl"][data-nav-layout="vertical"][data-toggled] body .app-sidebar,
+html[dir="rtl"][data-nav-layout="vertical"][data-toggled="open"] .app-sidebar,
+html[dir="rtl"][data-nav-layout="vertical"][data-toggled="close"] .app-sidebar,
+html[dir="rtl"][data-nav-layout="vertical"][data-toggled="open"] body .app-sidebar,
+html[dir="rtl"][data-nav-layout="vertical"][data-toggled="close"] body .app-sidebar {
+    right: 0;
+    left: auto;
+    inset-inline-start: 0;
+    inset-inline-end: auto;
+    direction: rtl;
+}
+
+html[dir="rtl"] .app-sidebar .main-sidebar,
+html[dir="rtl"] .app-sidebar .main-menu,
+html[dir="rtl"] .app-sidebar .side-menu__item {
+    direction: rtl;
+    text-align: right;
+}
+
+html[dir="rtl"] .app-sidebar .side-menu__item {
+    padding-inline-start: 1.25rem;
+    padding-inline-end: 1.25rem;
+}
+
+html[dir="rtl"] .app-sidebar .side-menu__icon {
+    margin-left: 0.75rem;
+    margin-right: 0;
+    margin-inline-end: 0.75rem;
+    margin-inline-start: 0;
+}
+
+html[dir="rtl"] .app-sidebar .side-menu__angle {
+    margin-right: auto;
+    margin-left: 0.5rem;
+    margin-inline-start: 0.5rem;
+    margin-inline-end: auto;
+}
+
+html[dir="rtl"] .app-sidebar .side-menu__label {
+    text-align: right;
+}
+
+html[dir="rtl"] .app-sidebar .slide-menu.child1 li,
+html[dir="rtl"] .app-sidebar .slide-menu.child2 li,
+html[dir="rtl"] .app-sidebar .slide-menu.child3 li {
+    padding-inline-start: 2rem;
+    padding-inline-end: 0;
+}
+
+/* ========================================
+   Sidebar - LTR (Higher Specificity - Override styles.css)
+   ======================================== */
+
+html[dir="ltr"] .app-sidebar,
+html[dir="ltr"][data-nav-layout="vertical"] .app-sidebar,
+html[dir="ltr"][data-nav-layout="vertical"] .app-sidebar.sticky {
+    left: 0;
+    right: auto;
+    inset-inline-start: 0;
+    inset-inline-end: auto;
+    direction: ltr;
+}
+
+html[dir="ltr"] .app-sidebar .main-sidebar,
+html[dir="ltr"] .app-sidebar .main-menu,
+html[dir="ltr"] .app-sidebar .side-menu__item {
+    direction: ltr;
+    text-align: left;
+}
+
+html[dir="ltr"] .app-sidebar .side-menu__item {
+    padding-inline-start: 1.25rem;
+    padding-inline-end: 1.25rem;
+}
+
+html[dir="ltr"] .app-sidebar .side-menu__icon {
+    margin-right: 0.75rem;
+    margin-left: 0;
+    margin-inline-start: 0;
+    margin-inline-end: 0.75rem;
+}
+
+html[dir="ltr"] .app-sidebar .side-menu__angle {
+    margin-left: auto;
+    margin-right: 0.5rem;
+    margin-inline-start: auto;
+    margin-inline-end: 0.5rem;
+}
+
+html[dir="ltr"] .app-sidebar .side-menu__label {
+    text-align: left;
+}
+
+html[dir="ltr"] .app-sidebar .slide-menu.child1 li,
+html[dir="ltr"] .app-sidebar .slide-menu.child2 li,
+html[dir="ltr"] .app-sidebar .slide-menu.child3 li {
+    padding-inline-start: 2rem;
+    padding-inline-end: 0;
+}
+
+/* ========================================
+   Content - RTL
+   ======================================== */
+
+html[dir="rtl"] .main-content {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+/* ========================================
+   Content - LTR
+   ======================================== */
+
+html[dir="ltr"] .main-content {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+/* ========================================
+   Cards - RTL
+   ======================================== */
+
+html[dir="rtl"] .card,
+html[dir="rtl"] .card-header,
+html[dir="rtl"] .card-body,
+html[dir="rtl"] .card-title,
+html[dir="rtl"] .custom-card {
+    direction: rtl;
+    text-align: right;
+}
+
+html[dir="rtl"] .card-header.justify-content-between {
+    flex-direction: row-reverse;
+}
+
+/* ========================================
+   Cards - LTR
+   ======================================== */
+
+html[dir="ltr"] .card,
+html[dir="ltr"] .card-header,
+html[dir="ltr"] .card-body,
+html[dir="ltr"] .card-title,
+html[dir="ltr"] .custom-card {
+    direction: ltr;
+    text-align: left;
+}
+
+html[dir="ltr"] .card-header.justify-content-between {
+    flex-direction: row;
+}
+
+/* ========================================
+   Tables - RTL
+   ======================================== */
+
+html[dir="rtl"] .table,
+html[dir="rtl"] .table thead,
+html[dir="rtl"] .table tbody,
+html[dir="rtl"] .table th,
+html[dir="rtl"] .table td {
+    direction: rtl;
+    text-align: right;
+}
+
+html[dir="rtl"] .table th:first-child,
+html[dir="rtl"] .table td:first-child {
+    text-align: right;
+}
+
+html[dir="rtl"] .table th:last-child,
+html[dir="rtl"] .table td:last-child {
+    text-align: left; /* عملیات معمولا سمت چپ */
+}
+
+/* ========================================
+   Tables - LTR
+   ======================================== */
+
+html[dir="ltr"] .table,
+html[dir="ltr"] .table thead,
+html[dir="ltr"] .table tbody,
+html[dir="ltr"] .table th,
+html[dir="ltr"] .table td {
+    direction: ltr;
+    text-align: left;
+}
+
+html[dir="ltr"] .table th:first-child,
+html[dir="ltr"] .table td:first-child {
+    text-align: left;
+}
+
+html[dir="ltr"] .table th:last-child,
+html[dir="ltr"] .table td:last-child {
+    text-align: right; /* Actions usually on right */
+}
+
+/* ========================================
+   Forms - RTL
+   ======================================== */
+
+html[dir="rtl"] .form-label,
+html[dir="rtl"] .form-text,
+html[dir="rtl"] .form-check-label {
+    direction: rtl;
+    text-align: right;
+}
+
+html[dir="rtl"] .form-control,
+html[dir="rtl"] .form-select {
+    direction: rtl;
+    text-align: right;
+    padding-right: 0.75rem;
+    padding-left: 0.75rem;
+}
+
+/* فقط این input ها LTR */
+html[dir="rtl"] input[type="email"],
+html[dir="rtl"] input[type="url"],
+html[dir="rtl"] input[type="tel"].ltr-input,
+html[dir="rtl"] .ltr-input {
+    direction: ltr;
+    text-align: left;
+}
+
+html[dir="rtl"] .form-select {
+    background-position: left 0.75rem center;
+    padding-left: 2.5rem;
+}
+
+/* ========================================
+   Forms - LTR
+   ======================================== */
+
+html[dir="ltr"] .form-label,
+html[dir="ltr"] .form-text,
+html[dir="ltr"] .form-check-label {
+    direction: ltr;
+    text-align: left;
+}
+
+html[dir="ltr"] .form-control,
+html[dir="ltr"] .form-select {
+    direction: ltr;
+    text-align: left;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+}
+
+html[dir="ltr"] .form-select {
+    background-position: right 0.75rem center;
+    padding-right: 2.5rem;
+}
+
+/* ========================================
+   Buttons - RTL
+   ======================================== */
+
+html[dir="rtl"] .btn,
+html[dir="rtl"] .webino-button {
+    direction: rtl;
+}
+
+html[dir="rtl"] .btn i,
+html[dir="rtl"] .webino-button i {
+    margin-left: 0.5rem;
+    margin-right: 0;
+}
+
+html[dir="rtl"] .btn-close {
+    margin-right: auto;
+    margin-left: 0;
+}
+
+/* ========================================
+   Buttons - LTR
+   ======================================== */
+
+html[dir="ltr"] .btn,
+html[dir="ltr"] .webino-button {
+    direction: ltr;
+}
+
+html[dir="ltr"] .btn i,
+html[dir="ltr"] .webino-button i {
+    margin-right: 0.5rem;
+    margin-left: 0;
+}
+
+html[dir="ltr"] .btn-close {
+    margin-left: auto;
+    margin-right: 0;
+}
+
+/* ========================================
+   Dropdowns - RTL
+   ======================================== */
+
+html[dir="rtl"] .dropdown-menu {
+    right: 0;
+    left: auto;
+    text-align: right;
+}
+
+html[dir="rtl"] .dropdown-menu-end {
+    right: 0;
+    left: auto;
+}
+
+html[dir="rtl"] .dropdown-item {
+    direction: rtl;
+    text-align: right;
+}
+
+html[dir="rtl"] .dropdown-item i {
+    margin-left: 0.5rem;
+    margin-right: 0;
+}
+
+/* ========================================
+   Dropdowns - LTR
+   ======================================== */
+
+html[dir="ltr"] .dropdown-menu {
+    left: 0;
+    right: auto;
+    text-align: left;
+}
+
+html[dir="ltr"] .dropdown-menu-end {
+    left: auto;
+    right: 0;
+}
+
+html[dir="ltr"] .dropdown-item {
+    direction: ltr;
+    text-align: left;
+}
+
+html[dir="ltr"] .dropdown-item i {
+    margin-right: 0.5rem;
+    margin-left: 0;
+}
+
+/* ========================================
+   Breadcrumb - RTL
+   ======================================== */
+
+html[dir="rtl"] .breadcrumb {
+    direction: rtl;
+}
+
+html[dir="rtl"] .breadcrumb-item + .breadcrumb-item::before {
+    float: right;
+    padding-left: 0.5rem;
+    padding-right: 0;
+    content: "/";
+}
+
+/* ========================================
+   Breadcrumb - LTR
+   ======================================== */
+
+html[dir="ltr"] .breadcrumb {
+    direction: ltr;
+}
+
+html[dir="ltr"] .breadcrumb-item + .breadcrumb-item::before {
+    float: left;
+    padding-right: 0.5rem;
+    padding-left: 0;
+    content: "/";
+}
+
+/* ========================================
+   List Group - RTL
+   ======================================== */
+
+html[dir="rtl"] .list-group,
+html[dir="rtl"] .list-group-item {
+    direction: rtl;
+    text-align: right;
+}
+
+/* ========================================
+   List Group - LTR
+   ======================================== */
+
+html[dir="ltr"] .list-group,
+html[dir="ltr"] .list-group-item {
+    direction: ltr;
+    text-align: left;
+}
+
+/* ========================================
+   Avatar & Icons - RTL
+   ======================================== */
+
+html[dir="rtl"] .avatar + * {
+    margin-right: 0.75rem;
+    margin-left: 0;
+}
+
+/* ========================================
+   Avatar & Icons - LTR
+   ======================================== */
+
+html[dir="ltr"] .avatar + * {
+    margin-left: 0.75rem;
+    margin-right: 0;
+}
+
+/* ========================================
+   Alerts - RTL
+   ======================================== */
+
+html[dir="rtl"] .alert {
+    direction: rtl;
+    text-align: right;
+}
+
+html[dir="rtl"] .alert i {
+    margin-left: 0.5rem;
+    margin-right: 0;
+}
+
+/* ========================================
+   Alerts - LTR
+   ======================================== */
+
+html[dir="ltr"] .alert {
+    direction: ltr;
+    text-align: left;
+}
+
+html[dir="ltr"] .alert i {
+    margin-right: 0.5rem;
+    margin-left: 0;
+}
+
+/* ========================================
+   Navigation - RTL
+   ======================================== */
+
+html[dir="rtl"] .nav {
+    direction: rtl;
+}
+
+html[dir="rtl"] .nav-link {
+    direction: rtl;
+    text-align: right;
+}
+
+html[dir="rtl"] .nav-tabs .nav-link {
+    border-radius: 0.375rem 0.375rem 0 0;
+}
+
+/* ========================================
+   Navigation - LTR
+   ======================================== */
+
+html[dir="ltr"] .nav {
+    direction: ltr;
+}
+
+html[dir="ltr"] .nav-link {
+    direction: ltr;
+    text-align: left;
+}
+
+html[dir="ltr"] .nav-tabs .nav-link {
+    border-radius: 0.375rem 0.375rem 0 0;
+}
+
+/* ========================================
+   Modal - RTL
+   ======================================== */
+
+html[dir="rtl"] .modal-header,
+html[dir="rtl"] .modal-body,
+html[dir="rtl"] .modal-footer {
+    direction: rtl;
+    text-align: right;
+}
+
+html[dir="rtl"] .modal-header .btn-close {
+    margin-right: auto;
+    margin-left: 0;
+}
+
+/* ========================================
+   Modal - LTR
+   ======================================== */
+
+html[dir="ltr"] .modal-header,
+html[dir="ltr"] .modal-body,
+html[dir="ltr"] .modal-footer {
+    direction: ltr;
+    text-align: left;
+}
+
+html[dir="ltr"] .modal-header .btn-close {
+    margin-left: auto;
+    margin-right: 0;
+}
+
+/* ========================================
+   Pagination - RTL
+   ======================================== */
+
+html[dir="rtl"] .pagination {
+    direction: rtl;
+}
+
+/* ========================================
+   Pagination - LTR
+   ======================================== */
+
+html[dir="ltr"] .pagination {
+    direction: ltr;
+}
+
+/* ========================================
+   Float Fix - RTL
+   ======================================== */
+
+html[dir="rtl"] .float-end {
+    float: left;
+}
+
+html[dir="rtl"] .float-start {
+    float: right;
+}
+
+/* ========================================
+   Float Fix - LTR
+   ======================================== */
+
+html[dir="ltr"] .float-end {
+    float: right;
+}
+
+html[dir="ltr"] .float-start {
+    float: left;
+}
+
+/* ========================================
+   Flexbox Fix - RTL
+   ======================================== */
+
+html[dir="rtl"] .d-flex {
+    direction: rtl;
+}
+
+html[dir="rtl"] .ms-auto {
+    margin-right: auto;
+    margin-left: 0;
+}
+
+html[dir="rtl"] .me-auto {
+    margin-left: auto;
+    margin-right: 0;
+}
+
+/* ========================================
+   Flexbox Fix - LTR
+   ======================================== */
+
+html[dir="ltr"] .d-flex {
+    direction: ltr;
+}
+
+html[dir="ltr"] .ms-auto {
+    margin-left: auto;
+    margin-right: 0;
+}
+
+html[dir="ltr"] .me-auto {
+    margin-right: auto;
+    margin-left: 0;
+}
+
+/* ========================================
+   Grid - RTL
+   ======================================== */
+
+html[dir="rtl"] .row {
+    direction: rtl;
+}
+
+/* ========================================
+   Grid - LTR
+   ======================================== */
+
+html[dir="ltr"] .row {
+    direction: ltr;
+}
+
+/* ========================================
+   Text Alignment - RTL
+   ======================================== */
+
+html[dir="rtl"] .text-start {
+    text-align: right;
+}
+
+html[dir="rtl"] .text-end {
+    text-align: left;
+}
+
+html[dir="rtl"] .text-center {
+    text-align: center;
+}
+
+/* ========================================
+   Text Alignment - LTR
+   ======================================== */
+
+html[dir="ltr"] .text-start {
+    text-align: left;
+}
+
+html[dir="ltr"] .text-end {
+    text-align: right;
+}
+
+html[dir="ltr"] .text-center {
+    text-align: center;
+}
+
+/* ========================================
+   Sidebar Position Fix - RTL
+   ======================================== */
+
+html[dir="rtl"] .app-sidebar.sticky,
+html[dir="rtl"][data-nav-layout="vertical"] .app-sidebar.sticky,
+html[dir="rtl"] body .app-sidebar.sticky,
+html[dir="rtl"][data-nav-layout="vertical"] body .app-sidebar.sticky {
+    right: 0;
+    left: auto;
+    inset-inline-start: 0;
+    inset-inline-end: auto;
+}
+
+/* ========================================
+   Sidebar Position Fix - LTR
+   ======================================== */
+
+html[dir="ltr"] .app-sidebar.sticky,
+html[dir="ltr"][data-nav-layout="vertical"] .app-sidebar.sticky {
+    left: 0;
+    right: auto;
+    inset-inline-start: 0;
+    inset-inline-end: auto;
+}
+
+/* ========================================
+   Logo Images - RTL
+   ======================================== */
+
+html[dir="rtl"] .header-logo,
+html[dir="rtl"] .main-sidebar-header {
+    direction: rtl;
+    text-align: right;
+}
+
+/* ========================================
+   Logo Images - LTR
+   ======================================== */
+
+html[dir="ltr"] .header-logo,
+html[dir="ltr"] .main-sidebar-header {
+    direction: ltr;
+    text-align: left;
+}
+
+/* ========================================
+   User Dropdown - RTL
+   ======================================== */
+
+html[dir="rtl"] .header-profile-dropdown {
+    right: 0;
+    left: auto;
+}
+
+html[dir="rtl"] .header-navheading {
+    text-align: right;
+}
+
+/* ========================================
+   User Dropdown - LTR
+   ======================================== */
+
+html[dir="ltr"] .header-profile-dropdown {
+    left: 0;
+    right: auto;
+}
+
+html[dir="ltr"] .header-navheading {
+    text-align: left;
+}
+
+/* ========================================
+   Form Row - RTL
+   ======================================== */
+
+html[dir="rtl"] .webino-form-row,
+html[dir="rtl"] .row.gy-3,
+html[dir="rtl"] .row.gx-3 {
+    direction: rtl;
+}
+
+/* ========================================
+   Form Row - LTR
+   ======================================== */
+
+html[dir="ltr"] .webino-form-row,
+html[dir="ltr"] .row.gy-3,
+html[dir="ltr"] .row.gx-3 {
+    direction: ltr;
+}
+
+/* ========================================
+   Authentication - RTL
+   ======================================== */
+
+html[dir="rtl"] .authentication,
+html[dir="rtl"] .authentication-cover-main {
+    direction: rtl;
+}
+
+html[dir="rtl"] .authentication-cover-logo,
+html[dir="rtl"] .aunthentication-cover-content {
+    direction: rtl;
+    text-align: right;
+}
+
+/* ========================================
+   Authentication - LTR
+   ======================================== */
+
+html[dir="ltr"] .authentication,
+html[dir="ltr"] .authentication-cover-main {
+    direction: ltr;
+}
+
+html[dir="ltr"] .authentication-cover-logo,
+html[dir="ltr"] .aunthentication-cover-content {
+    direction: ltr;
+    text-align: left;
+}
+
+/* ========================================
+   Stats Cards - RTL
+   ======================================== */
+
+html[dir="rtl"] .d-flex.align-items-top {
+    direction: rtl;
+}
+
+html[dir="rtl"] .flex-fill {
+    direction: rtl;
+    text-align: right;
+}
+
+/* ========================================
+   Stats Cards - LTR
+   ======================================== */
+
+html[dir="ltr"] .d-flex.align-items-top {
+    direction: ltr;
+}
+
+html[dir="ltr"] .flex-fill {
+    direction: ltr;
+    text-align: left;
+}
+
+/* ========================================
+   Input Groups - RTL
+   ======================================== */
+
+html[dir="rtl"] .input-group {
+    direction: rtl;
+}
+
+html[dir="rtl"] .input-group > :not(:last-child) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 0.375rem;
+    border-bottom-right-radius: 0.375rem;
+}
+
+html[dir="rtl"] .input-group > :not(:first-child) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top-left-radius: 0.375rem;
+    border-bottom-left-radius: 0.375rem;
+}
+
+/* ========================================
+   Input Groups - LTR
+   ======================================== */
+
+html[dir="ltr"] .input-group {
+    direction: ltr;
+}
+
+html[dir="ltr"] .input-group > :not(:last-child) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top-left-radius: 0.375rem;
+    border-bottom-left-radius: 0.375rem;
+}
+
+html[dir="ltr"] .input-group > :not(:first-child) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-right-radius: 0.375rem;
+    border-bottom-right-radius: 0.375rem;
+}
+
+/* ========================================
+   Offcanvas - RTL
+   ======================================== */
+
+html[dir="rtl"] .offcanvas-end {
+    right: auto;
+    left: 0;
+}
+
+/* ========================================
+   Offcanvas - LTR
+   ======================================== */
+
+html[dir="ltr"] .offcanvas-end {
+    left: auto;
+    right: 0;
+}
+
+/* ========================================
+   App Content Wrapper - RTL (Sidebar Open/Close)
+   ======================================== */
+
+/* Sidebar باز - RTL */
+@media (min-width: 992px) {
+    html[dir="rtl"][data-nav-layout="vertical"] .app-content,
+    html[dir="rtl"][data-nav-layout="vertical"][data-toggled="open"] .app-content,
+    html[dir="rtl"][data-nav-layout="vertical"][data-toggled="menu-click-open"] .app-content,
+    html[dir="rtl"][data-nav-layout="vertical"][data-toggled="menu-hover-open"] .app-content,
+    html[dir="rtl"][data-nav-layout="vertical"][data-toggled="icon-click-open"] .app-content,
+    html[dir="rtl"][data-nav-layout="vertical"][data-toggled="icon-hover-open"] .app-content,
+    html[dir="rtl"][data-nav-layout="vertical"][data-toggled="icon-text-open"] .app-content {
+        margin-left: 0;
+        margin-right: 15rem;
+        margin-inline-start: 15rem;
+        margin-inline-end: 0;
+    }
+}
+
+/* Sidebar بسته - RTL - Override styles.css margin-inline-start: 15rem */
+/* این rule باید با specificity بالاتر از styles.css خط 10447 override کند */
+@media (min-width: 992px) {
+    /* حالت‌های مختلف sidebar بسته - با specificity بسیار بالا */
+    html[dir="rtl"][data-nav-layout="vertical"][data-toggled="close"] body .app-content,
+    html[dir="rtl"][data-nav-layout="vertical"][data-toggled="menu-click-closed"] body .app-content,
+    html[dir="rtl"][data-nav-layout="vertical"][data-toggled="menu-hover-closed"] body .app-content,
+    html[dir="rtl"][data-nav-layout="vertical"][data-toggled="icon-click-closed"] body .app-content,
+    html[dir="rtl"][data-nav-layout="vertical"][data-toggled="icon-hover-closed"] body .app-content,
+    html[dir="rtl"][data-nav-layout="vertical"][data-toggled="icon-text-close"] body .app-content,
+    html[dir="rtl"][data-nav-layout="vertical"][data-toggled="close-menu-close"] body .app-content,
+    html[dir="rtl"][data-nav-layout="vertical"][data-toggled="detached-close"] body .app-content,
+    html[dir="rtl"][data-nav-layout="vertical"][data-toggled="double-menu-close"] body .app-content,
+    html[dir="rtl"][data-nav-layout="vertical"][data-toggled="icon-overlay-close"] body .app-content {
+        margin-left: 0;
+        margin-right: 6rem;
+        margin-inline-start: 6rem;
+        margin-inline-end: 0;
+        width: calc(100% - 6rem);
+        max-width: calc(100% - 6rem);
+        box-sizing: border-box;
+        position: relative;
+        z-index: 1;
+    }
+}
+
+
+
+/* ========================================
+   App Content Wrapper - LTR (Sidebar Open/Close)
+   ======================================== */
+
+/* Sidebar باز - LTR */
+@media (min-width: 992px) {
+    html[dir="ltr"][data-nav-layout="vertical"] .app-content,
+    html[dir="ltr"][data-nav-layout="vertical"][data-toggled="open"] .app-content,
+    html[dir="ltr"][data-nav-layout="vertical"][data-toggled="menu-click-open"] .app-content,
+    html[dir="ltr"][data-nav-layout="vertical"][data-toggled="menu-hover-open"] .app-content,
+    html[dir="ltr"][data-nav-layout="vertical"][data-toggled="icon-click-open"] .app-content,
+    html[dir="ltr"][data-nav-layout="vertical"][data-toggled="icon-hover-open"] .app-content,
+    html[dir="ltr"][data-nav-layout="vertical"][data-toggled="icon-text-open"] .app-content {
+        margin-right: 0;
+        margin-left: 15rem;
+        margin-inline-start: 15rem;
+        margin-inline-end: 0;
+    }
+}
+
+/* Sidebar بسته - LTR - Override styles.css margin-inline-start: 15rem */
+/* این rule باید با specificity بالاتر از styles.css خط 10447 override کند */
+@media (min-width: 992px) {
+    /* حالت‌های مختلف sidebar بسته - با specificity بسیار بالا */
+    html[dir="ltr"][data-nav-layout="vertical"][data-toggled="close"] body .app-content,
+    html[dir="ltr"][data-nav-layout="vertical"][data-toggled="menu-click-closed"] body .app-content,
+    html[dir="ltr"][data-nav-layout="vertical"][data-toggled="menu-hover-closed"] body .app-content,
+    html[dir="ltr"][data-nav-layout="vertical"][data-toggled="icon-click-closed"] body .app-content,
+    html[dir="ltr"][data-nav-layout="vertical"][data-toggled="icon-hover-closed"] body .app-content,
+    html[dir="ltr"][data-nav-layout="vertical"][data-toggled="icon-text-close"] body .app-content,
+    html[dir="ltr"][data-nav-layout="vertical"][data-toggled="close-menu-close"] body .app-content,
+    html[dir="ltr"][data-nav-layout="vertical"][data-toggled="detached-close"] body .app-content,
+    html[dir="ltr"][data-nav-layout="vertical"][data-toggled="double-menu-close"] body .app-content,
+    html[dir="ltr"][data-nav-layout="vertical"][data-toggled="icon-overlay-close"] body .app-content {
+        margin-right: 0;
+        margin-left: 6rem;
+        margin-inline-start: 6rem;
+        margin-inline-end: 0;
+        width: calc(100% - 6rem);
+        max-width: calc(100% - 6rem);
+        box-sizing: border-box;
+        position: relative;
+        z-index: 1;
+    }
+}
+/* ========================================
+   ULTIMATE FIX: Sidebar بسته - Override styles.css
+   این rule باید در انتهای فایل باشد تا حتماً override کند
+   ======================================== */
+
+
+
+/* ========================================
+

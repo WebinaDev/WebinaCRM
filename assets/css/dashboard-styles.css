@@ -1,0 +1,372 @@
+/**
+ * Dashboard Styles - Enhanced UI
+ * @package WebinoCRM
+ */
+
+/* Welcome Banner Enhancements */
+.card.overflow-hidden {
+    position: relative;
+}
+
+.card.overflow-hidden::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 200px;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+}
+
+/* KPI Cards */
+.card.border {
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.card.border:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+}
+
+.card.border .avatar-lg {
+    transition: all 0.3s ease;
+}
+
+.card.border:hover .avatar-lg {
+    transform: scale(1.1);
+}
+
+/* Chart Containers */
+canvas {
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05));
+}
+
+/* Timeline Widget */
+.timeline-widget {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: relative;
+}
+
+.timeline-widget-list {
+    position: relative;
+    padding-bottom: 20px;
+}
+
+.timeline-widget-list:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: 16px;
+    top: 40px;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, #e9ecef 0%, transparent 100%);
+}
+
+.timeline-widget-list:hover {
+    background: rgba(132, 90, 223, 0.02);
+    border-radius: 8px;
+    margin: 0 -10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/* Progress Circles */
+svg circle {
+    transition: stroke-dasharray 0.6s ease;
+}
+
+/* Quick Actions Buttons */
+.btn-wave {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.btn-wave:hover {
+    transform: translateX(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.btn-wave::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn-wave:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* Table Enhancements */
+.table-hover tbody tr {
+    transition: all 0.2s ease;
+}
+
+.table-hover tbody tr:hover {
+    background-color: rgba(132, 90, 223, 0.05);
+    transform: scale(1.005);
+}
+
+/* Badge Animations */
+.badge {
+    transition: all 0.2s ease;
+}
+
+.badge:hover {
+    transform: scale(1.05);
+}
+
+/* Avatar Enhancements */
+.avatar {
+    transition: all 0.3s ease;
+}
+
+.avatar:hover {
+    transform: rotate(5deg) scale(1.1);
+}
+
+/* Financial Summary Cards */
+.border.rounded {
+    transition: all 0.3s ease;
+    border-color: #dee2e6;
+}
+
+.border.rounded:hover {
+    border-color: #845adf;
+    box-shadow: 0 4px 12px rgba(132, 90, 223, 0.15);
+    transform: translateY(-2px);
+}
+
+/* Alert Enhancements */
+.alert {
+    border-left: 4px solid;
+    animation: slideIn 0.5s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.alert-warning {
+    border-left-color: #ffc107;
+}
+
+.alert-success {
+    border-left-color: #28a745;
+}
+
+.alert-info {
+    border-left-color: #17a2b8;
+}
+
+/* Card Header Enhancements */
+.card-header {
+    border-bottom: 2px solid rgba(132, 90, 223, 0.1);
+}
+
+.card-header.bg-primary-transparent {
+    background: linear-gradient(135deg, rgba(132, 90, 223, 0.05) 0%, rgba(132, 90, 223, 0.1) 100%);
+}
+
+.card-header.bg-success-transparent {
+    background: linear-gradient(135deg, rgba(40, 167, 69, 0.05) 0%, rgba(40, 167, 69, 0.1) 100%);
+}
+
+.card-header.bg-warning-transparent {
+    background: linear-gradient(135deg, rgba(255, 193, 7, 0.05) 0%, rgba(255, 193, 7, 0.1) 100%);
+}
+
+.card-header.bg-info-transparent {
+    background: linear-gradient(135deg, rgba(23, 162, 184, 0.05) 0%, rgba(23, 162, 184, 0.1) 100%);
+}
+
+/* Number Counter Animation */
+@keyframes countUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card-body h4,
+.card-body h3 {
+    animation: countUp 0.6s ease;
+}
+
+/* Loading Skeleton */
+.skeleton {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Empty State */
+.text-muted i.opacity-3 {
+    opacity: 0.3;
+    color: #dee2e6;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .card.border {
+        margin-bottom: 15px;
+    }
+    
+    .timeline-widget-list {
+        padding-bottom: 15px;
+    }
+    
+    canvas {
+        max-height: 250px;
+    }
+    
+    .btn-group {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .btn-group .btn {
+        width: 100%;
+    }
+}
+
+/* Dark Mode Support (if needed) */
+@media (prefers-color-scheme: dark) {
+    .card.border {
+        background-color: #1e1e2d;
+        border-color: #2e2e3e;
+    }
+    
+    .card-header {
+        background-color: #2e2e3e;
+        border-bottom-color: #3e3e4e;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .btn,
+    .btn-group,
+    .timeline-widget-list::after {
+        display: none;
+    }
+    
+    .card {
+        page-break-inside: avoid;
+    }
+    
+    canvas {
+        max-height: 300px;
+    }
+}
+
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--webino-primary-color, #845adf);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--webino-primary-color, #845adf);
+    opacity: 0.8;
+}
+
+/* Accessibility */
+.btn:focus,
+.card:focus {
+    outline: 2px solid #845adf;
+    outline-offset: 2px;
+}
+
+/* Performance Optimization */
+.card,
+.btn,
+.avatar,
+.badge {
+    will-change: transform;
+}
+
+/* Stats Card Number Glow */
+.card.border:hover h4,
+.card.border:hover h3 {
+    text-shadow: 0 0 20px rgba(132, 90, 223, 0.3);
+}
+
+/* Interactive Elements */
+a.fw-semibold {
+    transition: color 0.2s ease;
+}
+
+a.fw-semibold:hover {
+    color: #845adf;
+    text-decoration: underline;
+}
+
+/* Grid Layout Improvements */
+.row {
+    margin-bottom: 0;
+}
+
+.row + .row {
+    margin-top: 0;
+}
+
+/* Card Body Padding */
+.card-body {
+    padding: 1.5rem;
+}
+
+@media (max-width: 576px) {
+    .card-body {
+        padding: 1rem;
+    }
+}
+

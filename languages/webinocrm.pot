@@ -1,0 +1,151 @@
+# Copyright (C) 2025 WebinoCRM
+# This file is distributed under the same license as the WebinoCRM plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: WebinoCRM 2.1.0\n"
+"Report-Msgid-Bugs-To: https://webinoco.com/support\n"
+"PO-Revision-Date: 2025-01-01 00:00+0000\n"
+"Last-Translator: Arsalan Arghavan <contact@arsalanarghavan.ir>\n"
+"Language-Team: Persian <fa@li.org>\n"
+"Language: fa_IR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n==0 || n==1);\n"
+"X-Generator: Manual\n"
+"X-Domain: webinocrm\n"
+
+#: Header Component
+msgid "Guest"
+msgstr ""
+
+msgid "System Manager"
+msgstr ""
+
+msgid "Finance Manager"
+msgstr ""
+
+msgid "Team Member"
+msgstr ""
+
+msgid "Customer"
+msgstr ""
+
+msgid "User"
+msgstr ""
+
+msgid "Search..."
+msgstr ""
+
+msgid "Persian"
+msgstr ""
+
+msgid "English"
+msgstr ""
+
+msgid "Notifications"
+msgstr ""
+
+msgid "No notifications"
+msgstr ""
+
+msgid "View All"
+msgstr ""
+
+msgid "My Profile"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+msgid "Logout"
+msgstr ""
+
+msgid "Logo"
+msgstr ""
+
+msgid "WebinoCRM"
+msgstr ""
+
+msgid "No results found"
+msgstr ""
+
+msgid "Loading..."
+msgstr ""
+
+#: Sidebar Component
+msgid "Dashboard"
+msgstr ""
+
+msgid "Projects"
+msgstr ""
+
+msgid "Contracts"
+msgstr ""
+
+msgid "Invoices"
+msgstr ""
+
+msgid "Tickets"
+msgstr ""
+
+msgid "Tasks"
+msgstr ""
+
+msgid "Appointments"
+msgstr ""
+
+msgid "Leads"
+msgstr ""
+
+msgid "Customers"
+msgstr ""
+
+msgid "Staff"
+msgstr ""
+
+msgid "Reports"
+msgstr ""
+
+msgid "My Projects"
+msgstr ""
+
+msgid "My Tasks"
+msgstr ""
+
+msgid "My Contracts"
+msgstr ""
+
+msgid "My Invoices"
+msgstr ""
+
+msgid "Support Tickets"
+msgstr ""
+
+msgid "Toggle Sidebar"
+msgstr ""
+
+#: Footer Component
+msgid "Webino Institute"
+msgstr ""
+
+msgid "%1$s © Designed with %2$s by %3$s"
+msgstr ""
+
+msgid "All rights reserved"
+msgstr ""
+
+#: Dashboard Wrapper
+msgid "Page not found."
+msgstr ""
+
+#: Common
+msgid "Hide Sidebar"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Home"
+msgstr ""
+

@@ -1,0 +1,182 @@
+/**
+ * License Cards Styles
+ * Colored cards based on remaining license percentage
+ */
+
+.license-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.license-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Success (Green) - >75% */
+.license-card-success {
+    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+    border-left: 4px solid #28a745;
+}
+
+.license-card-success .card-title {
+    color: #155724;
+}
+
+.license-card-success .progress-bar {
+    background-color: #28a745;
+}
+
+.license-card-success .badge.bg-success {
+    background-color: #28a745;
+}
+
+/* Warning (Yellow) - 50-75% */
+.license-card-warning {
+    background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+    border-left: 4px solid #ffc107;
+}
+
+.license-card-warning .card-title {
+    color: #856404;
+}
+
+.license-card-warning .progress-bar {
+    background-color: #ffc107;
+}
+
+.license-card-warning .badge.bg-warning {
+    background-color: #ffc107;
+    color: #856404;
+}
+
+/* Danger (Red) - <50% */
+.license-card-danger {
+    background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+    border-left: 4px solid #dc3545;
+}
+
+.license-card-danger .card-title {
+    color: #721c24;
+}
+
+.license-card-danger .progress-bar {
+    background-color: #dc3545;
+}
+
+.license-card-danger .badge.bg-danger {
+    background-color: #dc3545;
+}
+
+/* Black (VIP) - No expiry date */
+.license-card-black {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    border-left: 4px solid #000000;
+    color: #ffffff;
+}
+
+.license-card-black .card-title {
+    color: #ffffff;
+}
+
+.license-card-black .text-muted {
+    color: #cccccc;
+}
+
+.license-card-black .progress-bar {
+    background-color: #ffd700;
+}
+
+.license-card-black .badge.bg-black {
+    background-color: #000000;
+    color: #ffd700;
+    border: 1px solid #ffd700;
+}
+
+.license-card-black .badge:not(.bg-black) {
+    color: #ffffff;
+}
+
+.license-card-black .small {
+    color: #cccccc;
+}
+
+/* Logo styles */
+.license-logo {
+    border-radius: 8px;
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.license-logo-placeholder {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 8px;
+    color: #6c757d;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .license-card {
+        margin-bottom: 1rem;
+    }
+}
+
+/* Card body padding adjustment */
+.license-card .card-body {
+    padding: 1.25rem;
+}
+
+/* Dropdown menu styling */
+.license-card .dropdown-menu {
+    min-width: 180px;
+}
+
+.license-card .dropdown-item {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+}
+
+.license-card .dropdown-item:hover {
+    background-color: #f8f9fa;
+}
+
+.license-card .dropdown-item.text-danger:hover {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+/* Progress bar styling */
+.license-card .progress {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.license-card .progress-bar {
+    border-radius: 10px;
+    transition: width 0.6s ease;
+}
+
+/* Badge styling */
+.license-card .badge {
+    font-size: 0.75rem;
+    padding: 0.35em 0.65em;
+    font-weight: 500;
+}
+
+/* Empty state */
+#licenses-grid:empty::before {
+    content: "هنوز لایسنس‌ای ثبت نشده است.";
+    display: block;
+    text-align: center;
+    padding: 3rem;
+    color: #6c757d;
+}
+

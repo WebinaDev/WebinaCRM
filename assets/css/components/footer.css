@@ -1,0 +1,115 @@
+/**
+ * Footer Component Styles
+ * 
+ * Styles for the dashboard footer component
+ *
+ * @package WebinoCRM
+ * @since 2.1.0
+ */
+
+/* Footer Container */
+.webino-footer {
+	background: var(--footer-bg, #fff);
+	border-top: 1px solid var(--border-color, #e9ecef);
+	padding: 1.5rem 0;
+	margin-top: auto;
+}
+
+.webino-footer__container {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 1rem;
+}
+
+/* Copyright */
+.webino-footer__copyright {
+	text-align: center;
+	color: var(--text-muted, #6c757d);
+	font-size: 0.875rem;
+	margin-bottom: 0.5rem;
+}
+
+.webino-footer__copyright a {
+	color: var(--primary-color, #5b6ce3);
+	text-decoration: none;
+	font-weight: 600;
+	transition: color 0.2s;
+}
+
+.webino-footer__copyright a:hover {
+	color: var(--primary-color-dark, #4a5dcb);
+	text-decoration: underline;
+}
+
+.webino-footer__copyright .bi-heart-fill {
+	color: var(--danger-color, #dc3545);
+	animation: heartbeat 1.5s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+	0%, 100% {
+		transform: scale(1);
+	}
+	50% {
+		transform: scale(1.1);
+	}
+}
+
+/* Credits */
+.webino-footer__credits {
+	text-align: center;
+	color: var(--text-muted, #6c757d);
+	font-size: 0.8125rem;
+	margin-top: 0.5rem;
+}
+
+/* Footer Links */
+.webino-footer__links {
+	display: flex;
+	justify-content: center;
+	gap: 1.5rem;
+	margin-top: 1rem;
+}
+
+.webino-footer__link {
+	color: var(--text-muted, #6c757d);
+	text-decoration: none;
+	font-size: 0.875rem;
+	transition: color 0.2s;
+}
+
+.webino-footer__link:hover {
+	color: var(--primary-color, #5b6ce3);
+	text-decoration: underline;
+}
+
+/* Dark Mode */
+[data-theme-mode="dark"] .webino-footer {
+	background: var(--footer-bg-dark, #1a1a1e);
+	border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme-mode="dark"] .webino-footer__copyright,
+[data-theme-mode="dark"] .webino-footer__credits,
+[data-theme-mode="dark"] .webino-footer__link {
+	color: rgba(255, 255, 255, 0.5);
+}
+
+[data-theme-mode="dark"] .webino-footer__copyright a,
+[data-theme-mode="dark"] .webino-footer__link:hover {
+	color: var(--primary-color, #5b6ce3);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+	.webino-footer__links {
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+	
+	.webino-footer__copyright,
+	.webino-footer__credits {
+		font-size: 0.8125rem;
+	}
+}
+

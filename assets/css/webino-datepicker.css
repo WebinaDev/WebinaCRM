@@ -1,0 +1,226 @@
+/*
+ * WebinoCRM Custom Jalali Date Picker Styles - V2
+ * with month/year picker - White Label Compatible
+ */
+.webino-datepicker-container {
+    position: absolute;
+    z-index: 10000;
+    background: #fff;
+    border: 1px solid #e0e7ff;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    padding: 10px;
+    font-family: var(--default-font-family, 'Vazirmatn'), sans-serif;
+    width: 290px;
+    display: none;
+    direction: rtl;
+    user-select: none;
+    visibility: visible;
+    opacity: 1;
+    color: #212b37;
+}
+
+.webino-datepicker-container:not([style*="display: none"]) {
+    display: block;
+}
+
+.webino-datepicker-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 0 10px;
+}
+
+.webino-datepicker-header button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 5px 10px;
+    color: #212b37;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.webino-datepicker-header button:hover {
+    background: #f5f6f7;
+    color: var(--webino-primary, var(--primary-color, rgb(92, 103, 247)));
+}
+
+.webino-datepicker-month-year {
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: all 0.2s;
+    color: #212b37;
+}
+.webino-datepicker-month-year:hover {
+    background: #f5f6f7;
+    color: var(--webino-primary, var(--primary-color, rgb(92, 103, 247)));
+}
+
+.webino-datepicker-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.webino-datepicker-day, .webino-datepicker-day-name {
+    text-align: center;
+    padding: 8px 0;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.webino-datepicker-day-name {
+    font-weight: bold;
+    font-size: 12px;
+    color: #6e829f;
+    cursor: default;
+}
+
+.webino-datepicker-day {
+    color: #212b37;
+}
+
+.webino-datepicker-day:not(.empty):hover {
+    background: #f5f6f7;
+    color: var(--webino-primary, var(--primary-color, rgb(92, 103, 247)));
+}
+
+.webino-datepicker-day.today {
+    font-weight: bold;
+    border: 1px solid var(--webino-primary, var(--primary-color, rgb(92, 103, 247)));
+    color: var(--webino-primary, var(--primary-color, rgb(92, 103, 247)));
+}
+
+.webino-datepicker-day.selected {
+    background-color: var(--webino-primary, var(--primary-color, rgb(92, 103, 247)));
+    color: #fff;
+    font-weight: bold;
+}
+
+.webino-datepicker-today {
+    width: 100%;
+    margin-top: 10px;
+    background: var(--webino-primary, var(--primary-color, rgb(92, 103, 247)));
+    border: 1px solid var(--webino-primary, var(--primary-color, rgb(92, 103, 247)));
+    color: #fff;
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 500;
+}
+.webino-datepicker-today:hover {
+    opacity: 0.9;
+    filter: brightness(1.1);
+}
+
+/* Month/Year Picker Styles */
+.webino-datepicker-view {
+    display: none;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 5px;
+    animation: fadeIn 0.2s ease-in-out;
+}
+.webino-datepicker-view.active {
+    display: grid;
+}
+
+.webino-datepicker-month, .webino-datepicker-year {
+    padding: 12px 5px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+}
+.webino-datepicker-month, .webino-datepicker-year {
+    color: #212b37;
+}
+
+.webino-datepicker-month:hover, .webino-datepicker-year:hover {
+    background: #f5f6f7;
+    color: var(--webino-primary, var(--primary-color, rgb(92, 103, 247)));
+}
+.webino-datepicker-month.selected, .webino-datepicker-year.selected {
+    background: var(--webino-primary, var(--primary-color, rgb(92, 103, 247)));
+    color: #fff;
+    font-weight: bold;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* Dark Mode Support - Only applies when dark mode is active */
+html[data-theme-mode="dark"] .webino-datepicker-container,
+html[data-theme="dark"] .webino-datepicker-container {
+    background: #1a1d29;
+    border-color: #2d3142;
+    color: #a8b3cf;
+}
+
+html[data-theme-mode="dark"] .webino-datepicker-header button,
+html[data-theme="dark"] .webino-datepicker-header button {
+    color: #a8b3cf;
+}
+
+html[data-theme-mode="dark"] .webino-datepicker-header button:hover,
+html[data-theme="dark"] .webino-datepicker-header button:hover {
+    background: #383853;
+    color: var(--webino-primary, var(--primary-color, rgb(92, 103, 247)));
+}
+
+html[data-theme-mode="dark"] .webino-datepicker-month-year,
+html[data-theme="dark"] .webino-datepicker-month-year {
+    color: #a8b3cf;
+}
+
+html[data-theme-mode="dark"] .webino-datepicker-month-year:hover,
+html[data-theme="dark"] .webino-datepicker-month-year:hover {
+    background: #383853;
+    color: var(--webino-primary, var(--primary-color, rgb(92, 103, 247)));
+}
+
+html[data-theme-mode="dark"] .webino-datepicker-day-name,
+html[data-theme="dark"] .webino-datepicker-day-name {
+    color: #7987a1;
+}
+
+html[data-theme-mode="dark"] .webino-datepicker-day,
+html[data-theme="dark"] .webino-datepicker-day {
+    color: #a8b3cf;
+}
+
+html[data-theme-mode="dark"] .webino-datepicker-day:not(.empty):hover,
+html[data-theme="dark"] .webino-datepicker-day:not(.empty):hover {
+    background: #383853;
+    color: var(--webino-primary, var(--primary-color, rgb(92, 103, 247)));
+}
+
+html[data-theme-mode="dark"] .webino-datepicker-day.today,
+html[data-theme="dark"] .webino-datepicker-day.today {
+    border-color: var(--webino-primary, var(--primary-color, rgb(92, 103, 247)));
+    color: var(--webino-primary, var(--primary-color, rgb(92, 103, 247)));
+}
+
+html[data-theme-mode="dark"] .webino-datepicker-month,
+html[data-theme-mode="dark"] .webino-datepicker-year,
+html[data-theme="dark"] .webino-datepicker-month,
+html[data-theme="dark"] .webino-datepicker-year {
+    color: #a8b3cf;
+}
+
+html[data-theme-mode="dark"] .webino-datepicker-month:hover,
+html[data-theme-mode="dark"] .webino-datepicker-year:hover,
+html[data-theme="dark"] .webino-datepicker-month:hover,
+html[data-theme="dark"] .webino-datepicker-year:hover {
+    background: #383853;
+    color: var(--webino-primary, var(--primary-color, rgb(92, 103, 247)));
+}

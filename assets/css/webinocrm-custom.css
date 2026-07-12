@@ -1,0 +1,980 @@
+/**
+ * WebinoCRM Custom Styles (Compatible with Xintra)
+ * فقط استایل‌های خاص پلاگین - بدون override کردن Xintra
+ * Version: 3.1.0 - Fixed RTL/LTR wrapper positioning
+ */
+
+/* استایل‌های خاص برای فیلدهای admin پلاگین */
+.webino-form-container {
+    background: #fff;
+    border-radius: 8px;
+    padding: 25px;
+}
+
+/* استایل‌های خاص برای جداول پلاگین */
+.webino-table-container {
+    overflow-x: auto;
+}
+
+/* استایل‌های خاص برای کارت‌های Task */
+.webino-task-card {
+    background: #fff;
+    border: 1px solid #e0e7ff;
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+}
+
+.webino-task-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Priority Colors */
+.priority-high {
+    border-right: 4px solid #dc3545;
+}
+
+.priority-medium {
+    border-right: 4px solid #ffc107;
+}
+
+.priority-low {
+    border-right: 4px solid #28a745;
+}
+
+/* استایل‌های خاص برای فرم‌های AJAX */
+.webino-ajax-form .form-submit button {
+    min-width: 150px;
+}
+
+/* استایل‌های خاص برای Alert ها */
+.webino-alert {
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.webino-alert-success {
+    background-color: #d1e7dd;
+    border: 1px solid #badbcc;
+    color: #0f5132;
+}
+
+.webino-alert-error {
+    background-color: #f8d7da;
+    border: 1px solid #f5c2c7;
+    color: #842029;
+}
+
+.webino-alert-info {
+    background-color: #cff4fc;
+    border: 1px solid #b6effb;
+    color: #055160;
+}
+
+/* RTL Specific Fixes */
+.ltr-input {
+    direction: ltr;
+    text-align: left;
+}
+
+/* فونت فارسی (در صورت نیاز) */
+body.webino-dashboard-body,
+.webino-dashboard-wrapper {
+    font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Utility Classes - These are now handled by rtl-complete-fix.css */
+
+/* Sidebar Shadow - سایه برای مشخص بودن سایدبار */
+[dir="ltr"] .app-sidebar,
+[dir="ltr"] .webinocrm-sidebar,
+[dir="ltr"] .webino-sidebar,
+[dir="ltr"] .main-sidebar,
+[dir="ltr"] .customer-sidebar {
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.08);
+}
+
+[dir="rtl"] .app-sidebar,
+[dir="rtl"] .webinocrm-sidebar,
+[dir="rtl"] .webino-sidebar,
+[dir="rtl"] .main-sidebar,
+[dir="rtl"] .customer-sidebar {
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Main Page Scrollbar - White Label */
+html ::-webkit-scrollbar-thumb,
+body ::-webkit-scrollbar-thumb {
+    background: var(--webino-primary-color, #845adf);
+}
+
+html ::-webkit-scrollbar-thumb:hover,
+body ::-webkit-scrollbar-thumb:hover {
+    background: var(--webino-primary-color, #845adf);
+    opacity: 0.8;
+}
+
+/* Sidebar Scrollbar - White Label */
+.app-sidebar::-webkit-scrollbar,
+.webinocrm-sidebar::-webkit-scrollbar,
+.webino-sidebar::-webkit-scrollbar,
+.main-sidebar::-webkit-scrollbar,
+.customer-sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.app-sidebar::-webkit-scrollbar-track,
+.webinocrm-sidebar::-webkit-scrollbar-track,
+.webino-sidebar::-webkit-scrollbar-track,
+.main-sidebar::-webkit-scrollbar-track,
+.customer-sidebar::-webkit-scrollbar-track {
+    background: var(--default-background, #f9fafb);
+    border-radius: 3px;
+}
+
+.app-sidebar::-webkit-scrollbar-thumb,
+.webinocrm-sidebar::-webkit-scrollbar-thumb,
+.webino-sidebar::-webkit-scrollbar-thumb,
+.main-sidebar::-webkit-scrollbar-thumb,
+.customer-sidebar::-webkit-scrollbar-thumb {
+    background: var(--webino-primary-color, #845adf);
+    border-radius: 3px;
+    transition: background 0.2s ease;
+}
+
+.app-sidebar::-webkit-scrollbar-thumb:hover,
+.webinocrm-sidebar::-webkit-scrollbar-thumb:hover,
+.webino-sidebar::-webkit-scrollbar-thumb:hover,
+.main-sidebar::-webkit-scrollbar-thumb:hover,
+.customer-sidebar::-webkit-scrollbar-thumb:hover {
+    background: var(--webino-primary-color, #845adf);
+    opacity: 0.8;
+}
+
+/* Dark Mode Sidebar Scrollbar */
+html[data-theme-mode="dark"] .app-sidebar::-webkit-scrollbar-track,
+html[data-theme-mode="dark"] .webinocrm-sidebar::-webkit-scrollbar-track,
+html[data-theme-mode="dark"] .webino-sidebar::-webkit-scrollbar-track,
+html[data-theme-mode="dark"] .main-sidebar::-webkit-scrollbar-track,
+html[data-theme-mode="dark"] .customer-sidebar::-webkit-scrollbar-track,
+html[data-theme="dark"] .app-sidebar::-webkit-scrollbar-track,
+html[data-theme="dark"] .webinocrm-sidebar::-webkit-scrollbar-track,
+html[data-theme="dark"] .webino-sidebar::-webkit-scrollbar-track,
+html[data-theme="dark"] .main-sidebar::-webkit-scrollbar-track,
+html[data-theme="dark"] .customer-sidebar::-webkit-scrollbar-track {
+    background: var(--bg-primary, #1a1a2e);
+}
+
+html[data-theme-mode="dark"] .app-sidebar::-webkit-scrollbar-thumb,
+html[data-theme-mode="dark"] .webinocrm-sidebar::-webkit-scrollbar-thumb,
+html[data-theme-mode="dark"] .webino-sidebar::-webkit-scrollbar-thumb,
+html[data-theme-mode="dark"] .main-sidebar::-webkit-scrollbar-thumb,
+html[data-theme-mode="dark"] .customer-sidebar::-webkit-scrollbar-thumb,
+html[data-theme="dark"] .app-sidebar::-webkit-scrollbar-thumb,
+html[data-theme="dark"] .webinocrm-sidebar::-webkit-scrollbar-thumb,
+html[data-theme="dark"] .webino-sidebar::-webkit-scrollbar-thumb,
+html[data-theme="dark"] .main-sidebar::-webkit-scrollbar-thumb,
+html[data-theme="dark"] .customer-sidebar::-webkit-scrollbar-thumb {
+    background: var(--webino-primary-color, #845adf);
+}
+
+html[data-theme-mode="dark"] .app-sidebar::-webkit-scrollbar-thumb:hover,
+html[data-theme-mode="dark"] .webinocrm-sidebar::-webkit-scrollbar-thumb:hover,
+html[data-theme-mode="dark"] .webino-sidebar::-webkit-scrollbar-thumb:hover,
+html[data-theme-mode="dark"] .main-sidebar::-webkit-scrollbar-thumb:hover,
+html[data-theme-mode="dark"] .customer-sidebar::-webkit-scrollbar-thumb:hover,
+html[data-theme="dark"] .app-sidebar::-webkit-scrollbar-thumb:hover,
+html[data-theme="dark"] .webinocrm-sidebar::-webkit-scrollbar-thumb:hover,
+html[data-theme="dark"] .webino-sidebar::-webkit-scrollbar-thumb:hover,
+html[data-theme="dark"] .main-sidebar::-webkit-scrollbar-thumb:hover,
+html[data-theme="dark"] .customer-sidebar::-webkit-scrollbar-thumb:hover {
+    background: var(--webino-primary-color, #845adf);
+    opacity: 0.8;
+}
+
+/* فیکس‌های کوچک برای سازگاری با Xintra */
+.main-content .card-body table {
+    margin-bottom: 0;
+}
+
+/* Loading State */
+.btn.loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.btn.loading i.fa-spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Leads Card and List View Styles */
+.webino-leads-card-view,
+.webino-leads-list-view {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.webino-leads-card-view .card.custom-card {
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 100%;
+}
+
+.webino-leads-card-view .card.custom-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.webino-leads-card-view .avatar-initials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-weight: 600;
+    border-radius: 50%;
+}
+
+.webino-leads-card-view .deal-description {
+    margin-top: 0.5rem;
+}
+
+.webino-leads-card-view .deal-description .company-name {
+    color: var(--text-default);
+    text-decoration: none;
+    font-size: 0.875rem;
+}
+
+.webino-leads-card-view .deal-description .company-name:hover {
+    color: var(--primary);
+}
+
+/* Ensure full width on mobile */
+@media (max-width: 767.98px) {
+    /* Main views */
+    .webino-leads-card-view,
+    .webino-leads-list-view {
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
+        margin: 0;
+        overflow-x: hidden;
+    }
+    
+    /* Remove negative margins on mobile */
+    .webino-leads-card-view .row,
+    .webino-leads-list-view .row {
+        margin-left: 0;
+        margin-right: 0;
+        width: 100%;
+    }
+    
+    .webino-leads-card-view .row > [class*="col-"],
+    .webino-leads-list-view .row > [class*="col-"] {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+        width: 100%;
+        max-width: 100%;
+        flex: 0 0 100%;
+    }
+    
+    /* Cards should not overflow */
+    .webino-leads-card-view .card.custom-card,
+    .webino-leads-list-view .card.custom-card {
+        width: 100%;
+        max-width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
+    /* Ensure table wrapper doesn't overflow */
+    .webino-leads-list-view .table-responsive {
+        width: 100%;
+        max-width: 100%;
+        margin: 0;
+    }
+}
+
+/* Responsive adjustments for card view */
+.webino-leads-card-view .card.custom-card {
+    min-height: 200px;
+}
+
+@media (max-width: 575.98px) {
+    .webino-leads-card-view .row {
+        margin-left: -0.5rem;
+        margin-right: -0.5rem;
+    }
+    
+    .webino-leads-card-view .row > [class*="col-"] {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+    
+    .webino-leads-card-view .card.custom-card {
+        margin-bottom: 1rem;
+    }
+}
+
+/* Fix table responsive on mobile */
+@media (max-width: 767.98px) {
+    .webino-leads-list-view .table-responsive {
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .webino-leads-list-view .table {
+        min-width: 800px;
+    }
+    
+    .webino-leads-list-view .table thead th {
+        white-space: nowrap;
+        font-size: 0.75rem;
+        padding: 0.5rem;
+    }
+    
+    .webino-leads-list-view .table tbody td {
+        font-size: 0.875rem;
+        padding: 0.5rem;
+    }
+}
+
+/* Header responsive adjustments */
+@media (max-width: 767.98px) {
+    /* Stats cards */
+    .row.mb-4.g-3 > [class*="col-"] {
+        margin-bottom: 0.75rem;
+    }
+    
+    /* Header card */
+    .card.custom-card .card-body {
+        padding: 1rem;
+    }
+    
+    .card.custom-card .d-flex.flex-wrap {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+    }
+    
+    .card.custom-card .d-flex.flex-wrap > div:first-child {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 0;
+    }
+    
+    .card.custom-card .d-flex.flex-wrap > div:last-child {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    
+    .btn-group {
+        width: 100%;
+        margin-bottom: 0;
+    }
+    
+    .btn-group .btn {
+        flex: 1;
+    }
+    
+    /* Filters */
+    .card.custom-card form .col-12 {
+        margin-bottom: 0;
+    }
+    
+    /* Status header cards in card view */
+    .webino-leads-card-view .row.mb-4.g-3 > [class*="col-"] {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    
+    /* Ensure cards take full width on mobile */
+    .webino-leads-card-view .row.g-3 > [class*="col-"] {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+
+/* Tablet adjustments */
+@media (min-width: 576px) and (max-width: 991.98px) {
+    .webino-leads-card-view .row.g-3 > [class*="col-"] {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+
+/* Small desktop adjustments */
+@media (min-width: 992px) and (max-width: 1399.98px) {
+    .webino-leads-card-view .row.g-3 > [class*="col-"] {
+        flex: 0 0 33.333333%;
+        max-width: 33.333333%;
+    }
+}
+
+/* Dark mode compatibility */
+[data-theme-mode="dark"] .webino-leads-card-view .card.custom-card {
+    background: var(--custom-white);
+    border-color: var(--border-color);
+}
+
+[data-theme-mode="dark"] .webino-leads-card-view .deal-description .company-name {
+    color: var(--text-default);
+}
+
+[data-theme-mode="dark"] .webino-leads-card-view .deal-description .company-name:hover {
+    color: var(--primary);
+}
+
+/* List view styles */
+.webino-leads-list-view .table-responsive {
+    border-radius: 0.5rem;
+}
+
+.webino-leads-list-view .leads-list.selected {
+    background-color: var(--primary-transparent);
+}
+
+/* Checkbox styles */
+.leads-checkbox input[type="checkbox"] {
+    cursor: pointer;
+}
+
+/* View toggle buttons */
+.btn-group input[type="radio"]:checked + label {
+    background-color: var(--primary);
+    color: var(--text-fixed-white);
+    border-color: var(--primary);
+}
+
+/* Empty state */
+.webino-leads-card-view .card.custom-card .card-body.text-center,
+.webino-leads-list-view .card-body.text-center {
+    padding: 3rem 1rem;
+}
+
+/* Smooth transitions for view switching */
+.webino-leads-list-view,
+.webino-leads-card-view {
+    transition: opacity 0.3s ease;
+}
+
+/* RTL support for card view */
+[dir="rtl"] .webino-leads-card-view .dropdown-menu-end {
+    left: 0;
+    right: auto;
+}
+
+[dir="rtl"] .webino-leads-card-view .ms-auto {
+    margin-left: 0;
+    margin-right: auto;
+}
+
+/* LTR support for card view */
+[dir="ltr"] .webino-leads-card-view .dropdown-menu-end {
+    right: 0;
+    left: auto;
+}
+
+[dir="ltr"] .webino-leads-card-view .ms-auto {
+    margin-right: 0;
+    margin-left: auto;
+}
+
+/* Ensure container-fluid is responsive */
+@media (max-width: 767.98px) {
+    .main-content .container-fluid {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+    
+    /* Prevent horizontal scroll */
+    .page,
+    .main-content,
+    .container-fluid {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+    
+    /* Stats cards responsive */
+    .row.mb-4.g-3 {
+        margin-left: -0.375rem;
+        margin-right: -0.375rem;
+    }
+    
+    .row.mb-4.g-3 > [class*="col-"] {
+        padding-left: 0.375rem;
+        padding-right: 0.375rem;
+    }
+}
+
+/* Status Cards Drag & Drop Styles */
+.webino-status-cards-row {
+    position: relative;
+    min-height: 100px;
+}
+
+.webino-status-card-item {
+    cursor: move;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.webino-status-card-item:hover {
+    transform: translateY(-2px);
+    z-index: 10;
+}
+
+.webino-status-card-item:hover .card {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.webino-status-card-item.gu-mirror {
+    opacity: 0.8;
+    transform: rotate(2deg);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    cursor: grabbing;
+}
+
+.webino-status-card-item.gu-transit {
+    opacity: 0.3;
+}
+
+/* Dragging state */
+.webino-status-cards-row.gu-unselectable .webino-status-card-item {
+    cursor: grabbing;
+}
+
+/* Visual feedback for drop zones */
+.webino-status-cards-row.gu-over {
+    background-color: rgba(0, 123, 255, 0.05);
+    border-radius: 8px;
+}
+
+/* Fix: Make all primary text white for visibility */
+.text-primary,
+[class*="text-primary"]:not(.btn-primary):not(.bg-primary),
+*[style*="color"][style*="var(--primary"]:not(.btn-primary):not(.bg-primary),
+*[style*="color"][style*="var(--webino-primary"]:not(.btn-primary):not(.bg-primary) {
+    color: #ffffff;
+}
+
+/* But keep primary color for backgrounds and borders */
+.bg-primary {
+    color: #ffffff;
+}
+
+/* Links and hover states with primary color */
+a.text-primary,
+a[class*="text-primary"]:not(.btn-primary) {
+    color: #ffffff;
+}
+
+a.text-primary:hover,
+a[class*="text-primary"]:not(.btn-primary):hover {
+    color: #ffffff;
+    opacity: 0.9;
+}
+
+/* ============================================
+   Page Wrapper Styles
+   ============================================ */
+
+/* Main Page Wrapper */
+.webino-page-wrapper {
+    background: #ffffff;
+    border-radius: 15px;
+    padding: 0;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    min-height: calc(100vh - 4.25rem - 30px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+}
+
+/* Page Header */
+.webino-page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 30px;
+    border-bottom: 1px solid #e9ecef;
+    background: #ffffff;
+    flex-wrap: nowrap;
+    gap: 20px;
+    width: 100%;
+    position: relative;
+}
+
+/* Breadcrumb (Right side in RTL) */
+.webino-page-breadcrumb {
+    flex: 0 0 auto;
+    order: 1;
+    min-width: 0;
+    white-space: nowrap;
+}
+
+[dir="rtl"] .webino-page-breadcrumb {
+    order: 1;
+    text-align: right;
+}
+
+[dir="ltr"] .webino-page-breadcrumb {
+    order: 3;
+    text-align: left;
+}
+
+.webino-page-breadcrumb .breadcrumb {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    font-size: 0.875rem;
+}
+
+.webino-page-breadcrumb .breadcrumb-item {
+    color: #6c757d;
+}
+
+.webino-page-breadcrumb .breadcrumb-item a {
+    color: #6c757d;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.webino-page-breadcrumb .breadcrumb-item a:hover {
+    color: var(--primary-color, #5e72e4);
+}
+
+.webino-page-breadcrumb .breadcrumb-item.active {
+    color: #495057;
+    font-weight: 500;
+}
+
+.webino-page-breadcrumb .breadcrumb-item + .breadcrumb-item::before {
+    content: "/";
+    padding: 0 8px;
+    color: #adb5bd;
+}
+
+[dir="rtl"] .webino-page-breadcrumb .breadcrumb-item + .breadcrumb-item::before {
+    content: "\\";
+}
+
+/* Page Title (Center) */
+.webino-page-title {
+    flex: 1 1 auto;
+    order: 2;
+    text-align: center;
+    min-width: 0;
+    padding: 0 15px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    max-width: 50%;
+}
+
+[dir="rtl"] .webino-page-title {
+    left: auto;
+    right: 50%;
+    transform: translateX(50%);
+}
+
+.webino-page-title-text {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #212529;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    text-align: center;
+}
+
+/* Page Actions (Left side in RTL) */
+.webino-page-actions {
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    order: 3;
+    white-space: nowrap;
+}
+
+[dir="rtl"] .webino-page-actions {
+    order: 3;
+    justify-content: flex-start;
+}
+
+[dir="ltr"] .webino-page-actions {
+    order: 1;
+    justify-content: flex-end;
+}
+
+/* Fix dropdown positioning */
+.webino-page-actions .dropdown-menu {
+    position: absolute;
+    z-index: 1000;
+}
+
+.webino-page-action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    font-size: 0.875rem;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.webino-page-action-btn i {
+    font-size: 1.1rem;
+}
+
+.webino-page-action-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Page Content */
+.webino-page-content {
+    padding: 15px;
+    min-height: 200px;
+}
+
+/* Ensure content inside wrapper has proper spacing - padding is already on .webino-page-content */
+.webino-page-content > *:first-child {
+    margin-top: 0;
+}
+
+.webino-page-content > *:last-child {
+    margin-bottom: 0;
+}
+
+/* Sidebar Adaptation - When sidebar is collapsed */
+/* REMOVED: This rule was conflicting with the more specific rules below */
+/* The collapsed state is now handled by the .app-content .webino-page-wrapper rules */
+
+/* Responsive Styles */
+@media (max-width: 1199.98px) {
+    .webino-page-wrapper {
+        margin-inline-start: calc(15rem + 10px);
+        margin-inline-end: 15px;
+    }
+    
+    /* REMOVED: This rule was conflicting with the more specific rules below */
+    /* The collapsed state is now handled by the .app-content .webino-page-wrapper rules */
+}
+
+@media (max-width: 991.98px) {
+    .webino-page-wrapper {
+        margin-top: calc(4.25rem + 15px);
+        margin-inline-start: 15px;
+        margin-inline-end: 15px;
+        border-radius: 12px;
+    }
+    
+    .webino-page-header {
+        padding: 15px 20px;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .webino-page-breadcrumb {
+        order: 1;
+        width: 100%;
+    }
+    
+    .webino-page-title {
+        order: 2;
+        width: 100%;
+        text-align: center;
+        position: static;
+        transform: none;
+        left: auto;
+        right: auto;
+        max-width: 100%;
+        padding: 0;
+    }
+    
+    [dir="rtl"] .webino-page-title {
+        transform: none;
+    }
+    
+    .webino-page-actions {
+        order: 3;
+        width: 100%;
+        justify-content: flex-end;
+    }
+    
+    [dir="ltr"] .webino-page-actions {
+        justify-content: flex-start;
+    }
+    
+    .webino-page-content {
+        padding: 15px;
+    }
+    
+    .webino-page-title-text {
+        font-size: 1.25rem;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .webino-page-wrapper {
+        margin-top: calc(4.25rem + 10px);
+        margin-inline-start: 10px;
+        margin-inline-end: 10px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+    }
+    
+    .webino-page-header {
+        padding: 12px 15px;
+        gap: 10px;
+    }
+    
+    .webino-page-content {
+        padding: 15px;
+    }
+    
+    .webino-page-title-text {
+        font-size: 1.1rem;
+    }
+    
+    .webino-page-action-btn {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+    
+    .webino-page-action-btn span {
+        display: none;
+    }
+}
+
+/* Dark Mode Support */
+[data-theme-mode="dark"] .webino-page-wrapper {
+    background: #19191C;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme-mode="dark"] .webino-page-header {
+    background: #19191C;
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme-mode="dark"] .webino-page-title-text {
+    color: var(--default-text-color, #ffffff);
+}
+
+[data-theme-mode="dark"] .webino-page-breadcrumb .breadcrumb-item {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+[data-theme-mode="dark"] .webino-page-breadcrumb .breadcrumb-item.active {
+    color: var(--default-text-color, #ffffff);
+}
+
+[data-theme-mode="dark"] .webino-page-breadcrumb .breadcrumb-item a {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+[data-theme-mode="dark"] .webino-page-breadcrumb .breadcrumb-item a:hover {
+    color: var(--primary-color, #5e72e4);
+}
+
+/* Page Wrapper - All positioning logic is here, NOT in app-content */
+.app-content .webino-page-wrapper {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    position: relative;
+    box-sizing: border-box;
+}
+
+/* RTL: wrapper starts from right edge, 10px from sidebar, 15px from left edge */
+[dir="rtl"] .app-content .webino-page-wrapper {
+    margin-right: 10px;
+    margin-left: 15px;
+}
+
+/* LTR: wrapper starts from left edge, 10px from sidebar, 15px from right edge */
+[dir="ltr"] .app-content .webino-page-wrapper {
+    margin-left: 10px;
+    margin-right: 15px;
+}
+
+@media (min-width: 992px) {
+    /* RTL: sidebar on right, wrapper starts 10px from sidebar - DEFAULT STATE (sidebar open) */
+    [dir="rtl"] .app-content .webino-page-wrapper {
+        margin-right: 10px;
+        margin-left: 15px;
+        /* Width is auto - let it fill naturally */
+    }
+    
+    /* LTR: sidebar on left, wrapper starts 10px from sidebar - DEFAULT STATE (sidebar open) */
+    [dir="ltr"] .app-content .webino-page-wrapper {
+        margin-left: 10px;
+        margin-right: 15px;
+        /* Width is auto - let it fill naturally */
+    }
+    
+    /* When sidebar is collapsed - RTL: wrapper expands to the right only */
+    [dir="rtl"][data-toggled="close-menu-close"] .app-content .webino-page-wrapper,
+    [dir="rtl"][data-toggled="icon-overlay-close"] .app-content .webino-page-wrapper,
+    [dir="rtl"][data-toggled="icon-click-closed"] .app-content .webino-page-wrapper,
+    [dir="rtl"][data-toggled="icon-hover-closed"] .app-content .webino-page-wrapper,
+    [dir="rtl"][data-toggled="detached-close"] .app-content .webino-page-wrapper {
+        margin-right: 10px; /* FIXED - distance from right edge of app-content (sidebar side) */
+        margin-left: auto; /* AUTO - pushes wrapper to the right, allows expansion to the right */
+        margin-inline-start: auto; /* Override any inline-start rules - push to right */
+        margin-inline-end: 10px; /* Override any inline-end rules - fixed from right */
+        width: calc(100% - 10px);
+        max-width: calc(100% - 10px);
+        position: relative;
+        left: auto;
+        right: auto;
+        box-sizing: border-box;
+    }
+    
+    /* When sidebar is collapsed - LTR: wrapper expands to the left only */
+    [dir="ltr"][data-toggled="close-menu-close"] .app-content .webino-page-wrapper,
+    [dir="ltr"][data-toggled="icon-overlay-close"] .app-content .webino-page-wrapper,
+    [dir="ltr"][data-toggled="icon-click-closed"] .app-content .webino-page-wrapper,
+    [dir="ltr"][data-toggled="icon-hover-closed"] .app-content .webino-page-wrapper,
+    [dir="ltr"][data-toggled="detached-close"] .app-content .webino-page-wrapper {
+        margin-left: 10px;
+        margin-right: 15px; /* FIXED - MUST NOT CHANGE - keeps right side fixed */
+        width: calc(100vw - 5rem - 25px);
+        max-width: calc(100vw - 5rem - 25px);
+        position: relative;
+        left: auto;
+        right: auto;
+    }
+}
+
+@media (max-width: 991.98px) {
+    .app-content .webino-page-wrapper {
+        margin-right: 15px;
+        margin-left: 15px;
+    }
+}
+

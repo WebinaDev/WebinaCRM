@@ -1,0 +1,878 @@
+/**
+ * Touch Optimizations for Mobile Devices
+ * 
+ * Improves touch experience on mobile and tablet devices
+ */
+
+/* Touch-friendly button sizes */
+@media (max-width: 768px) {
+    .btn, .webino-btn {
+        min-height: 44px;
+        min-width: 44px;
+        padding: 12px 16px;
+        font-size: 16px;
+        line-height: 1.2;
+    }
+    
+    .btn-sm, .webino-btn-sm {
+        min-height: 36px;
+        min-width: 36px;
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+    
+    .btn-lg, .webino-btn-lg {
+        min-height: 52px;
+        min-width: 52px;
+        padding: 16px 20px;
+        font-size: 18px;
+    }
+}
+
+/* Touch-friendly form elements */
+@media (max-width: 768px) {
+    .form-control, .webino-form-control {
+        min-height: 44px;
+        font-size: 16px;
+        padding: 12px 16px;
+        border-radius: 8px;
+    }
+    
+    .form-check-input {
+        width: 20px;
+        height: 20px;
+        margin-top: 2px;
+    }
+    
+    .form-check-label {
+        padding-right: 8px;
+        font-size: 16px;
+        line-height: 1.4;
+    }
+}
+
+/* Touch-friendly navigation */
+@media (max-width: 768px) {
+    .webino-nav-tabs {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+    
+    .webino-nav-tabs::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .webino-nav-tabs .nav-link {
+        white-space: nowrap;
+        min-width: 120px;
+        text-align: center;
+        padding: 12px 16px;
+    }
+}
+
+/* Touch-friendly tables */
+@media (max-width: 768px) {
+    .table-responsive {
+        border: none;
+    }
+    
+    .table {
+        font-size: 14px;
+    }
+    
+    .table th,
+    .table td {
+        padding: 12px 8px;
+        vertical-align: middle;
+    }
+    
+    /* Make table rows touch-friendly */
+    .table tbody tr {
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+    }
+    
+    .table tbody tr:hover {
+        background-color: rgba(0, 123, 255, 0.1);
+    }
+}
+
+/* Touch-friendly modals */
+@media (max-width: 768px) {
+    .modal-dialog {
+        margin: 10px;
+        max-width: calc(100% - 20px);
+    }
+    
+    .modal-content {
+        border-radius: 12px;
+    }
+    
+    .modal-header {
+        padding: 16px 20px;
+        border-bottom: 1px solid #dee2e6;
+    }
+    
+    .modal-body {
+        padding: 20px;
+        max-height: 70vh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .modal-footer {
+        padding: 16px 20px;
+        border-top: 1px solid #dee2e6;
+    }
+}
+
+/* Touch-friendly cards */
+@media (max-width: 768px) {
+    .webino-card {
+        margin-bottom: 16px;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .webino-card-header {
+        padding: 16px 20px;
+        font-size: 16px;
+        font-weight: 600;
+    }
+    
+    .webino-card-body {
+        padding: 20px;
+    }
+}
+
+/* Touch-friendly dropdowns */
+@media (max-width: 768px) {
+    .dropdown-menu {
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        border: none;
+    }
+    
+    .dropdown-item {
+        padding: 12px 16px;
+        font-size: 16px;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+    }
+    
+    .dropdown-item:hover,
+    .dropdown-item:focus {
+        background-color: rgba(0, 123, 255, 0.1);
+    }
+}
+
+/* Touch-friendly pagination */
+@media (max-width: 768px) {
+    .pagination {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    
+    .page-link {
+        min-width: 44px;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        margin: 0 2px;
+        border-radius: 8px;
+    }
+}
+
+/* Touch-friendly alerts */
+@media (max-width: 768px) {
+    .alert {
+        padding: 16px 20px;
+        font-size: 16px;
+        border-radius: 8px;
+        margin-bottom: 16px;
+    }
+    
+    .alert-dismissible .btn-close {
+        padding: 16px;
+        font-size: 20px;
+    }
+}
+
+/* Touch-friendly progress bars */
+@media (max-width: 768px) {
+    .progress {
+        height: 8px;
+        border-radius: 4px;
+    }
+    
+    .progress-bar {
+        border-radius: 4px;
+    }
+}
+
+/* Touch-friendly badges */
+@media (max-width: 768px) {
+    .badge, .webino-badge {
+        font-size: 12px;
+        padding: 6px 10px;
+        border-radius: 6px;
+        min-height: 24px;
+        display: inline-flex;
+        align-items: center;
+    }
+}
+
+/* Touch-friendly tooltips */
+@media (max-width: 768px) {
+    .tooltip {
+        font-size: 14px;
+    }
+    
+    .tooltip-inner {
+        padding: 8px 12px;
+        border-radius: 6px;
+    }
+}
+
+/* Touch-friendly popovers */
+@media (max-width: 768px) {
+    .popover {
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    .popover-header {
+        padding: 12px 16px;
+        font-size: 16px;
+        border-radius: 8px 8px 0 0;
+    }
+    
+    .popover-body {
+        padding: 16px;
+        font-size: 14px;
+    }
+}
+
+/* Touch-friendly list groups */
+@media (max-width: 768px) {
+    .list-group-item {
+        padding: 16px 20px;
+        font-size: 16px;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+    }
+    
+    .list-group-item-action {
+        transition: background-color 0.2s ease;
+    }
+    
+    .list-group-item-action:hover {
+        background-color: rgba(0, 123, 255, 0.1);
+    }
+}
+
+/* Touch-friendly accordions */
+@media (max-width: 768px) {
+    .accordion-button {
+        padding: 16px 20px;
+        font-size: 16px;
+        min-height: 44px;
+    }
+    
+    .accordion-body {
+        padding: 20px;
+        font-size: 14px;
+    }
+}
+
+/* Touch-friendly tabs */
+@media (max-width: 768px) {
+    .nav-tabs .nav-link {
+        padding: 12px 16px;
+        font-size: 16px;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .tab-content {
+        padding: 20px 0;
+    }
+}
+
+/* Touch-friendly carousels */
+@media (max-width: 768px) {
+    .carousel-control-prev,
+    .carousel-control-next {
+        width: 50px;
+        height: 50px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    
+    .carousel-indicators {
+        bottom: 10px;
+    }
+    
+    .carousel-indicators button {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        margin: 0 4px;
+    }
+}
+
+/* Touch-friendly datepickers */
+@media (max-width: 768px) {
+    .datepicker {
+        font-size: 16px;
+    }
+    
+    .datepicker table {
+        font-size: 14px;
+    }
+    
+    .datepicker table td,
+    .datepicker table th {
+        width: 44px;
+        height: 44px;
+        line-height: 44px;
+    }
+}
+
+/* Touch-friendly select2 */
+@media (max-width: 768px) {
+    .select2-container .select2-selection--single {
+        height: 44px;
+        font-size: 16px;
+    }
+    
+    .select2-container .select2-selection--single .select2-selection__rendered {
+        line-height: 44px;
+        padding-right: 12px;
+    }
+    
+    .select2-container .select2-selection--single .select2-selection__arrow {
+        height: 44px;
+    }
+    
+    .select2-dropdown {
+        font-size: 16px;
+    }
+    
+    .select2-results__option {
+        padding: 12px 16px;
+        min-height: 44px;
+        display: flex;
+        align-items: center;
+    }
+}
+
+/* Touch-friendly data tables */
+@media (max-width: 768px) {
+    .dataTables_wrapper {
+        font-size: 14px;
+    }
+    
+    .dataTables_length,
+    .dataTables_filter {
+        margin-bottom: 16px;
+    }
+    
+    .dataTables_length select,
+    .dataTables_filter input {
+        height: 44px;
+        font-size: 16px;
+        padding: 8px 12px;
+    }
+    
+    .dataTables_paginate .paginate_button {
+        min-width: 44px;
+        min-height: 44px;
+        margin: 0 2px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+/* Touch-friendly kanban boards */
+@media (max-width: 768px) {
+    .kanban-board {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 20px;
+    }
+    
+    .kanban-column {
+        min-width: 280px;
+        margin: 0 8px;
+    }
+    
+    .kanban-card {
+        margin-bottom: 12px;
+        padding: 16px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+}
+
+/* Touch-friendly gantt charts */
+@media (max-width: 768px) {
+    .gantt-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .gantt_task_line {
+        min-height: 44px;
+    }
+    
+    .gantt_task_content {
+        font-size: 14px;
+        padding: 4px 8px;
+    }
+}
+
+/* Touch-friendly calendars */
+@media (max-width: 768px) {
+    .fc-toolbar {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .fc-toolbar-chunk {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+    }
+    
+    .fc-button {
+        min-width: 44px;
+        min-height: 44px;
+        font-size: 14px;
+    }
+    
+    .fc-event {
+        font-size: 12px;
+        padding: 2px 4px;
+    }
+}
+
+/* Touch-friendly file uploads */
+@media (max-width: 768px) {
+    .filepond--root {
+        font-size: 16px;
+    }
+    
+    .filepond--drop-label {
+        min-height: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .filepond--panel-root {
+        border-radius: 8px;
+    }
+    
+    .filepond--item {
+        border-radius: 6px;
+    }
+}
+
+/* Touch-friendly drag and drop */
+@media (max-width: 768px) {
+    .sortable-item {
+        min-height: 44px;
+        padding: 12px 16px;
+        margin-bottom: 8px;
+        border-radius: 8px;
+        background: #fff;
+        border: 1px solid #dee2e6;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    
+    .sortable-item:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+    
+    .sortable-item.dragging {
+        opacity: 0.5;
+        transform: rotate(5deg);
+    }
+}
+
+/* Touch-friendly empty states */
+@media (max-width: 768px) {
+    .empty-state {
+        padding: 40px 20px;
+        text-align: center;
+    }
+    
+    .empty-state-icon {
+        font-size: 48px;
+        margin-bottom: 20px;
+        opacity: 0.5;
+    }
+    
+    .empty-state-title {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 12px;
+    }
+    
+    .empty-state-description {
+        font-size: 16px;
+        color: #6c757d;
+        margin-bottom: 24px;
+    }
+    
+    .empty-state-action {
+        min-height: 44px;
+        padding: 12px 24px;
+        font-size: 16px;
+    }
+}
+
+/* Touch-friendly loading states */
+@media (max-width: 768px) {
+    .loading-spinner {
+        width: 32px;
+        height: 32px;
+        border-width: 3px;
+    }
+    
+    .loading-text {
+        font-size: 16px;
+        margin-top: 12px;
+    }
+}
+
+/* Touch-friendly error states */
+@media (max-width: 768px) {
+    .error-state {
+        padding: 40px 20px;
+        text-align: center;
+    }
+    
+    .error-state-icon {
+        font-size: 48px;
+        margin-bottom: 20px;
+        color: #dc3545;
+    }
+    
+    .error-state-title {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 12px;
+        color: #dc3545;
+    }
+    
+    .error-state-description {
+        font-size: 16px;
+        color: #6c757d;
+        margin-bottom: 24px;
+    }
+    
+    .error-state-action {
+        min-height: 44px;
+        padding: 12px 24px;
+        font-size: 16px;
+    }
+}
+
+/* Touch-friendly success states */
+@media (max-width: 768px) {
+    .success-state {
+        padding: 40px 20px;
+        text-align: center;
+    }
+    
+    .success-state-icon {
+        font-size: 48px;
+        margin-bottom: 20px;
+        color: #28a745;
+    }
+    
+    .success-state-title {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 12px;
+        color: #28a745;
+    }
+    
+    .success-state-description {
+        font-size: 16px;
+        color: #6c757d;
+        margin-bottom: 24px;
+    }
+    
+    .success-state-action {
+        min-height: 44px;
+        padding: 12px 24px;
+        font-size: 16px;
+    }
+}
+
+/* Touch-friendly notifications */
+@media (max-width: 768px) {
+    .toast {
+        font-size: 16px;
+        padding: 16px 20px;
+        border-radius: 8px;
+        margin-bottom: 12px;
+    }
+    
+    .toast-header {
+        padding: 12px 16px;
+        font-size: 16px;
+    }
+    
+    .toast-body {
+        padding: 16px;
+        font-size: 14px;
+    }
+}
+
+/* Touch-friendly tooltips and popovers */
+@media (max-width: 768px) {
+    .tooltip {
+        font-size: 14px;
+    }
+    
+    .tooltip-inner {
+        padding: 8px 12px;
+        border-radius: 6px;
+    }
+    
+    .popover {
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    .popover-header {
+        padding: 12px 16px;
+        font-size: 16px;
+        border-radius: 8px 8px 0 0;
+    }
+    
+    .popover-body {
+        padding: 16px;
+        font-size: 14px;
+    }
+}
+
+/* Touch-friendly modals */
+@media (max-width: 768px) {
+    .modal-dialog {
+        margin: 10px;
+        max-width: calc(100% - 20px);
+    }
+    
+    .modal-content {
+        border-radius: 12px;
+    }
+    
+    .modal-header {
+        padding: 16px 20px;
+        border-bottom: 1px solid #dee2e6;
+    }
+    
+    .modal-body {
+        padding: 20px;
+        max-height: 70vh;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .modal-footer {
+        padding: 16px 20px;
+        border-top: 1px solid #dee2e6;
+    }
+}
+
+/* Touch-friendly scrollbars */
+@media (max-width: 768px) {
+    ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: var(--webino-primary-color, #845adf);
+        border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--webino-primary-color, #845adf);
+        opacity: 0.8;
+    }
+}
+
+/* Touch-friendly focus states */
+@media (max-width: 768px) {
+    .btn:focus,
+    .form-control:focus,
+    .form-check-input:focus {
+        outline: 2px solid #007bff;
+        outline-offset: 2px;
+    }
+    
+    .btn:active,
+    .form-control:active,
+    .form-check-input:active {
+        transform: scale(0.98);
+    }
+}
+
+/* Touch-friendly hover states */
+@media (max-width: 768px) {
+    .btn:hover,
+    .form-control:hover,
+    .form-check-input:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+}
+
+/* Touch-friendly transitions */
+@media (max-width: 768px) {
+    .btn,
+    .form-control,
+    .form-check-input,
+    .card,
+    .modal,
+    .dropdown-menu,
+    .tooltip,
+    .popover {
+        transition: all 0.2s ease;
+    }
+}
+
+/* Touch-friendly animations */
+@media (max-width: 768px) {
+    @keyframes touch-feedback {
+        0% { transform: scale(1); }
+        50% { transform: scale(0.95); }
+        100% { transform: scale(1); }
+    }
+    
+    .btn:active,
+    .form-control:active,
+    .form-check-input:active {
+        animation: touch-feedback 0.1s ease;
+    }
+}
+
+/* Touch-friendly accessibility */
+@media (max-width: 768px) {
+    .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+    }
+    
+    .focus-visible {
+        outline: 2px solid #007bff;
+        outline-offset: 2px;
+    }
+}
+
+/* Touch-friendly dark mode */
+@media (max-width: 768px) {
+    [data-theme="dark"] .btn {
+        background-color: #495057;
+        border-color: #495057;
+        color: #fff;
+    }
+    
+    [data-theme="dark"] .btn:hover {
+        background-color: #6c757d;
+        border-color: #6c757d;
+    }
+    
+    [data-theme="dark"] .form-control {
+        background-color: #495057;
+        border-color: #6c757d;
+        color: #fff;
+    }
+    
+    [data-theme="dark"] .form-control:focus {
+        background-color: #495057;
+        border-color: #007bff;
+        color: #fff;
+    }
+    
+    [data-theme="dark"] .card {
+        background-color: #495057;
+        border-color: #6c757d;
+    }
+    
+    [data-theme="dark"] .modal-content {
+        background-color: #495057;
+        border-color: #6c757d;
+    }
+    
+    [data-theme="dark"] .dropdown-menu {
+        background-color: #495057;
+        border-color: #6c757d;
+    }
+    
+    [data-theme="dark"] .dropdown-item {
+        color: #fff;
+    }
+    
+    [data-theme="dark"] .dropdown-item:hover {
+        background-color: #6c757d;
+    }
+}
+
+/* Touch-friendly print styles */
+@media print {
+    .btn,
+    .webino-btn {
+        border: 1px solid #000;
+        background: #fff;
+        color: #000;
+    }
+    
+    .form-control,
+    .webino-form-control {
+        border: 1px solid #000;
+        background: #fff;
+        color: #000;
+    }
+    
+    .card,
+    .webino-card {
+        border: 1px solid #000;
+        background: #fff;
+    }
+    
+    .modal,
+    .dropdown-menu,
+    .tooltip,
+    .popover {
+        display: none;
+    }
+}

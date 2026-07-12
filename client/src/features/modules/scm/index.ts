@@ -1,0 +1,5 @@
+export { WarehousesPage } from "./warehouse/WarehousesPage"
+export { WarehouseStockPage } from "./warehouse/WarehouseStockPage"
+export { WarehouseInboundPage } from "./warehouse/WarehouseInboundPage"
+export { WarehouseOutboundPage } from "./warehouse/WarehouseOutboundPage"
+export { WarehouseAuditPage } from "./warehouse/WarehouseAuditPage"

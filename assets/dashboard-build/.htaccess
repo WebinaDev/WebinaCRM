@@ -1,0 +1,6 @@
+# Vite dev preview only — block direct access on Apache hosts.
+<Files "index.html">
+	<IfModule mod_authz_core.c>
+		Require all denied
+	</IfModule>
+</Files>

@@ -1,0 +1,1 @@
+import{sr as e}from"./dashboard-shared-D_JWNhgb.js";import{t}from"./SettingsModulePage-CrCdKXH1.js";var n=e();function r(){return(0,n.jsx)(t,{moduleId:`crm`})}export{r as SettingsCrmPage};

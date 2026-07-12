@@ -1,0 +1,75 @@
+/**
+ * Modern visual bridge for legacy admin pages.
+ * Aligns header/footer/wrappers with shadcn-like shell tokens.
+ */
+
+:root {
+  --webino-shell-bg: #f8fafc;
+  --webino-shell-surface: #ffffff;
+  --webino-shell-border: #e2e8f0;
+  --webino-shell-text: #0f172a;
+  --webino-shell-muted: #64748b;
+}
+
+html.dark,
+html[data-theme="dark"],
+html[data-theme-mode="dark"] {
+  --webino-shell-bg: #020817;
+  --webino-shell-surface: #0f172a;
+  --webino-shell-border: #1e293b;
+  --webino-shell-text: #e2e8f0;
+  --webino-shell-muted: #94a3b8;
+}
+
+body {
+  background: var(--webino-shell-bg);
+  color: var(--webino-shell-text);
+}
+
+.app-header {
+  background: color-mix(in srgb, var(--webino-shell-surface) 92%, transparent);
+  border-bottom: 1px solid var(--webino-shell-border);
+  backdrop-filter: blur(8px);
+}
+
+.main-content,
+.webino-page-wrapper,
+.webinocrm-container,
+.card,
+.postbox {
+  background: var(--webino-shell-surface);
+  border-color: var(--webino-shell-border);
+  color: var(--webino-shell-text);
+}
+
+.webino-page-wrapper {
+  border: 1px solid var(--webino-shell-border);
+  border-radius: 0.75rem;
+  padding: 1rem;
+  box-shadow: 0 1px 3px rgb(15 23 42 / 0.08);
+}
+
+.webino-page-header {
+  border-bottom: 1px solid var(--webino-shell-border);
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+}
+
+.footer,
+footer.footer {
+  background: color-mix(in srgb, var(--webino-shell-surface) 92%, transparent);
+  border-top: 1px solid var(--webino-shell-border);
+  color: var(--webino-shell-muted);
+}
+
+html[dir="rtl"] .webino-page-title,
+html[dir="rtl"] .webino-page-breadcrumb,
+html[dir="rtl"] .webino-page-actions {
+  text-align: right;
+}
+
+html[dir="ltr"] .webino-page-title,
+html[dir="ltr"] .webino-page-breadcrumb,
+html[dir="ltr"] .webino-page-actions {
+  text-align: left;
+}
