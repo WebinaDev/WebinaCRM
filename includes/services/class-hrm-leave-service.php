@@ -345,6 +345,25 @@ class WebinoCRM_Hrm_Leave_Service {
 		}
 
 		$row = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $table WHERE id = %d", $id ) );
+		if ( $row && $id > 0 && empty( $params['skip_cartable'] ) ) {
+			require_once WEBINOCRM_PLUGIN_DIR . 'includes/modules/hrm/class-hrm-request-service.php';
+			$type_row = $wpdb->get_row( $wpdb->prepare( "SELECT code FROM {$wpdb->prefix}webinocrm_hrm_leave_types WHERE id = %d", $leave_type_id ) );
+			$req_type = ( $type_row && 'mission' === $type_row->code ) ? 'mission' : 'leave';
+			$existing = $wpdb->get_var( $wpdb->prepare( "SELECT id FROM {$wpdb->prefix}webinocrm_hrm_requests WHERE ref_id = %d AND type = %s LIMIT 1", $id, $req_type ) );
+			if ( ! $existing ) {
+				WebinoCRM_Hrm_Request_Service::create_request(
+					$req_type,
+					$user_id,
+					array(
+						'leave_type_id' => $leave_type_id,
+						'date_from'     => $date_from,
+						'date_to'       => $date_to,
+						'reason'        => $reason,
+					),
+					$id
+				);
+			}
+		}
 		return WebinoCRM_Service_Base::success(
 			array(
 				'message' => __( 'درخواست مرخصی ذخیره شد.', 'webinocrm' ),
@@ -392,6 +411,9 @@ class WebinoCRM_Hrm_Leave_Service {
 			self::sync_balance_on_approve( $request );
 			self::sync_job_status_on_approve( $request );
 		}
+
+		require_once WEBINOCRM_PLUGIN_DIR . 'includes/modules/hrm/class-hrm-request-service.php';
+		WebinoCRM_Hrm_Request_Service::sync_leave_cartable( (int) $request_id, $new_status );
 
 		$row = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $table WHERE id = %d", (int) $request_id ) );
 		return WebinoCRM_Service_Base::success(

@@ -65,8 +65,12 @@ class WebinoCRM_Campaign_Ajax_Handler {
 			'budget'          => $budget !== '' && $budget !== false ? (float) $budget : 0,
 			'start_date'      => $start ?: '',
 			'end_date'        => $end ?: '',
-			'start_date_display' => $start ? date_i18n( 'Y/m/d', strtotime( $start ) ) : '',
-			'end_date_display'   => $end ? date_i18n( 'Y/m/d', strtotime( $end ) ) : '',
+			'start_date_display' => $start && class_exists( 'WebinoCRM_Date_Formatter' )
+				? WebinoCRM_Date_Formatter::format_date( $start )
+				: ( $start ? date_i18n( 'Y/m/d', strtotime( $start ) ) : '' ),
+			'end_date_display'   => $end && class_exists( 'WebinoCRM_Date_Formatter' )
+				? WebinoCRM_Date_Formatter::format_date( $end )
+				: ( $end ? date_i18n( 'Y/m/d', strtotime( $end ) ) : '' ),
 			'lead_count'      => $this->count_leads_for_campaign( $id ),
 			'created'         => $post->post_date,
 		);

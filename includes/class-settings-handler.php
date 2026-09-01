@@ -58,7 +58,7 @@ class WebinoCRM_Settings_Handler {
 		),
 		'style'             => array( 'primary_color', 'font_family', 'font_size' ),
 		'sms'               => array( 'sms_service', 'sms_username', 'sms_password', 'sms_sender' ),
-		'modirpayamak'      => array( 'modirpayamak_api_key', 'modirpayamak_default_from', 'modirpayamak_enabled', 'modirpayamak_sms_price_per_unit', 'modirpayamak_reseller_credit_alert' ),
+		'modirpayamak'      => array( 'modirpayamak_api_key', 'modirpayamak_default_from', 'modirpayamak_enabled', 'modirpayamak_sms_price_per_unit', 'modirpayamak_sms_tax_percent', 'modirpayamak_sms_surcharge_rial', 'modirpayamak_reseller_credit_alert' ),
 		'payment'           => array( 'zarinpal_merchant', 'zarinpal_sandbox' ),
 		'notifications'     => array( 'telegram_bot_token', 'telegram_chat_id' ),
 		'visitor_tracking'  => array( 'enable_visitor_statistics' ),
@@ -84,6 +84,8 @@ class WebinoCRM_Settings_Handler {
 		'sms_service'                 => '',
 		'modirpayamak_enabled'        => '0',
 		'modirpayamak_sms_price_per_unit' => 500,
+		'modirpayamak_sms_tax_percent' => 10,
+		'modirpayamak_sms_surcharge_rial' => 40,
 		'modirpayamak_reseller_credit_alert' => 100000,
 	);
 
@@ -175,6 +177,8 @@ class WebinoCRM_Settings_Handler {
 					'modirpayamak_default_from'         => (string) ( $all['modirpayamak_default_from'] ?? '' ),
 					'modirpayamak_enabled'              => (string) ( $all['modirpayamak_enabled'] ?? '0' ) === '1',
 					'modirpayamak_sms_price_per_unit'   => (float) ( $all['modirpayamak_sms_price_per_unit'] ?? 500 ),
+					'modirpayamak_sms_tax_percent'      => (float) ( $all['modirpayamak_sms_tax_percent'] ?? 10 ),
+					'modirpayamak_sms_surcharge_rial'   => (float) ( $all['modirpayamak_sms_surcharge_rial'] ?? 40 ),
 					'modirpayamak_reseller_credit_alert' => (float) ( $all['modirpayamak_reseller_credit_alert'] ?? 100000 ),
 				);
 
@@ -284,7 +288,7 @@ class WebinoCRM_Settings_Handler {
 			return self::is_truthy_post( $payload, $key ) ? '1' : '0';
 		}
 
-		if ( in_array( $key, array( 'modirpayamak_sms_price_per_unit', 'modirpayamak_reseller_credit_alert' ), true ) ) {
+		if ( in_array( $key, array( 'modirpayamak_sms_price_per_unit', 'modirpayamak_sms_tax_percent', 'modirpayamak_sms_surcharge_rial', 'modirpayamak_reseller_credit_alert' ), true ) ) {
 			return (float) ( $payload[ $key ] ?? 0 );
 		}
 

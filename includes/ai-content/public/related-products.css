@@ -1,0 +1,47 @@
+.webino-ai-related {
+	margin: 2.5rem 0 1.5rem;
+	clear: both;
+}
+
+.webino-ai-related__title {
+	margin: 0 0 1rem;
+	font-size: 1.25rem;
+	font-weight: 700;
+}
+
+.webino-ai-related__list {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(10.5rem, 1fr));
+	gap: 1rem;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.webino-ai-related__item {
+	margin: 0;
+}
+
+.webino-ai-related__link {
+	display: flex;
+	flex-direction: column;
+	gap: 0.4rem;
+	color: inherit;
+	text-decoration: none;
+}
+
+.webino-ai-related__image img {
+	width: 100%;
+	height: auto;
+	border-radius: 0.5rem;
+}
+
+.webino-ai-related__name {
+	font-size: 0.9rem;
+	font-weight: 600;
+	line-height: 1.35;
+}
+
+.webino-ai-related__price {
+	font-size: 0.85rem;
+}

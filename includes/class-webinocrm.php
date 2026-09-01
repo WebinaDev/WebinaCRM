@@ -85,6 +85,7 @@ class WebinoCRM {
         require_once WEBINOCRM_PLUGIN_DIR . 'includes/class-dashboard-router.php';
         require_once WEBINOCRM_PLUGIN_DIR . 'includes/class-dashboard-rewrite.php';
         require_once WEBINOCRM_PLUGIN_DIR . 'includes/class-dashboard-assets.php';
+        require_once WEBINOCRM_PLUGIN_DIR . 'includes/class-webinocrm-dashboard-ssr.php';
         require_once WEBINOCRM_PLUGIN_DIR . 'includes/class-modules.php';
         require_once WEBINOCRM_PLUGIN_DIR . 'includes/components/sidebar/class-sidebar-menu-builder.php';
         require_once WEBINOCRM_PLUGIN_DIR . 'includes/class-dashboard-app.php';
@@ -120,6 +121,7 @@ class WebinoCRM {
         // ModirPayamak SMS panel (IPPanel Edge)
         require_once WEBINOCRM_PLUGIN_DIR . 'includes/integrations/class-modirpayamak-edge-client.php';
         require_once WEBINOCRM_PLUGIN_DIR . 'includes/class-modirpayamak-manager.php';
+        require_once WEBINOCRM_PLUGIN_DIR . 'includes/class-modirpayamak-tariffs.php';
         require_once WEBINOCRM_PLUGIN_DIR . 'includes/class-modirpayamak-api.php';
         require_once WEBINOCRM_PLUGIN_DIR . 'includes/sms/class-sms-constants.php';
         require_once WEBINOCRM_PLUGIN_DIR . 'includes/sms/class-sms-install.php';
@@ -127,8 +129,10 @@ class WebinoCRM {
         require_once WEBINOCRM_PLUGIN_DIR . 'includes/sms/class-sms-settings-service.php';
         require_once WEBINOCRM_PLUGIN_DIR . 'includes/sms/class-sms-pattern-sync-service.php';
         require_once WEBINOCRM_PLUGIN_DIR . 'includes/sms/class-sms-order-notify-service.php';
+        require_once WEBINOCRM_PLUGIN_DIR . 'includes/sms/class-sms-order-messages-service.php';
         require_once WEBINOCRM_PLUGIN_DIR . 'includes/sms/class-sms-auth-service.php';
         require_once WEBINOCRM_PLUGIN_DIR . 'includes/sms/class-sms-newsletter-service.php';
+        require_once WEBINOCRM_PLUGIN_DIR . 'includes/sms/class-sms-secretary-service.php';
         require_once WEBINOCRM_PLUGIN_DIR . 'includes/sms/class-sms-api.php';
         require_once WEBINOCRM_PLUGIN_DIR . 'includes/ajax/class-modirpayamak-ajax-handler.php';
 
@@ -136,6 +140,11 @@ class WebinoCRM {
         require_once WEBINOCRM_PLUGIN_DIR . 'includes/modules/class-erp-module-registry.php';
         require_once WEBINOCRM_PLUGIN_DIR . 'includes/modules/accounting/class-accounting-module.php';
         require_once WEBINOCRM_PLUGIN_DIR . 'includes/modules/hrm/class-hrm-module.php';
+
+        // AI content engine (GapGPT / Elementor pages / Woo jobs when available).
+        require_once WEBINOCRM_PLUGIN_DIR . 'includes/ai-content/bootstrap.php';
+        require_once WEBINOCRM_PLUGIN_DIR . 'includes/rest/class-webinocrm-rest-content-pages.php';
+        WebinoCRM_REST_Content_Pages::init();
         WebinoCRM_Hrm_Module::load();
         
         // ENTERPRISE FEATURES (Lazy loaded - only when needed)

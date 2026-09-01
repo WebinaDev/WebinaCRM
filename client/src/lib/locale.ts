@@ -46,9 +46,13 @@ export interface FormatDateOptions {
 function parseInputDate(input: string): InstanceType<typeof DateObject> | null {
   if (!input || input.trim() === "" || input === "-") return null
   const trimmed = input.trim()
+  if (trimmed.startsWith("0000-00-00")) return null
   try {
     if (/^\d{4}-\d{2}-\d{2}/.test(trimmed)) {
-      return new DateObject(trimmed)
+      const iso = trimmed.slice(0, 10)
+      const year = Number(iso.slice(0, 4))
+      if (!Number.isFinite(year) || year < 1000) return null
+      return new DateObject({ date: iso, calendar: gregorian })
     }
     return new DateObject({ date: trimmed, calendar: persian, locale: persian_fa })
   } catch {
@@ -59,7 +63,11 @@ function parseInputDate(input: string): InstanceType<typeof DateObject> | null {
 export function formatDate(input: string, options?: FormatDateOptions): string {
   const lang = options?.lang ?? getLocale()
   const d = parseInputDate(input)
-  if (!d) return input || "-"
+  if (!d) {
+    const trimmed = (input || "").trim()
+    if (!trimmed || trimmed === "-" || trimmed.startsWith("0000-00-00")) return "-"
+    return input || "-"
+  }
 
   if (lang === "fa") {
     const jalali = d.convert(persian)

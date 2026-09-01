@@ -141,7 +141,7 @@ export async function edgeSavePattern(code: string | null, body: Record<string, 
   if (code) {
     return edgeRequest("PUT", `api/patterns/${encodeURIComponent(code)}`, body)
   }
-  return edgeRequest("POST", "api/patterns", body)
+  return edgeRequest("POST", "api/patterns/normal", body)
 }
 
 export async function edgeDeletePattern(code: string) {

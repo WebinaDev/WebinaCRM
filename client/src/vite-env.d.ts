@@ -33,6 +33,12 @@ export interface WebinoDashboardConfig {
   }
   /** Optional server-injected bootstrap snapshot for first paint / placeholderData. */
   bootstrap?: BootstrapPayload
+  /** Route-scoped SSR payload (path, route id). */
+  page?: {
+    path?: string
+    route?: string
+    generated?: number
+  }
   i18n?: {
     server_error?: string
   }

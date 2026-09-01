@@ -1,8 +1,10 @@
 import { useTranslation } from 'react-i18next'
 
+import { useLocale } from '@/hooks/use-locale'
+
 import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
-import { Input } from '@/components/ui/input'
+import { DatePicker } from '@/components/ui/date-picker'
 import { Label } from '@/components/ui/label'
 import {
   Select,
@@ -70,9 +72,10 @@ export function ReportFilters({
   onStatusesChange,
 }: ReportFiltersProps) {
   const { t } = useTranslation()
+  const { isRtl } = useLocale()
 
   return (
-    <div className="space-y-4 rounded-lg border border-border bg-card p-4 shadow-sm">
+    <div className="space-y-4 rounded-lg border border-border bg-card p-4 shadow-sm" dir={isRtl ? 'rtl' : 'ltr'}>
       <div className="flex flex-wrap gap-2">
         {PRESETS.map((p) => (
           <Button
@@ -90,20 +93,18 @@ export function ReportFilters({
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <div className="space-y-2">
           <Label htmlFor="report-from">{t('reports.dateFrom')}</Label>
-          <Input
+          <DatePicker
             id="report-from"
-            type="date"
             value={toInputDate(from)}
-            onChange={(e) => onFromChange(e.target.value)}
+            onChange={onFromChange}
           />
         </div>
         <div className="space-y-2">
           <Label htmlFor="report-to">{t('reports.dateTo')}</Label>
-          <Input
+          <DatePicker
             id="report-to"
-            type="date"
             value={toInputDate(to)}
-            onChange={(e) => onToChange(e.target.value)}
+            onChange={onToChange}
           />
         </div>
         <div className="space-y-2">

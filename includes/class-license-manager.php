@@ -206,6 +206,13 @@ class WebinoCRM_License_Manager {
             self::queue_license_webhook($normalized_domain, 'activate');
         }
 
+        if ( class_exists( 'WebinoCRM_ModirPayamak_Manager' ) ) {
+            WebinoCRM_ModirPayamak_Manager::get_or_create_account( $normalized_domain );
+            if ( 'active' === sanitize_text_field( (string) $data['status'] ) ) {
+                WebinoCRM_ModirPayamak_Manager::set_account_status( $normalized_domain, WebinoCRM_ModirPayamak_Manager::STATUS_ACTIVE );
+            }
+        }
+
         return $wpdb->insert_id;
     }
 
@@ -254,13 +261,13 @@ class WebinoCRM_License_Manager {
             }
         }
         
-        if (isset($data['expiry_date'])) {
-            $update_data['expiry_date'] = $data['expiry_date'] ? sanitize_text_field($data['expiry_date']) : null;
+        if ( array_key_exists( 'expiry_date', $data ) ) {
+            $update_data['expiry_date'] = ! empty( $data['expiry_date'] ) ? sanitize_text_field( (string) $data['expiry_date'] ) : null;
             $format[] = '%s';
         }
-        
-        if (isset($data['start_date'])) {
-            $update_data['start_date'] = $data['start_date'] ? sanitize_text_field($data['start_date']) : null;
+
+        if ( array_key_exists( 'start_date', $data ) ) {
+            $update_data['start_date'] = ! empty( $data['start_date'] ) ? sanitize_text_field( (string) $data['start_date'] ) : null;
             $format[] = '%s';
         }
         
@@ -290,8 +297,15 @@ class WebinoCRM_License_Manager {
             $domain = $current_license['domain'];
             if ($new_status === 'inactive' || $new_status === 'cancelled' || $new_status === 'expired') {
                 self::queue_license_webhook($domain, 'deactivate');
+                if ( class_exists( 'WebinoCRM_ModirPayamak_Manager' ) ) {
+                    WebinoCRM_ModirPayamak_Manager::set_account_status( $domain, WebinoCRM_ModirPayamak_Manager::STATUS_SUSPENDED );
+                }
             } elseif ($new_status === 'active') {
                 self::queue_license_webhook($domain, 'activate');
+                if ( class_exists( 'WebinoCRM_ModirPayamak_Manager' ) ) {
+                    WebinoCRM_ModirPayamak_Manager::get_or_create_account( $domain );
+                    WebinoCRM_ModirPayamak_Manager::set_account_status( $domain, WebinoCRM_ModirPayamak_Manager::STATUS_ACTIVE );
+                }
             }
         }
         
@@ -677,6 +691,11 @@ class WebinoCRM_License_Manager {
         if ($license['status'] !== 'active') {
             self::update_license($license['id'], ['status' => 'active']);
             $license['status'] = 'active';
+        }
+
+        if ( class_exists( 'WebinoCRM_ModirPayamak_Manager' ) ) {
+            WebinoCRM_ModirPayamak_Manager::get_or_create_account( $domain );
+            WebinoCRM_ModirPayamak_Manager::set_account_status( $domain, WebinoCRM_ModirPayamak_Manager::STATUS_ACTIVE );
         }
 
         self::invalidate_license_cache($domain);

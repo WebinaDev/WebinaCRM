@@ -67,6 +67,16 @@ export const ERP_NAV_MODULE_IDS = [
   'logs',
   'settings',
   'visitor-statistics',
+  'ai-content',
+  'ai-content-jobs',
+  'ai-content-calendar',
+  'ai-content-products',
+  'ai-content-titles',
+  'ai-content-pages',
+  'ai-content-taxonomies',
+  'ai-content-attributes',
+  'ai-content-cms-pages',
+  'ai-content-settings',
 ]
 
 export const ERP_NAV_CATEGORY_IDS = [
@@ -80,4 +90,5 @@ export const ERP_NAV_CATEGORY_IDS = [
   'cat-docs',
   'cat-distribution',
   'cat-admin',
+  'cat-ai_content',
 ]

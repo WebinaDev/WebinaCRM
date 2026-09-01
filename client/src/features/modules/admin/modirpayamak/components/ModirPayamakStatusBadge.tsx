@@ -1,4 +1,7 @@
+import { useTranslation } from "react-i18next"
+
 import { Badge } from "@/components/ui/badge"
+import { translateModirPayamakStatus } from "@/lib/enumLabels"
 import { cn } from "@/lib/utils"
 
 type Props = {
@@ -8,7 +11,7 @@ type Props = {
 
 function tone(status: string): string {
   const s = status.toLowerCase()
-  if (["active", "approved", "delivered", "sent", "paid", "success", "done", "closed"].some((k) => s.includes(k))) {
+  if (["active", "approved", "delivered", "sent", "paid", "success", "done", "closed", "synced"].some((k) => s.includes(k))) {
     return "bg-success/15 text-success border-success/30"
   }
   if (["pending", "waiting", "open", "processing", "draft"].some((k) => s.includes(k))) {
@@ -21,9 +24,10 @@ function tone(status: string): string {
 }
 
 export function ModirPayamakStatusBadge({ status, className }: Props) {
-  const label = status || "—"
+  const { t } = useTranslation()
+  const label = translateModirPayamakStatus(t, status)
   return (
-    <Badge variant="outline" className={cn("font-normal", tone(label), className)}>
+    <Badge variant="outline" className={cn("font-normal", tone(status), className)}>
       {label}
     </Badge>
   )

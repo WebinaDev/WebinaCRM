@@ -192,7 +192,7 @@ function LeadFormFields({
 }
 
 export function LeadsPage() {
-  const { t, isRtl } = useLocale()
+  const { t, isRtl, formatDate } = useLocale()
   const navigate = useNavigate()
   const [leads, setLeads] = useState<Lead[]>([])
   const [total, setTotal] = useState(0)
@@ -635,7 +635,7 @@ export function LeadsPage() {
                             <StatusBadge slug={lead.status_slug} name={lead.status_name} />
                           )}
                         </TableCell>
-                        <TableCell>{lead.date}</TableCell>
+                        <TableCell>{formatDate(lead.date)}</TableCell>
                         <TableCell>
                           <div className="flex items-center gap-1">
                             <Button variant="ghost" size="sm" onClick={() => { clearMessages(); setOpenDetail(lead) }} title={t("pages.leads.مشاهده")}><Eye className="h-4 w-4" /></Button>

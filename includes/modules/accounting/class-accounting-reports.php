@@ -174,6 +174,115 @@ class WebinoCRM_Accounting_Reports {
 	}
 
 	/**
+	 * Simplified VAT summary from sales invoices in range.
+	 *
+	 * @param string $date_from From.
+	 * @param string $date_to   To.
+	 * @return array<string,mixed>
+	 */
+	public static function vat_summary( $date_from = '', $date_to = '' ) {
+		global $wpdb;
+		$table = $wpdb->prefix . 'webinocrm_accounting_invoices';
+		$where = "WHERE invoice_type IN ('sales','purchase')";
+		$args  = array();
+		if ( $date_from ) {
+			$where .= ' AND invoice_date >= %s';
+			$args[] = $date_from;
+		}
+		if ( $date_to ) {
+			$where .= ' AND invoice_date <= %s';
+			$args[] = $date_to;
+		}
+		$sql = "SELECT invoice_type, COALESCE(SUM(tax_amount),0) AS tax_sum, COALESCE(SUM(grand_total),0) AS total_sum FROM {$table} {$where} GROUP BY invoice_type"; // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$rows = $args ? $wpdb->get_results( $wpdb->prepare( $sql, $args ), ARRAY_A ) : $wpdb->get_results( $sql, ARRAY_A ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$out  = array( 'sales_vat' => 0.0, 'purchase_vat' => 0.0, 'net_vat' => 0.0, 'rows' => $rows );
+		foreach ( (array) $rows as $r ) {
+			if ( 'sales' === ( $r['invoice_type'] ?? '' ) ) {
+				$out['sales_vat'] = (float) $r['tax_sum'];
+			}
+			if ( 'purchase' === ( $r['invoice_type'] ?? '' ) ) {
+				$out['purchase_vat'] = (float) $r['tax_sum'];
+			}
+		}
+		$out['net_vat'] = $out['sales_vat'] - $out['purchase_vat'];
+		return $out;
+	}
+
+	/**
+	 * Simple AR aging buckets from open sales invoices.
+	 *
+	 * @return array<string,mixed>
+	 */
+	public static function aging() {
+		global $wpdb;
+		$table = $wpdb->prefix . 'webinocrm_accounting_invoices';
+		$today = current_time( 'Y-m-d' );
+		$rows  = $wpdb->get_results(
+			"SELECT id, person_id, invoice_no, invoice_date, grand_total, COALESCE(paid_amount,0) AS paid_amount
+			FROM {$table} WHERE invoice_type = 'sales' AND status IN ('confirmed','posted','unpaid','partial')", // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+			ARRAY_A
+		);
+		$buckets = array( 'current' => 0.0, 'd30' => 0.0, 'd60' => 0.0, 'd90' => 0.0, 'older' => 0.0 );
+		foreach ( (array) $rows as $r ) {
+			$due = max( 0, (float) $r['grand_total'] - (float) $r['paid_amount'] );
+			if ( $due <= 0 ) {
+				continue;
+			}
+			$days = (int) ( ( strtotime( $today ) - strtotime( (string) $r['invoice_date'] ) ) / DAY_IN_SECONDS );
+			if ( $days <= 30 ) {
+				$buckets['current'] += $due;
+			} elseif ( $days <= 60 ) {
+				$buckets['d30'] += $due;
+			} elseif ( $days <= 90 ) {
+				$buckets['d60'] += $due;
+			} elseif ( $days <= 120 ) {
+				$buckets['d90'] += $due;
+			} else {
+				$buckets['older'] += $due;
+			}
+		}
+		return $buckets;
+	}
+
+	/**
+	 * Margin proxy: sales totals vs purchase totals.
+	 *
+	 * @param string $date_from From.
+	 * @param string $date_to To.
+	 * @return array<string,mixed>
+	 */
+	public static function margin( $date_from = '', $date_to = '' ) {
+		$vat = self::vat_summary( $date_from, $date_to );
+		global $wpdb;
+		$table = $wpdb->prefix . 'webinocrm_accounting_invoices';
+		$sales = (float) $wpdb->get_var( "SELECT COALESCE(SUM(grand_total),0) FROM {$table} WHERE invoice_type='sales'" ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$purch = (float) $wpdb->get_var( "SELECT COALESCE(SUM(grand_total),0) FROM {$table} WHERE invoice_type='purchase'" ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$margin = $sales - $purch;
+		return array(
+			'sales'   => $sales,
+			'cogs'    => $purch,
+			'margin'  => $margin,
+			'pct'     => $sales > 0 ? round( 100 * $margin / $sales, 2 ) : 0,
+			'net_vat' => $vat['net_vat'],
+		);
+	}
+
+	/**
+	 * Cash-flow proxy from receipt vouchers.
+	 *
+	 * @param string $date_from From.
+	 * @param string $date_to To.
+	 * @return array<string,mixed>
+	 */
+	public static function cash_flow( $date_from = '', $date_to = '' ) {
+		global $wpdb;
+		$table = $wpdb->prefix . 'webinocrm_accounting_receipt_vouchers';
+		$in    = (float) $wpdb->get_var( "SELECT COALESCE(SUM(amount),0) FROM {$table} WHERE voucher_type IN ('receipt','in')" ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		$out   = (float) $wpdb->get_var( "SELECT COALESCE(SUM(amount),0) FROM {$table} WHERE voucher_type IN ('payment','out')" ); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+		return array( 'in' => $in, 'out' => $out, 'net' => $in - $out );
+	}
+
+	/**
 	 * Account turnover (گردش حساب) for one account.
 	 *
 	 * @param int    $account_id Account id.

@@ -15,8 +15,10 @@ import { useLocale } from "@/hooks/use-locale"
 import {
   approvePayrollRun,
   calculatePayrollRun,
+  exportTaminDsk,
   getPayrollRun,
   getPayslips,
+  printPayslipHtml,
   type PayrollRun,
   type Payslip,
 } from "@/api/hrm"
@@ -95,6 +97,39 @@ export function PayrollRunDetailPage() {
     }
   }
 
+  const handleTamin = async () => {
+    if (!runId) return
+    setActing(true)
+    try {
+      const res = await exportTaminDsk(runId)
+      if (res.success && res.data?.url) {
+        window.open(res.data.url, "_blank", "noopener,noreferrer")
+        setSuccess(t("pages.hrm.payroll.taminExported"))
+      } else {
+        setError(getAjaxMessage(res) ?? t("common.errors.saveFailed"))
+      }
+    } finally {
+      setActing(false)
+    }
+  }
+
+  const handlePrintSlip = async (id: number) => {
+    try {
+      const res = await printPayslipHtml(id)
+      if (res.success && res.data?.html) {
+        const w = window.open("", "_blank")
+        if (w) {
+          w.document.write(res.data.html)
+          w.document.close()
+        }
+      } else {
+        setError(getAjaxMessage(res) ?? t("common.errors.saveFailed"))
+      }
+    } catch {
+      setError(t("common.errors.saveFailed"))
+    }
+  }
+
   return (
     <CrmPageLayout
       title={run?.title ?? t("pages.hrm.payroll.runDetail")}
@@ -122,6 +157,11 @@ export function PayrollRunDetailPage() {
               {t("pages.hrm.payroll.approve")}
             </Button>
           )}
+          {run ? (
+            <Button size="sm" variant="secondary" onClick={() => void handleTamin()} disabled={acting}>
+              {t("pages.hrm.payroll.exportTamin")}
+            </Button>
+          ) : null}
         </div>
       }
     >
@@ -159,6 +199,7 @@ export function PayrollRunDetailPage() {
                       <TableHead>{t("pages.hrm.payroll.deductions")}</TableHead>
                       <TableHead>{t("pages.hrm.payroll.net")}</TableHead>
                       <TableHead>{t("common.status")}</TableHead>
+                      <TableHead />
                     </TableRow>
                   </TableHeader>
                   <TableBody>
@@ -169,6 +210,11 @@ export function PayrollRunDetailPage() {
                         <TableCell>{formatNumber(ps.deductions)}</TableCell>
                         <TableCell>{formatNumber(ps.net)}</TableCell>
                         <TableCell>{ps.status}</TableCell>
+                        <TableCell>
+                          <Button size="sm" variant="outline" onClick={() => void handlePrintSlip(ps.id)}>
+                            {t("pages.hrm.payroll.print")}
+                          </Button>
+                        </TableCell>
                       </TableRow>
                     ))}
                   </TableBody>

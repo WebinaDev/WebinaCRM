@@ -24,6 +24,7 @@ export const NAV_MODULE_LAYOUT_ALIASES: Record<string, string> = {
   'modirpayamak-reports': 'modirpayamakReports',
   'modirpayamak-customers': 'modirpayamakCustomers',
   'modirpayamak-packages': 'modirpayamakPackages',
+  'modirpayamak-tariffs': 'modirpayamakTariffs',
   'modirpayamak-orders': 'modirpayamakOrders',
   'modirpayamak-patterns': 'modirpayamakPatterns',
   'modirpayamak-phonebooks': 'modirpayamakPhonebooks',

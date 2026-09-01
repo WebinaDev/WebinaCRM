@@ -1,6 +1,6 @@
 <?php
 /**
- * Posts payroll runs to accounting journal entries.
+ * Posts payroll runs to accounting journal entries (employer/unemployment splits).
  *
  * @package WebinoCRM
  */
@@ -33,13 +33,23 @@ class WebinoCRM_Hrm_Payroll_Finance_Integration {
 		$settings = self::get_settings();
 		$expense  = (int) ( $settings['salary_expense_account_id'] ?? 0 );
 		$payable  = (int) ( $settings['salary_payable_account_id'] ?? 0 );
+		$ins_exp  = (int) ( $settings['employer_insurance_expense_account_id'] ?? 0 );
+		$ue_exp   = (int) ( $settings['unemployment_expense_account_id'] ?? 0 );
+		$ins_p    = (int) ( $settings['insurance_payable_account_id'] ?? 0 );
+		$ue_p     = (int) ( $settings['unemployment_payable_account_id'] ?? 0 );
+		$tax_p    = (int) ( $settings['tax_payable_account_id'] ?? 0 );
+
 		if ( $expense <= 0 || $payable <= 0 ) {
 			return new WP_Error( 'settings', __( 'حساب‌های GL حقوق در تنظیمات تعریف نشده‌اند.', 'webinocrm' ) );
 		}
 
-		$gross      = (float) ( $run->total_gross ?? 0 );
-		$deductions = (float) ( $run->total_deductions ?? 0 );
-		$net        = (float) ( $run->total_net ?? 0 );
+		$gross = (float) ( $run->total_gross ?? 0 );
+		$net   = (float) ( $run->total_net ?? 0 );
+		$emp_i = (float) ( $run->total_emp_ins ?? 0 );
+		$er_i  = (float) ( $run->total_er_ins ?? 0 );
+		$ue_i  = (float) ( $run->total_unemployment ?? 0 );
+		$tax   = (float) ( $run->total_tax ?? 0 );
+
 		if ( $net <= 0 && $gross <= 0 ) {
 			return new WP_Error( 'empty', __( 'مبلغ حقوق برای ثبت سند کافی نیست.', 'webinocrm' ) );
 		}
@@ -48,9 +58,6 @@ class WebinoCRM_Hrm_Payroll_Finance_Integration {
 			require_once WEBINOCRM_PLUGIN_DIR . 'includes/modules/accounting/class-journal-entry.php';
 		}
 
-		$insurance = (int) ( $settings['insurance_payable_account_id'] ?? 0 );
-		$tax       = (int) ( $settings['tax_payable_account_id'] ?? 0 );
-
 		$lines = array();
 		if ( $gross > 0 ) {
 			$lines[] = array(
@@ -58,11 +65,26 @@ class WebinoCRM_Hrm_Payroll_Finance_Integration {
 				'debit'       => $gross,
 				'credit'      => 0,
 				'description' => sprintf(
-					/* translators: %1$s: year, %2$s: month */
 					__( 'هزینه حقوق %1$s/%2$s', 'webinocrm' ),
-					(string) $run->period_year,
-					(string) $run->period_month
+					(string) ( $run->period_year ?? $run->jalali_year ?? '' ),
+					(string) ( $run->period_month ?? $run->jalali_month ?? '' )
 				),
+			);
+		}
+		if ( $er_i > 0 && $ins_exp > 0 ) {
+			$lines[] = array(
+				'account_id'  => $ins_exp,
+				'debit'       => $er_i,
+				'credit'      => 0,
+				'description' => __( 'بیمه سهم کارفرما', 'webinocrm' ),
+			);
+		}
+		if ( $ue_i > 0 && $ue_exp > 0 ) {
+			$lines[] = array(
+				'account_id'  => $ue_exp,
+				'debit'       => $ue_i,
+				'credit'      => 0,
+				'description' => __( 'بیمه بیکاری', 'webinocrm' ),
 			);
 		}
 		if ( $net > 0 ) {
@@ -73,27 +95,35 @@ class WebinoCRM_Hrm_Payroll_Finance_Integration {
 				'description' => __( 'بدهی حقوق و دستمزد', 'webinocrm' ),
 			);
 		}
-		if ( $deductions > 0 ) {
-			$credit_account = $insurance > 0 ? $insurance : $payable;
-			$lines[]        = array(
-				'account_id'  => $credit_account,
+		if ( ( $emp_i + $er_i ) > 0 && $ins_p > 0 ) {
+			$lines[] = array(
+				'account_id'  => $ins_p,
 				'debit'       => 0,
-				'credit'      => $deductions,
-				'description' => __( 'کسورات حقوق', 'webinocrm' ),
+				'credit'      => $emp_i + $er_i,
+				'description' => __( 'بیمه تأمین اجتماعی', 'webinocrm' ),
 			);
 		}
-		if ( $tax > 0 && $deductions > 0 ) {
-			// Optional split when tax account configured — remainder stays on insurance/payable above.
+		if ( $ue_i > 0 && $ue_p > 0 ) {
+			$lines[] = array(
+				'account_id'  => $ue_p,
+				'debit'       => 0,
+				'credit'      => $ue_i,
+				'description' => __( 'بیمه بیکاری پرداختنی', 'webinocrm' ),
+			);
+		}
+		if ( $tax > 0 && $tax_p > 0 ) {
+			$lines[] = array(
+				'account_id'  => $tax_p,
+				'debit'       => 0,
+				'credit'      => $tax,
+				'description' => __( 'مالیات حقوق', 'webinocrm' ),
+			);
 		}
 
 		$entry_id = WebinoCRM_Accounting_Journal_Entry::create(
 			array(
 				'voucher_date'   => (string) ( $run->period_end ?? current_time( 'Y-m-d' ) ),
-				'description'    => sprintf(
-					/* translators: %d: payroll run id */
-					__( 'سند حقوق و دستمزد — دوره #%d', 'webinocrm' ),
-					$run_id
-				),
+				'description'    => sprintf( __( 'سند حقوق و دستمزد — دوره #%d', 'webinocrm' ), $run_id ),
 				'reference_type' => 'hrm_payroll_run',
 				'reference_id'   => $run_id,
 				'status'         => WebinoCRM_Accounting_Journal_Entry::STATUS_POSTED,

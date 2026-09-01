@@ -104,6 +104,9 @@ final class WebinoCRM_Sms_Settings_Service {
 				$out[ $k ] = max( 1, min( 15, (int) $input[ $k ] ) );
 			}
 		}
+		if ( array_key_exists( 'otp_max_attempts', $input ) ) {
+			$out['otp_max_attempts'] = max( 1, min( 20, (int) $input['otp_max_attempts'] ) );
+		}
 		return $out;
 	}
 
@@ -114,7 +117,7 @@ final class WebinoCRM_Sms_Settings_Service {
 	 */
 	private static function sanitize_shop( array $input, array $current ) {
 		$out = $current;
-		foreach ( array( 'enabled', 'use_service_line' ) as $k ) {
+		foreach ( array( 'enabled', 'use_service_line', 'require_pattern' ) as $k ) {
 			if ( array_key_exists( $k, $input ) ) {
 				$out[ $k ] = ! empty( $input[ $k ] );
 			}
@@ -137,15 +140,91 @@ final class WebinoCRM_Sms_Settings_Service {
 				)
 			);
 		}
+		if ( isset( $input['bot_ids'] ) ) {
+			$raw = is_array( $input['bot_ids'] ) ? $input['bot_ids'] : preg_split( '/[\s,;]+/', (string) $input['bot_ids'] );
+			$ids = array();
+			foreach ( $raw as $id ) {
+				$id = sanitize_text_field( (string) $id );
+				if ( '' === $id ) {
+					continue;
+				}
+				$ids[] = $id;
+				if ( count( $ids ) >= 5 ) {
+					break;
+				}
+			}
+			$out['bot_ids'] = $ids;
+		}
+		if ( isset( $input['newsletter'] ) && is_array( $input['newsletter'] ) ) {
+			$nl = is_array( $out['newsletter'] ?? null ) ? $out['newsletter'] : array();
+			if ( array_key_exists( 'enabled', $input['newsletter'] ) ) {
+				$nl['enabled'] = ! empty( $input['newsletter']['enabled'] );
+			}
+			if ( array_key_exists( 'message_template', $input['newsletter'] ) ) {
+				$nl['message_template'] = sanitize_textarea_field( (string) $input['newsletter']['message_template'] );
+			}
+			if ( array_key_exists( 'pattern_code', $input['newsletter'] ) ) {
+				$nl['pattern_code'] = sanitize_text_field( (string) $input['newsletter']['pattern_code'] );
+			}
+			$out['newsletter'] = $nl;
+		}
+		if ( isset( $input['recovery'] ) && is_array( $input['recovery'] ) ) {
+			$defaults = WebinoCRM_Sms_Constants::default_shop_settings()['recovery'] ?? array();
+			$rec_out  = is_array( $out['recovery'] ?? null ) ? $out['recovery'] : $defaults;
+			foreach ( $input['recovery'] as $ek => $row ) {
+				$ek = sanitize_key( (string) $ek );
+				if ( '' === $ek || ! is_array( $row ) ) {
+					continue;
+				}
+				$base = is_array( $rec_out[ $ek ] ?? null ) ? $rec_out[ $ek ] : ( $defaults[ $ek ] ?? array() );
+				$next = array(
+					'enabled'      => ! empty( $row['enabled'] ),
+					'type'         => in_array( (string) ( $row['type'] ?? 'percent' ), array( 'percent', 'fixed_cart' ), true )
+						? (string) $row['type']
+						: 'percent',
+					'amount'       => isset( $row['amount'] ) ? max( 0, (float) $row['amount'] ) : (float) ( $base['amount'] ?? 0 ),
+					'expires_days' => isset( $row['expires_days'] ) ? max( 1, min( 365, (int) $row['expires_days'] ) ) : (int) ( $base['expires_days'] ?? 7 ),
+					'usage_limit'  => isset( $row['usage_limit'] ) ? max( 1, min( 100, (int) $row['usage_limit'] ) ) : (int) ( $base['usage_limit'] ?? 1 ),
+				);
+				if ( isset( $row['delay_hours'] ) || isset( $base['delay_hours'] ) ) {
+					$next['delay_hours'] = isset( $row['delay_hours'] )
+						? max( 1, min( 720, (int) $row['delay_hours'] ) )
+						: (int) ( $base['delay_hours'] ?? 24 );
+				}
+				$rec_out[ $ek ] = $next;
+			}
+			$out['recovery'] = $rec_out;
+		}
+		if ( isset( $input['event_catalog'] ) && is_array( $input['event_catalog'] ) ) {
+			$catalog = array();
+			foreach ( $input['event_catalog'] as $row ) {
+				if ( ! is_array( $row ) ) {
+					continue;
+				}
+				$key = sanitize_key( (string) ( $row['key'] ?? '' ) );
+				if ( ! WebinoCRM_Sms_Constants::is_valid_event_key( $key ) ) {
+					continue;
+				}
+				$catalog[] = array(
+					'key'   => $key,
+					'label' => sanitize_text_field( (string) ( $row['label'] ?? $key ) ),
+					'kind'  => in_array( (string) ( $row['kind'] ?? '' ), array( 'status', 'extra' ), true )
+						? (string) $row['kind']
+						: 'status',
+				);
+			}
+			$out['event_catalog'] = $catalog;
+		}
 		if ( isset( $input['events'] ) && is_array( $input['events'] ) ) {
-			$events = $out['events'];
-			foreach ( WebinoCRM_Sms_Constants::order_event_keys() as $key ) {
-				if ( ! isset( $input['events'][ $key ] ) || ! is_array( $input['events'][ $key ] ) ) {
+			$events = is_array( $out['events'] ?? null ) ? $out['events'] : array();
+			foreach ( $input['events'] as $key => $toggle ) {
+				$key = sanitize_key( (string) $key );
+				if ( ! WebinoCRM_Sms_Constants::is_valid_event_key( $key ) || ! is_array( $toggle ) ) {
 					continue;
 				}
 				$events[ $key ] = array(
-					'customer' => ! empty( $input['events'][ $key ]['customer'] ),
-					'admin'    => ! empty( $input['events'][ $key ]['admin'] ),
+					'customer' => ! empty( $toggle['customer'] ),
+					'admin'    => ! empty( $toggle['admin'] ),
 				);
 			}
 			$out['events'] = $events;
@@ -158,6 +237,13 @@ final class WebinoCRM_Sms_Settings_Service {
 	 * @return string
 	 */
 	public static function resolve_from_number( $domain, $use_service = true ) {
+		$role     = $use_service
+			? WebinoCRM_ModirPayamak_Manager::ROLE_SERVICE
+			: WebinoCRM_ModirPayamak_Manager::ROLE_PERSONAL;
+		$attached = WebinoCRM_ModirPayamak_Manager::get_domain_number_for_role( $domain, $role );
+		if ( '' !== $attached ) {
+			return $attached;
+		}
 		$shop = self::get( $domain, WebinoCRM_Sms_Constants::SCOPE_SHOP );
 		$site = self::get( $domain, WebinoCRM_Sms_Constants::SCOPE_SITE );
 		$line = $use_service

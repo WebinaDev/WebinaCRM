@@ -12,9 +12,11 @@ type Props = {
   data: unknown
 }
 
+/** Dev-only raw API dump — never shown in production builds. */
 export function ModirPayamakJsonDebug({ data }: Props) {
   const { t } = useLocale()
   const [open, setOpen] = useState(false)
+  if (!import.meta.env.DEV) return null
   if (data == null) return null
 
   return (

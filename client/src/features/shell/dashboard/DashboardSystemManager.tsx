@@ -49,7 +49,7 @@ function normalizeRevenueData(raw: unknown): { values: number[]; labels: string[
 }
 
 export function DashboardSystemManager({ onError }: Props) {
-  const { t, isRtl, formatNumber } = useLocale()
+  const { t, isRtl, formatNumber, formatDate } = useLocale()
   const [data, setData] = useState<DashboardFullData | null>(null)
   const [loading, setLoading] = useState(true)
   const BackIcon = isRtl ? ArrowRight : ArrowLeft
@@ -324,7 +324,7 @@ export function DashboardSystemManager({ onError }: Props) {
                       ) : null}
                     </div>
                     <span className="text-sm text-muted-foreground">
-                      {task.due_time || task.due_date}
+                      {task.due_time || (task.due_date ? formatDate(task.due_date) : "")}
                     </span>
                   </div>
                 ))}
@@ -373,7 +373,7 @@ export function DashboardSystemManager({ onError }: Props) {
                       <TableCell>
                         <Badge variant="outline">{p.status}</Badge>
                       </TableCell>
-                      <TableCell>{p.due_date || "-"}</TableCell>
+                      <TableCell>{p.due_date ? formatDate(p.due_date) : "-"}</TableCell>
                       <TableCell>
                         <div className="flex gap-1">
                           <Button variant="ghost" size="icon" asChild>

@@ -3,7 +3,7 @@
  * Plugin Name:       WebinoERP
  * Plugin URI:        https://Webinoco.com/
  * Description:       A complete CRM and Project Management solution for Social Marketing agencies.
- * Version:           3.0.1
+ * Version:           3.4.0
  * Author:            Arsalan Arghavan
  * Author URI:        https://ArsalanArghavan.ir/
  * License:           GPL v2 or later
@@ -17,7 +17,8 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 // Define Plugin Constants
-define( 'WEBINOCRM_VERSION', '3.0.1' );
+define( 'WEBINOCRM_VERSION', '3.4.0' );
+define( 'WEBINOCRM_PLUGIN_FILE', __FILE__ );
 define( 'WEBINOCRM_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'WEBINOCRM_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 define( 'WEBINO_CRM_TEMPLATE_PATH', WEBINOCRM_PLUGIN_DIR . 'templates/' );
@@ -69,6 +70,7 @@ add_action(
 );
 
 require_once WEBINOCRM_PLUGIN_DIR . 'includes/class-webinocrm.php';
+require_once WEBINOCRM_PLUGIN_DIR . 'includes/site/bootstrap.php';
 
 // === [START] FINAL & CORRECTED SCRIPT ENQUEUEING ===
 
@@ -198,7 +200,7 @@ function webino_dependency_notice() {
 function webino_load_textdomain() {
     load_plugin_textdomain( 'webinocrm', false, dirname( plugin_basename( __FILE__ ) ) . '/languages' );
 }
-add_action( 'plugins_loaded', 'webino_load_textdomain' );
+add_action( 'init', 'webino_load_textdomain', 0 );
 
 
 /**

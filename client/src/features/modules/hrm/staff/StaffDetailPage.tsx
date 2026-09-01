@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { DatePicker } from "@/components/ui/date-picker"
 import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
@@ -17,8 +18,16 @@ import { useLocale } from "@/hooks/use-locale"
 import {
   getStaffProfile,
   saveStaffProfile,
+  getStaffDependents,
+  saveStaffDependent,
+  getStaffAssets,
+  saveStaffAsset,
+  getStaffShift,
+  saveStaffShift,
+  getShiftTemplates,
   type ProfileFieldDef,
   type StaffProfile,
+  type ShiftTemplate,
 } from "@/api/hrm"
 import { getAjaxMessage } from "@/api/client"
 import { ArrowLeft, Loader2, Save } from "lucide-react"
@@ -60,6 +69,14 @@ function ProfileFieldInput({
       </Select>
     )
   }
+  if (field.type === "date") {
+    return (
+      <DatePicker
+        value={value}
+        onChange={(v) => onChange(fieldKey, v)}
+      />
+    )
+  }
   return (
     <Input
       type={field.type === "number" ? "number" : field.type === "tel" ? "tel" : "text"}
@@ -81,13 +98,23 @@ export function StaffDetailPage() {
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<string | null>(null)
+  const [dependents, setDependents] = useState<Record<string, unknown>[]>([])
+  const [assets, setAssets] = useState<Record<string, unknown>[]>([])
+  const [shiftTemplates, setShiftTemplates] = useState<ShiftTemplate[]>([])
+  const [shiftId, setShiftId] = useState("")
 
   const load = useCallback(async () => {
     if (!userId || Number.isNaN(userId)) return
     setLoading(true)
     setError(null)
     try {
-      const res = await getStaffProfile(userId)
+      const [res, depRes, assetRes, shiftRes, tmplRes] = await Promise.all([
+        getStaffProfile(userId),
+        getStaffDependents(userId),
+        getStaffAssets(userId),
+        getStaffShift(userId),
+        getShiftTemplates(),
+      ])
       if (res.success && res.data) {
         setProfile(res.data)
         const sections: Record<string, Record<string, string>> = {}
@@ -101,6 +128,10 @@ export function StaffDetailPage() {
       } else {
         setError(getAjaxMessage(res) ?? t("pages.hrm.loadError"))
       }
+      if (depRes.success && depRes.data?.dependents) setDependents(depRes.data.dependents)
+      if (assetRes.success && assetRes.data?.assets) setAssets(assetRes.data.assets)
+      if (shiftRes.success) setShiftId(String(shiftRes.data?.shift_template_id ?? ""))
+      if (tmplRes.success && tmplRes.data?.templates) setShiftTemplates(tmplRes.data.templates)
     } catch {
       setError(t("pages.hrm.loadError"))
     } finally {
@@ -177,6 +208,9 @@ export function StaffDetailPage() {
                 {profile.sections[sk]?.title ?? sk}
               </TabsTrigger>
             ))}
+            <TabsTrigger value="dependents">{t("pages.hrm.portal.dependents")}</TabsTrigger>
+            <TabsTrigger value="assets">{t("pages.hrm.portal.assets")}</TabsTrigger>
+            <TabsTrigger value="shift">{t("pages.hrm.portal.shift")}</TabsTrigger>
           </TabsList>
           {sectionKeys.map((sk) => {
             const sec = profile.sections[sk]
@@ -206,6 +240,39 @@ export function StaffDetailPage() {
               </TabsContent>
             )
           })}
+          <TabsContent value="dependents" className="mt-4">
+            <Card><CardContent className="pt-6 space-y-2 text-sm">
+              {dependents.map((d) => (
+                <div key={String(d.id)} className="rounded border px-3 py-2">{String(d.full_name)} · {String(d.relation)}</div>
+              ))}
+              <Button size="sm" onClick={() => void saveStaffDependent(userId, { full_name: t("pages.hrm.portal.newDependent"), relation: "child" }).then(() => load())}>
+                {t("common.add")}
+              </Button>
+            </CardContent></Card>
+          </TabsContent>
+          <TabsContent value="assets" className="mt-4">
+            <Card><CardContent className="pt-6 space-y-2 text-sm">
+              {assets.map((a) => (
+                <div key={String(a.id)} className="rounded border px-3 py-2">{String(a.asset_type)} · {String(a.serial_number)}</div>
+              ))}
+              <Button size="sm" onClick={() => void saveStaffAsset(userId, { asset_type: "laptop", serial_number: "" }).then(() => load())}>
+                {t("common.add")}
+              </Button>
+            </CardContent></Card>
+          </TabsContent>
+          <TabsContent value="shift" className="mt-4">
+            <Card><CardContent className="pt-6 space-y-3">
+              <Select value={shiftId || "_"} onValueChange={(v) => setShiftId(v === "_" ? "" : v)}>
+                <SelectTrigger><SelectValue placeholder={t("pages.hrm.portal.shift")} /></SelectTrigger>
+                <SelectContent>
+                  {shiftTemplates.map((s) => (
+                    <SelectItem key={s.id} value={String(s.id)}>{s.name}</SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <Button size="sm" onClick={() => void saveStaffShift(userId, Number(shiftId)).then(() => load())}>{t("common.save")}</Button>
+            </CardContent></Card>
+          </TabsContent>
         </Tabs>
       )}
     </CrmPageLayout>

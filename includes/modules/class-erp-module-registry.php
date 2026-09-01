@@ -57,6 +57,60 @@ class WebinoCRM_Erp_Module_Registry {
 								'icon'  => 'ri-money-dollar-circle-line',
 							),
 							array(
+								'id'    => 'hrm-payroll-decrees',
+								'path'  => 'hrm/payroll/decrees',
+								'title' => __( 'احکام کارگزینی', 'webinocrm' ),
+								'icon'  => 'ri-file-list-3-line',
+							),
+							array(
+								'id'    => 'hrm-my-payroll',
+								'path'  => 'hrm/my-payroll',
+								'title' => __( 'فیش حقوق من', 'webinocrm' ),
+								'icon'  => 'ri-wallet-3-line',
+							),
+							array(
+								'id'    => 'hrm-me',
+								'path'  => 'hrm/me',
+								'title' => __( 'پورتال من', 'webinocrm' ),
+								'icon'  => 'ri-dashboard-line',
+							),
+							array(
+								'id'    => 'hrm-my-time',
+								'path'  => 'hrm/my-time',
+								'title' => __( 'زمان و حضور', 'webinocrm' ),
+								'icon'  => 'ri-time-line',
+							),
+							array(
+								'id'    => 'hrm-my-docs',
+								'path'  => 'hrm/my-docs',
+								'title' => __( 'مدارک من', 'webinocrm' ),
+								'icon'  => 'ri-file-text-line',
+							),
+							array(
+								'id'    => 'hrm-my-insurance',
+								'path'  => 'hrm/my-insurance',
+								'title' => __( 'بیمه من', 'webinocrm' ),
+								'icon'  => 'ri-shield-user-line',
+							),
+							array(
+								'id'    => 'hrm-my-org',
+								'path'  => 'hrm/my-org',
+								'title' => __( 'سازمان', 'webinocrm' ),
+								'icon'  => 'ri-building-line',
+							),
+							array(
+								'id'    => 'hrm-my-profile',
+								'path'  => 'hrm/my-profile',
+								'title' => __( 'پروفایل من', 'webinocrm' ),
+								'icon'  => 'ri-user-settings-line',
+							),
+							array(
+								'id'    => 'hrm-cartable',
+								'path'  => 'hrm/cartable',
+								'title' => __( 'کارتابل HR', 'webinocrm' ),
+								'icon'  => 'ri-inbox-line',
+							),
+							array(
 								'id'    => 'hrm-recruitment',
 								'path'  => 'hrm/recruitment',
 								'title' => __( 'استخدام', 'webinocrm' ),
@@ -245,6 +299,33 @@ class WebinoCRM_Erp_Module_Registry {
 				),
 			),
 			array(
+				'id'                  => 'ai_content',
+				'settings_key'        => 'ai_content',
+				'legacy_settings'     => array(),
+				'default_enabled'     => true,
+				'category'            => __( 'هوش مصنوعی محتوا', 'webinocrm' ),
+				'items'               => array(
+					array(
+						'id'       => 'ai-content-menu',
+						'path'     => 'ai-content',
+						'title'    => __( 'هوش مصنوعی محتوا', 'webinocrm' ),
+						'icon'     => 'ri-sparkling-line',
+						'children' => array(
+							array( 'id' => 'ai-content', 'path' => 'ai-content', 'title' => __( 'نمای کلی', 'webinocrm' ), 'icon' => 'ri-dashboard-line' ),
+							array( 'id' => 'ai-content-jobs', 'path' => 'ai-content/jobs', 'title' => __( 'کارها', 'webinocrm' ), 'icon' => 'ri-list-check-2' ),
+							array( 'id' => 'ai-content-calendar', 'path' => 'ai-content/calendar', 'title' => __( 'تقویم', 'webinocrm' ), 'icon' => 'ri-calendar-line' ),
+							array( 'id' => 'ai-content-products', 'path' => 'ai-content/products', 'title' => __( 'محصولات', 'webinocrm' ), 'icon' => 'ri-shopping-bag-line' ),
+							array( 'id' => 'ai-content-titles', 'path' => 'ai-content/titles', 'title' => __( 'عناوین', 'webinocrm' ), 'icon' => 'ri-text' ),
+							array( 'id' => 'ai-content-pages', 'path' => 'ai-content/pages', 'title' => __( 'صفحات', 'webinocrm' ), 'icon' => 'ri-file-list-3-line' ),
+							array( 'id' => 'ai-content-taxonomies', 'path' => 'ai-content/taxonomies', 'title' => __( 'دسته‌ها', 'webinocrm' ), 'icon' => 'ri-folder-line' ),
+							array( 'id' => 'ai-content-attributes', 'path' => 'ai-content/attributes', 'title' => __( 'ویژگی‌ها', 'webinocrm' ), 'icon' => 'ri-price-tag-3-line' ),
+							array( 'id' => 'ai-content-cms-pages', 'path' => 'pages', 'title' => __( 'ویرایش صفحات', 'webinocrm' ), 'icon' => 'ri-pages-line' ),
+							array( 'id' => 'ai-content-settings', 'path' => 'ai-content/settings', 'title' => __( 'تنظیمات', 'webinocrm' ), 'icon' => 'ri-settings-3-line' ),
+						),
+					),
+				),
+			),
+			array(
 				'id'                  => 'admin',
 				'settings_key'        => 'admin',
 				'legacy_settings'     => array( 'general', 'bots' ),
@@ -268,6 +349,29 @@ class WebinoCRM_Erp_Module_Registry {
 	}
 
 	/**
+	 * Module enablement map without translated strings (safe before init).
+	 *
+	 * @return array<int, array{settings_key:string,legacy_settings:array<int,string>,default_enabled:bool}>
+	 */
+	public static function module_settings_map() {
+		return array(
+			array( 'settings_key' => 'hrm', 'legacy_settings' => array(), 'default_enabled' => true ),
+			array( 'settings_key' => 'finance', 'legacy_settings' => array( 'accounting' ), 'default_enabled' => true ),
+			array( 'settings_key' => 'crm', 'legacy_settings' => array(), 'default_enabled' => true ),
+			array( 'settings_key' => 'pm', 'legacy_settings' => array( 'projects' ), 'default_enabled' => true ),
+			array( 'settings_key' => 'scm', 'legacy_settings' => array(), 'default_enabled' => true ),
+			array( 'settings_key' => 'sales', 'legacy_settings' => array(), 'default_enabled' => true ),
+			array( 'settings_key' => 'mfg', 'legacy_settings' => array(), 'default_enabled' => false ),
+			array( 'settings_key' => 'docs', 'legacy_settings' => array(), 'default_enabled' => true ),
+			array( 'settings_key' => 'distribution', 'legacy_settings' => array(), 'default_enabled' => true ),
+			array( 'settings_key' => 'ai_content', 'legacy_settings' => array(), 'default_enabled' => true ),
+			array( 'settings_key' => 'admin', 'legacy_settings' => array( 'general', 'bots' ), 'default_enabled' => true ),
+			array( 'settings_key' => 'modirpayamak', 'legacy_settings' => array(), 'default_enabled' => true ),
+			array( 'settings_key' => 'bale_business', 'legacy_settings' => array(), 'default_enabled' => true ),
+		);
+	}
+
+	/**
 	 * Whether an ERP module is enabled in settings.
 	 *
 	 * @param string $module_key settings_key from registry.
@@ -276,7 +380,7 @@ class WebinoCRM_Erp_Module_Registry {
 	public static function is_module_enabled( $module_key ) {
 		$settings = class_exists( 'WebinoCRM_Settings_Handler' ) ? WebinoCRM_Settings_Handler::get_all_settings() : array();
 
-		foreach ( self::get_modules() as $module ) {
+		foreach ( self::module_settings_map() as $module ) {
 			$keys = array_merge( array( $module['settings_key'] ), (array) $module['legacy_settings'] );
 			if ( ! in_array( $module_key, $keys, true ) ) {
 				continue;
@@ -448,6 +552,7 @@ class WebinoCRM_Erp_Module_Registry {
 			array( 'id' => 'modirpayamak-reports', 'path' => 'admin/integrations/modirpayamak/reports', 'title' => __( 'گزارش ارسال', 'webinocrm' ), 'icon' => 'ri-file-list-line' ),
 			array( 'id' => 'modirpayamak-customers', 'path' => 'admin/integrations/modirpayamak/customers', 'title' => __( 'مشتریان پیامک', 'webinocrm' ), 'icon' => 'ri-group-line' ),
 			array( 'id' => 'modirpayamak-packages', 'path' => 'admin/integrations/modirpayamak/packages', 'title' => __( 'بسته شارژ', 'webinocrm' ), 'icon' => 'ri-wallet-line' ),
+			array( 'id' => 'modirpayamak-tariffs', 'path' => 'admin/integrations/modirpayamak/tariffs', 'title' => __( 'تعرفه‌ها', 'webinocrm' ), 'icon' => 'ri-price-tag-3-line' ),
 			array( 'id' => 'modirpayamak-orders', 'path' => 'admin/integrations/modirpayamak/orders', 'title' => __( 'سفارش شارژ', 'webinocrm' ), 'icon' => 'ri-shopping-cart-line' ),
 			array( 'id' => 'modirpayamak-patterns', 'path' => 'admin/integrations/modirpayamak/patterns', 'title' => __( 'پترن‌ها', 'webinocrm' ), 'icon' => 'ri-code-box-line' ),
 			array( 'id' => 'modirpayamak-phonebooks', 'path' => 'admin/integrations/modirpayamak/phonebooks', 'title' => __( 'دفترچه', 'webinocrm' ), 'icon' => 'ri-contacts-book-line' ),
@@ -578,6 +683,50 @@ class WebinoCRM_Erp_Module_Registry {
 	}
 
 	/**
+	 * All ERP menu item ids from the module registry tree.
+	 *
+	 * @return array<int, string>
+	 */
+	public static function all_menu_ids() {
+		$ids = array();
+		self::collect_menu_ids_from_modules( self::get_modules(), $ids );
+		return array_values( array_unique( $ids ) );
+	}
+
+	/**
+	 * @param array<int, array<string, mixed>> $modules Module rows.
+	 * @param array<int, string>             $ids     Collected ids (by reference).
+	 * @return void
+	 */
+	private static function collect_menu_ids_from_modules( array $modules, array &$ids ) {
+		foreach ( $modules as $module ) {
+			if ( ! is_array( $module ) || empty( $module['items'] ) || ! is_array( $module['items'] ) ) {
+				continue;
+			}
+			self::collect_menu_ids_from_items( $module['items'], $ids );
+		}
+	}
+
+	/**
+	 * @param array<int, array<string, mixed>> $items Menu rows.
+	 * @param array<int, string>             $ids   Collected ids (by reference).
+	 * @return void
+	 */
+	private static function collect_menu_ids_from_items( array $items, array &$ids ) {
+		foreach ( $items as $item ) {
+			if ( ! is_array( $item ) ) {
+				continue;
+			}
+			if ( ! empty( $item['id'] ) ) {
+				$ids[] = sanitize_key( (string) $item['id'] );
+			}
+			if ( ! empty( $item['children'] ) && is_array( $item['children'] ) ) {
+				self::collect_menu_ids_from_items( $item['children'], $ids );
+			}
+		}
+	}
+
+	/**
 	 * Menu item ids allowed per role (subset of full manager menu).
 	 *
 	 * @return array<string, array<int, string>>
@@ -617,6 +766,13 @@ class WebinoCRM_Erp_Module_Registry {
 				'documents',
 				'time-tracking',
 				'tickets',
+				'hrm-me',
+				'hrm-my-payroll',
+				'hrm-my-time',
+				'hrm-my-docs',
+				'hrm-my-insurance',
+				'hrm-my-org',
+				'hrm-my-profile',
 			),
 			'client'           => array( 'dashboard', 'projects', 'contracts', 'invoices', 'tickets' ),
 			'customer'         => array( 'dashboard', 'projects', 'contracts', 'invoices', 'tickets' ),

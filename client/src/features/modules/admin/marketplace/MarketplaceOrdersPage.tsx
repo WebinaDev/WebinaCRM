@@ -32,7 +32,7 @@ export function MarketplaceOrdersPage() {
       setOrders(res.data.orders ?? [])
       setEntitlements(res.data.entitlements ?? [])
     } else {
-      setError(marketplaceError(res, t("pages.marketplace.loadError")))
+      setError(marketplaceError(t, res, "pages.marketplace.loadError"))
       setOrders([])
       setEntitlements([])
     }

@@ -33,7 +33,7 @@ import { Plus, Loader2 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 export function PerformancePage() {
-  const { t, isRtl } = useLocale()
+  const { t, isRtl, formatDate } = useLocale()
   const [tab, setTab] = useState("cycles")
   const [cycles, setCycles] = useState<ReviewCycle[]>([])
   const [reviews, setReviews] = useState<PerformanceReview[]>([])
@@ -133,8 +133,8 @@ export function PerformancePage() {
                       <TableRow key={c.id}>
                         <TableCell>{c.name}</TableCell>
                         <TableCell>{c.year}</TableCell>
-                        <TableCell dir="ltr" className="text-start">
-                          {c.start_date} — {c.end_date}
+                        <TableCell className="text-start">
+                          {formatDate(c.start_date)} — {formatDate(c.end_date)}
                         </TableCell>
                         <TableCell>{c.status}</TableCell>
                       </TableRow>

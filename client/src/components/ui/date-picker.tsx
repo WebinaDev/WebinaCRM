@@ -57,8 +57,12 @@ export const DatePicker = React.forwardRef<HTMLDivElement, DatePickerProps>(
 
     const pickerValue = (() => {
       if (!value || value.trim() === "") return undefined
+      const iso = value.trim().slice(0, 10)
+      if (iso === "0000-00-00" || !/^\d{4}-\d{2}-\d{2}$/.test(iso)) return undefined
+      const year = Number(iso.slice(0, 4))
+      if (!Number.isFinite(year) || year < 1600) return undefined
       try {
-        return new DateObject(value)
+        return new DateObject({ date: iso, calendar: gregorian })
       } catch {
         return undefined
       }

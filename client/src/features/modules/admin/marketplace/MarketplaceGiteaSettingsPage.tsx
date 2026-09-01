@@ -86,7 +86,7 @@ export function MarketplaceGiteaSettingsPage() {
         return res.data
       }
       if (!silent) {
-        setError(marketplaceError(res, t("pages.marketplace.gitea.testFail")))
+        setError(marketplaceError(t, res, "pages.marketplace.gitea.testFail"))
       }
       return null
     },
@@ -109,7 +109,7 @@ export function MarketplaceGiteaSettingsPage() {
       }))
       setHasToken(s.has_token)
     } else {
-      setError(marketplaceError(res, t("pages.marketplace.gitea.loadError")))
+      setError(marketplaceError(t, res, "pages.marketplace.gitea.loadError"))
     }
     setLoading(false)
   }, [setError, t])

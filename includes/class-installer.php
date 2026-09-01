@@ -51,6 +51,9 @@ class WebinoCRM_Installer {
         // Flush rewrite rules to make CPT URLs work correctly
         flush_rewrite_rules();
 
+        // Defer Webina site seed until init (rewrite API must be ready).
+        update_option( 'webinocrm_site_needs_seed', '1' );
+
         // HIGHLIGHT: The creation of the dashboard page is now disabled.
         // self::create_dashboard_page();
     }
@@ -179,6 +182,13 @@ class WebinoCRM_Installer {
             "UPDATE {$wpdb->options}
              SET option_name = REPLACE(option_name, '_site_transient_timeout_pcrm_', '_site_transient_timeout_wcrm_')
              WHERE option_name LIKE '_site\\_transient\\_timeout\\_pcrm\\_%'"
+        );
+
+        // Shorten Bale CPT slug (WP max 20 chars).
+        $wpdb->query(
+            "UPDATE {$wpdb->posts}
+             SET post_type = 'wbb_biz_submit'
+             WHERE post_type = 'wbb_business_submission'"
         );
     }
 
@@ -586,6 +596,8 @@ class WebinoCRM_Installer {
 
         // HRM module tables
         self::create_hrm_tables();
+        require_once WEBINOCRM_PLUGIN_DIR . 'includes/modules/hrm/class-hrm-schema.php';
+        WebinoCRM_Hrm_Schema::ensure();
     }
 
     /**
@@ -1018,6 +1030,24 @@ class WebinoCRM_Installer {
         ) $charset_collate;";
         dbDelta( $sql );
 
+        $table = $prefix . 'tariffs';
+        $sql   = "CREATE TABLE $table (
+            id bigint(20) NOT NULL AUTO_INCREMENT,
+            line_type varchar(50) NOT NULL,
+            operator varchar(20) NOT NULL DEFAULT 'other',
+            rate_fa decimal(14,4) NOT NULL DEFAULT 0,
+            rate_la decimal(14,4) NOT NULL DEFAULT 0,
+            sort int(11) DEFAULT 0,
+            status varchar(20) DEFAULT 'active',
+            created_at datetime DEFAULT CURRENT_TIMESTAMP,
+            updated_at datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+            PRIMARY KEY (id),
+            UNIQUE KEY line_operator (line_type, operator),
+            KEY status (status),
+            KEY sort (sort)
+        ) $charset_collate;";
+        dbDelta( $sql );
+
         $table = $prefix . 'orders';
         $sql   = "CREATE TABLE $table (
             id bigint(20) NOT NULL AUTO_INCREMENT,
@@ -1084,11 +1114,31 @@ class WebinoCRM_Installer {
         ) $charset_collate;";
         dbDelta( $sql );
 
+        $table = $prefix . 'domain_numbers';
+        $sql   = "CREATE TABLE $table (
+            id bigint(20) NOT NULL AUTO_INCREMENT,
+            domain varchar(255) NOT NULL,
+            number varchar(50) NOT NULL,
+            role varchar(20) NOT NULL DEFAULT 'service',
+            label varchar(255) DEFAULT NULL,
+            is_default tinyint(1) DEFAULT 1,
+            created_at datetime DEFAULT CURRENT_TIMESTAMP,
+            updated_at datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+            PRIMARY KEY (id),
+            UNIQUE KEY domain_number (domain, number),
+            KEY domain (domain),
+            KEY number (number),
+            KEY domain_role (domain, role)
+        ) $charset_collate;";
+        dbDelta( $sql );
+
         require_once WEBINOCRM_PLUGIN_DIR . 'includes/sms/class-sms-install.php';
         WebinoCRM_Sms_Install::create_tables();
 
         require_once WEBINOCRM_PLUGIN_DIR . 'includes/class-modirpayamak-manager.php';
+        require_once WEBINOCRM_PLUGIN_DIR . 'includes/class-modirpayamak-tariffs.php';
         WebinoCRM_ModirPayamak_Manager::seed_default_packages();
+        WebinoCRM_ModirPayamak_Tariffs::seed_defaults();
     }
 
     /**

@@ -1,16 +1,27 @@
 import type { ReactNode } from 'react'
 
-import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-
-export function PageShell({ title, description, children }: { title: string; description?: string; children?: ReactNode }) {
+export function PageShell({
+  title,
+  description,
+  eyebrow,
+  children,
+}: {
+  title: string
+  description?: string
+  eyebrow?: string
+  children?: ReactNode
+}) {
   return (
-    <div className="space-y-4">
-      <Card className="shadow-sm">
-        <CardHeader className="pb-4">
-          <CardTitle className="text-xl">{title}</CardTitle>
-          {description ? <CardDescription>{description}</CardDescription> : null}
-        </CardHeader>
-      </Card>
+    <div className="space-y-5">
+      <header className="min-w-0 space-y-1.5">
+        {eyebrow ? (
+          <p className="text-muted-foreground text-xs font-medium tracking-wide uppercase">{eyebrow}</p>
+        ) : null}
+        <h1 className="text-xl font-semibold tracking-tight sm:text-2xl">{title}</h1>
+        {description ? (
+          <p className="text-muted-foreground max-w-2xl text-sm leading-relaxed">{description}</p>
+        ) : null}
+      </header>
       {children}
     </div>
   )

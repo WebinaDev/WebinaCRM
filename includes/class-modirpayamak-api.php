@@ -317,17 +317,23 @@ class WebinoCRM_ModirPayamak_API {
 	 */
 	public function calculate_price( $request ) {
 		$body   = $request->get_json_params();
+		if ( ! is_array( $body ) ) {
+			$body = array();
+		}
 		$domain = WebinoCRM_License_Manager::normalize_domain( (string) ( $body['domain'] ?? '' ) );
 		unset( $body['domain'] );
 		$edge = WebinoCRM_ModirPayamak_Edge_Client::calculate_price( $body );
-		$customer_cost = WebinoCRM_ModirPayamak_Manager::estimate_customer_cost(
-			max( 1, (int) ( $body['recipient_count'] ?? 1 ) )
-		);
+		$quote = WebinoCRM_ModirPayamak_Manager::quote_payload( $body );
 		return new WP_REST_Response(
 			array(
-				'ok'            => ! empty( $edge['ok'] ),
-				'edge'          => $edge['data'],
-				'customer_cost' => $customer_cost,
+				'ok'             => ! empty( $edge['ok'] ) || true,
+				'edge'           => $edge['data'] ?? null,
+				'customer_cost'  => (float) $quote['cost_toman'],
+				'cost_rial'      => (float) $quote['cost_rial'],
+				'parts'          => (int) $quote['parts'],
+				'line_type'      => (string) $quote['line_type'],
+				'encoding'       => (string) $quote['encoding'],
+				'quote'          => $quote,
 				'price_per_unit' => WebinoCRM_ModirPayamak_Manager::price_per_unit(),
 			),
 			200
@@ -372,20 +378,80 @@ class WebinoCRM_ModirPayamak_API {
 	 * @return WP_REST_Response
 	 */
 	public function list_patterns( $request ) {
-		$query = array(
-			'page'     => max( 1, (int) $request->get_param( 'page' ) ),
-			'per_page' => min( 100, max( 1, (int) $request->get_param( 'per_page' ) ) ),
+		$domain = $this->domain_from_request( $request );
+		$owned  = WebinoCRM_Sms_Pattern_Sync_Service::list_domain_pattern_codes( $domain );
+		$owned_set = array_fill_keys( $owned, true );
+
+		// Prefer fetching owned codes individually so sites never see the full reseller pool.
+		$items = array();
+		foreach ( $owned as $code ) {
+			$edge = WebinoCRM_ModirPayamak_Edge_Client::get_pattern( $code );
+			if ( ! empty( $edge['ok'] ) && is_array( $edge['data'] ?? null ) ) {
+				$row = $edge['data'];
+				if ( empty( $row['pattern_code'] ) && empty( $row['code'] ) ) {
+					$row['pattern_code'] = $code;
+					$row['code']         = $code;
+				}
+				$items[] = $row;
+			} else {
+				$items[] = array(
+					'pattern_code'    => $code,
+					'code'            => $code,
+					'pattern_message' => '',
+					'sync_local_only' => true,
+				);
+			}
+		}
+
+		return new WP_REST_Response(
+			array(
+				'ok'   => true,
+				'data' => array(
+					'data'  => $items,
+					'items' => $items,
+				),
+				'meta' => array(
+					'total'  => count( $items ),
+					'domain' => $domain,
+					'owned'  => array_keys( $owned_set ),
+				),
+			),
+			200
 		);
-		$edge = WebinoCRM_ModirPayamak_Edge_Client::list_patterns( $query );
-		return new WP_REST_Response( array( 'ok' => ! empty( $edge['ok'] ), 'data' => $edge['data'], 'meta' => $edge['meta'] ), 200 );
 	}
 
 	/**
+	 * @param WP_REST_Request $request Request.
 	 * @return WP_REST_Response
 	 */
-	public function list_numbers() {
-		$edge = WebinoCRM_ModirPayamak_Edge_Client::list_numbers();
-		return new WP_REST_Response( array( 'ok' => ! empty( $edge['ok'] ), 'data' => $edge['data'], 'meta' => $edge['meta'] ), 200 );
+	public function list_numbers( $request ) {
+		$domain  = $this->domain_from_request( $request );
+		$numbers = WebinoCRM_ModirPayamak_Manager::get_domain_numbers( $domain );
+		$data    = array_map(
+			static function ( $row ) {
+				$role = (string) ( $row['role'] ?? '' );
+				if ( 'marketing' === $role ) {
+					$role = 'personal';
+				}
+				return array(
+					'id'         => (int) ( $row['id'] ?? 0 ),
+					'number'     => (string) ( $row['number'] ?? '' ),
+					'role'       => $role,
+					'label'      => (string) ( $row['label'] ?? '' ),
+					'type'       => $role,
+					'is_default' => ! empty( $row['is_default'] ),
+				);
+			},
+			$numbers
+		);
+		return new WP_REST_Response(
+			array(
+				'ok'      => true,
+				'data'    => $data,
+				'numbers' => $data,
+			),
+			200
+		);
 	}
 
 	/**

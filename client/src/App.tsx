@@ -1,11 +1,11 @@
-import type { ReactNode } from 'react'
 import { Suspense, useEffect } from 'react'
-import { BrowserRouter, Navigate, Outlet, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 
 import { PermissionGate } from '@/components/PermissionGate'
 import { RouteErrorBoundary } from '@/components/RouteErrorBoundary'
 import { DashboardSkeleton, RoutePageSkeleton } from '@/components/skeletons'
-import { useAuthSession } from '@/hooks/useAuthSession'
+import { AuthGate } from '@/layouts/AuthGate'
+import { LicenseGate } from '@/layouts/LicenseGate'
 import { DashboardLayout } from '@/layouts/DashboardLayout'
 import NotFoundPage from '@/pages/NotFoundPage'
 import { Toaster } from '@/components/ui/sonner'
@@ -17,6 +17,7 @@ const CrmHomePage = lazyNamedPage(() => import('@/pages/crm/dashboard-page'), 'D
 const LoginPage = lazyPage(() =>
   import('@/pages/LoginPage').then((m) => ({ default: m.LoginPage })),
 )
+const LicensePage = lazyPage(() => import('@/pages/LicensePage'))
 
 function dashboardBasename(): string {
   try {
@@ -28,40 +29,8 @@ function dashboardBasename(): string {
   }
 }
 
-function AuthLoading() {
-  return <DashboardSkeleton compact showPageHeader={false} />
-}
-
 function RouteFallback() {
   return <RoutePageSkeleton />
-}
-
-function ProtectedRoute() {
-  const session = useAuthSession()
-
-  if (session.isPending && !session.data) {
-    return <AuthLoading />
-  }
-
-  if (!session.data?.logged_in) {
-    return <Navigate to="/login" replace />
-  }
-
-  return <Outlet />
-}
-
-function GuardLogin({ children }: { children: ReactNode }) {
-  const session = useAuthSession()
-
-  if (session.isPending && !session.data) {
-    return <AuthLoading />
-  }
-
-  if (session.data?.logged_in) {
-    return <Navigate to="/" replace />
-  }
-
-  return <>{children}</>
 }
 
 export default function App() {
@@ -79,57 +48,69 @@ export default function App() {
           <Route
             path="/login"
             element={
-              <GuardLogin>
-                <Suspense fallback={<AuthLoading />}>
+              <AuthGate mode="guest">
+                <Suspense fallback={<DashboardSkeleton compact showPageHeader={false} />}>
                   <LoginPage />
                 </Suspense>
-              </GuardLogin>
+              </AuthGate>
             }
           />
-          <Route element={<ProtectedRoute />}>
-            <Route element={<DashboardLayout />}>
-              <Route
-                index
-                element={
-                  <RouteErrorBoundary>
-                    <PermissionGate capability="webinocrm_route_home">
-                      <Suspense fallback={<RouteFallback />}>
-                        <CrmHomePage />
-                      </Suspense>
-                    </PermissionGate>
-                  </RouteErrorBoundary>
-                }
-              />
-              {dashboardRoutes.map(({ path, capability, Component }) => (
+          <Route element={<AuthGate mode="protected" />}>
+            <Route
+              path="license"
+              element={
+                <RouteErrorBoundary>
+                  <Suspense fallback={<RouteFallback />}>
+                    <LicensePage />
+                  </Suspense>
+                </RouteErrorBoundary>
+              }
+            />
+            <Route element={<LicenseGate />}>
+              <Route element={<DashboardLayout />}>
                 <Route
-                  key={path}
-                  path={path}
+                  index
                   element={
-                    <RouteErrorBoundary key={path}>
-                      <PermissionGate capability={capability}>
+                    <RouteErrorBoundary>
+                      <PermissionGate capability="webinocrm_route_home">
                         <Suspense fallback={<RouteFallback />}>
-                          <Component />
+                          <CrmHomePage />
                         </Suspense>
                       </PermissionGate>
                     </RouteErrorBoundary>
                   }
                 />
-              ))}
-              <Route path="settings/authentication" element={<Navigate to="admin/settings/general/authentication" replace />} />
-              <Route path="settings/style" element={<Navigate to="admin/settings/general/style" replace />} />
-              <Route path="settings/visitor_statistics" element={<Navigate to="admin/settings/general/visitor-tracking" replace />} />
-              <Route path="settings/workflow" element={<Navigate to="admin/settings/projects/workflow" replace />} />
-              <Route path="settings/positions" element={<Navigate to="admin/settings/projects/positions" replace />} />
-              <Route path="settings/task_categories" element={<Navigate to="admin/settings/projects/task_categories" replace />} />
-              <Route path="settings/automations" element={<Navigate to="admin/settings/projects/automations" replace />} />
-              <Route path="settings/sms" element={<Navigate to="admin/settings/crm/sms" replace />} />
-              <Route path="settings/notifications" element={<Navigate to="admin/settings/crm/notifications" replace />} />
-              <Route path="settings/canned_responses" element={<Navigate to="admin/settings/crm/canned_responses" replace />} />
-              <Route path="settings/forms" element={<Navigate to="admin/settings/crm/forms" replace />} />
-              <Route path="settings/leads" element={<Navigate to="admin/settings/crm/leads" replace />} />
-              <Route path="settings/payment" element={<Navigate to="admin/settings/accounting/payment" replace />} />
-              <Route path="bots/business" element={<Navigate to="admin/integrations/bale" replace />} />
-              <Route path="*" element={<NotFoundPage />} />
+                {dashboardRoutes.map(({ path, capability, Component }) => (
+                  <Route
+                    key={path}
+                    path={path}
+                    element={
+                      <RouteErrorBoundary key={path}>
+                        <PermissionGate capability={capability}>
+                          <Suspense fallback={<RouteFallback />}>
+                            <Component />
+                          </Suspense>
+                        </PermissionGate>
+                      </RouteErrorBoundary>
+                    }
+                  />
+                ))}
+                <Route path="settings/authentication" element={<Navigate to="admin/settings/general/authentication" replace />} />
+                <Route path="settings/style" element={<Navigate to="admin/settings/general/style" replace />} />
+                <Route path="settings/visitor_statistics" element={<Navigate to="admin/settings/general/visitor-tracking" replace />} />
+                <Route path="settings/workflow" element={<Navigate to="admin/settings/projects/workflow" replace />} />
+                <Route path="settings/positions" element={<Navigate to="admin/settings/projects/positions" replace />} />
+                <Route path="settings/task_categories" element={<Navigate to="admin/settings/projects/task_categories" replace />} />
+                <Route path="settings/automations" element={<Navigate to="admin/settings/projects/automations" replace />} />
+                <Route path="settings/sms" element={<Navigate to="admin/settings/crm/sms" replace />} />
+                <Route path="settings/notifications" element={<Navigate to="admin/settings/crm/notifications" replace />} />
+                <Route path="settings/canned_responses" element={<Navigate to="admin/settings/crm/canned_responses" replace />} />
+                <Route path="settings/forms" element={<Navigate to="admin/settings/crm/forms" replace />} />
+                <Route path="settings/leads" element={<Navigate to="admin/settings/crm/leads" replace />} />
+                <Route path="settings/payment" element={<Navigate to="admin/settings/accounting/payment" replace />} />
+                <Route path="bots/business" element={<Navigate to="admin/integrations/bale" replace />} />
+                <Route path="*" element={<NotFoundPage />} />
+              </Route>
             </Route>
           </Route>
         </Routes>

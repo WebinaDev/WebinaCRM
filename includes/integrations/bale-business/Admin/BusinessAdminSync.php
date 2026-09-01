@@ -27,7 +27,7 @@ class BusinessAdminSync {
 
 	public static function init(): void {
 		\add_action( 'add_meta_boxes', array( __CLASS__, 'register_meta_box' ) );
-		\add_action( 'save_post_wbb_business_submission', array( __CLASS__, 'save_review_meta' ) );
+		\add_action( 'save_post_wbb_biz_submit', array( __CLASS__, 'save_review_meta' ) );
 	}
 
 	public static function sync_business_submission( int $business_id ): void {
@@ -47,7 +47,7 @@ class BusinessAdminSync {
 		$submission_id = self::find_submission_id_by_business( $business_id );
 		$title         = (string) ( $business['bot_name'] ?: $business['owner_name'] ?: ( 'Business #' . $business_id ) );
 		$post_data     = array(
-			'post_type'   => 'wbb_business_submission',
+			'post_type'   => 'wbb_biz_submit',
 			'post_status' => 'publish',
 			'post_title'  => \sanitize_text_field( $title ),
 		);
@@ -126,7 +126,7 @@ class BusinessAdminSync {
 			'wbb-business-review',
 			'بررسی درخواست کسب و کار',
 			array( __CLASS__, 'render_meta_box' ),
-			'wbb_business_submission',
+			'wbb_biz_submit',
 			'normal',
 			'high'
 		);
@@ -199,7 +199,7 @@ class BusinessAdminSync {
 	private static function find_submission_id_by_business( int $business_id ): int {
 		$posts = \get_posts(
 			array(
-				'post_type'      => 'wbb_business_submission',
+				'post_type'      => 'wbb_biz_submit',
 				'post_status'    => 'any',
 				'posts_per_page' => 1,
 				'fields'         => 'ids',

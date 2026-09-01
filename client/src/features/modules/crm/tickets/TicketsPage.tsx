@@ -45,7 +45,7 @@ import { RichTextEditor } from "@/features/shared/pm/RichTextEditor"
 import { CannedResponsePicker } from "../components/CannedResponsePicker"
 
 export function TicketsPage() {
-  const { t, isRtl } = useLocale()
+  const { t, isRtl, formatDateTime } = useLocale()
       const navigate = useNavigate()
   const [searchParams] = useSearchParams()
   const viewId = searchParams.get("ticket_id") ? parseInt(searchParams.get("ticket_id")!, 10) : null
@@ -340,7 +340,7 @@ export function TicketsPage() {
             <h2 className="text-xl font-semibold mb-4">{singleTicket.title}</h2>
             <div className="flex flex-wrap gap-2 mb-4 text-sm text-muted-foreground">
               <span>{t("pages.tickets.ارسال_شده_توسط")}: {singleTicket.author_name}</span>
-              <span>{t("pages.tickets.در_تاریخ")}: {singleTicket.date}</span>
+              <span>{t("pages.tickets.در_تاریخ")}: {formatDateTime(singleTicket.date)}</span>
               <Badge variant="secondary">{singleTicket.status_name}</Badge>
               <Badge variant="outline">{singleTicket.priority_name}</Badge>
               <span>{t("pages.tickets.دپارتمان")}: {singleTicket.department_name}</span>
@@ -362,7 +362,7 @@ export function TicketsPage() {
                   {singleTicket.replies.map((r) => (
                     <div key={r.id} className="border rounded-lg p-4">
                       <div className="text-sm text-muted-foreground mb-2">
-                        {r.author} — {r.date}
+                        {r.author} — {formatDateTime(r.date)}
                       </div>
                       <div className="prose prose-sm max-w-none" dangerouslySetInnerHTML={{ __html: r.content }} />
                     </div>
@@ -640,7 +640,7 @@ export function TicketsPage() {
                             {ticket.title}
                           </button>
                         </TableCell>
-                        <TableCell>{ticket.modified}</TableCell>
+                        <TableCell>{formatDateTime(ticket.modified)}</TableCell>
                         <TableCell><Badge variant="outline">{ticket.priority_name}</Badge></TableCell>
                         <TableCell><Badge variant="secondary">{ticket.status_name}</Badge></TableCell>
                         <TableCell>

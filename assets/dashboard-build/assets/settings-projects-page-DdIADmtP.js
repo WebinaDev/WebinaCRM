@@ -1,0 +1,1 @@
+import{Cr as e}from"./dashboard-shared-BZgt2jTd.js";import{t}from"./SettingsModulePage-DkRD-g8n.js";var n=e();function r(){return(0,n.jsx)(t,{moduleId:`projects`})}export{r as SettingsProjectsPage};

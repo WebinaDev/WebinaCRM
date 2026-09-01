@@ -66,19 +66,31 @@ export async function setDashboardLanguage(lng: string) {
 }
 
 export const i18nReady = (async () => {
-  const bundle = await loadLocaleBundle(initial)
+  const secondary = initial === 'fa' ? 'en' : 'fa'
+  const [primaryBundle, secondaryBundle] = await Promise.all([
+    loadLocaleBundle(initial),
+    loadLocaleBundle(secondary),
+  ])
   loadedLocales.add(initial)
+  loadedLocales.add(secondary)
   await i18n
     .use(faDigitsProcessor)
     .use(initReactI18next)
     .init({
       resources: {
-        [initial]: { translation: bundle },
+        [initial]: { translation: primaryBundle },
+        [secondary]: { translation: secondaryBundle },
       },
       lng: initial,
       fallbackLng: 'en',
+      keySeparator: false,
+      nsSeparator: false,
       interpolation: { escapeValue: false },
       postProcess: ['faDigits'],
+      react: {
+        bindI18n: 'languageChanged loaded added',
+        useSuspense: false,
+      },
     })
   document.documentElement.lang = initial
   document.documentElement.dir = dashboardDir(initial)

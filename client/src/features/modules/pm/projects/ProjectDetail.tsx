@@ -17,7 +17,7 @@ type Props = {
 }
 
 export function ProjectDetailPanel({ projectId, isRtl, onBack, onEdit }: Props) {
-  const { t } = useLocale()
+  const { t, formatDate } = useLocale()
   const [detail, setDetail] = useState<ProjectDetail | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -104,14 +104,14 @@ export function ProjectDetailPanel({ projectId, isRtl, onBack, onEdit }: Props) 
               <div className="flex items-center gap-2">
                 <Calendar className="h-4 w-4 text-muted-foreground" />
                 <span>{t("pages.projects.تاریخ_شروع")}</span>
-                <span>{detail.start_date}</span>
+                <span>{formatDate(detail.start_date)}</span>
               </div>
             )}
             {detail.end_date && (
               <div className="flex items-center gap-2">
                 <Calendar className="h-4 w-4 text-muted-foreground" />
                 <span>{t("pages.projects.تاریخ_پایان")}</span>
-                <span>{detail.end_date}</span>
+                <span>{formatDate(detail.end_date)}</span>
               </div>
             )}
             {detail.assigned_members && detail.assigned_members.length > 0 && (

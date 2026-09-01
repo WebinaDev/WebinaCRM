@@ -12,10 +12,10 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Separator } from '@/components/ui/separator'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useBootstrapQuery } from '@/hooks/useBootstrapQuery'
+import { useLocale } from '@/hooks/use-locale'
 import { translateLicenseStatus } from '@/lib/enumLabels'
 import { apiFetch } from '@/lib/api'
 import { applyDashboardDocumentSeo } from '@/lib/dashboard-seo'
-import { formatDisplayDate } from '@/lib/date'
 
 type LicenseRemoteResponse = {
   active: boolean
@@ -74,7 +74,8 @@ function badgeForLicense(
 }
 
 export default function LicensePage() {
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
+  const { formatDisplayDate } = useLocale()
   const qc = useQueryClient()
   const bq = useBootstrapQuery()
   const canManage = Boolean(bq.data?.capabilities?.includes('manage_options'))
@@ -261,7 +262,7 @@ export default function LicensePage() {
                     <div className="bg-muted/50 rounded-xl border p-4">
                       <dt className="text-muted-foreground text-xs font-medium">{t('license.fieldExpiry')}</dt>
                       <dd className="mt-1 text-sm">
-                        {lic?.expiry ? formatDisplayDate(lic.expiry, i18n.language) : '—'}
+                        {lic?.expiry ? formatDisplayDate(lic.expiry) : '—'}
                       </dd>
                     </div>
                   </dl>

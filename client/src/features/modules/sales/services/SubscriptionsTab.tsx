@@ -32,7 +32,7 @@ export function SubscriptionsTab({
   convertingId,
   onConvert,
 }: Props) {
-  const { t, isRtl } = useLocale()
+  const { t, isRtl, formatDate } = useLocale()
 
   return (
     <div dir={isRtl ? "rtl" : "ltr"} className="text-start">
@@ -86,7 +86,7 @@ export function SubscriptionsTab({
                     </Badge>
                   </TableCell>
                   <TableCell>{sub.total_formatted}</TableCell>
-                  <TableCell>{sub.start_date || "-"}</TableCell>
+                  <TableCell>{sub.start_date ? formatDate(sub.start_date) : "-"}</TableCell>
                   <TableCell>{sub.next_payment || "-"}</TableCell>
                   <TableCell>
                     {sub.already_converted ? (

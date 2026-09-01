@@ -43,15 +43,15 @@ final class WebinoCRM_Sms_Auth_Service {
 			return new WP_Error( 'disabled', __( 'Login OTP is disabled.', 'webinocrm' ), array( 'status' => 403 ) );
 		}
 
-		$length  = max( 4, min( 8, (int) ( $settings['otp_length'] ?? 6 ) ) );
-		$code    = (string) wp_rand( (int) str_pad( '1', $length, '0' ), (int) str_pad( '9', $length, '9' ) );
-		$expiry  = max( 1, (int) ( $settings['otp_expiry_minutes'] ?? 5 ) ) * MINUTE_IN_SECONDS;
-		$key     = self::storage_key( $domain, $phone, $purpose );
+		$length = max( 4, min( 8, (int) ( $settings['otp_length'] ?? 6 ) ) );
+		$code   = (string) wp_rand( (int) str_pad( '1', $length, '0' ), (int) str_pad( '9', $length, '9' ) );
+		$expiry = max( 1, (int) ( $settings['otp_expiry_minutes'] ?? 5 ) ) * MINUTE_IN_SECONDS;
+		$key    = self::storage_key( $domain, $phone, $purpose );
 
 		set_transient(
 			$key,
 			array(
-				'code'    => $code,
+				'code'     => $code,
 				'attempts' => 0,
 			),
 			$expiry
@@ -59,18 +59,57 @@ final class WebinoCRM_Sms_Auth_Service {
 
 		$template_key = self::PURPOSE_REGISTER === $purpose ? 'otp_register_template' : 'otp_login_template';
 		$template     = (string) ( $settings[ $template_key ] ?? WebinoCRM_Sms_Constants::default_site_settings()[ $template_key ] );
-		$message      = WebinoCRM_Sms_Template_Service::render( $template, array( 'code' => $code ) );
 		$from         = WebinoCRM_Sms_Settings_Service::resolve_from_number( $domain, true );
+		$use_pattern  = ! empty( $settings['use_pattern_for_otp'] );
 
-		$result = WebinoCRM_ModirPayamak_Manager::customer_send(
-			$domain,
-			array(
-				'sending_type' => 'webservice',
-				'from_number'  => $from,
-				'message'      => $message,
-				'params'       => array( 'recipients' => array( $phone ) ),
-			)
-		);
+		if ( $use_pattern ) {
+			$event_key = self::PURPOSE_REGISTER === $purpose ? 'otp_register' : 'otp_login';
+			$registry  = WebinoCRM_Sms_Pattern_Sync_Service::get_registry_row(
+				$domain,
+				WebinoCRM_Sms_Constants::SCOPE_SITE,
+				$event_key
+			);
+			$pattern_code = (string) ( $registry['ippanel_code'] ?? '' );
+			if ( '' === $pattern_code || WebinoCRM_Sms_Pattern_Sync_Service::STATUS_FAILED === ( $registry['sync_status'] ?? '' ) ) {
+				$sync = WebinoCRM_Sms_Pattern_Sync_Service::sync_body(
+					$domain,
+					WebinoCRM_Sms_Constants::SCOPE_SITE,
+					$event_key,
+					$template,
+					$pattern_code
+				);
+				if ( is_wp_error( $sync ) ) {
+					delete_transient( $key );
+					return $sync;
+				}
+				$pattern_code = (string) ( $sync['ippanel_code'] ?? '' );
+			}
+			if ( '' === $pattern_code ) {
+				delete_transient( $key );
+				return new WP_Error( 'pattern_missing', __( 'OTP pattern is not ready.', 'webinocrm' ), array( 'status' => 502 ) );
+			}
+			$result = WebinoCRM_ModirPayamak_Manager::customer_send(
+				$domain,
+				array(
+					'sending_type' => 'pattern',
+					'from_number'  => $from,
+					'code'         => $pattern_code,
+					'recipients'   => array( $phone ),
+					'params'       => array( 'code' => $code ),
+				)
+			);
+		} else {
+			$message = WebinoCRM_Sms_Template_Service::render( $template, array( 'code' => $code ) );
+			$result  = WebinoCRM_ModirPayamak_Manager::customer_send(
+				$domain,
+				array(
+					'sending_type' => 'webservice',
+					'from_number'  => $from,
+					'message'      => $message,
+					'params'       => array( 'recipients' => array( $phone ) ),
+				)
+			);
+		}
 
 		if ( is_wp_error( $result ) ) {
 			delete_transient( $key );
@@ -78,9 +117,9 @@ final class WebinoCRM_Sms_Auth_Service {
 		}
 
 		return array(
-			'ok'       => true,
-			'expires'  => $expiry,
-			'length'   => $length,
+			'ok'      => true,
+			'expires' => $expiry,
+			'length'  => $length,
 		);
 	}
 

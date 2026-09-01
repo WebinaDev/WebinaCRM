@@ -35,7 +35,7 @@ import { PmConfirmDialog } from "@/features/shared/pm/PmConfirmDialog"
 import { Loader2, Plus, Pencil, Trash2 } from "lucide-react"
 
 export function PriceListsTab() {
-  const { t, isRtl, formatNumber } = useLocale()
+  const { t, isRtl, formatNumber, formatDate } = useLocale()
   const [lists, setLists] = useState<PriceList[]>([])
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
@@ -168,8 +168,8 @@ export function PriceListsTab() {
                     {row.name}
                     {row.is_default ? ` (${t("pages.accounting.products.defaultList")})` : ""}
                   </TableCell>
-                  <TableCell>{row.valid_from ?? "—"}</TableCell>
-                  <TableCell>{row.valid_to ?? "—"}</TableCell>
+                  <TableCell>{row.valid_from ? formatDate(row.valid_from) : "—"}</TableCell>
+                  <TableCell>{row.valid_to ? formatDate(row.valid_to) : "—"}</TableCell>
                   <TableCell>
                     <div className="flex gap-1">
                       <Button variant="ghost" size="icon" onClick={() => void openItems(row.id)}>

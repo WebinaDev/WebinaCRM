@@ -1,0 +1,1176 @@
+{
+  "tree": {
+    "title": "وب‌سایت شرکت توسعه کسب‌وکار",
+    "slug": "وبسایت-شرکت-توسعه-کسبوکار",
+    "path": "وبسایت-شرکت-توسعه-کسبوکار",
+    "section": "root",
+    "children": [
+      {
+        "title": "صفحه اصلی Home",
+        "slug": "home",
+        "path": "وبسایت-شرکت-توسعه-کسبوکار/home",
+        "section": "root",
+        "children": []
+      },
+      {
+        "title": "منوی خدمات Services",
+        "slug": "services",
+        "path": "وبسایت-شرکت-توسعه-کسبوکار/services",
+        "section": "services",
+        "children": [
+          {
+            "title": "فناوری و توسعه وب Tech",
+            "slug": "tech",
+            "path": "وبسایت-شرکت-توسعه-کسبوکار/services/tech",
+            "section": "services",
+            "children": [
+              {
+                "title": "توسعه وب‌سایت",
+                "slug": "توسعه-وبسایت",
+                "path": "وبسایت-شرکت-توسعه-کسبوکار/services/tech/توسعه-وبسایت",
+                "section": "services",
+                "children": [
+                  {
+                    "title": "طراحی سایت اختصاصی",
+                    "slug": "طراحی-سایت-اختصاصی",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/tech/توسعه-وبسایت/طراحی-سایت-اختصاصی",
+                    "section": "services",
+                    "children": []
+                  },
+                  {
+                    "title": "طراحی سایت وردپرس پیشرفته",
+                    "slug": "طراحی-سایت-وردپرس-پیشرفته",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/tech/توسعه-وبسایت/طراحی-سایت-وردپرس-پیشرفته",
+                    "section": "services",
+                    "children": []
+                  },
+                  {
+                    "title": "بازطراحی و نوسازی سایت",
+                    "slug": "بازطراحی-و-نوسازی-سایت",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/tech/توسعه-وبسایت/بازطراحی-و-نوسازی-سایت",
+                    "section": "services",
+                    "children": []
+                  },
+                  {
+                    "title": "طراحی لندینگ پیج",
+                    "slug": "طراحی-لندینگ-پیج",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/tech/توسعه-وبسایت/طراحی-لندینگ-پیج",
+                    "section": "services",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "title": "راهکارهای فروشگاهی",
+                "slug": "راهکارهای-فروشگاهی",
+                "path": "وبسایت-شرکت-توسعه-کسبوکار/services/tech/راهکارهای-فروشگاهی",
+                "section": "services",
+                "children": [
+                  {
+                    "title": "راه‌اندازی فروشگاه اینترنتی",
+                    "slug": "راهاندازی-فروشگاه-اینترنتی",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/tech/راهکارهای-فروشگاهی/راهاندازی-فروشگاه-اینترنتی",
+                    "section": "services",
+                    "children": []
+                  },
+                  {
+                    "title": "توسعه مارکت‌‌پلیس",
+                    "slug": "توسعه-مارکتپلیس",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/tech/راهکارهای-فروشگاهی/توسعه-مارکتپلیس",
+                    "section": "services",
+                    "children": []
+                  },
+                  {
+                    "title": "اتصال درگاه و انبارداری",
+                    "slug": "اتصال-درگاه-و-انبارداری",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/tech/راهکارهای-فروشگاهی/اتصال-درگاه-و-انبارداری",
+                    "section": "services",
+                    "children": []
+                  },
+                  {
+                    "title": "سیستم حراجی و تخفیف",
+                    "slug": "سیستم-حراجی-و-تخفیف",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/tech/راهکارهای-فروشگاهی/سیستم-حراجی-و-تخفیف",
+                    "section": "services",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "title": "اپلیکیشن و نرم‌افزار",
+                "slug": "اپلیکیشن-و-نرمافزار",
+                "path": "وبسایت-شرکت-توسعه-کسبوکار/services/tech/اپلیکیشن-و-نرمافزار",
+                "section": "services",
+                "children": [
+                  {
+                    "title": "وب‌اپلیکیشن PWA",
+                    "slug": "وباپلیکیشن-pwa",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/tech/اپلیکیشن-و-نرمافزار/وباپلیکیشن-pwa",
+                    "section": "services",
+                    "children": []
+                  },
+                  {
+                    "title": "اپلیکیشن نیتیو Android iOS",
+                    "slug": "اپلیکیشن-نیتیو-android-ios",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/tech/اپلیکیشن-و-نرمافزار/اپلیکیشن-نیتیو-android-ios",
+                    "section": "services",
+                    "children": []
+                  },
+                  {
+                    "title": "پورتال‌های سازمانی",
+                    "slug": "پورتالهای-سازمانی",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/tech/اپلیکیشن-و-نرمافزار/پورتالهای-سازمانی",
+                    "section": "services",
+                    "children": []
+                  },
+                  {
+                    "title": "پنل‌های کاربری اختصاصی",
+                    "slug": "پنلهای-کاربری-اختصاصی",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/tech/اپلیکیشن-و-نرمافزار/پنلهای-کاربری-اختصاصی",
+                    "section": "services",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "title": "هوش مصنوعی AI",
+                "slug": "هوش-مصنوعی-ai",
+                "path": "وبسایت-شرکت-توسعه-کسبوکار/services/tech/هوش-مصنوعی-ai",
+                "section": "services",
+                "children": [
+                  {
+                    "title": "چت‌بات هوشمند",
+                    "slug": "چتبات-هوشمند",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/tech/هوش-مصنوعی-ai/چتبات-هوشمند",
+                    "section": "services",
+                    "children": []
+                  },
+                  {
+                    "title": "اتصال به CRM",
+                    "slug": "اتصال-به-crm",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/tech/هوش-مصنوعی-ai/اتصال-به-crm",
+                    "section": "services",
+                    "children": []
+                  },
+                  {
+                    "title": "اتوماسیون فروش",
+                    "slug": "اتوماسیون-فروش",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/tech/هوش-مصنوعی-ai/اتوماسیون-فروش",
+                    "section": "services",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "title": "رشد و مارکتینگ Growth",
+            "slug": "growth",
+            "path": "وبسایت-شرکت-توسعه-کسبوکار/services/growth",
+            "section": "services",
+            "children": [
+              {
+                "title": "سئو و ترافیک SEO",
+                "slug": "سئو-و-ترافیک-seo",
+                "path": "وبسایت-شرکت-توسعه-کسبوکار/services/growth/سئو-و-ترافیک-seo",
+                "section": "services",
+                "children": [
+                  {
+                    "title": "سئو داخلی و تکنیکال",
+                    "slug": "سئو-داخلی-و-تکنیکال",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/growth/سئو-و-ترافیک-seo/سئو-داخلی-و-تکنیکال",
+                    "section": "services",
+                    "children": []
+                  },
+                  {
+                    "title": "لینک‌سازی و سئو خارجی",
+                    "slug": "لینکسازی-و-سئو-خارجی",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/growth/سئو-و-ترافیک-seo/لینکسازی-و-سئو-خارجی",
+                    "section": "services",
+                    "children": []
+                  },
+                  {
+                    "title": "سئو محلی Local",
+                    "slug": "سئو-محلی-local",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/growth/سئو-و-ترافیک-seo/سئو-محلی-local",
+                    "section": "services",
+                    "children": []
+                  },
+                  {
+                    "title": "استراتژی سئو",
+                    "slug": "استراتژی-سئو",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/growth/سئو-و-ترافیک-seo/استراتژی-سئو",
+                    "section": "services",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "title": "تبلیغات آنلاین Ads",
+                "slug": "تبلیغات-آنلاین-ads",
+                "path": "وبسایت-شرکت-توسعه-کسبوکار/services/growth/تبلیغات-آنلاین-ads",
+                "section": "services",
+                "children": [
+                  {
+                    "title": "گوگل ادز",
+                    "slug": "گوگل-ادز",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/growth/تبلیغات-آنلاین-ads/گوگل-ادز",
+                    "section": "services",
+                    "children": []
+                  },
+                  {
+                    "title": "تبلیغات کلیکی CPC",
+                    "slug": "تبلیغات-کلیکی-cpc",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/growth/تبلیغات-آنلاین-ads/تبلیغات-کلیکی-cpc",
+                    "section": "services",
+                    "children": []
+                  },
+                  {
+                    "title": "ریتارگتینگ",
+                    "slug": "ریتارگتینگ",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/growth/تبلیغات-آنلاین-ads/ریتارگتینگ",
+                    "section": "services",
+                    "children": []
+                  },
+                  {
+                    "title": "رپورتاژ آگهی",
+                    "slug": "رپورتاژ-آگهی",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/growth/تبلیغات-آنلاین-ads/رپورتاژ-آگهی",
+                    "section": "services",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "title": "سوشال مدیا Social",
+                "slug": "سوشال-مدیا-social",
+                "path": "وبسایت-شرکت-توسعه-کسبوکار/services/growth/سوشال-مدیا-social",
+                "section": "services",
+                "children": [
+                  {
+                    "title": "مدیریت اینستاگرام و لینکدین",
+                    "slug": "مدیریت-اینستاگرام-و-لینکدین",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/growth/سوشال-مدیا-social/مدیریت-اینستاگرام-و-لینکدین",
+                    "section": "services",
+                    "children": []
+                  },
+                  {
+                    "title": "تولید محتوای ویدیویی",
+                    "slug": "تولید-محتوای-ویدیویی",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/growth/سوشال-مدیا-social/تولید-محتوای-ویدیویی",
+                    "section": "services",
+                    "children": []
+                  },
+                  {
+                    "title": "اینفلوئنسر مارکتینگ",
+                    "slug": "اینفلوئنسر-مارکتینگ",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/growth/سوشال-مدیا-social/اینفلوئنسر-مارکتینگ",
+                    "section": "services",
+                    "children": []
+                  },
+                  {
+                    "title": "مدیریت دایرکت",
+                    "slug": "مدیریت-دایرکت",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/growth/سوشال-مدیا-social/مدیریت-دایرکت",
+                    "section": "services",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "title": "بازاریابی محتوایی",
+                "slug": "بازاریابی-محتوایی",
+                "path": "وبسایت-شرکت-توسعه-کسبوکار/services/growth/بازاریابی-محتوایی",
+                "section": "services",
+                "children": [
+                  {
+                    "title": "استراتژی محتوا",
+                    "slug": "استراتژی-محتوا",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/growth/بازاریابی-محتوایی/استراتژی-محتوا",
+                    "section": "services",
+                    "children": []
+                  },
+                  {
+                    "title": "تولید مقالات بلاگ",
+                    "slug": "تولید-مقالات-بلاگ",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/growth/بازاریابی-محتوایی/تولید-مقالات-بلاگ",
+                    "section": "services",
+                    "children": []
+                  },
+                  {
+                    "title": "کپی‌رایتینگ محصول",
+                    "slug": "کپیرایتینگ-محصول",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/growth/بازاریابی-محتوایی/کپیرایتینگ-محصول",
+                    "section": "services",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "title": "برندینگ و دیزاین Branding",
+            "slug": "branding",
+            "path": "وبسایت-شرکت-توسعه-کسبوکار/services/branding",
+            "section": "services",
+            "children": [
+              {
+                "title": "هویت بصری",
+                "slug": "هویت-بصری",
+                "path": "وبسایت-شرکت-توسعه-کسبوکار/services/branding/هویت-بصری",
+                "section": "services",
+                "children": [
+                  {
+                    "title": "طراحی لوگو",
+                    "slug": "طراحی-لوگو",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/branding/هویت-بصری/طراحی-لوگو",
+                    "section": "services",
+                    "children": []
+                  },
+                  {
+                    "title": "برندبوک",
+                    "slug": "برندبوک",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/branding/هویت-بصری/برندبوک",
+                    "section": "services",
+                    "children": []
+                  },
+                  {
+                    "title": "پالت رنگ و تایپوگرافی",
+                    "slug": "پالت-رنگ-و-تایپوگرافی",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/branding/هویت-بصری/پالت-رنگ-و-تایپوگرافی",
+                    "section": "services",
+                    "children": []
+                  },
+                  {
+                    "title": "پترن و اوراق اداری",
+                    "slug": "پترن-و-اوراق-اداری",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/branding/هویت-بصری/پترن-و-اوراق-اداری",
+                    "section": "services",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "title": "رابط کاربری UI UX",
+                "slug": "رابط-کاربری-ui-ux",
+                "path": "وبسایت-شرکت-توسعه-کسبوکار/services/branding/رابط-کاربری-ui-ux",
+                "section": "services",
+                "children": [
+                  {
+                    "title": "تحقیقات UX",
+                    "slug": "تحقیقات-ux",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/branding/رابط-کاربری-ui-ux/تحقیقات-ux",
+                    "section": "services",
+                    "children": []
+                  },
+                  {
+                    "title": "وایرفریم و پروتوتایپ",
+                    "slug": "وایرفریم-و-پروتوتایپ",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/branding/رابط-کاربری-ui-ux/وایرفریم-و-پروتوتایپ",
+                    "section": "services",
+                    "children": []
+                  },
+                  {
+                    "title": "طراحی UI وب",
+                    "slug": "طراحی-ui-وب",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/branding/رابط-کاربری-ui-ux/طراحی-ui-وب",
+                    "section": "services",
+                    "children": []
+                  },
+                  {
+                    "title": "طراحی UI موبایل",
+                    "slug": "طراحی-ui-موبایل",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/branding/رابط-کاربری-ui-ux/طراحی-ui-موبایل",
+                    "section": "services",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "title": "گرافیک تبلیغاتی",
+                "slug": "گرافیک-تبلیغاتی",
+                "path": "وبسایت-شرکت-توسعه-کسبوکار/services/branding/گرافیک-تبلیغاتی",
+                "section": "services",
+                "children": [
+                  {
+                    "title": "کاتالوگ دیجیتال",
+                    "slug": "کاتالوگ-دیجیتال",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/branding/گرافیک-تبلیغاتی/کاتالوگ-دیجیتال",
+                    "section": "services",
+                    "children": []
+                  },
+                  {
+                    "title": "بنرهای تبلیغاتی",
+                    "slug": "بنرهای-تبلیغاتی",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/branding/گرافیک-تبلیغاتی/بنرهای-تبلیغاتی",
+                    "section": "services",
+                    "children": []
+                  },
+                  {
+                    "title": "پست و استوری گرافیکی",
+                    "slug": "پست-و-استوری-گرافیکی",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/branding/گرافیک-تبلیغاتی/پست-و-استوری-گرافیکی",
+                    "section": "services",
+                    "children": []
+                  },
+                  {
+                    "title": "بسته‌بندی محصول",
+                    "slug": "بستهبندی-محصول",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/branding/گرافیک-تبلیغاتی/بستهبندی-محصول",
+                    "section": "services",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "title": "استراتژی و مشاوره Strategy",
+            "slug": "strategy",
+            "path": "وبسایت-شرکت-توسعه-کسبوکار/services/strategy",
+            "section": "services",
+            "children": [
+              {
+                "title": "معماری کسب‌وکار",
+                "slug": "معماری-کسبوکار",
+                "path": "وبسایت-شرکت-توسعه-کسبوکار/services/strategy/معماری-کسبوکار",
+                "section": "services",
+                "children": [
+                  {
+                    "title": "مشاوره تحول دیجیتال",
+                    "slug": "مشاوره-تحول-دیجیتال",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/strategy/معماری-کسبوکار/مشاوره-تحول-دیجیتال",
+                    "section": "services",
+                    "children": []
+                  },
+                  {
+                    "title": "بوم مدل کسب‌وکار BMC",
+                    "slug": "بوم-مدل-کسبوکار-bmc",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/strategy/معماری-کسبوکار/بوم-مدل-کسبوکار-bmc",
+                    "section": "services",
+                    "children": []
+                  },
+                  {
+                    "title": "بیزینس پلن",
+                    "slug": "بیزینس-پلن",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/strategy/معماری-کسبوکار/بیزینس-پلن",
+                    "section": "services",
+                    "children": []
+                  },
+                  {
+                    "title": "سیستم‌سازی",
+                    "slug": "سیستمسازی",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/strategy/معماری-کسبوکار/سیستمسازی",
+                    "section": "services",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "title": "تحقیقات بازار",
+                "slug": "تحقیقات-بازار",
+                "path": "وبسایت-شرکت-توسعه-کسبوکار/services/strategy/تحقیقات-بازار",
+                "section": "services",
+                "children": [
+                  {
+                    "title": "مارکت ریسرچ",
+                    "slug": "مارکت-ریسرچ",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/strategy/تحقیقات-بازار/مارکت-ریسرچ",
+                    "section": "services",
+                    "children": []
+                  },
+                  {
+                    "title": "تحلیل رقبا",
+                    "slug": "تحلیل-رقبا",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/strategy/تحقیقات-بازار/تحلیل-رقبا",
+                    "section": "services",
+                    "children": []
+                  },
+                  {
+                    "title": "مارکتینگ پلن",
+                    "slug": "مارکتینگ-پلن",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/strategy/تحقیقات-بازار/مارکتینگ-پلن",
+                    "section": "services",
+                    "children": []
+                  },
+                  {
+                    "title": "نقشه سفر مشتری",
+                    "slug": "نقشه-سفر-مشتری",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/strategy/تحقیقات-بازار/نقشه-سفر-مشتری",
+                    "section": "services",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "title": "پشتیبانی و زیرساخت Support",
+            "slug": "support",
+            "path": "وبسایت-شرکت-توسعه-کسبوکار/services/support",
+            "section": "services",
+            "children": [
+              {
+                "title": "نگهداری و امنیت",
+                "slug": "نگهداری-و-امنیت",
+                "path": "وبسایت-شرکت-توسعه-کسبوکار/services/support/نگهداری-و-امنیت",
+                "section": "services",
+                "children": [
+                  {
+                    "title": "پشتیبانی فنی",
+                    "slug": "پشتیبانی-فنی",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/support/نگهداری-و-امنیت/پشتیبانی-فنی",
+                    "section": "services",
+                    "children": []
+                  },
+                  {
+                    "title": "کانفیگ امنیتی",
+                    "slug": "کانفیگ-امنیتی",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/support/نگهداری-و-امنیت/کانفیگ-امنیتی",
+                    "section": "services",
+                    "children": []
+                  },
+                  {
+                    "title": "پاکسازی ویروس",
+                    "slug": "پاکسازی-ویروس",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/support/نگهداری-و-امنیت/پاکسازی-ویروس",
+                    "section": "services",
+                    "children": []
+                  },
+                  {
+                    "title": "بک‌آپ ابری",
+                    "slug": "بکآپ-ابری",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/support/نگهداری-و-امنیت/بکآپ-ابری",
+                    "section": "services",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "title": "پرفورمنس",
+                "slug": "پرفورمنس",
+                "path": "وبسایت-شرکت-توسعه-کسبوکار/services/support/پرفورمنس",
+                "section": "services",
+                "children": [
+                  {
+                    "title": "افزایش سرعت",
+                    "slug": "افزایش-سرعت",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/support/پرفورمنس/افزایش-سرعت",
+                    "section": "services",
+                    "children": []
+                  },
+                  {
+                    "title": "بهینه‌سازی Core Web Vitals",
+                    "slug": "بهینهسازی-core-web-vitals",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/support/پرفورمنس/بهینهسازی-core-web-vitals",
+                    "section": "services",
+                    "children": []
+                  },
+                  {
+                    "title": "هاستینگ و سرور",
+                    "slug": "هاستینگ-و-سرور",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/support/پرفورمنس/هاستینگ-و-سرور",
+                    "section": "services",
+                    "children": []
+                  },
+                  {
+                    "title": "رفع خطاهای تکنیکال",
+                    "slug": "رفع-خطاهای-تکنیکال",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/services/support/پرفورمنس/رفع-خطاهای-تکنیکال",
+                    "section": "services",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "منوی راهکارها Solutions",
+        "slug": "solutions",
+        "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions",
+        "section": "solutions",
+        "children": [
+          {
+            "title": "خرده‌فروشی Retail",
+            "slug": "خردهفروشی-retail",
+            "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/خردهفروشی-retail",
+            "section": "solutions",
+            "children": [
+              {
+                "title": "مد و پوشاک",
+                "slug": "مد-و-پوشاک",
+                "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/خردهفروشی-retail/مد-و-پوشاک",
+                "section": "solutions",
+                "children": [
+                  {
+                    "title": "برند فشن",
+                    "slug": "برند-فشن",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/خردهفروشی-retail/مد-و-پوشاک/برند-فشن",
+                    "section": "solutions",
+                    "children": []
+                  },
+                  {
+                    "title": "فروشگاه لباس",
+                    "slug": "فروشگاه-لباس",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/خردهفروشی-retail/مد-و-پوشاک/فروشگاه-لباس",
+                    "section": "solutions",
+                    "children": []
+                  },
+                  {
+                    "title": "کمپین فصلی",
+                    "slug": "کمپین-فصلی",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/خردهفروشی-retail/مد-و-پوشاک/کمپین-فصلی",
+                    "section": "solutions",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "title": "کالای دیجیتال",
+                "slug": "کالای-دیجیتال",
+                "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/خردهفروشی-retail/کالای-دیجیتال",
+                "section": "solutions",
+                "children": [
+                  {
+                    "title": "فروشگاه موبایل",
+                    "slug": "فروشگاه-موبایل",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/خردهفروشی-retail/کالای-دیجیتال/فروشگاه-موبایل",
+                    "section": "solutions",
+                    "children": []
+                  },
+                  {
+                    "title": "مقایسه فنی",
+                    "slug": "مقایسه-فنی",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/خردهفروشی-retail/کالای-دیجیتال/مقایسه-فنی",
+                    "section": "solutions",
+                    "children": []
+                  },
+                  {
+                    "title": "لوازم خانگی",
+                    "slug": "لوازم-خانگی",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/خردهفروشی-retail/کالای-دیجیتال/لوازم-خانگی",
+                    "section": "solutions",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "title": "سوپرمارکت FMCG",
+                "slug": "سوپرمارکت-fmcg",
+                "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/خردهفروشی-retail/سوپرمارکت-fmcg",
+                "section": "solutions",
+                "children": [
+                  {
+                    "title": "هایپرمارکت آنلاین",
+                    "slug": "هایپرمارکت-آنلاین",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/خردهفروشی-retail/سوپرمارکت-fmcg/هایپرمارکت-آنلاین",
+                    "section": "solutions",
+                    "children": []
+                  },
+                  {
+                    "title": "دلیوری سریع",
+                    "slug": "دلیوری-سریع",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/خردهفروشی-retail/سوپرمارکت-fmcg/دلیوری-سریع",
+                    "section": "solutions",
+                    "children": []
+                  },
+                  {
+                    "title": "فروشگاه مواد غذایی",
+                    "slug": "فروشگاه-مواد-غذایی",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/خردهفروشی-retail/سوپرمارکت-fmcg/فروشگاه-مواد-غذایی",
+                    "section": "solutions",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "title": "پزشکی و سلامت Health",
+            "slug": "پزشکی-و-سلامت-health",
+            "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/پزشکی-و-سلامت-health",
+            "section": "solutions",
+            "children": [
+              {
+                "title": "پزشکان و مطب‌ها",
+                "slug": "پزشکان-و-مطبها",
+                "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/پزشکی-و-سلامت-health/پزشکان-و-مطبها",
+                "section": "solutions",
+                "children": [
+                  {
+                    "title": "برندینگ پزشک",
+                    "slug": "برندینگ-پزشک",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/پزشکی-و-سلامت-health/پزشکان-و-مطبها/برندینگ-پزشک",
+                    "section": "solutions",
+                    "children": []
+                  },
+                  {
+                    "title": "نوبت‌دهی آنلاین",
+                    "slug": "نوبتدهی-آنلاین",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/پزشکی-و-سلامت-health/پزشکان-و-مطبها/نوبتدهی-آنلاین",
+                    "section": "solutions",
+                    "children": []
+                  },
+                  {
+                    "title": "مدیکال مارکتینگ",
+                    "slug": "مدیکال-مارکتینگ",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/پزشکی-و-سلامت-health/پزشکان-و-مطبها/مدیکال-مارکتینگ",
+                    "section": "solutions",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "title": "کلینیک‌ها",
+                "slug": "کلینیکها",
+                "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/پزشکی-و-سلامت-health/کلینیکها",
+                "section": "solutions",
+                "children": [
+                  {
+                    "title": "کلینیک زیبایی",
+                    "slug": "کلینیک-زیبایی",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/پزشکی-و-سلامت-health/کلینیکها/کلینیک-زیبایی",
+                    "section": "solutions",
+                    "children": []
+                  },
+                  {
+                    "title": "بیمارستان",
+                    "slug": "بیمارستان",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/پزشکی-و-سلامت-health/کلینیکها/بیمارستان",
+                    "section": "solutions",
+                    "children": []
+                  },
+                  {
+                    "title": "توریسم سلامت",
+                    "slug": "توریسم-سلامت",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/پزشکی-و-سلامت-health/کلینیکها/توریسم-سلامت",
+                    "section": "solutions",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "title": "دارو و تجهیزات",
+                "slug": "دارو-و-تجهیزات",
+                "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/پزشکی-و-سلامت-health/دارو-و-تجهیزات",
+                "section": "solutions",
+                "children": [
+                  {
+                    "title": "داروخانه آنلاین",
+                    "slug": "داروخانه-آنلاین",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/پزشکی-و-سلامت-health/دارو-و-تجهیزات/داروخانه-آنلاین",
+                    "section": "solutions",
+                    "children": []
+                  },
+                  {
+                    "title": "تجهیزات پزشکی",
+                    "slug": "تجهیزات-پزشکی",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/پزشکی-و-سلامت-health/دارو-و-تجهیزات/تجهیزات-پزشکی",
+                    "section": "solutions",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "title": "خدمات شرکتی Corporate",
+            "slug": "خدمات-شرکتی-corporate",
+            "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/خدمات-شرکتی-corporate",
+            "section": "solutions",
+            "children": [
+              {
+                "title": "املاک Real Estate",
+                "slug": "املاک-real-estate",
+                "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/خدمات-شرکتی-corporate/املاک-real-estate",
+                "section": "solutions",
+                "children": [
+                  {
+                    "title": "آژانس املاک",
+                    "slug": "آژانس-املاک",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/خدمات-شرکتی-corporate/املاک-real-estate/آژانس-املاک",
+                    "section": "solutions",
+                    "children": []
+                  },
+                  {
+                    "title": "شرکت ساختمانی",
+                    "slug": "شرکت-ساختمانی",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/خدمات-شرکتی-corporate/املاک-real-estate/شرکت-ساختمانی",
+                    "section": "solutions",
+                    "children": []
+                  },
+                  {
+                    "title": "تور مجازی",
+                    "slug": "تور-مجازی",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/خدمات-شرکتی-corporate/املاک-real-estate/تور-مجازی",
+                    "section": "solutions",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "title": "حقوقی و مالی",
+                "slug": "حقوقی-و-مالی",
+                "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/خدمات-شرکتی-corporate/حقوقی-و-مالی",
+                "section": "solutions",
+                "children": [
+                  {
+                    "title": "وکلا و موسسات",
+                    "slug": "وکلا-و-موسسات",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/خدمات-شرکتی-corporate/حقوقی-و-مالی/وکلا-و-موسسات",
+                    "section": "solutions",
+                    "children": []
+                  },
+                  {
+                    "title": "پورتال بیمه",
+                    "slug": "پورتال-بیمه",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/خدمات-شرکتی-corporate/حقوقی-و-مالی/پورتال-بیمه",
+                    "section": "solutions",
+                    "children": []
+                  },
+                  {
+                    "title": "حسابداری",
+                    "slug": "حسابداری",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/خدمات-شرکتی-corporate/حقوقی-و-مالی/حسابداری",
+                    "section": "solutions",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "title": "خدمات عمومی",
+                "slug": "خدمات-عمومی",
+                "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/خدمات-شرکتی-corporate/خدمات-عمومی",
+                "section": "solutions",
+                "children": [
+                  {
+                    "title": "باربری و لجستیک",
+                    "slug": "باربری-و-لجستیک",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/خدمات-شرکتی-corporate/خدمات-عمومی/باربری-و-لجستیک",
+                    "section": "solutions",
+                    "children": []
+                  },
+                  {
+                    "title": "خدمات نظافتی",
+                    "slug": "خدمات-نظافتی",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/خدمات-شرکتی-corporate/خدمات-عمومی/خدمات-نظافتی",
+                    "section": "solutions",
+                    "children": []
+                  },
+                  {
+                    "title": "شرکت مهاجرتی",
+                    "slug": "شرکت-مهاجرتی",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/خدمات-شرکتی-corporate/خدمات-عمومی/شرکت-مهاجرتی",
+                    "section": "solutions",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "title": "آموزش Education",
+            "slug": "آموزش-education",
+            "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/آموزش-education",
+            "section": "solutions",
+            "children": [
+              {
+                "title": "موسسات آموزشی",
+                "slug": "موسسات-آموزشی",
+                "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/آموزش-education/موسسات-آموزشی",
+                "section": "solutions",
+                "children": [
+                  {
+                    "title": "LMS",
+                    "slug": "lms",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/آموزش-education/موسسات-آموزشی/lms",
+                    "section": "solutions",
+                    "children": []
+                  },
+                  {
+                    "title": "آزمون آنلاین",
+                    "slug": "آزمون-آنلاین",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/آموزش-education/موسسات-آموزشی/آزمون-آنلاین",
+                    "section": "solutions",
+                    "children": []
+                  },
+                  {
+                    "title": "مدارس",
+                    "slug": "مدارس",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/آموزش-education/موسسات-آموزشی/مدارس",
+                    "section": "solutions",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "title": "مدرسین",
+                "slug": "مدرسین",
+                "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/آموزش-education/مدرسین",
+                "section": "solutions",
+                "children": [
+                  {
+                    "title": "فروش دوره",
+                    "slug": "فروش-دوره",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/آموزش-education/مدرسین/فروش-دوره",
+                    "section": "solutions",
+                    "children": []
+                  },
+                  {
+                    "title": "پرسونال برندینگ استاد",
+                    "slug": "پرسونال-برندینگ-استاد",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/آموزش-education/مدرسین/پرسونال-برندینگ-استاد",
+                    "section": "solutions",
+                    "children": []
+                  },
+                  {
+                    "title": "وبینار",
+                    "slug": "وبینار",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/آموزش-education/مدرسین/وبینار",
+                    "section": "solutions",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "title": "گردشگری Hospitality",
+            "slug": "گردشگری-hospitality",
+            "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/گردشگری-hospitality",
+            "section": "solutions",
+            "children": [
+              {
+                "title": "کافه و رستوران",
+                "slug": "کافه-و-رستوران",
+                "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/گردشگری-hospitality/کافه-و-رستوران",
+                "section": "solutions",
+                "children": [
+                  {
+                    "title": "منوی دیجیتال QR",
+                    "slug": "منوی-دیجیتال-qr",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/گردشگری-hospitality/کافه-و-رستوران/منوی-دیجیتال-qr",
+                    "section": "solutions",
+                    "children": []
+                  },
+                  {
+                    "title": "سفارش آنلاین",
+                    "slug": "سفارش-آنلاین",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/گردشگری-hospitality/کافه-و-رستوران/سفارش-آنلاین",
+                    "section": "solutions",
+                    "children": []
+                  },
+                  {
+                    "title": "باشگاه مشتریان",
+                    "slug": "باشگاه-مشتریان",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/گردشگری-hospitality/کافه-و-رستوران/باشگاه-مشتریان",
+                    "section": "solutions",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "title": "سفر و اقامت",
+                "slug": "سفر-و-اقامت",
+                "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/گردشگری-hospitality/سفر-و-اقامت",
+                "section": "solutions",
+                "children": [
+                  {
+                    "title": "آژانس مسافرتی",
+                    "slug": "آژانس-مسافرتی",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/گردشگری-hospitality/سفر-و-اقامت/آژانس-مسافرتی",
+                    "section": "solutions",
+                    "children": []
+                  },
+                  {
+                    "title": "رزرو هتل",
+                    "slug": "رزرو-هتل",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/گردشگری-hospitality/سفر-و-اقامت/رزرو-هتل",
+                    "section": "solutions",
+                    "children": []
+                  },
+                  {
+                    "title": "مجموعه تفریحی",
+                    "slug": "مجموعه-تفریحی",
+                    "path": "وبسایت-شرکت-توسعه-کسبوکار/solutions/گردشگری-hospitality/سفر-و-اقامت/مجموعه-تفریحی",
+                    "section": "solutions",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "سایر صفحات Pages",
+        "slug": "pages",
+        "path": "وبسایت-شرکت-توسعه-کسبوکار/pages",
+        "section": "pages",
+        "children": [
+          {
+            "title": "درباره ما",
+            "slug": "about",
+            "path": "وبسایت-شرکت-توسعه-کسبوکار/pages/about",
+            "section": "pages",
+            "children": []
+          },
+          {
+            "title": "تیم ما",
+            "slug": "team",
+            "path": "وبسایت-شرکت-توسعه-کسبوکار/pages/team",
+            "section": "pages",
+            "children": []
+          },
+          {
+            "title": "تماس با ما",
+            "slug": "contact",
+            "path": "وبسایت-شرکت-توسعه-کسبوکار/pages/contact",
+            "section": "pages",
+            "children": []
+          },
+          {
+            "title": "همکاری با ما",
+            "slug": "careers",
+            "path": "وبسایت-شرکت-توسعه-کسبوکار/pages/careers",
+            "section": "pages",
+            "children": []
+          }
+        ]
+      },
+      {
+        "title": "نمونه‌کارها Portfolio",
+        "slug": "portfolio",
+        "path": "وبسایت-شرکت-توسعه-کسبوکار/portfolio",
+        "section": "portfolio",
+        "children": [
+          {
+            "title": "آرشیو کل پروژه‌ها",
+            "slug": "آرشیو-کل-پروژهها",
+            "path": "وبسایت-شرکت-توسعه-کسبوکار/portfolio/آرشیو-کل-پروژهها",
+            "section": "portfolio",
+            "children": []
+          },
+          {
+            "title": "فیلتر بر اساس خدمات",
+            "slug": "فیلتر-بر-اساس-خدمات",
+            "path": "وبسایت-شرکت-توسعه-کسبوکار/portfolio/فیلتر-بر-اساس-خدمات",
+            "section": "portfolio",
+            "children": []
+          },
+          {
+            "title": "فیلتر بر اساس صنعت",
+            "slug": "فیلتر-بر-اساس-صنعت",
+            "path": "وبسایت-شرکت-توسعه-کسبوکار/portfolio/فیلتر-بر-اساس-صنعت",
+            "section": "portfolio",
+            "children": []
+          },
+          {
+            "title": "صفحه جزئیات پروژه Case Study",
+            "slug": "صفحه-جزئیات-پروژه-case-study",
+            "path": "وبسایت-شرکت-توسعه-کسبوکار/portfolio/صفحه-جزئیات-پروژه-case-study",
+            "section": "portfolio",
+            "children": []
+          }
+        ]
+      },
+      {
+        "title": "منابع Resources",
+        "slug": "resources",
+        "path": "وبسایت-شرکت-توسعه-کسبوکار/resources",
+        "section": "resources",
+        "children": [
+          {
+            "title": "بلاگ",
+            "slug": "blog",
+            "path": "وبسایت-شرکت-توسعه-کسبوکار/resources/blog",
+            "section": "resources",
+            "children": []
+          },
+          {
+            "title": "آکادمی ویدیو",
+            "slug": "academy",
+            "path": "وبسایت-شرکت-توسعه-کسبوکار/resources/academy",
+            "section": "resources",
+            "children": []
+          },
+          {
+            "title": "دانلودها",
+            "slug": "downloads",
+            "path": "وبسایت-شرکت-توسعه-کسبوکار/resources/downloads",
+            "section": "resources",
+            "children": []
+          },
+          {
+            "title": "سوالات متداول FAQ",
+            "slug": "faq",
+            "path": "وبسایت-شرکت-توسعه-کسبوکار/resources/faq",
+            "section": "resources",
+            "children": []
+          }
+        ]
+      },
+      {
+        "title": "صفحات فرود مخفی Landing",
+        "slug": "landing",
+        "path": "وبسایت-شرکت-توسعه-کسبوکار/landing",
+        "section": "landing",
+        "children": [
+          {
+            "title": "مشاوره رایگان",
+            "slug": "free-consultation",
+            "path": "وبسایت-شرکت-توسعه-کسبوکار/landing/free-consultation",
+            "section": "landing",
+            "children": []
+          },
+          {
+            "title": "درخواست پروپوزال",
+            "slug": "proposal",
+            "path": "وبسایت-شرکت-توسعه-کسبوکار/landing/proposal",
+            "section": "landing",
+            "children": []
+          },
+          {
+            "title": "تعرفه‌ها",
+            "slug": "pricing",
+            "path": "وبسایت-شرکت-توسعه-کسبوکار/landing/pricing",
+            "section": "landing",
+            "children": []
+          }
+        ]
+      },
+      {
+        "title": "فوتر و قانونی Legal",
+        "slug": "legal",
+        "path": "وبسایت-شرکت-توسعه-کسبوکار/legal",
+        "section": "legal",
+        "children": [
+          {
+            "title": "قوانین و مقررات",
+            "slug": "terms",
+            "path": "وبسایت-شرکت-توسعه-کسبوکار/legal/terms",
+            "section": "legal",
+            "children": []
+          },
+          {
+            "title": "حریم خصوصی",
+            "slug": "privacy",
+            "path": "وبسایت-شرکت-توسعه-کسبوکار/legal/privacy",
+            "section": "legal",
+            "children": []
+          },
+          {
+            "title": "نماد اعتماد",
+            "slug": "trust-seal",
+            "path": "وبسایت-شرکت-توسعه-کسبوکار/legal/trust-seal",
+            "section": "legal",
+            "children": []
+          }
+        ]
+      }
+    ]
+  },
+  "leaf_count": 114
+}

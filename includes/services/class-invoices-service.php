@@ -37,7 +37,9 @@ class WebinoCRM_Invoices_Service {
                 'project_title' => $project_id ? get_the_title($project_id) : '---',
                 'final_total' => (float) get_post_meta($inv_id, '_final_total', true),
                 'issue_date' => get_post_meta($inv_id, '_issue_date', true),
-                'date_display' => get_the_date('Y/m/d', $post),
+                'date_display' => class_exists( 'WebinoCRM_Date_Formatter' )
+                    ? WebinoCRM_Date_Formatter::format_date( get_the_date( 'Y-m-d', $post ) )
+                    : get_the_date( 'Y/m/d', $post ),
             ];
         }
         $customers = get_users(['role__in' => ['customer', 'subscriber'], 'orderby' => 'display_name']);

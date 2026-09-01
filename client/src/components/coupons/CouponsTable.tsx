@@ -6,7 +6,7 @@ import { MoneyDisplay } from '@/components/currency/MoneyDisplay'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { useStoreCurrency } from '@/hooks/useStoreCurrency'
-import { formatDisplayDate } from '@/lib/date'
+import { useLocale } from '@/hooks/use-locale'
 import { translateCouponType } from '@/lib/enumLabels'
 
 export type CouponTableRow = CouponListRow & {
@@ -39,6 +39,7 @@ export function CouponsTable({
   onTrashed,
 }: CouponsTableProps) {
   const { t } = useTranslation()
+  const { formatDate } = useLocale()
   const { currency, currencySymbol } = useStoreCurrency()
 
   const allSelected = items.length > 0 && items.every((row) => selectedIds.includes(row.id))
@@ -81,7 +82,7 @@ export function CouponsTable({
 
   function expiryCell(iso: string | null | undefined) {
     if (!iso) return '—'
-    return formatDisplayDate(iso, locale)
+    return formatDate(iso)
   }
 
   return (

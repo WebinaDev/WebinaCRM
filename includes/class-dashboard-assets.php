@@ -644,6 +644,54 @@ class WebinoCRM_Dashboard_Assets {
 	}
 
 	/**
+	 * Public accessor for SSR shell bootstrap snapshot.
+	 *
+	 * @param int $user_id User ID.
+	 * @return array<string,mixed>|null
+	 */
+	public static function get_cached_bootstrap_for_user( $user_id ) {
+		$user_id = (int) $user_id;
+		if ( $user_id <= 0 || ! is_user_logged_in() ) {
+			return null;
+		}
+		$cached = self::get_cached_bootstrap( $user_id );
+		if ( is_array( $cached ) ) {
+			return $cached;
+		}
+		try {
+			$response = WebinoCRM_Dashboard_REST::bootstrap();
+			if ( $response instanceof WP_REST_Response ) {
+				$data = $response->get_data();
+				if ( is_array( $data ) ) {
+					self::set_cached_bootstrap( $user_id, $data );
+					return $data;
+				}
+			}
+		} catch ( Throwable $e ) {
+			if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+				// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+				error_log( '[WebinoCRM] SSR bootstrap failed: ' . $e->getMessage() );
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * CRM host is always licensed; embed snapshot for LicenseGate parity.
+	 *
+	 * @return array<string,mixed>
+	 */
+	public static function license_bootstrap_payload() {
+		return array(
+			'active'  => true,
+			'demo'    => false,
+			'status'  => 'active',
+			'message' => '',
+			'domain'  => wp_parse_url( home_url( '/' ), PHP_URL_HOST ),
+		);
+	}
+
+	/**
 	 * @param int                  $user_id WordPress user ID.
 	 * @param array<string,mixed>  $data    Bootstrap payload.
 	 * @return void
@@ -739,24 +787,12 @@ class WebinoCRM_Dashboard_Assets {
 
 		$bootstrap = null;
 		if ( is_user_logged_in() ) {
-			$bootstrap = self::get_cached_bootstrap( $uid );
-			if ( null === $bootstrap ) {
-				try {
-					$response = WebinoCRM_Dashboard_REST::bootstrap();
-					if ( $response instanceof WP_REST_Response ) {
-						$bootstrap = $response->get_data();
-						if ( is_array( $bootstrap ) ) {
-							self::set_cached_bootstrap( $uid, $bootstrap );
-						}
-					}
-				} catch ( Throwable $e ) {
-					if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
-						// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
-						error_log( '[WebinoCRM] bootstrap embed failed: ' . $e->getMessage() );
-					}
-					$bootstrap = null;
-				}
-			}
+			$bootstrap = self::get_cached_bootstrap_for_user( $uid );
+		}
+
+		$page = null;
+		if ( $uid > 0 && is_user_logged_in() && class_exists( 'WebinoCRM_Dashboard_SSR', false ) ) {
+			$page = WebinoCRM_Dashboard_SSR::build_page_payload();
 		}
 
 		return array(
@@ -777,8 +813,9 @@ class WebinoCRM_Dashboard_Assets {
 			'userId'       => $uid,
 			'siteName'     => webinocrm_product_display_name(),
 			'siteIconUrl'  => WebinoCRM_Dashboard_REST::site_icon_url(),
-			'license'      => array(),
+			'license'      => self::license_bootstrap_payload(),
 			'bootstrap'    => $bootstrap,
+			'page'         => $page,
 			'marketplaceSettingsSections' => apply_filters( 'webinocrm_marketplace_settings_sections', array() ),
 			'flags'        => array(
 				'crm'                  => true,

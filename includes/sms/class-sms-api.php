@@ -43,19 +43,36 @@ class WebinoCRM_Sms_API {
 			array( 'POST', '/modirpayamak/templates', 'put_templates' ),
 			array( 'GET', '/modirpayamak/templates/shortcodes', 'get_shortcodes' ),
 			array( 'POST', '/modirpayamak/patterns/sync', 'sync_pattern' ),
+			array( 'POST', '/modirpayamak/patterns/detach', 'detach_pattern' ),
 			array( 'GET', '/modirpayamak/patterns/registry', 'get_pattern_registry' ),
+			array( 'POST', '/modirpayamak/patterns', 'create_pattern' ),
 			array( 'POST', '/modirpayamak/orders/notify', 'order_notify' ),
+			array( 'GET', '/modirpayamak/orders/messages', 'order_messages' ),
+			array( 'POST', '/modirpayamak/orders/test-notify', 'order_test_notify' ),
 			array( 'POST', '/modirpayamak/auth/send-otp', 'auth_send_otp' ),
 			array( 'POST', '/modirpayamak/auth/verify-otp', 'auth_verify_otp' ),
 			array( 'POST', '/modirpayamak/newsletter/subscribe', 'newsletter_subscribe' ),
 			array( 'GET', '/modirpayamak/newsletter/subscribers', 'newsletter_subscribers' ),
+			array( 'DELETE', '/modirpayamak/newsletter/subscribers', 'newsletter_unsubscribe' ),
+			array( 'POST', '/modirpayamak/newsletter/unsubscribe', 'newsletter_unsubscribe' ),
 			array( 'POST', '/modirpayamak/newsletter/send', 'newsletter_send' ),
 			array( 'GET', '/modirpayamak/reports/inbox', 'reports_inbox' ),
+			array( 'GET', '/modirpayamak/reports/bulk-stats', 'reports_bulk_stats' ),
+			array( 'GET', '/modirpayamak/reports/bulk-recipients', 'reports_bulk_recipients' ),
 			array( 'POST', '/modirpayamak/send/cancel-scheduled', 'cancel_scheduled' ),
 			array( 'GET', '/modirpayamak/drafts', 'list_drafts' ),
+			array( 'POST', '/modirpayamak/drafts', 'create_draft' ),
+			array( 'DELETE', '/modirpayamak/drafts', 'delete_draft' ),
+			array( 'POST', '/modirpayamak/drafts/delete', 'delete_draft' ),
 			array( 'GET', '/modirpayamak/tickets', 'list_tickets' ),
 			array( 'GET', '/modirpayamak/phonebooks/edge', 'list_edge_phonebooks' ),
 			array( 'POST', '/modirpayamak/phonebooks/edge', 'create_edge_phonebook' ),
+			array( 'GET', '/modirpayamak/ledger', 'get_ledger' ),
+			array( 'GET', '/modirpayamak/secretaries', 'list_secretaries' ),
+			array( 'POST', '/modirpayamak/secretaries', 'save_secretary' ),
+			array( 'DELETE', '/modirpayamak/secretaries', 'delete_secretary' ),
+			array( 'POST', '/modirpayamak/secretaries/delete', 'delete_secretary' ),
+			array( 'POST', '/modirpayamak/secretaries/process', 'process_secretaries' ),
 		);
 
 		foreach ( $routes as $r ) {
@@ -122,7 +139,7 @@ class WebinoCRM_Sms_API {
 	 */
 	public function permission_check( $request ) {
 		$domain = $request->get_param( 'domain' );
-		if ( ! $domain && in_array( $request->get_method(), array( 'POST', 'PUT', 'PATCH' ), true ) ) {
+		if ( ! $domain && in_array( $request->get_method(), array( 'POST', 'PUT', 'PATCH', 'DELETE' ), true ) ) {
 			$body   = $request->get_json_params();
 			$domain = is_array( $body ) ? ( $body['domain'] ?? '' ) : '';
 		}
@@ -192,13 +209,16 @@ class WebinoCRM_Sms_API {
 	 * @return WP_REST_Response
 	 */
 	public function get_shop_settings( $request ) {
-		$domain = $this->domain_from_request( $request );
-		WebinoCRM_Sms_Template_Service::seed_order_defaults( $domain );
+		$domain   = $this->domain_from_request( $request );
+		$settings = WebinoCRM_Sms_Settings_Service::get( $domain, WebinoCRM_Sms_Constants::SCOPE_SHOP );
+		$keys     = WebinoCRM_Sms_Constants::resolve_event_keys( $settings );
+		WebinoCRM_Sms_Template_Service::seed_order_defaults( $domain, $keys );
 		return new WP_REST_Response(
 			array(
-				'ok'         => true,
-				'settings'   => WebinoCRM_Sms_Settings_Service::get( $domain, WebinoCRM_Sms_Constants::SCOPE_SHOP ),
-				'event_keys' => WebinoCRM_Sms_Constants::order_event_keys(),
+				'ok'            => true,
+				'settings'      => $settings,
+				'event_keys'    => $keys,
+				'event_catalog' => is_array( $settings['event_catalog'] ?? null ) ? $settings['event_catalog'] : array(),
 			),
 			200
 		);
@@ -273,11 +293,51 @@ class WebinoCRM_Sms_API {
 	 * @return WP_REST_Response|WP_Error
 	 */
 	public function sync_pattern( $request ) {
-		$body       = $request->get_json_params();
-		$domain     = WebinoCRM_License_Manager::normalize_domain( (string) ( $body['domain'] ?? '' ) );
-		$scope      = sanitize_key( (string) ( $body['scope'] ?? '' ) );
-		$event_key  = sanitize_key( (string) ( $body['event_key'] ?? '' ) );
-		$result     = WebinoCRM_Sms_Pattern_Sync_Service::sync_one( $domain, $scope, $event_key );
+		$body      = $request->get_json_params();
+		$domain    = WebinoCRM_License_Manager::normalize_domain( (string) ( $body['domain'] ?? '' ) );
+		$scope     = sanitize_key( (string) ( $body['scope'] ?? '' ) );
+		$event_key = sanitize_key( (string) ( $body['event_key'] ?? '' ) );
+		$bind_code = sanitize_text_field( (string) ( $body['pattern_code'] ?? $body['ippanel_code'] ?? '' ) );
+		$param_map = WebinoCRM_Sms_Template_Service::decode_param_map( $body['param_map'] ?? array() );
+		if ( '' !== $bind_code && ! empty( $body['bind_only'] ) ) {
+			$result = WebinoCRM_Sms_Pattern_Sync_Service::bind_existing( $domain, $scope, $event_key, $bind_code, $param_map );
+		} else {
+			if ( '' !== $bind_code || $param_map ) {
+				$tpl = WebinoCRM_Sms_Template_Service::get_one( $domain, $scope, $event_key );
+				$body_tpl = $tpl ? (string) $tpl['body'] : '';
+				if ( $param_map && '' !== $bind_code ) {
+					$body_tpl = WebinoCRM_Sms_Template_Service::format_param_map_preview( $bind_code, $param_map );
+				}
+				if ( $tpl || $body_tpl ) {
+					WebinoCRM_Sms_Template_Service::upsert(
+						$domain,
+						$scope,
+						$event_key,
+						$body_tpl ?: ( $tpl ? (string) $tpl['body'] : '' ),
+						$tpl ? ! empty( $tpl['enabled'] ) : true,
+						$bind_code !== '' ? $bind_code : ( $tpl['pattern_code'] ?? null ),
+						$param_map ?: null
+					);
+				}
+			}
+			$result = WebinoCRM_Sms_Pattern_Sync_Service::sync_one( $domain, $scope, $event_key );
+		}
+		if ( is_wp_error( $result ) ) {
+			return $result;
+		}
+		return new WP_REST_Response( $result, 200 );
+	}
+
+	/**
+	 * @param WP_REST_Request $request Request.
+	 * @return WP_REST_Response|WP_Error
+	 */
+	public function detach_pattern( $request ) {
+		$body      = $request->get_json_params();
+		$domain    = WebinoCRM_License_Manager::normalize_domain( (string) ( $body['domain'] ?? $this->domain_from_request( $request ) ) );
+		$scope     = sanitize_key( (string) ( $body['scope'] ?? '' ) );
+		$event_key = sanitize_key( (string) ( $body['event_key'] ?? '' ) );
+		$result    = WebinoCRM_Sms_Pattern_Sync_Service::detach( $domain, $scope, $event_key );
 		if ( is_wp_error( $result ) ) {
 			return $result;
 		}
@@ -308,11 +368,70 @@ class WebinoCRM_Sms_API {
 		$domain     = WebinoCRM_License_Manager::normalize_domain( (string) ( $body['domain'] ?? '' ) );
 		$event_key  = sanitize_key( (string) ( $body['event_key'] ?? '' ) );
 		$order      = is_array( $body['order'] ?? null ) ? $body['order'] : array();
-		$result     = WebinoCRM_Sms_Order_Notify_Service::notify( $domain, $event_key, $order );
+		$options    = array(
+			'force_customer' => ! empty( $body['force_customer'] ),
+			'force_admin'    => ! empty( $body['force_admin'] ),
+		);
+		$result     = WebinoCRM_Sms_Order_Notify_Service::notify( $domain, $event_key, $order, $options );
 		if ( is_wp_error( $result ) ) {
 			return $result;
 		}
 		return new WP_REST_Response( $result, 200 );
+	}
+
+	/**
+	 * SMS history for a WooCommerce order (context_type=order).
+	 *
+	 * @param WP_REST_Request $request Request.
+	 * @return WP_REST_Response
+	 */
+	public function order_messages( $request ) {
+		$domain   = WebinoCRM_License_Manager::normalize_domain( (string) $request->get_param( 'domain' ) );
+		$order_id = (int) $request->get_param( 'order_id' );
+		$result   = WebinoCRM_Sms_Order_Messages_Service::list_for_order( $domain, $order_id );
+		return new WP_REST_Response( $result, 200 );
+	}
+
+	/**
+	 * Force-send a test notify for one role (customer or admin) using sample/order snapshot.
+	 *
+	 * @param WP_REST_Request $request Request.
+	 * @return WP_REST_Response|WP_Error
+	 */
+	public function order_test_notify( $request ) {
+		$body      = $request->get_json_params();
+		$domain    = WebinoCRM_License_Manager::normalize_domain( (string) ( $body['domain'] ?? '' ) );
+		$event_key = sanitize_key( (string) ( $body['event_key'] ?? 'processing' ) );
+		$role      = sanitize_key( (string) ( $body['role'] ?? 'customer' ) );
+		$order     = is_array( $body['order'] ?? null ) ? $body['order'] : array();
+		$test_phone = WebinoCRM_Sms_Template_Service::normalize_phone( (string) ( $body['phone'] ?? '' ) );
+		if ( empty( $order ) ) {
+			$order = array(
+				'id'             => 0,
+				'number'         => 'TEST',
+				'customer_name'  => 'Test Customer',
+				'customer_phone' => $test_phone,
+				'total'          => '0',
+				'status'         => 'processing',
+				'status_label'   => 'Processing',
+				'site_name'      => get_bloginfo( 'name' ),
+				'site_url'       => 'https://' . $domain,
+			);
+		} elseif ( '' !== $test_phone ) {
+			$order['customer_phone'] = $test_phone;
+		}
+		$options = array(
+			'force_customer' => 'admin' !== $role,
+			'force_admin'    => 'admin' === $role,
+		);
+		if ( 'admin' === $role && '' !== $test_phone ) {
+			$options['admin_phones'] = array( $test_phone );
+		}
+		$result = WebinoCRM_Sms_Order_Notify_Service::notify( $domain, $event_key, $order, $options );
+		if ( is_wp_error( $result ) ) {
+			return $result;
+		}
+		return new WP_REST_Response( array_merge( is_array( $result ) ? $result : array(), array( 'ok' => true, 'test' => true ) ), 200 );
 	}
 
 	/**
@@ -386,6 +505,24 @@ class WebinoCRM_Sms_API {
 	 * @param WP_REST_Request $request Request.
 	 * @return WP_REST_Response|WP_Error
 	 */
+	public function newsletter_unsubscribe( $request ) {
+		$body   = $request->get_json_params();
+		$domain = $this->domain_from_request( $request );
+		if ( ! $domain && is_array( $body ) ) {
+			$domain = WebinoCRM_License_Manager::normalize_domain( (string) ( $body['domain'] ?? '' ) );
+		}
+		$id = (int) ( $request->get_param( 'id' ) ?: ( is_array( $body ) ? ( $body['id'] ?? 0 ) : 0 ) );
+		$result = WebinoCRM_Sms_Newsletter_Service::unsubscribe( $domain, $id );
+		if ( is_wp_error( $result ) ) {
+			return $result;
+		}
+		return new WP_REST_Response( $result, 200 );
+	}
+
+	/**
+	 * @param WP_REST_Request $request Request.
+	 * @return WP_REST_Response|WP_Error
+	 */
 	public function newsletter_send( $request ) {
 		$body       = $request->get_json_params();
 		$domain     = WebinoCRM_License_Manager::normalize_domain( (string) ( $body['domain'] ?? '' ) );
@@ -414,6 +551,32 @@ class WebinoCRM_Sms_API {
 	 * @param WP_REST_Request $request Request.
 	 * @return WP_REST_Response
 	 */
+	public function reports_bulk_stats( $request ) {
+		$outbox_id = (string) ( $request->get_param( 'bulk_id' ) ?: $request->get_param( 'outbox_id' ) );
+		$edge      = WebinoCRM_ModirPayamak_Edge_Client::report_bulk_stats( $outbox_id );
+		return new WP_REST_Response( array( 'ok' => ! empty( $edge['ok'] ), 'data' => $edge['data'], 'meta' => $edge['meta'] ), 200 );
+	}
+
+	/**
+	 * @param WP_REST_Request $request Request.
+	 * @return WP_REST_Response
+	 */
+	public function reports_bulk_recipients( $request ) {
+		$outbox_id = (string) ( $request->get_param( 'bulk_id' ) ?: $request->get_param( 'outbox_id' ) );
+		$edge      = WebinoCRM_ModirPayamak_Edge_Client::report_bulk_recipients(
+			$outbox_id,
+			array(
+				'page'  => max( 1, (int) $request->get_param( 'page' ) ),
+				'limit' => min( 100, max( 1, (int) $request->get_param( 'limit' ) ) ),
+			)
+		);
+		return new WP_REST_Response( array( 'ok' => ! empty( $edge['ok'] ), 'data' => $edge['data'], 'meta' => $edge['meta'] ), 200 );
+	}
+
+	/**
+	 * @param WP_REST_Request $request Request.
+	 * @return WP_REST_Response
+	 */
 	public function cancel_scheduled( $request ) {
 		$body      = $request->get_json_params();
 		$outbox_id = (string) ( $body['messages_outbox_id'] ?? $body['outbox_id'] ?? '' );
@@ -433,6 +596,110 @@ class WebinoCRM_Sms_API {
 			)
 		);
 		return new WP_REST_Response( array( 'ok' => ! empty( $edge['ok'] ), 'data' => $edge['data'], 'meta' => $edge['meta'] ), 200 );
+	}
+
+	/**
+	 * @param WP_REST_Request $request Request.
+	 * @return WP_REST_Response
+	 */
+	public function create_draft( $request ) {
+		$body = $request->get_json_params();
+		unset( $body['domain'] );
+		$edge = WebinoCRM_ModirPayamak_Edge_Client::create_draft( is_array( $body ) ? $body : array() );
+		return new WP_REST_Response( array( 'ok' => ! empty( $edge['ok'] ), 'data' => $edge['data'], 'meta' => $edge['meta'] ), 200 );
+	}
+
+	/**
+	 * @param WP_REST_Request $request Request.
+	 * @return WP_REST_Response
+	 */
+	public function delete_draft( $request ) {
+		$body = $request->get_json_params();
+		$id   = (int) ( $request->get_param( 'id' ) ?: ( is_array( $body ) ? ( $body['id'] ?? 0 ) : 0 ) );
+		$edge = WebinoCRM_ModirPayamak_Edge_Client::delete_draft( $id );
+		return new WP_REST_Response( array( 'ok' => ! empty( $edge['ok'] ), 'data' => $edge['data'], 'meta' => $edge['meta'] ), 200 );
+	}
+
+	/**
+	 * Site-facing wallet ledger for the licensed domain.
+	 *
+	 * @param WP_REST_Request $request Request.
+	 * @return WP_REST_Response
+	 */
+	public function get_ledger( $request ) {
+		$domain  = $this->domain_from_request( $request );
+		$page    = max( 1, (int) $request->get_param( 'page' ) );
+		$limit   = min( 100, max( 1, (int) $request->get_param( 'limit' ) ) );
+		$account = WebinoCRM_ModirPayamak_Manager::get_or_create_account( $domain );
+		return new WP_REST_Response(
+			array(
+				'ok'      => true,
+				'account' => WebinoCRM_ModirPayamak_Manager::format_account_public( $account ),
+				'ledger'  => WebinoCRM_ModirPayamak_Manager::get_ledger( $domain, $page, $limit ),
+			),
+			200
+		);
+	}
+
+	/**
+	 * @param WP_REST_Request $request Request.
+	 * @return WP_REST_Response
+	 */
+	public function list_secretaries( $request ) {
+		$domain = $this->domain_from_request( $request );
+		return new WP_REST_Response(
+			array(
+				'ok'          => true,
+				'secretaries' => WebinoCRM_Sms_Secretary_Service::list_rules( $domain ),
+			),
+			200
+		);
+	}
+
+	/**
+	 * @param WP_REST_Request $request Request.
+	 * @return WP_REST_Response|WP_Error
+	 */
+	public function save_secretary( $request ) {
+		$body   = $request->get_json_params();
+		$domain = WebinoCRM_License_Manager::normalize_domain( (string) ( $body['domain'] ?? '' ) );
+		$result = WebinoCRM_Sms_Secretary_Service::save_rule( $domain, is_array( $body ) ? $body : array() );
+		if ( is_wp_error( $result ) ) {
+			return $result;
+		}
+		return new WP_REST_Response( $result, 200 );
+	}
+
+	/**
+	 * @param WP_REST_Request $request Request.
+	 * @return WP_REST_Response|WP_Error
+	 */
+	public function delete_secretary( $request ) {
+		$body   = $request->get_json_params();
+		$domain = $this->domain_from_request( $request );
+		if ( ! $domain && is_array( $body ) ) {
+			$domain = WebinoCRM_License_Manager::normalize_domain( (string) ( $body['domain'] ?? '' ) );
+		}
+		$id     = (int) ( $request->get_param( 'id' ) ?: ( is_array( $body ) ? ( $body['id'] ?? 0 ) : 0 ) );
+		$result = WebinoCRM_Sms_Secretary_Service::delete_rule( $domain, $id );
+		if ( is_wp_error( $result ) ) {
+			return $result;
+		}
+		return new WP_REST_Response( $result, 200 );
+	}
+
+	/**
+	 * @param WP_REST_Request $request Request.
+	 * @return WP_REST_Response|WP_Error
+	 */
+	public function process_secretaries( $request ) {
+		$body   = $request->get_json_params();
+		$domain = WebinoCRM_License_Manager::normalize_domain( (string) ( $body['domain'] ?? $this->domain_from_request( $request ) ) );
+		$result = WebinoCRM_Sms_Secretary_Service::process_inbox( $domain );
+		if ( is_wp_error( $result ) ) {
+			return $result;
+		}
+		return new WP_REST_Response( $result, 200 );
 	}
 
 	/**
@@ -505,11 +772,37 @@ class WebinoCRM_Sms_API {
 	 * @param WP_REST_Request $request Request.
 	 * @return WP_REST_Response
 	 */
-	public function create_pattern( $request ) {
+	public static function create_pattern( $request ) {
 		$body = $request->get_json_params();
-		unset( $body['domain'] );
-		$edge = WebinoCRM_ModirPayamak_Edge_Client::create_pattern( is_array( $body ) ? $body : array() );
-		return new WP_REST_Response( array( 'ok' => ! empty( $edge['ok'] ), 'data' => $edge['data'], 'meta' => $edge['meta'] ), 200 );
+		if ( ! is_array( $body ) ) {
+			$body = array();
+		}
+		$domain = WebinoCRM_License_Manager::normalize_domain( (string) ( $body['domain'] ?? $this->domain_from_request( $request ) ) );
+		$scope  = sanitize_key( (string) ( $body['scope'] ?? '' ) );
+		$event  = sanitize_key( (string) ( $body['event_key'] ?? '' ) );
+		unset( $body['domain'], $body['scope'], $body['event_key'], $body['param_map'] );
+		$body['is_share'] = false;
+		$edge = WebinoCRM_ModirPayamak_Edge_Client::create_pattern( $body );
+		$status = ! empty( $edge['ok'] ) ? 200 : 502;
+		$code   = '';
+		if ( ! empty( $edge['ok'] ) && is_array( $edge['data'] ?? null ) ) {
+			$code = (string) ( $edge['data']['code'] ?? $edge['data']['pattern_code'] ?? '' );
+		}
+		if ( '' !== $code && '' !== $domain && '' !== $scope && '' !== $event ) {
+			WebinoCRM_Sms_Pattern_Sync_Service::bind_existing( $domain, $scope, $event, $code );
+		} elseif ( '' !== $code && '' !== $domain ) {
+			// Record ownership without event: temporary registry row under site/otp placeholder not used —
+			// store via a lightweight upsert on a dedicated "owned" event if provided later.
+		}
+		return new WP_REST_Response(
+			array(
+				'ok'      => ! empty( $edge['ok'] ),
+				'data'    => $edge['data'] ?? null,
+				'meta'    => $edge['meta'] ?? null,
+				'message' => $edge['message'] ?? '',
+			),
+			$status
+		);
 	}
 
 	/**

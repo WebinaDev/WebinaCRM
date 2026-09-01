@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { useLocale } from "@/hooks/use-locale"
 import {
   BookUser,
+  Bot,
   Code,
   DraftingCompass,
   FileText,
@@ -12,6 +13,7 @@ import {
   Send,
   Settings,
   ShoppingCart,
+  Tags,
   UserCog,
   Users,
   Wallet,
@@ -22,10 +24,12 @@ const LINKS = [
   { to: "reports", labelKey: "reportsTitle", icon: FileText },
   { to: "customers", labelKey: "customersTitle", icon: Users },
   { to: "packages", labelKey: "packagesTitle", icon: Wallet },
+  { to: "tariffs", labelKey: "tariffsTitle", icon: Tags },
   { to: "orders", labelKey: "ordersTitle", icon: ShoppingCart },
   { to: "patterns", labelKey: "patternsTitle", icon: Code },
   { to: "phonebooks", labelKey: "phonebooksTitle", icon: BookUser },
   { to: "numbers", labelKey: "numbersTitle", icon: Phone },
+  { to: "secretaries", labelKey: "secretariesTitle", icon: Bot },
   { to: "users", labelKey: "usersTitle", icon: UserCog },
   { to: "tickets", labelKey: "ticketsTitle", icon: Headphones },
   { to: "drafts", labelKey: "draftsTitle", icon: DraftingCompass },

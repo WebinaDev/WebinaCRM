@@ -45,7 +45,7 @@ export function LicensesPage() {
     status: "active",
   })
   const [submitting, setSubmitting] = useState(false)
-  const [addForm, setAddForm] = useState(defaultLicenseAddForm)
+  const [addForm, setAddForm] = useState(defaultLicenseAddForm())
 
   const load = async () => {
     setLoading(true)

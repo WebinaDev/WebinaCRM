@@ -497,7 +497,7 @@ msgid "Add New Label"
 msgstr "Add New Label"
 
 msgid "Admin alert — order {order_number} ({status_label}). Event: %s"
-msgstr "Admin alert — order {order_number} ({status_label}). Event: %s"
+msgstr "هشدار مدیر — سفارش {order_number} ({status_label}). رویداد: %s"
 
 msgid "All Labels"
 msgstr "All Labels"
@@ -797,7 +797,7 @@ msgid "Order total"
 msgstr "Order total"
 
 msgid "Order {order_id}: status updated to {status_label}."
-msgstr "Order {order_id}: status updated to {status_label}."
+msgstr "سفارش {order_id}: وضعیت به {status_label} تغییر کرد."
 
 msgid "Organizational Positions"
 msgstr "Organizational Positions"

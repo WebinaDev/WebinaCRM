@@ -37,8 +37,6 @@
     "active": "فعال",
     "inactive": "غیرفعال",
     "comingSoon": "به زودی...",
-    "prevPage": "قبلی",
-    "nextPage": "بعدی",
     "pageOf": "صفحه {{page}} از {{totalPages}}",
     "create": "ایجاد",
     "saved": "ذخیره شد.",
@@ -60,7 +58,8 @@
       "notFound": "موردی یافت نشد.",
       "serverError": "خطای سرور.",
       "required": "این فیلد الزامی است."
-    }
+    },
+    "refresh": "بروزرسانی"
   },
   "layout": {
     "cat-home": "داشبورد پیش‌فرض",
@@ -81,7 +80,7 @@
     "tasks": "وظایف",
     "appointments": "قرار ملاقات‌ها",
     "leads": "سرنخ‌ها",
-    "licenses": "لایسنس‌ها",
+    "licenses": "لایسنس‌های مارکت‌پلیس",
     "marketplace-products": "بازارچه / محصولات",
     "marketplace-categories": "دسته‌های بازارچه",
     "marketplace-orders": "سفارش‌های بازارچه",
@@ -133,8 +132,7 @@
     "baleBusiness": "ربات کسب‌وکار",
     "bots": "ربات‌ها",
     "businessBot": "ربات کسب‌وکار",
-    "mfg-overview": "نمای کلی تولید",
-    "licenses": "لایسنس‌های مارکت‌پلیس"
+    "mfg-overview": "نمای کلی تولید"
   },
   "sidebar": {
     "searchPlaceholder": "جستجو در منو...",
@@ -158,8 +156,7 @@
   },
   "datePicker": {
     "placeholder": "تاریخ"
-  }
-,
+  },
   "coreUpdate": {
     "title": "آپدیت هسته سامانه",
     "description": "آخرین بسته انتشار سامانه را بررسی کنید و هسته را با ایمنی بالا به‌روزرسانی کنید.",
@@ -183,5 +180,13 @@
         }
       }
     }
-  }
+  },
+  "nav": {
+    "erp": {
+      "admin": {
+        "mpSecretaries": "منشی‌ها"
+      }
+    }
+  },
+  "nav.erp.admin.mpSecretaries": "منشی‌ها"
 }

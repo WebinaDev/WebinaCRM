@@ -36,7 +36,7 @@ export function MarketplaceProductsPage() {
     if (res.success && res.data) {
       setModules(res.data.modules ?? [])
     } else {
-      setError(marketplaceError(res, t("pages.marketplace.api.modulesLoadError")))
+      setError(marketplaceError(t, res, "pages.marketplace.api.modulesLoadError"))
       setModules([])
     }
     setLoading(false)
@@ -59,7 +59,7 @@ export function MarketplaceProductsPage() {
     if (res.success) {
       void load()
     } else {
-      setError(marketplaceError(res, t("pages.marketplace.saveError")))
+      setError(marketplaceError(t, res, "pages.marketplace.saveError"))
     }
   }
 
@@ -72,7 +72,7 @@ export function MarketplaceProductsPage() {
       setDeleteId(null)
       void load()
     } else {
-      setError(marketplaceError(res, t("pages.marketplace.deleteError")))
+      setError(marketplaceError(t, res, "pages.marketplace.deleteError"))
     }
   }
 

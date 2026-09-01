@@ -206,16 +206,28 @@ class WebinoCRM_Service_Base {
 
 	/**
 	 * @param string $raw Date string (Gregorian Y-m-d or Jalali).
-	 * @return string
+	 * @return string Gregorian Y-m-d, or empty string if invalid / zero-date.
 	 */
 	public static function normalize_date( $raw ) {
 		$raw = trim( (string) $raw );
-		if ( '' === $raw ) {
+		if ( '' === $raw || '0000-00-00' === $raw || 0 === strpos( $raw, '0000-00-00' ) ) {
 			return '';
 		}
 		if ( preg_match( '/^\d{4}-\d{1,2}-\d{1,2}$/', $raw ) ) {
 			$parts = explode( '-', $raw );
-			return sprintf( '%04d-%02d-%02d', (int) $parts[0], (int) $parts[1], (int) $parts[2] );
+			$year  = (int) $parts[0];
+			// Jalali years commonly fall in 1000–1500; convert instead of storing as Gregorian.
+			if ( $year >= 1000 && $year <= 1500 && function_exists( 'webino_jalali_to_gregorian' ) ) {
+				$converted = webino_jalali_to_gregorian( $raw, true );
+				if ( $converted ) {
+					return $converted;
+				}
+				return '';
+			}
+			if ( $year < 1600 ) {
+				return '';
+			}
+			return sprintf( '%04d-%02d-%02d', $year, (int) $parts[1], (int) $parts[2] );
 		}
 		if ( function_exists( 'webino_jalali_to_gregorian' ) ) {
 			$converted = webino_jalali_to_gregorian( $raw, true );

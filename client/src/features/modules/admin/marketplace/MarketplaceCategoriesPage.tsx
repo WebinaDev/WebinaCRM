@@ -37,7 +37,7 @@ export function MarketplaceCategoriesPage() {
     if (res.success && res.data) {
       setItems(res.data.categories ?? [])
     } else {
-      setError(marketplaceError(res, t("pages.marketplace.api.categoriesLoadError")))
+      setError(marketplaceError(t, res, "pages.marketplace.api.categoriesLoadError"))
       setItems([])
     }
     setLoading(false)
@@ -83,7 +83,7 @@ export function MarketplaceCategoriesPage() {
       resetForm()
       void load()
     } else {
-      setError(marketplaceError(res, t("pages.marketplace.api.categorySaveFailed")))
+      setError(marketplaceError(t, res, "pages.marketplace.api.categorySaveFailed"))
     }
   }
 
@@ -98,7 +98,7 @@ export function MarketplaceCategoriesPage() {
       if (editingId === deleteId) resetForm()
       void load()
     } else {
-      setError(marketplaceError(res, t("pages.marketplace.deleteError")))
+      setError(marketplaceError(t, res, "pages.marketplace.deleteError"))
     }
   }
 

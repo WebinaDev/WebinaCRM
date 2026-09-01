@@ -12,14 +12,31 @@ import { useCrmFeedback } from "@/features/shared/hooks/useCrmFeedback"
 import { ModirPayamakQuickLinks } from "./components/ModirPayamakQuickLinks"
 
 function formatCredit(credit: unknown, formatNumber: (n: number) => string): { balance: string; expiry: string } {
-  if (!credit || typeof credit !== "object") {
+  let src: unknown = credit
+  if (typeof src === "string") {
+    try {
+      src = JSON.parse(src) as unknown
+    } catch {
+      const raw = typeof credit === "string" ? credit.trim() : ""
+      return { balance: raw || "—", expiry: "—" }
+    }
+  }
+  if (Array.isArray(src) && src[0]) src = src[0]
+  if (!src || typeof src !== "object") {
+    if (typeof credit === "number") return { balance: formatNumber(credit), expiry: "—" }
     return { balance: "—", expiry: "—" }
   }
-  const c = credit as Record<string, unknown>
-  const balance = c.balance ?? c.credit ?? c.amount ?? c.remaining
-  const expiry = c.expire_at ?? c.expires_at ?? c.expiry
+  const c = src as Record<string, unknown>
+  const nested =
+    c.data && typeof c.data === "object" && !Array.isArray(c.data)
+      ? (c.data as Record<string, unknown>)
+      : c
+  const balance = nested.balance ?? nested.credit ?? nested.amount ?? nested.remaining ?? nested.reseller_credit
+  const expiry = nested.expire_at ?? nested.expires_at ?? nested.expiry ?? nested.expire
+  const balanceNum =
+    typeof balance === "string" ? Number(balance.replace(/,/g, "")) : Number(balance as number)
   return {
-    balance: balance != null ? formatNumber(Number(balance) || 0) : "—",
+    balance: Number.isFinite(balanceNum) ? formatNumber(balanceNum) : balance != null ? String(balance) : "—",
     expiry: expiry != null ? String(expiry) : "—",
   }
 }

@@ -2,6 +2,7 @@ import dayjs from 'dayjs'
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
+import { DateTimePicker } from '@/components/DateTimePicker'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import {
@@ -21,6 +22,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Switch } from '@/components/ui/switch'
+import { useLocale } from '@/hooks/use-locale'
 import { translatePostStatus } from '@/lib/enumLabels'
 
 export type CouponVisibility = 'public' | 'private' | 'password'
@@ -79,6 +81,7 @@ export function CouponPublishPanel({
   isSaving,
 }: CouponPublishPanelProps) {
   const { t } = useTranslation()
+  const { formatDateTime, isRtl } = useLocale()
   const [statusOpen, setStatusOpen] = useState(false)
   const [visibilityOpen, setVisibilityOpen] = useState(false)
   const [dateOpen, setDateOpen] = useState(false)
@@ -98,7 +101,17 @@ export function CouponPublishPanel({
 
   const publishLabel = publishImmediately
     ? t('posts.publishImmediately')
-    : dayjs(publishDate).format('YYYY/MM/DD HH:mm')
+    : formatDateTime(publishDate)
+
+  function toDraftUnix(value: string) {
+    const parsed = dayjs(value)
+    return parsed.isValid() ? parsed.unix() : dayjs().unix()
+  }
+
+  function fromUnix(unix: number | null) {
+    if (unix == null) return publishDate
+    return dayjs.unix(unix).format('YYYY-MM-DDTHH:mm')
+  }
 
   const saveLabel =
     status === 'publish' || status === 'future' ? t('posts.publishButton') : t('posts.saveDraftButton')
@@ -228,7 +241,7 @@ export function CouponPublishPanel({
       </Dialog>
 
       <Dialog open={dateOpen} onOpenChange={setDateOpen}>
-        <DialogContent>
+        <DialogContent dir={isRtl ? 'rtl' : 'ltr'}>
           <DialogHeader>
             <DialogTitle>{t('posts.publishDateLabel')}</DialogTitle>
           </DialogHeader>
@@ -243,12 +256,11 @@ export function CouponPublishPanel({
             </div>
             {!draftImmediate ? (
               <div className="space-y-2">
-                <Label htmlFor="coupon-publish-date">{t('posts.publishScheduled')}</Label>
-                <Input
+                <DateTimePicker
                   id="coupon-publish-date"
-                  type="datetime-local"
-                  value={draftDate}
-                  onChange={(e) => setDraftDate(e.target.value)}
+                  label={t('posts.publishScheduled')}
+                  value={toDraftUnix(draftDate)}
+                  onChange={(unix) => setDraftDate(fromUnix(unix))}
                 />
               </div>
             ) : null}

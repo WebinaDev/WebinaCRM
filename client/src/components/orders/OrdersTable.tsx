@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { MoneyDisplay } from '@/components/currency/MoneyDisplay'
-import { formatDisplayDateTime } from '@/lib/date'
+import { useLocale } from '@/hooks/use-locale'
 import { localizeDigits } from '@/lib/digits'
 import { formatAttributionSource, translateOrderStatus } from '@/lib/enumLabels'
 import { cn } from '@/lib/utils'
@@ -73,6 +73,7 @@ export function OrdersTable({
   onSort,
 }: OrdersTableProps) {
   const { t } = useTranslation()
+  const { formatDateTime } = useLocale()
   const allSelected = items.length > 0 && items.every((row) => selectedIds.includes(row.id))
   const someSelected = items.some((row) => selectedIds.includes(row.id))
 
@@ -160,7 +161,7 @@ export function OrdersTable({
                   {row.customer_name || t('common.emptyValue')}
                 </TableCell>
                 <TableCell className="text-muted-foreground whitespace-nowrap text-xs">
-                  {formatDisplayDateTime(row.date ?? undefined, locale)}
+                  {formatDateTime(row.date ?? '')}
                 </TableCell>
                 <TableCell>
                   <Badge variant={statusBadgeVariant(row.status)}>

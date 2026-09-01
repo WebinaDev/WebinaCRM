@@ -172,7 +172,7 @@ export function MarketplaceModuleDetailPage() {
         )
       }
     } else {
-      setError(marketplaceError(modRes, t("pages.marketplace.loadError")))
+      setError(marketplaceError(t, modRes, "pages.marketplace.loadError"))
       setModule(null)
     }
     setLoading(false)
@@ -192,7 +192,7 @@ export function MarketplaceModuleDetailPage() {
       populateSettings(res.data.module)
       setSuccess(t("pages.marketplace.repoReady"))
     } else {
-      setError(marketplaceError(res, t("pages.marketplace.saveError")))
+      setError(marketplaceError(t, res, "pages.marketplace.saveError"))
     }
     setBusy(false)
   }
@@ -207,7 +207,7 @@ export function MarketplaceModuleDetailPage() {
       populateSettings(res.data.module)
       setSuccess(t("pages.marketplace.repoSynced"))
     } else {
-      setError(marketplaceError(res, t("pages.marketplace.saveError")))
+      setError(marketplaceError(t, res, "pages.marketplace.saveError"))
     }
     setBusy(false)
   }
@@ -222,7 +222,7 @@ export function MarketplaceModuleDetailPage() {
       setModule(res.data.module)
       setSuccess(t("pages.marketplace.repoVisibilityUpdated"))
     } else {
-      setError(marketplaceError(res, t("pages.marketplace.saveError")))
+      setError(marketplaceError(t, res, "pages.marketplace.saveError"))
     }
     setBusy(false)
   }
@@ -237,7 +237,7 @@ export function MarketplaceModuleDetailPage() {
       populateSettings(res.data.module)
       setSuccess(t("pages.marketplace.readmeSynced"))
     } else {
-      setError(marketplaceError(res, t("pages.marketplace.saveError")))
+      setError(marketplaceError(t, res, "pages.marketplace.saveError"))
     }
     setBusy(false)
   }
@@ -308,7 +308,7 @@ export function MarketplaceModuleDetailPage() {
       void load()
     } else {
       setSaveWarnings(null)
-      setError(marketplaceError(res, t("pages.marketplace.saveError")))
+      setError(marketplaceError(t, res, "pages.marketplace.saveError"))
     }
     setBusy(false)
   }
@@ -330,7 +330,7 @@ export function MarketplaceModuleDetailPage() {
       setReleaseZip(null)
       void load()
     } else {
-      setError(marketplaceError(res, t("pages.marketplace.saveError")))
+      setError(marketplaceError(t, res, "pages.marketplace.saveError"))
     }
     setBusy(false)
   }
@@ -343,7 +343,7 @@ export function MarketplaceModuleDetailPage() {
       setSuccess(t("pages.marketplace.releasePublished"))
       void load()
     } else {
-      setError(marketplaceError(res, t("pages.marketplace.saveError")))
+      setError(marketplaceError(t, res, "pages.marketplace.saveError"))
     }
     setBusy(false)
   }
@@ -358,7 +358,7 @@ export function MarketplaceModuleDetailPage() {
       setSuccess(t("pages.marketplace.api.releaseDeleted"))
       void load()
     } else {
-      setError(marketplaceError(res, t("pages.marketplace.deleteError")))
+      setError(marketplaceError(t, res, "pages.marketplace.deleteError"))
     }
   }
 

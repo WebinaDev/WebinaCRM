@@ -42,7 +42,9 @@ export function LicenseCard({ license, onEdit, onRenew, onCancel, onDelete }: Pr
   }
 
   const formatExpiry = (d: string | null) =>
-    d ? formatDateTime(d) : t("pages.licenses.unlimited")
+    !d || d.startsWith("0000-00-00")
+      ? t("pages.licenses.unlimited")
+      : formatDateTime(d)
 
   return (
     <Card

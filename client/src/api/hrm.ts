@@ -242,10 +242,16 @@ export interface LeaveBalance {
   allocated: number
   used: number
   balance: number
+  type_name?: string
+  type_code?: string
 }
 
 export function getLeaveTypes() {
   return crmGet<{ types: LeaveType[] }>("hrm/leave/types")
+}
+
+export function getPortalLeaveTypes() {
+  return getMyLeaveTypes()
 }
 
 export function saveLeaveType(data: Partial<LeaveType> & { name: string }) {
@@ -291,8 +297,6 @@ export function rejectLeave(id: number, rejection_reason?: string) {
 export function getLeaveBalances(params?: { user_id?: number; year?: number }) {
   return crmGet<{ balances: LeaveBalance[] }>("hrm/leave/balances", params)
 }
-
-// —— Payroll ——
 
 export interface PayrollRun {
   id: number
@@ -378,6 +382,32 @@ export function getPayslips(runId: number, userId?: number) {
     `hrm/payroll/runs/${runId}/payslips`,
     userId ? { user_id: userId } : undefined,
   )
+}
+
+export function exportTaminDsk(runId: number) {
+  return crmPost<{ url?: string; filename?: string; message?: string }>(
+    `hrm/payroll/runs/${runId}/tamin-dsk`,
+  )
+}
+
+export function printPayslipHtml(id: number) {
+  return crmGet<{ html: string }>(`hrm/payroll/payslips/${id}/print`)
+}
+
+export function printDecreeHtml(id: number) {
+  return crmGet<{ html: string }>(`hrm/payroll/decrees/${id}/print`)
+}
+
+export function getDecrees() {
+  return crmGet<{ decrees: Record<string, unknown>[] }>("hrm/payroll/decrees")
+}
+
+export function saveDecree(data: Record<string, string | number | boolean | null | undefined>) {
+  return crmPost<{ message?: string; id?: number }>("hrm/payroll/decrees", data)
+}
+
+export function getMyPayslips() {
+  return crmGet<{ payslips: Payslip[] }>("hrm/payroll/my-payslips")
 }
 
 export function getEmployeeSalary(userId: number) {
@@ -607,4 +637,224 @@ export function saveEnrollment(data: {
   status?: string
 }) {
   return crmPost<{ message?: string }>("hrm/training/enrollments", data)
+}
+
+// —— Employee portal ——
+
+export interface HrmMeIdentity {
+  user_id: number
+  display_name: string
+  first_name: string
+  last_name: string
+  email: string
+  avatar_url: string
+  personnel_code: string
+  national_id: string
+  insurance_number: string
+  job_title: string
+  department: string
+  direct_manager?: { id?: number; name: string } | null
+  workshop?: { id: number; code: string; name: string } | null
+  hire_date: string
+  contract_type: string
+}
+
+export interface HrmMeResponse {
+  identity: HrmMeIdentity
+  decree: Record<string, unknown> | null
+  leave_balances: LeaveBalance[]
+  latest_payslip: {
+    id: number
+    run_title: string
+    jalali_year: number
+    jalali_month: number
+    gross: number
+    net: number
+    deposit_date: string
+  } | null
+  open_requests: number
+}
+
+export interface HrmRequest {
+  id: number
+  type: string
+  user_id: number
+  user_name: string
+  status: string
+  payload: Record<string, unknown>
+  manager_id: number
+  hr_user_id: number
+  ref_id: number
+  notes: string
+  created_at: string
+  updated_at: string
+}
+
+export interface HrmNotice {
+  id: number
+  title: string
+  body: string
+  date_from: string
+  date_to: string
+  file_url: string
+}
+
+export interface HrmDependent {
+  id: number
+  full_name: string
+  relation: string
+  national_id: string
+  birth_date: string
+}
+
+export interface HrmDecreeSummary {
+  id: number
+  decree_no: string
+  decree_type: string
+  status: string
+  effective_from: string
+  effective_to: string
+}
+
+export interface ShiftTemplate {
+  id: number
+  name: string
+  start_time: string
+  end_time: string
+  grace_minutes?: number
+}
+
+export interface OrgChartResponse {
+  departments: { id: number; name: string; parent: number }[]
+  positions: { id: number; name: string; parent: number }[]
+}
+
+export interface MyPayslipRow extends Payslip {
+  run_title?: string
+  jalali_year?: number
+  jalali_month?: number
+  days_worked?: number
+  overtime?: number
+  employee_insurance?: number
+  employer_insurance?: number
+  tax?: number
+  loan_deduction?: number
+  advance_deduction?: number
+  deposit_date?: string
+  iban?: string
+}
+
+export function getHrmMe() {
+  return crmGet<HrmMeResponse>("hrm/me")
+}
+
+export function getMyAttendance(params?: { date_from?: string; date_to?: string; paged?: number }) {
+  return crmGet<AttendanceListResponse>("hrm/me/attendance", params)
+}
+
+export function getMyShift() {
+  return crmGet<{ shift: ShiftTemplate | null }>("hrm/me/shift")
+}
+
+export function getMyNotices() {
+  return crmGet<{ notices: HrmNotice[] }>("hrm/me/notices")
+}
+
+export function getMyDependents() {
+  return crmGet<{ dependents: HrmDependent[] }>("hrm/me/dependents")
+}
+
+export function getMyDecrees() {
+  return crmGet<{ decrees: HrmDecreeSummary[] }>("hrm/me/decrees")
+}
+
+export function getMyProfileView() {
+  return crmGet<{ profile: StaffProfile }>("hrm/me/profile")
+}
+
+export function getOrgChart() {
+  return crmGet<OrgChartResponse>("hrm/me/org-chart")
+}
+
+export function getMyLeaveTypes() {
+  return crmGet<{ types: LeaveType[] }>("hrm/leave/my-types")
+}
+
+export function getMyLeaveBalances(params?: { year?: number }) {
+  return crmGet<{ balances: LeaveBalance[] }>("hrm/leave/my-balances", params)
+}
+
+export function getMyRequests(params?: { status?: string }) {
+  return crmGet<{ requests: HrmRequest[] }>("hrm/requests/mine", params)
+}
+
+export function submitHrmRequest(data: { type: string; payload: Record<string, unknown> }) {
+  return crmPost<{ message?: string; request?: HrmRequest }>("hrm/requests/submit", {
+    type: data.type,
+    payload: JSON.stringify(data.payload),
+  })
+}
+
+export function getCartableInbox() {
+  return crmGet<{ requests: HrmRequest[] }>("hrm/requests/inbox")
+}
+
+export function managerRequestAction(id: number, action: "approve" | "reject", notes?: string) {
+  return crmPost<{ message?: string; request?: HrmRequest }>(`hrm/requests/${id}/manager`, {
+    id,
+    action,
+    notes: notes ?? "",
+  })
+}
+
+export function hrRequestAction(id: number, action: "approve" | "reject", notes?: string) {
+  return crmPost<{ message?: string; request?: HrmRequest }>(`hrm/requests/${id}/hr`, {
+    id,
+    action,
+    notes: notes ?? "",
+  })
+}
+
+export function printCertificateHtml(type: string, requestId?: number) {
+  return crmGet<{ html: string }>("hrm/certificates/print", {
+    type,
+    request_id: requestId,
+  })
+}
+
+export function getStaffDependents(userId: number) {
+  return crmGet<{ dependents: Record<string, unknown>[] }>(`hrm/staff/${userId}/dependents`)
+}
+
+export function saveStaffDependent(userId: number, data: Record<string, string | number>) {
+  return crmPost<{ message?: string; id?: number }>(`hrm/staff/${userId}/dependents`, {
+    user_id: userId,
+    ...data,
+  })
+}
+
+export function getStaffAssets(userId: number) {
+  return crmGet<{ assets: Record<string, unknown>[] }>(`hrm/staff/${userId}/assets`)
+}
+
+export function saveStaffAsset(userId: number, data: Record<string, string | number>) {
+  return crmPost<{ message?: string; id?: number }>(`hrm/staff/${userId}/assets`, {
+    user_id: userId,
+    ...data,
+  })
+}
+
+export function getStaffShift(userId: number) {
+  return crmGet<{ user_id: number; shift_template_id: number }>(`hrm/staff/${userId}/shift`)
+}
+
+export function saveStaffShift(userId: number, shiftTemplateId: number) {
+  return crmPost<{ message?: string }>(`hrm/staff/${userId}/shift`, {
+    user_id: userId,
+    shift_template_id: shiftTemplateId,
+  })
+}
+
+export function getShiftTemplates() {
+  return crmGet<{ templates: ShiftTemplate[] }>("hrm/shift-templates")
 }

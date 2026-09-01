@@ -28,7 +28,6 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog"
 import { SELECT_ALL_VALUE } from "@/lib/constants"
-import { getCurrentLanguage } from "@/lib/language"
 import {
   getAppointments,
   getAppointment,
@@ -57,7 +56,7 @@ const STATUS_COLORS: Record<string, string> = {
 }
 
 export function AppointmentsPage() {
-  const { t, isRtl } = useLocale()
+  const { t, isRtl, formatDateTime } = useLocale()
       const [view, setView] = useState<"list" | "calendar">("list")
   const [appointments, setAppointments] = useState<AppointmentItem[]>([])
   const [events, setEvents] = useState<CalendarEvent[]>([])
@@ -342,12 +341,7 @@ export function AppointmentsPage() {
                       <TableCell className="font-medium">{a.title}</TableCell>
                       <TableCell>{a.customer_name}</TableCell>
                       <TableCell>
-                        {a.datetime
-                          ? new Date(a.datetime).toLocaleString(
-                              getCurrentLanguage() === "fa" ? "fa-IR" : "en-US",
-                              { dateStyle: "short", timeStyle: "short" }
-                            )
-                          : "—"}
+                        {a.datetime ? formatDateTime(a.datetime) : "—"}
                       </TableCell>
                       <TableCell>
                         <Badge className={cn(STATUS_COLORS[a.status_slug] ?? "bg-muted")}>

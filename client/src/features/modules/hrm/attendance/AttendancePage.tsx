@@ -27,7 +27,7 @@ import { LogIn, LogOut, Loader2 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 export function AttendancePage() {
-  const { t, isRtl } = useLocale()
+  const { t, isRtl, formatDate } = useLocale()
   const { currentPage, setCurrentPage, totalPages, setTotalPages } = usePmPagination()
   const [items, setItems] = useState<AttendanceRecord[]>([])
   const [loading, setLoading] = useState(true)
@@ -144,7 +144,7 @@ export function AttendancePage() {
               <TableBody>
                 {items.map((row) => (
                   <TableRow key={row.id}>
-                    <TableCell dir="ltr" className="text-start">{row.work_date}</TableCell>
+                    <TableCell className="text-start">{formatDate(row.work_date)}</TableCell>
                     <TableCell>{row.user_name}</TableCell>
                     <TableCell dir="ltr" className="text-start">{row.check_in || "—"}</TableCell>
                     <TableCell dir="ltr" className="text-start">{row.check_out || "—"}</TableCell>

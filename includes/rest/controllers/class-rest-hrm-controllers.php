@@ -49,6 +49,21 @@ class WebinoCRM_REST_Hrm_Controller extends WebinoCRM_REST_Controller_Base {
 		WebinoCRM_REST_Registry::register_service_route( 'POST', '/hrm/payroll/runs/(?P<id>\d+)/approve', array( 'WebinoCRM_Hrm_Payroll_Service', 'run_approve' ), 'hrm-payroll' );
 		WebinoCRM_REST_Registry::register_service_route( 'GET', '/hrm/payroll/runs/(?P<id>\d+)/payslips', array( 'WebinoCRM_Hrm_Payroll_Service', 'payslips_list' ), 'hrm-payroll' );
 
+		WebinoCRM_REST_Registry::register_service_route( 'GET', '/hrm/payroll/workshops', array( 'WebinoCRM_Hrm_Payroll_Service', 'workshops_list' ), 'hrm-payroll' );
+		WebinoCRM_REST_Registry::register_service_route( 'POST', '/hrm/payroll/workshops', array( 'WebinoCRM_Hrm_Payroll_Service', 'workshops_save' ), 'hrm-payroll' );
+		WebinoCRM_REST_Registry::register_service_route( 'GET', '/hrm/payroll/decrees', array( 'WebinoCRM_Hrm_Payroll_Service', 'decrees_list' ), 'hrm-payroll' );
+		WebinoCRM_REST_Registry::register_service_route( 'POST', '/hrm/payroll/decrees', array( 'WebinoCRM_Hrm_Payroll_Service', 'decrees_save' ), 'hrm-payroll' );
+		WebinoCRM_REST_Registry::register_service_route( 'GET', '/hrm/payroll/attendance', array( 'WebinoCRM_Hrm_Payroll_Service', 'payroll_attendance_list' ), 'hrm-payroll' );
+		WebinoCRM_REST_Registry::register_service_route( 'POST', '/hrm/payroll/attendance', array( 'WebinoCRM_Hrm_Payroll_Service', 'payroll_attendance_save' ), 'hrm-payroll' );
+		WebinoCRM_REST_Registry::register_service_route( 'GET', '/hrm/payroll/tamin-jobs', array( 'WebinoCRM_Hrm_Payroll_Service', 'tamin_jobs_search' ), 'hrm-payroll' );
+		WebinoCRM_REST_Registry::register_service_route( 'GET', '/hrm/payroll/runs/(?P<id>\d+)/tamin-dsk', array( 'WebinoCRM_Hrm_Payroll_Service', 'tamin_dsk_preview' ), 'hrm-payroll' );
+		WebinoCRM_REST_Registry::register_service_route( 'POST', '/hrm/payroll/runs/(?P<id>\d+)/tamin-dsk', array( 'WebinoCRM_Hrm_Payroll_Service', 'tamin_dsk_export' ), 'hrm-payroll' );
+		WebinoCRM_REST_Registry::register_service_route( 'GET', '/hrm/payroll/payslips/(?P<id>\d+)/print', array( 'WebinoCRM_Hrm_Payroll_Service', 'print_payslip' ), 'hrm-self' );
+		WebinoCRM_REST_Registry::register_service_route( 'GET', '/hrm/payroll/decrees/(?P<id>\d+)/print', array( 'WebinoCRM_Hrm_Payroll_Service', 'print_decree' ), 'hrm-self' );
+		WebinoCRM_REST_Registry::register_service_route( 'GET', '/hrm/payroll/my-payslips', array( 'WebinoCRM_Hrm_Payroll_Service', 'my_payslips' ), 'hrm-self' );
+		WebinoCRM_REST_Registry::register_service_route( 'GET', '/hrm/payroll/config', array( 'WebinoCRM_Hrm_Payroll_Service', 'payroll_config_get' ), 'hrm-payroll' );
+		WebinoCRM_REST_Registry::register_service_route( 'POST', '/hrm/payroll/config', array( 'WebinoCRM_Hrm_Payroll_Service', 'payroll_config_save' ), 'hrm-payroll' );
+
 		WebinoCRM_REST_Registry::register_service_route( 'GET', '/hrm/recruitment/postings', array( 'WebinoCRM_Hrm_Recruitment_Service', 'job_postings_list' ), 'hrm-recruitment' );
 		WebinoCRM_REST_Registry::register_service_route( 'POST', '/hrm/recruitment/postings', array( 'WebinoCRM_Hrm_Recruitment_Service', 'job_postings_save' ), 'hrm-recruitment' );
 		WebinoCRM_REST_Registry::register_service_route( 'GET', '/hrm/recruitment/applicants', array( 'WebinoCRM_Hrm_Recruitment_Service', 'applicants_list' ), 'hrm-recruitment' );
@@ -71,5 +86,39 @@ class WebinoCRM_REST_Hrm_Controller extends WebinoCRM_REST_Controller_Base {
 		WebinoCRM_REST_Registry::register_service_route( 'POST', '/hrm/training/sessions', array( 'WebinoCRM_Hrm_Training_Service', 'sessions_save' ), 'hrm-training' );
 		WebinoCRM_REST_Registry::register_service_route( 'GET', '/hrm/training/enrollments', array( 'WebinoCRM_Hrm_Training_Service', 'enrollments_list' ), 'hrm-training' );
 		WebinoCRM_REST_Registry::register_service_route( 'POST', '/hrm/training/enrollments', array( 'WebinoCRM_Hrm_Training_Service', 'enrollments_save' ), 'hrm-training' );
+
+		$cap_self = 'hrm-self';
+
+		WebinoCRM_REST_Registry::register_service_route( 'GET', '/hrm/me', array( 'WebinoCRM_Hrm_Self_Service', 'me' ), $cap_self );
+		WebinoCRM_REST_Registry::register_service_route( 'GET', '/hrm/me/attendance', array( 'WebinoCRM_Hrm_Self_Service', 'my_attendance' ), $cap_self );
+		WebinoCRM_REST_Registry::register_service_route( 'GET', '/hrm/me/shift', array( 'WebinoCRM_Hrm_Self_Service', 'my_shift' ), $cap_self );
+		WebinoCRM_REST_Registry::register_service_route( 'GET', '/hrm/me/notices', array( 'WebinoCRM_Hrm_Self_Service', 'my_notices' ), $cap_self );
+		WebinoCRM_REST_Registry::register_service_route( 'GET', '/hrm/me/dependents', array( 'WebinoCRM_Hrm_Self_Service', 'my_dependents' ), $cap_self );
+		WebinoCRM_REST_Registry::register_service_route( 'GET', '/hrm/me/decrees', array( 'WebinoCRM_Hrm_Self_Service', 'my_decrees' ), $cap_self );
+		WebinoCRM_REST_Registry::register_service_route( 'GET', '/hrm/me/assets', array( 'WebinoCRM_Hrm_Self_Service', 'my_assets' ), $cap_self );
+		WebinoCRM_REST_Registry::register_service_route( 'GET', '/hrm/me/profile', array( 'WebinoCRM_Hrm_Self_Service', 'my_profile' ), $cap_self );
+		WebinoCRM_REST_Registry::register_service_route( 'GET', '/hrm/me/org-chart', array( 'WebinoCRM_Hrm_Self_Service', 'org_chart' ), $cap_self );
+
+		WebinoCRM_REST_Registry::register_service_route( 'GET', '/hrm/leave/my-balances', array( 'WebinoCRM_Hrm_Leave_Service', 'balances_list' ), $cap_self );
+		WebinoCRM_REST_Registry::register_service_route( 'GET', '/hrm/leave/my-types', array( 'WebinoCRM_Hrm_Leave_Service', 'types_list' ), $cap_self );
+		WebinoCRM_REST_Registry::register_service_route( 'GET', '/hrm/leave/my-requests', array( 'WebinoCRM_Hrm_Leave_Service', 'requests_list' ), $cap_self );
+		WebinoCRM_REST_Registry::register_service_route( 'POST', '/hrm/leave/my-requests', array( 'WebinoCRM_Hrm_Leave_Service', 'request_save' ), $cap_self );
+		WebinoCRM_REST_Registry::register_service_route( 'POST', '/hrm/attendance/check-in', array( 'WebinoCRM_Hrm_Attendance_Service', 'check_in' ), $cap_self );
+		WebinoCRM_REST_Registry::register_service_route( 'POST', '/hrm/attendance/check-out', array( 'WebinoCRM_Hrm_Attendance_Service', 'check_out' ), $cap_self );
+
+		WebinoCRM_REST_Registry::register_service_route( 'GET', '/hrm/requests/mine', array( 'WebinoCRM_Hrm_Request_Service', 'my_requests' ), $cap_self );
+		WebinoCRM_REST_Registry::register_service_route( 'POST', '/hrm/requests/submit', array( 'WebinoCRM_Hrm_Request_Service', 'submit' ), $cap_self );
+		WebinoCRM_REST_Registry::register_service_route( 'GET', '/hrm/requests/inbox', array( 'WebinoCRM_Hrm_Request_Service', 'inbox' ), 'hrm-cartable' );
+		WebinoCRM_REST_Registry::register_service_route( 'POST', '/hrm/requests/(?P<id>\d+)/manager', array( 'WebinoCRM_Hrm_Request_Service', 'manager_action' ), 'hrm-cartable' );
+		WebinoCRM_REST_Registry::register_service_route( 'POST', '/hrm/requests/(?P<id>\d+)/hr', array( 'WebinoCRM_Hrm_Request_Service', 'hr_action' ), 'staff' );
+		WebinoCRM_REST_Registry::register_service_route( 'GET', '/hrm/certificates/print', array( 'WebinoCRM_Hrm_Request_Service', 'certificate_print' ), $cap_self );
+
+		WebinoCRM_REST_Registry::register_service_route( 'GET', '/hrm/staff/(?P<id>\d+)/dependents', array( 'WebinoCRM_Hrm_Request_Service', 'staff_dependents_list' ), $cap_staff );
+		WebinoCRM_REST_Registry::register_service_route( 'POST', '/hrm/staff/(?P<id>\d+)/dependents', array( 'WebinoCRM_Hrm_Request_Service', 'staff_dependents_save' ), $cap_staff );
+		WebinoCRM_REST_Registry::register_service_route( 'GET', '/hrm/staff/(?P<id>\d+)/assets', array( 'WebinoCRM_Hrm_Request_Service', 'staff_assets_list' ), $cap_staff );
+		WebinoCRM_REST_Registry::register_service_route( 'POST', '/hrm/staff/(?P<id>\d+)/assets', array( 'WebinoCRM_Hrm_Request_Service', 'staff_assets_save' ), $cap_staff );
+		WebinoCRM_REST_Registry::register_service_route( 'GET', '/hrm/staff/(?P<id>\d+)/shift', array( 'WebinoCRM_Hrm_Request_Service', 'staff_shift_get' ), $cap_staff );
+		WebinoCRM_REST_Registry::register_service_route( 'POST', '/hrm/staff/(?P<id>\d+)/shift', array( 'WebinoCRM_Hrm_Request_Service', 'staff_shift_save' ), $cap_staff );
+		WebinoCRM_REST_Registry::register_service_route( 'GET', '/hrm/shift-templates', array( 'WebinoCRM_Hrm_Request_Service', 'shift_templates_list' ), $cap_staff );
 	}
 }

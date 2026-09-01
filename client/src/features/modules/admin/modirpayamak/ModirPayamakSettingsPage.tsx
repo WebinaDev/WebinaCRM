@@ -21,6 +21,8 @@ export function ModirPayamakSettingsPage() {
     modirpayamak_default_from: "",
     modirpayamak_enabled: false,
     modirpayamak_sms_price_per_unit: 500,
+    modirpayamak_sms_tax_percent: 10,
+    modirpayamak_sms_surcharge_rial: 40,
     modirpayamak_reseller_credit_alert: 100000,
   })
   const [loading, setLoading] = useState(true)
@@ -38,6 +40,8 @@ export function ModirPayamakSettingsPage() {
         modirpayamak_default_from: String(d.modirpayamak_default_from ?? ""),
         modirpayamak_enabled: Boolean(d.modirpayamak_enabled),
         modirpayamak_sms_price_per_unit: Number(d.modirpayamak_sms_price_per_unit ?? 500),
+        modirpayamak_sms_tax_percent: Number(d.modirpayamak_sms_tax_percent ?? 10),
+        modirpayamak_sms_surcharge_rial: Number(d.modirpayamak_sms_surcharge_rial ?? 40),
         modirpayamak_reseller_credit_alert: Number(d.modirpayamak_reseller_credit_alert ?? 100000),
       })
     }
@@ -55,6 +59,8 @@ export function ModirPayamakSettingsPage() {
       modirpayamak_default_from: form.modirpayamak_default_from,
       modirpayamak_enabled: form.modirpayamak_enabled ? "1" : "0",
       modirpayamak_sms_price_per_unit: form.modirpayamak_sms_price_per_unit,
+      modirpayamak_sms_tax_percent: form.modirpayamak_sms_tax_percent,
+      modirpayamak_sms_surcharge_rial: form.modirpayamak_sms_surcharge_rial,
       modirpayamak_reseller_credit_alert: form.modirpayamak_reseller_credit_alert,
     })
     setSaving(false)
@@ -117,7 +123,7 @@ export function ModirPayamakSettingsPage() {
                 />
               </div>
               <div className="space-y-2">
-                <Label>{t("pages.modirpayamak.pricePerUnit")}</Label>
+                <Label>{t("pages.modirpayamak.pricePerUnitFallback")}</Label>
                 <Input
                   type="number"
                   value={form.modirpayamak_sms_price_per_unit}
@@ -128,6 +134,34 @@ export function ModirPayamakSettingsPage() {
                     }))
                   }
                 />
+                <p className="text-xs text-muted-foreground">{t("pages.modirpayamak.pricePerUnitFallbackHint")}</p>
+              </div>
+              <div className="space-y-2">
+                <Label>{t("pages.modirpayamak.taxPercent")}</Label>
+                <Input
+                  type="number"
+                  value={form.modirpayamak_sms_tax_percent}
+                  onChange={(e) =>
+                    setForm((f) => ({
+                      ...f,
+                      modirpayamak_sms_tax_percent: parseFloat(e.target.value) || 0,
+                    }))
+                  }
+                />
+              </div>
+              <div className="space-y-2">
+                <Label>{t("pages.modirpayamak.surchargeRial")}</Label>
+                <Input
+                  type="number"
+                  value={form.modirpayamak_sms_surcharge_rial}
+                  onChange={(e) =>
+                    setForm((f) => ({
+                      ...f,
+                      modirpayamak_sms_surcharge_rial: parseFloat(e.target.value) || 0,
+                    }))
+                  }
+                />
+                <p className="text-xs text-muted-foreground">{t("pages.modirpayamak.surchargeHint")}</p>
               </div>
               <div className="space-y-2">
                 <Label>{t("pages.modirpayamak.creditAlert")}</Label>

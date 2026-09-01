@@ -196,6 +196,29 @@ class WebinoCRM_ModirPayamak_Edge_Client {
 		);
 	}
 
+	/**
+	 * @param string|int $outbox_id Outbox / bulk id.
+	 * @return array<string,mixed>
+	 */
+	public static function report_bulk_stats( $outbox_id ) {
+		return self::request(
+			'GET',
+			'api/report/bulk_stats',
+			array(),
+			array( 'bulk_id' => (string) $outbox_id )
+		);
+	}
+
+	/**
+	 * @param string|int          $outbox_id Outbox id.
+	 * @param array<string,mixed> $query Query.
+	 * @return array<string,mixed>
+	 */
+	public static function report_bulk_recipients( $outbox_id, array $query = array() ) {
+		$query['bulk_id'] = (string) $outbox_id;
+		return self::request( 'GET', 'api/report/bulk-recipient', array(), $query );
+	}
+
 	// --- Payment ---
 	public static function my_credit() {
 		return self::request( 'GET', 'api/payment/credit/mine' );
@@ -211,7 +234,74 @@ class WebinoCRM_ModirPayamak_Edge_Client {
 	}
 
 	public static function create_pattern( array $payload ) {
+		$body = self::normalize_pattern_payload( $payload );
+		$result = self::request( 'POST', 'api/patterns/normal', $body );
+		if ( ! empty( $result['ok'] ) ) {
+			return $result;
+		}
+		// Fallback for older Edge deployments.
 		return self::request( 'POST', 'api/patterns', $payload );
+	}
+
+	/**
+	 * Map CRM/UI payload to Edge normal-pattern schema.
+	 *
+	 * @param array<string,mixed> $payload Input.
+	 * @return array<string,mixed>
+	 */
+	public static function normalize_pattern_payload( array $payload ) {
+		$message = (string) ( $payload['message'] ?? $payload['pattern'] ?? '' );
+		$vars    = array();
+		if ( ! empty( $payload['variable'] ) && is_array( $payload['variable'] ) ) {
+			foreach ( $payload['variable'] as $v ) {
+				if ( ! is_array( $v ) ) {
+					continue;
+				}
+				$name = sanitize_key( (string) ( $v['name'] ?? $v['var'] ?? '' ) );
+				$type = strtolower( (string) ( $v['type'] ?? 'string' ) );
+				if ( '' === $name ) {
+					continue;
+				}
+				$vars[] = array(
+					'name' => $name,
+					'type' => in_array( $type, array( 'string', 'integer' ), true ) ? $type : 'string',
+				);
+			}
+		} elseif ( ! empty( $payload['vars'] ) && is_array( $payload['vars'] ) ) {
+			foreach ( $payload['vars'] as $v ) {
+				if ( ! is_array( $v ) ) {
+					continue;
+				}
+				$name = sanitize_key( (string) ( $v['name'] ?? $v['var'] ?? '' ) );
+				$type = strtolower( (string) ( $v['type'] ?? 'string' ) );
+				if ( '' === $name ) {
+					continue;
+				}
+				$vars[] = array(
+					'name' => $name,
+					'type' => in_array( $type, array( 'string', 'integer' ), true ) ? $type : 'string',
+				);
+			}
+		} elseif ( preg_match_all( '/%([a-zA-Z0-9_]+)%/', $message, $m ) ) {
+			foreach ( array_unique( $m[1] ) as $name ) {
+				$vars[] = array(
+					'name' => sanitize_key( $name ),
+					'type' => 'string',
+				);
+			}
+		}
+
+		$out = array(
+			'title'       => (string) ( $payload['title'] ?? $payload['code'] ?? '' ),
+			'description' => (string) ( $payload['description'] ?? $payload['title'] ?? __( 'Pattern', 'webinocrm' ) ),
+			'message'     => $message,
+			'is_share'    => ! empty( $payload['is_share'] ),
+			'variable'    => $vars,
+		);
+		if ( ! empty( $payload['website'] ) ) {
+			$out['website'] = esc_url_raw( (string) $payload['website'] );
+		}
+		return $out;
 	}
 
 	public static function update_pattern( $code, array $payload ) {

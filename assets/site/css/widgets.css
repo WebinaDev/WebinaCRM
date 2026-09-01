@@ -1,0 +1,85 @@
+/* Widget-specific polish layered on site.css tokens */
+
+.webina-widget {
+	padding: 0.5rem 0;
+}
+
+.webina-widget--hero-cinematic {
+	min-height: auto;
+	background: transparent;
+	padding: 0;
+}
+
+.webina-widget--cta-fullbleed {
+	padding: 3.5rem 1.5rem;
+}
+
+.webina-widget--cta-fullbleed .webina-btn--gold,
+.webina-widget--cta-fullbleed .webina-btn--accent {
+	background: #fff;
+	color: var(--webina-primary, #231110) !important;
+	box-shadow: none;
+}
+
+.webina-widget--lead-form {
+	max-width: 560px;
+	margin-inline: auto;
+	padding: 1.5rem;
+	border-radius: 20px;
+	background: var(--webina-surface, #F5F5F5);
+	border: 1px solid var(--webina-border, rgba(35, 17, 16, 0.08));
+}
+
+.webina-widget--client-marquee,
+.webina-widget--logo-marquee {
+	padding-block: 1rem;
+}
+
+.webina-widget--split-service,
+.webina-widget--vision-mission,
+.webina-widget--ceo-quote,
+.webina-widget--team-carousel,
+.webina-widget--portfolio-carousel,
+.webina-widget--blog-cards,
+.webina-widget--contact-cards,
+.webina-widget--page-hero,
+.webina-widget--ai-badges,
+.webina-widget--careers-form {
+	padding-block: 0.25rem;
+}
+
+.webina-pricing {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 1rem;
+	margin-top: 1.5rem;
+}
+
+.webina-pricing__card {
+	padding: 1.5rem;
+	border-radius: 18px;
+	background: #fff;
+	border: 1px solid var(--webina-border, rgba(35, 17, 16, 0.08));
+}
+
+.webina-pricing__card--featured {
+	border-color: var(--webina-accent, #CA2C24);
+	box-shadow: 0 16px 40px rgba(202, 44, 36, 0.12);
+}
+
+.webina-pricing__card h3 {
+	margin: 0 0 0.5rem;
+}
+
+.webina-pricing__card .price {
+	font-size: 1.5rem;
+	font-weight: 800;
+	color: var(--webina-accent, #CA2C24);
+	margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+	.webina-pricing {
+		grid-template-columns: 1fr;
+	}
+}

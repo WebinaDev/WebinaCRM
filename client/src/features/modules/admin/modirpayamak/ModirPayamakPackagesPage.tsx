@@ -29,8 +29,10 @@ import {
 import {
   deleteModirPayamakPackage,
   getModirPayamakPackages,
+  getModirPayamakTariffs,
   saveModirPayamakPackage,
   type ModirPayamakPackage,
+  type ModirPayamakTariff,
 } from "@/api/modirpayamak"
 import { getAjaxMessage } from "@/api/client"
 import { useLocale } from "@/hooks/use-locale"
@@ -49,6 +51,12 @@ export function ModirPayamakPackagesPage() {
   const { layoutProps, setError } = useCrmFeedback()
   const { configured } = useModirPayamakConfigured()
   const [packages, setPackages] = useState<ModirPayamakPackage[]>([])
+  const [tariffs, setTariffs] = useState<ModirPayamakTariff[]>([])
+  const [taxPercent, setTaxPercent] = useState(10)
+  const [surcharge, setSurcharge] = useState(40)
+  const [tariffId, setTariffId] = useState("")
+  const [tariffParts, setTariffParts] = useState("1")
+  const [tariffEncoding, setTariffEncoding] = useState<"fa" | "la">("fa")
   const [loading, setLoading] = useState(true)
   const [deleteId, setDeleteId] = useState<number | null>(null)
   const [deleting, setDeleting] = useState(false)
@@ -59,12 +67,17 @@ export function ModirPayamakPackagesPage() {
   const load = useCallback(async () => {
     setLoading(true)
     setError(null)
-    const res = await getModirPayamakPackages()
-    if (res.success && res.data) {
-      setPackages(res.data.packages ?? [])
+    const [pkgRes, tarRes] = await Promise.all([getModirPayamakPackages(), getModirPayamakTariffs()])
+    if (pkgRes.success && pkgRes.data) {
+      setPackages(pkgRes.data.packages ?? [])
     } else {
       setPackages([])
-      setError(getAjaxMessage(res) ?? t("pages.modirpayamak.loadError"))
+      setError(getAjaxMessage(pkgRes) ?? t("pages.modirpayamak.loadError"))
+    }
+    if (tarRes.success && tarRes.data) {
+      setTariffs(tarRes.data.tariffs ?? [])
+      setTaxPercent(Number(tarRes.data.tax_percent ?? 10))
+      setSurcharge(Number(tarRes.data.surcharge_rial ?? 40))
     }
     setLoading(false)
   }, [setError, t])
@@ -76,7 +89,20 @@ export function ModirPayamakPackagesPage() {
   const openCreate = () => {
     setEditId(null)
     setForm({ name: "", amount: "0", bonus: "0", sort: "0", status: "active" })
+    setTariffId("")
+    setTariffParts("1")
+    setTariffEncoding("fa")
     setDialogOpen(true)
+  }
+
+  const applyTariffAmount = () => {
+    const row = tariffs.find((x) => String(x.id) === tariffId)
+    if (!row) return
+    const parts = Math.max(1, parseInt(tariffParts, 10) || 1)
+    const rate = tariffEncoding === "la" ? Number(row.rate_la) : Number(row.rate_fa)
+    const rial = (rate * (1 + taxPercent / 100) + surcharge) * parts
+    const toman = Math.round((rial / 10) * 10000) / 10000
+    setForm((f) => ({ ...f, amount: String(toman) }))
   }
 
   const openEdit = (p: ModirPayamakPackage) => {
@@ -193,6 +219,52 @@ export function ModirPayamakPackagesPage() {
             <div className="space-y-2 sm:col-span-2">
               <Label>{t("pages.modirpayamak.name")}</Label>
               <Input value={form.name} onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))} />
+            </div>
+            <div className="space-y-2 sm:col-span-2 rounded-md border border-dashed p-3">
+              <Label className="mb-2 block">{t("pages.modirpayamak.useTariffForAmount")}</Label>
+              <div className="grid gap-2 sm:grid-cols-2">
+                <Select value={tariffId || undefined} onValueChange={setTariffId}>
+                  <SelectTrigger>
+                    <SelectValue placeholder={t("pages.modirpayamak.tariffsTitle")} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {tariffs.map((tr) => (
+                      <SelectItem key={tr.id} value={String(tr.id)}>
+                        {tr.line_type} /{" "}
+                        {tr.operator === "mci"
+                          ? t("pages.modirpayamak.operatorMci")
+                          : t("pages.modirpayamak.operatorOther")}{" "}
+                        ({formatNumber(tr.rate_fa)} / {formatNumber(tr.rate_la)})
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <Select
+                  value={tariffEncoding}
+                  onValueChange={(v) => setTariffEncoding(v as "fa" | "la")}
+                >
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="fa">{t("pages.modirpayamak.encodingFa")}</SelectItem>
+                    <SelectItem value="la">{t("pages.modirpayamak.encodingLa")}</SelectItem>
+                  </SelectContent>
+                </Select>
+                <div className="space-y-1">
+                  <Label className="text-xs">{t("pages.modirpayamak.tariffParts")}</Label>
+                  <Input
+                    value={tariffParts}
+                    onChange={(e) => setTariffParts(e.target.value)}
+                    dir="ltr"
+                  />
+                </div>
+                <div className="flex items-end">
+                  <Button type="button" variant="secondary" className="w-full" onClick={applyTariffAmount}>
+                    {t("pages.modirpayamak.applyTariffAmount")}
+                  </Button>
+                </div>
+              </div>
             </div>
             <div className="space-y-2">
               <Label>{t("pages.modirpayamak.amount")}</Label>

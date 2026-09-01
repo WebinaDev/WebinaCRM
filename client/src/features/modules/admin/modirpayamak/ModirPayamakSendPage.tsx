@@ -33,7 +33,7 @@ export function ModirPayamakSendPage() {
   const [phone, setPhone] = useState("")
   const [message, setMessage] = useState(searchParams.get("message") ?? "")
   const [patternCode, setPatternCode] = useState(searchParams.get("pattern") ?? "")
-  const [patternParams, setPatternParams] = useState<Record<string, string>>({ param1: "" })
+  const [patternParams, setPatternParams] = useState<Record<string, string>>({})
   const [loading, setLoading] = useState(false)
   const [lastResult, setLastResult] = useState<{ id: string; cost: string; status: string } | null>(null)
 
@@ -53,8 +53,16 @@ export function ModirPayamakSendPage() {
   )
 
   const onPatternSelect = (row: EdgeRow | null) => {
-    if (!row) return
-    setPatternParams({ param1: edgeField(row, "message", "text", "body") })
+    if (!row) {
+      setPatternParams({})
+      return
+    }
+    const message = edgeField(row, "pattern_message", "message", "text", "body")
+    const vars = [...new Set((message.match(/%([a-zA-Z0-9_]+)%/g) ?? []).map((m) => m.slice(1, -1)))]
+    const next: Record<string, string> = {}
+    for (const key of vars) next[key] = ""
+    // Prefer named %var% fields; never dump full body into param1.
+    setPatternParams(next)
   }
 
   const send = async () => {
@@ -136,12 +144,18 @@ export function ModirPayamakSendPage() {
                   <Label>{t("pages.modirpayamak.patternCode")}</Label>
                   <ModirPayamakPatternSelect value={patternCode} onChange={setPatternCode} onSelectRow={onPatternSelect} disabled={loading} />
                 </div>
-                {Object.entries(patternParams).map(([key, val]) => (
-                  <div key={key} className="space-y-2">
-                    <Label>{key}</Label>
-                    <Input value={val} onChange={(e) => setPatternParams((p) => ({ ...p, [key]: e.target.value }))} />
-                  </div>
-                ))}
+                {Object.keys(patternParams).length === 0 ? (
+                  <p className="text-xs text-muted-foreground">{t("pages.modirpayamak.noPatternVars")}</p>
+                ) : (
+                  Object.entries(patternParams).map(([key, val]) => (
+                    <div key={key} className="space-y-2">
+                      <Label className="font-mono text-xs" dir="ltr">
+                        %{key}%
+                      </Label>
+                      <Input value={val} onChange={(e) => setPatternParams((p) => ({ ...p, [key]: e.target.value }))} />
+                    </div>
+                  ))
+                )}
               </>
             ) : (
               <div className="space-y-2">

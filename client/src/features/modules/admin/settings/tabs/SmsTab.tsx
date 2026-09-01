@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Loader2 } from "lucide-react"
+import { Link } from "react-router-dom"
 import { useLocale } from "@/hooks/use-locale"
 import type { SmsSettings } from "@/api/settings"
 
@@ -13,6 +14,7 @@ type Props = {
   onSave: () => void
 }
 
+/** Legacy CRM-internal SMS gateway credentials — shop SMS lives under ModirPayamak. */
 export function SmsTab({ form, setForm, saving, onSave }: Props) {
   const { t } = useLocale()
   const f = form as unknown as SmsSettings
@@ -21,9 +23,20 @@ export function SmsTab({ form, setForm, saving, onSave }: Props) {
     <Card>
       <CardHeader>
         <CardTitle>{t("pages.settings.سامانه_پیامک")}</CardTitle>
-        <CardDescription>{t("pages.settings.سرویس_و_اطلاعات_اتصال_پیامک")}</CardDescription>
+        <CardDescription>
+          {t("pages.settings.smsLegacyHint")}
+        </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
+        <div className="rounded-lg border border-dashed p-3 text-sm text-muted-foreground">
+          <p className="font-medium text-foreground">{t("pages.settings.smsLegacyBadge")}</p>
+          <p className="mt-1">{t("pages.settings.smsLegacyBody")}</p>
+          <Button variant="outline" size="sm" className="mt-3" asChild>
+            <Link to="/admin/integrations/modirpayamak/settings">
+              {t("pages.settings.smsOpenModirPayamak")}
+            </Link>
+          </Button>
+        </div>
         <div className="space-y-2">
           <Label>{t("pages.settings.سرویس_پیامک")}</Label>
           <Input

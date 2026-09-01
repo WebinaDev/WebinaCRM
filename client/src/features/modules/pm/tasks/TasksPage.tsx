@@ -57,7 +57,7 @@ import {
 } from "lucide-react"
 
 export function TasksPage() {
-  const { t, isRtl } = useLocale()
+  const { t, isRtl, formatDate } = useLocale()
   const [view, setView] = useState<"board" | "list" | "calendar" | "gantt">("board")
   const [detailTaskId, setDetailTaskId] = useState<number | null>(null)
   const [calendarEvents, setCalendarEvents] = useState<TaskCalendarEvent[]>([])
@@ -486,7 +486,7 @@ export function TasksPage() {
                       <TableCell><Badge variant="secondary">{task.status_name}</Badge></TableCell>
                       <TableCell>{task.project_title || t("common.emptyValue")}</TableCell>
                       <TableCell>{task.assigned_name || t("common.emptyValue")}</TableCell>
-                      <TableCell>{task.due_date ? task.due_date.slice(0, 10) : t("common.emptyValue")}</TableCell>
+                      <TableCell>{task.due_date ? formatDate(task.due_date) : t("common.emptyValue")}</TableCell>
                       <TableCell>
                         {canDeleteTasks && (
                           <Button

@@ -7,7 +7,7 @@ import { CommentRowActions } from '@/components/comments/CommentRowActions'
 import type { CommentColumnVisibility, CommentRow } from '@/components/comments/types'
 import { Badge } from '@/components/ui/badge'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-import { formatDisplayDate } from '@/lib/date'
+import { useLocale } from '@/hooks/use-locale'
 import { cn } from '@/lib/utils'
 
 type CommentsTableProps = {
@@ -46,7 +46,7 @@ function statusVariant(status: string): 'default' | 'secondary' | 'destructive' 
 export function CommentsTable({
   items,
   columns,
-  locale,
+  locale: _locale,
   statusFilter,
   emptyMessage,
   visibleColumnCount,
@@ -63,6 +63,7 @@ export function CommentsTable({
   onSaved,
 }: CommentsTableProps) {
   const { t } = useTranslation()
+  const { formatDate } = useLocale()
 
   return (
     <Table>
@@ -117,7 +118,7 @@ export function CommentsTable({
                 ) : null}
                 {columns.date ? (
                   <TableCell className="whitespace-nowrap text-sm text-muted-foreground">
-                    {formatDisplayDate(row.date, locale)}
+                    {formatDate(row.date)}
                   </TableCell>
                 ) : null}
                 {columns.status ? (

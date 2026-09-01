@@ -91,6 +91,38 @@ final class WebinoCRM_Sms_Newsletter_Service {
 	}
 
 	/**
+	 * Soft-delete / unsubscribe a newsletter row for a domain.
+	 *
+	 * @param string $domain Domain.
+	 * @param int    $id Subscriber id.
+	 * @return array<string,mixed>|WP_Error
+	 */
+	public static function unsubscribe( $domain, $id ) {
+		global $wpdb;
+		$domain = WebinoCRM_License_Manager::normalize_domain( $domain );
+		$id     = (int) $id;
+		if ( $id <= 0 ) {
+			return new WP_Error( 'invalid_id', __( 'Subscriber id is required.', 'webinocrm' ), array( 'status' => 400 ) );
+		}
+		$table = WebinoCRM_Sms_Install::table( 'newsletter_subscribers' );
+		$updated = $wpdb->update(
+			$table,
+			array( 'status' => 'inactive' ),
+			array(
+				'id'     => $id,
+				'domain' => $domain,
+			)
+		);
+		if ( false === $updated ) {
+			return new WP_Error( 'db_error', __( 'Could not update subscriber.', 'webinocrm' ), array( 'status' => 500 ) );
+		}
+		if ( 0 === (int) $updated ) {
+			return new WP_Error( 'not_found', __( 'Subscriber not found.', 'webinocrm' ), array( 'status' => 404 ) );
+		}
+		return array( 'ok' => true, 'id' => $id );
+	}
+
+	/**
 	 * @param string              $domain Domain.
 	 * @param int                 $product_id Product id (0 = all subscribers).
 	 * @param string              $message Message template.
@@ -110,7 +142,7 @@ final class WebinoCRM_Sms_Newsletter_Service {
 			return array( 'ok' => true, 'sent' => 0, 'message' => __( 'No subscribers.', 'webinocrm' ) );
 		}
 
-		$from   = WebinoCRM_Sms_Settings_Service::resolve_from_number( $domain, true );
+		$from   = WebinoCRM_Sms_Settings_Service::resolve_from_number( $domain, false );
 		$sent   = 0;
 		$errors = array();
 

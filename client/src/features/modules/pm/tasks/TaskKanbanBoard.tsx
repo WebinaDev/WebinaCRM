@@ -14,6 +14,7 @@ import { useState } from "react"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import { useLocale } from "@/hooks/use-locale"
 import type { TaskItem } from "@/api/tasks"
 import { Calendar, FolderOpen, GripVertical, Trash2, User } from "lucide-react"
 
@@ -30,6 +31,7 @@ function TaskCard({
   onOpen: () => void
   onDelete: () => void
 }) {
+  const { formatDate } = useLocale()
   const { attributes, listeners, setNodeRef, transform, isDragging } = useDraggable({
     id: `task-${task.id}`,
     data: { task },
@@ -67,7 +69,7 @@ function TaskCard({
         {task.due_date && (
           <p className="text-xs text-muted-foreground flex items-center gap-1 mt-0.5">
             <Calendar className="h-3 w-3" />
-            {task.due_date}
+            {formatDate(task.due_date)}
           </p>
         )}
         {task.assigned_name && (

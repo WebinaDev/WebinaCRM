@@ -9,6 +9,16 @@ class ContentTypes {
 	}
 
 	public static function register(): void {
+		if ( ! get_option( 'wbb_biz_submit_migrated', false ) ) {
+			global $wpdb;
+			$wpdb->query(
+				"UPDATE {$wpdb->posts}
+				 SET post_type = 'wbb_biz_submit'
+				 WHERE post_type = 'wbb_business_submission'"
+			);
+			update_option( 'wbb_biz_submit_migrated', '1', true );
+		}
+
 		register_post_type(
 			'wbb_plan',
 			array(
@@ -54,7 +64,7 @@ class ContentTypes {
 		);
 
 		register_post_type(
-			'wbb_business_submission',
+			'wbb_biz_submit',
 			array(
 				'label'        => 'درخواست های کسب و کار',
 				'public'       => false,

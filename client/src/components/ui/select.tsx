@@ -10,10 +10,9 @@ import { cn } from "@/lib/utils"
 import { useTextDirection } from "@/hooks/use-text-direction"
 
 function Select({
-  modal = false,
   ...props
 }: React.ComponentProps<typeof SelectPrimitive.Root>) {
-  return <SelectPrimitive.Root data-slot="select" modal={modal} {...props} />
+  return <SelectPrimitive.Root data-slot="select" {...props} />
 }
 
 function SelectGroup({

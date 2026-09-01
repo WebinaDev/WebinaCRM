@@ -7,14 +7,17 @@ export type AuthSession = {
   user?: { id: number; login: string; name: string }
 }
 
+export const AUTH_SESSION_QUERY_KEY = ['auth', 'session'] as const
+
 export function useAuthSession() {
+  const isLogged = Boolean(window.webinoDashboard?.isLogged)
+
   return useQuery({
-    queryKey: ['auth', 'session'],
+    queryKey: AUTH_SESSION_QUERY_KEY,
     queryFn: () => apiFetch<AuthSession>('auth/session'),
     staleTime: 300_000,
     retry: false,
-    placeholderData: () => ({
-      logged_in: window.webinoDashboard.isLogged,
-    }),
+    initialData: { logged_in: isLogged },
+    initialDataUpdatedAt: Date.now(),
   })
 }

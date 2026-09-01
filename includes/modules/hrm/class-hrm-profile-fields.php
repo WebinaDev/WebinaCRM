@@ -24,6 +24,8 @@ class WebinoCRM_Hrm_Profile_Fields {
 					'national_id'     => array( 'label' => __( 'کد ملی', 'webinocrm' ), 'type' => 'text' ),
 					'id_number'       => array( 'label' => __( 'شماره شناسنامه', 'webinocrm' ), 'type' => 'text' ),
 					'id_issue_place'  => array( 'label' => __( 'محل صدور', 'webinocrm' ), 'type' => 'text' ),
+					'id_card_attachment_id' => array( 'label' => __( 'تصویر کارت ملی', 'webinocrm' ), 'type' => 'number' ),
+					'birth_cert_attachment_id' => array( 'label' => __( 'تصویر شناسنامه', 'webinocrm' ), 'type' => 'number' ),
 					'marital_status'  => array(
 						'label'   => __( 'وضعیت تأهل', 'webinocrm' ),
 						'type'    => 'select',
@@ -50,6 +52,21 @@ class WebinoCRM_Hrm_Profile_Fields {
 					'personnel_code'  => array( 'label' => __( 'کد پرسنلی', 'webinocrm' ), 'type' => 'text' ),
 					'direct_manager'  => array( 'label' => __( 'مدیر مستقیم', 'webinocrm' ), 'type' => 'text' ),
 					'hire_date'       => array( 'label' => __( 'تاریخ استخدام', 'webinocrm' ), 'type' => 'date' ),
+					'postal_code'     => array( 'label' => __( 'کد پستی', 'webinocrm' ), 'type' => 'text' ),
+					'military_status' => array(
+						'label'   => __( 'نظام وظیفه', 'webinocrm' ),
+						'type'    => 'select',
+						'options' => array(
+							''           => '',
+							'completed'  => __( 'پایان خدمت', 'webinocrm' ),
+							'exempt'     => __( 'معاف', 'webinocrm' ),
+							'ongoing'    => __( 'در حال خدمت', 'webinocrm' ),
+						),
+					),
+					'education_degree'=> array( 'label' => __( 'مدرک تحصیلی', 'webinocrm' ), 'type' => 'text' ),
+					'job_level'       => array( 'label' => __( 'سطح شغلی', 'webinocrm' ), 'type' => 'text' ),
+					'tax_exemption'   => array( 'label' => __( 'معافیت مالیاتی', 'webinocrm' ), 'type' => 'text' ),
+					'job_description' => array( 'label' => __( 'شرح شغل', 'webinocrm' ), 'type' => 'textarea' ),
 					'contract_type'   => array(
 						'label'   => __( 'نوع قرارداد', 'webinocrm' ),
 						'type'    => 'select',

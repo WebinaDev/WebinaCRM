@@ -31,7 +31,12 @@ final class WebinoCRM_Sms_Install {
 		if ( $wpdb->get_var( "SHOW TABLES LIKE '" . esc_sql( $flag ) . "'" ) !== $flag ) {
 			self::create_tables();
 		}
+		self::create_secretaries_table();
 		self::maybe_upgrade_messages_columns();
+		self::maybe_upgrade_pattern_param_map();
+		if ( class_exists( 'WebinoCRM_ModirPayamak_Manager', false ) ) {
+			WebinoCRM_ModirPayamak_Manager::maybe_upgrade_domain_numbers_schema();
+		}
 	}
 
 	/**
@@ -72,6 +77,7 @@ final class WebinoCRM_Sms_Install {
 			event_key varchar(80) NOT NULL,
 			body longtext NOT NULL,
 			pattern_code varchar(100) DEFAULT NULL,
+			param_map longtext DEFAULT NULL,
 			enabled tinyint(1) DEFAULT 1,
 			updated_at datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 			PRIMARY KEY (id),
@@ -87,13 +93,15 @@ final class WebinoCRM_Sms_Install {
 			scope varchar(30) NOT NULL,
 			event_key varchar(80) NOT NULL,
 			ippanel_code varchar(100) DEFAULT NULL,
+			param_map longtext DEFAULT NULL,
 			sync_status varchar(20) DEFAULT 'pending',
 			last_error text,
 			submitted_at datetime DEFAULT NULL,
 			updated_at datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 			PRIMARY KEY (id),
 			UNIQUE KEY domain_scope_event (domain, scope, event_key),
-			KEY sync_status (sync_status)
+			KEY sync_status (sync_status),
+			KEY ippanel_code (ippanel_code)
 		) $charset_collate;";
 		dbDelta( $sql );
 
@@ -112,7 +120,35 @@ final class WebinoCRM_Sms_Install {
 		) $charset_collate;";
 		dbDelta( $sql );
 
+		self::create_secretaries_table();
 		self::maybe_upgrade_messages_columns();
+	}
+
+	/**
+	 * @return void
+	 */
+	public static function create_secretaries_table() {
+		global $wpdb;
+		$charset_collate = $wpdb->get_charset_collate();
+		require_once ABSPATH . 'wp-admin/includes/upgrade.php';
+		$table = self::table( 'secretaries' );
+		$sql   = "CREATE TABLE $table (
+			id bigint(20) NOT NULL AUTO_INCREMENT,
+			domain varchar(255) NOT NULL,
+			type varchar(40) NOT NULL,
+			name varchar(191) DEFAULT '',
+			keywords text,
+			reply_body longtext,
+			pattern_code varchar(100) DEFAULT '',
+			forward_to varchar(40) DEFAULT '',
+			enabled tinyint(1) DEFAULT 1,
+			created_at datetime DEFAULT CURRENT_TIMESTAMP,
+			updated_at datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+			PRIMARY KEY (id),
+			KEY domain (domain),
+			KEY type (type)
+		) $charset_collate;";
+		dbDelta( $sql );
 	}
 
 	/**
@@ -140,6 +176,33 @@ final class WebinoCRM_Sms_Install {
 		if ( ! in_array( 'recipient_role', $cols, true ) ) {
 			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 			$wpdb->query( "ALTER TABLE $table ADD COLUMN recipient_role varchar(20) DEFAULT NULL AFTER context_id" );
+		}
+		if ( ! in_array( 'event_key', $cols, true ) ) {
+			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+			$wpdb->query( "ALTER TABLE $table ADD COLUMN event_key varchar(80) DEFAULT NULL AFTER recipient_role" );
+		}
+	}
+
+	/**
+	 * Add param_map columns for pattern variable binding.
+	 *
+	 * @return void
+	 */
+	public static function maybe_upgrade_pattern_param_map() {
+		global $wpdb;
+		foreach ( array( 'pattern_registry', 'message_templates' ) as $suffix ) {
+			$table = self::table( $suffix );
+			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+			if ( $wpdb->get_var( "SHOW TABLES LIKE '" . esc_sql( $table ) . "'" ) !== $table ) {
+				continue;
+			}
+			$cols = $wpdb->get_col( "DESC $table", 0 );
+			if ( ! is_array( $cols ) || in_array( 'param_map', $cols, true ) ) {
+				continue;
+			}
+			$after = ( 'pattern_registry' === $suffix ) ? 'ippanel_code' : 'pattern_code';
+			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+			$wpdb->query( "ALTER TABLE $table ADD COLUMN param_map longtext DEFAULT NULL AFTER $after" );
 		}
 	}
 }

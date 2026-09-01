@@ -3,6 +3,8 @@ import { Link } from "react-router-dom"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { DatePicker } from "@/components/ui/date-picker"
+import { Label } from "@/components/ui/label"
 import {
   Table,
   TableBody,
@@ -26,7 +28,7 @@ import { Plus, Loader2, Eye } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 export function PayrollRunsPage() {
-  const { t, isRtl, formatNumber } = useLocale()
+  const { t, isRtl, formatNumber, formatDate } = useLocale()
   const [runs, setRuns] = useState<PayrollRun[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -36,8 +38,7 @@ export function PayrollRunsPage() {
   const now = new Date()
   const [form, setForm] = useState({
     title: "",
-    period_year: now.getFullYear(),
-    period_month: now.getMonth() + 1,
+    period_date: now.toISOString().slice(0, 10),
   })
 
   const load = useCallback(async () => {
@@ -64,10 +65,12 @@ export function PayrollRunsPage() {
   const handleCreate = async () => {
     setSubmitting(true)
     try {
+      const periodDate = form.period_date || now.toISOString().slice(0, 10)
+      const [period_year, period_month] = periodDate.split("-").map((part) => parseInt(part, 10))
       const res = await savePayrollRun({
         title: form.title.trim() || undefined,
-        period_year: form.period_year,
-        period_month: form.period_month,
+        period_year,
+        period_month,
       })
       if (res.success) {
         setDialogOpen(false)
@@ -120,8 +123,8 @@ export function PayrollRunsPage() {
                         {run.title}
                       </Link>
                     </TableCell>
-                    <TableCell dir="ltr" className="text-start">
-                      {run.period_year}/{run.period_month}
+                    <TableCell className="text-start">
+                      {formatDate(`${run.period_year}-${String(run.period_month).padStart(2, "0")}-01`.slice(0, 10))}
                     </TableCell>
                     <TableCell>{run.status}</TableCell>
                     <TableCell>{formatNumber(run.total_net)}</TableCell>
@@ -151,20 +154,11 @@ export function PayrollRunsPage() {
               value={form.title}
               onChange={(e) => setForm((f) => ({ ...f, title: e.target.value }))}
             />
-            <div className="grid grid-cols-2 gap-2">
-              <Input
-                type="number"
-                placeholder={t("pages.hrm.payroll.year")}
-                value={form.period_year}
-                onChange={(e) => setForm((f) => ({ ...f, period_year: parseInt(e.target.value, 10) || f.period_year }))}
-              />
-              <Input
-                type="number"
-                min={1}
-                max={12}
-                placeholder={t("pages.hrm.payroll.month")}
-                value={form.period_month}
-                onChange={(e) => setForm((f) => ({ ...f, period_month: parseInt(e.target.value, 10) || 1 }))}
+            <div className="space-y-2">
+              <Label>{t("pages.hrm.payroll.period")}</Label>
+              <DatePicker
+                value={form.period_date}
+                onChange={(v) => setForm((f) => ({ ...f, period_date: v }))}
               />
             </div>
           </div>

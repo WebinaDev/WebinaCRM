@@ -37,8 +37,6 @@
     "active": "Active",
     "inactive": "Inactive",
     "comingSoon": "Coming soon...",
-    "prevPage": "Previous",
-    "nextPage": "Next",
     "pageOf": "Page {{page}} of {{totalPages}}",
     "create": "Create",
     "saved": "Saved.",
@@ -60,7 +58,8 @@
       "notFound": "Not found.",
       "serverError": "Server error.",
       "required": "This field is required."
-    }
+    },
+    "refresh": "Refresh"
   },
   "layout": {
     "cat-home": "Overview",
@@ -81,7 +80,7 @@
     "tasks": "Tasks",
     "appointments": "Appointments",
     "leads": "Leads",
-    "licenses": "Licenses",
+    "licenses": "Marketplace licenses",
     "marketplace-products": "Marketplace products",
     "marketplace-categories": "Marketplace categories",
     "marketplace-orders": "Marketplace orders",
@@ -133,8 +132,7 @@
     "baleBusiness": "Business bot",
     "bots": "Bots",
     "businessBot": "Business bot",
-    "mfg-overview": "Manufacturing overview",
-    "licenses": "Marketplace licenses"
+    "mfg-overview": "Manufacturing overview"
   },
   "sidebar": {
     "searchPlaceholder": "Search menu...",
@@ -158,8 +156,7 @@
   },
   "datePicker": {
     "placeholder": "Date"
-  }
-,
+  },
   "coreUpdate": {
     "title": "Platform core update",
     "description": "Check for the latest platform release package and update core safely.",
@@ -183,5 +180,13 @@
         }
       }
     }
-  }
+  },
+  "nav": {
+    "erp": {
+      "admin": {
+        "mpSecretaries": "Secretaries"
+      }
+    }
+  },
+  "nav.erp.admin.mpSecretaries": "Secretaries"
 }

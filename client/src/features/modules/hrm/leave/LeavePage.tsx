@@ -45,7 +45,7 @@ import { Plus, Loader2, Check, X } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 export function LeavePage() {
-  const { t, isRtl } = useLocale()
+  const { t, isRtl, formatDate } = useLocale()
   const canHr = normalizeCapabilities(window.webinoDashboard?.bootstrap?.capabilities).includes(
     "webinocrm_route_staff",
   )
@@ -157,8 +157,8 @@ export function LeavePage() {
         {rows.map((r) => (
           <TableRow key={r.id}>
             <TableCell>{r.user_name}</TableCell>
-            <TableCell dir="ltr" className="text-start">
-              {r.date_from} — {r.date_to}
+            <TableCell className="text-start">
+              {formatDate(r.date_from)} — {formatDate(r.date_to)}
             </TableCell>
             <TableCell>{r.days}</TableCell>
             <TableCell>{r.status}</TableCell>

@@ -66,6 +66,20 @@ class WebinoCRM_Accounting_Module {
 		require_once $dir . 'class-warehouse-invoice-integration.php';
 		require_once $dir . 'warehouse-functions.php'; // Helper functions
 
+		require_once $dir . 'class-accounting-ext-schema.php';
+		require_once $dir . 'class-accounting-ext-compat.php';
+		WebinoCRM_Accounting_Ext_Schema::ensure();
+		require_once $dir . 'moadian/class-accounting-moadian-client.php';
+		require_once $dir . 'moadian/class-accounting-moadian.php';
+		require_once $dir . 'hesabfa/class-accounting-hesabfa-client.php';
+		require_once $dir . 'hesabfa/class-accounting-hesabfa-sync.php';
+		require_once $dir . 'hesabfa/class-accounting-hesabfa-migrate.php';
+		require_once $dir . 'hesabfa/class-accounting-hesabfa-webhook.php';
+		require_once $dir . 'hesabfa/class-accounting-hesabfa.php';
+		if ( class_exists( 'WebinoCRM_Accounting_Hesabfa', false ) ) {
+			WebinoCRM_Accounting_Hesabfa::init();
+		}
+
 		require_once $dir . 'ajax/class-accounting-ajax-handler.php';
 
 		new WebinoCRM_Accounting_Ajax_Handler();

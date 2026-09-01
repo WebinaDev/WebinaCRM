@@ -308,6 +308,135 @@ class WebinoCRM_Accounting_Service {
 		return WebinoCRM_Service_Base::success( $data  );
 	}
 
+	public static function report_vat( array $params ) {
+		WebinoCRM_Service_Base::ensure_dependencies();
+		$access = self::verify_accounting_access( $params );
+		if ( is_array( $access ) ) {
+			return $access;
+		}
+		$from = sanitize_text_field( wp_unslash( (string) WebinoCRM_Service_Base::param( $params, 'date_from', '' ) ) );
+		$to   = sanitize_text_field( wp_unslash( (string) WebinoCRM_Service_Base::param( $params, 'date_to', '' ) ) );
+		return WebinoCRM_Service_Base::success( WebinoCRM_Accounting_Reports::vat_summary( $from, $to ) );
+	}
+
+	public static function report_aging( array $params ) {
+		WebinoCRM_Service_Base::ensure_dependencies();
+		$access = self::verify_accounting_access( $params );
+		if ( is_array( $access ) ) {
+			return $access;
+		}
+		return WebinoCRM_Service_Base::success( WebinoCRM_Accounting_Reports::aging() );
+	}
+
+	public static function report_margin( array $params ) {
+		WebinoCRM_Service_Base::ensure_dependencies();
+		$access = self::verify_accounting_access( $params );
+		if ( is_array( $access ) ) {
+			return $access;
+		}
+		$from = sanitize_text_field( wp_unslash( (string) WebinoCRM_Service_Base::param( $params, 'date_from', '' ) ) );
+		$to   = sanitize_text_field( wp_unslash( (string) WebinoCRM_Service_Base::param( $params, 'date_to', '' ) ) );
+		return WebinoCRM_Service_Base::success( WebinoCRM_Accounting_Reports::margin( $from, $to ) );
+	}
+
+	public static function report_cash_flow( array $params ) {
+		WebinoCRM_Service_Base::ensure_dependencies();
+		$access = self::verify_accounting_access( $params );
+		if ( is_array( $access ) ) {
+			return $access;
+		}
+		$from = sanitize_text_field( wp_unslash( (string) WebinoCRM_Service_Base::param( $params, 'date_from', '' ) ) );
+		$to   = sanitize_text_field( wp_unslash( (string) WebinoCRM_Service_Base::param( $params, 'date_to', '' ) ) );
+		return WebinoCRM_Service_Base::success( WebinoCRM_Accounting_Reports::cash_flow( $from, $to ) );
+	}
+
+	public static function moadian_settings_get( array $params ) {
+		WebinoCRM_Service_Base::ensure_dependencies();
+		$access = self::verify_accounting_access( $params );
+		if ( is_array( $access ) ) {
+			return $access;
+		}
+		return WebinoCRM_Service_Base::success( array( 'settings' => WebinoCRM_Accounting_Moadian_Config::get_public() ) );
+	}
+
+	public static function moadian_settings_save( array $params ) {
+		WebinoCRM_Service_Base::ensure_dependencies();
+		$access = self::verify_accounting_access( $params );
+		if ( is_array( $access ) ) {
+			return $access;
+		}
+		$saved = WebinoCRM_Accounting_Moadian_Config::save( $params );
+		return WebinoCRM_Service_Base::success( array( 'settings' => $saved, 'message' => __( 'Settings saved.', 'webinocrm' ) ) );
+	}
+
+	public static function moadian_test( array $params ) {
+		WebinoCRM_Service_Base::ensure_dependencies();
+		$access = self::verify_accounting_access( $params );
+		if ( is_array( $access ) ) {
+			return $access;
+		}
+		$res = WebinoCRM_Accounting_Moadian::test_connection();
+		return is_wp_error( $res )
+			? WebinoCRM_Service_Base::error( $res->get_error_message(), 400 )
+			: WebinoCRM_Service_Base::success( array( 'ok' => true ) );
+	}
+
+	public static function moadian_jobs( array $params ) {
+		WebinoCRM_Service_Base::ensure_dependencies();
+		$access = self::verify_accounting_access( $params );
+		if ( is_array( $access ) ) {
+			return $access;
+		}
+		return WebinoCRM_Service_Base::success( WebinoCRM_Accounting_Moadian::list_jobs( $params ) );
+	}
+
+	public static function moadian_process( array $params ) {
+		WebinoCRM_Service_Base::ensure_dependencies();
+		$access = self::verify_accounting_access( $params );
+		if ( is_array( $access ) ) {
+			return $access;
+		}
+		$limit = (int) WebinoCRM_Service_Base::param( $params, 'limit', 10 );
+		return WebinoCRM_Service_Base::success( WebinoCRM_Accounting_Moadian::process_jobs( $limit ) );
+	}
+
+	public static function moadian_send( array $params ) {
+		WebinoCRM_Service_Base::ensure_dependencies();
+		$access = self::verify_accounting_access( $params );
+		if ( is_array( $access ) ) {
+			return $access;
+		}
+		$id  = (int) WebinoCRM_Service_Base::param( $params, 'invoice_id', 0 );
+		$job = WebinoCRM_Accounting_Moadian::enqueue_send( $id, (string) WebinoCRM_Service_Base::param( $params, 'action', 'send' ) );
+		return is_wp_error( $job )
+			? WebinoCRM_Service_Base::error( $job->get_error_message(), 400 )
+			: WebinoCRM_Service_Base::success( array( 'job_id' => $job ) );
+	}
+
+	public static function hesabfa_test( array $params ) {
+		WebinoCRM_Service_Base::ensure_dependencies();
+		$access = self::verify_accounting_access( $params );
+		if ( is_array( $access ) ) {
+			return $access;
+		}
+		$res = WebinoCRM_Accounting_Hesabfa_Client::test_connection();
+		return is_wp_error( $res )
+			? WebinoCRM_Service_Base::error( $res->get_error_message(), 400 )
+			: WebinoCRM_Service_Base::success( array( 'ok' => true ) );
+	}
+
+	public static function hesabfa_sync_now( array $params ) {
+		WebinoCRM_Service_Base::ensure_dependencies();
+		$access = self::verify_accounting_access( $params );
+		if ( is_array( $access ) ) {
+			return $access;
+		}
+		$res = WebinoCRM_Accounting_Hesabfa_Sync::pull_changes();
+		return is_wp_error( $res )
+			? WebinoCRM_Service_Base::error( $res->get_error_message(), 400 )
+			: WebinoCRM_Service_Base::success( is_array( $res ) ? $res : array( 'ok' => true ) );
+	}
+
 	public static function settings_get( array $params ) {
 		WebinoCRM_Service_Base::ensure_dependencies();
 		$access = self::verify_accounting_access( $params );

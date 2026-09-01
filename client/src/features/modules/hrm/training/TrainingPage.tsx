@@ -26,7 +26,7 @@ import { getAjaxMessage } from "@/api/client"
 import { Loader2 } from "lucide-react"
 
 export function TrainingPage() {
-  const { t, isRtl } = useLocale()
+  const { t, isRtl, formatDate } = useLocale()
   const [tab, setTab] = useState("courses")
   const [courses, setCourses] = useState<TrainingCourse[]>([])
   const [sessions, setSessions] = useState<TrainingSession[]>([])
@@ -150,7 +150,7 @@ export function TrainingPage() {
                     {sessions.map((s) => (
                       <TableRow key={s.id}>
                         <TableCell>{courseTitleById(s.course_id)}</TableCell>
-                        <TableCell dir="ltr" className="text-start">{s.session_date}</TableCell>
+                        <TableCell className="text-start">{formatDate(s.session_date)}</TableCell>
                         <TableCell>{s.location || "—"}</TableCell>
                       </TableRow>
                     ))}

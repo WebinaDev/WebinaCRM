@@ -55,7 +55,7 @@ import { STAFF_ROLES, EMAIL_RE } from "../constants"
 import { usePmPagination } from "@/features/shared/pm/usePmPagination"
 
 export function CustomersPage() {
-  const { t, isRtl } = useLocale()
+  const { t, isRtl, formatDisplayDate } = useLocale()
   const [searchParams, setSearchParams] = useSearchParams()
   const { currentPage, setCurrentPage, totalPages, setTotalPages, resetPage } = usePmPagination()
   const [users, setUsers] = useState<CustomerUser[]>([])
@@ -432,7 +432,7 @@ export function CustomersPage() {
                     <TableCell>
                       <Badge variant="secondary">{u.role_name}</Badge>
                     </TableCell>
-                    <TableCell>{u.registered_jalali}</TableCell>
+                    <TableCell>{formatDisplayDate(u.registered, u.registered_jalali)}</TableCell>
                     <TableCell>
                       <div className="flex gap-2">
                         <Button variant="outline" size="sm" onClick={() => setCustomer360Id(u.id)} title={t("pages.customers.customer_360")}>

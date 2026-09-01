@@ -11,7 +11,7 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { apiFetch } from '@/lib/api'
-import { formatDisplayDateTime } from '@/lib/date'
+import { useLocale } from '@/hooks/use-locale'
 import { translateNoteAddedBy } from '@/lib/enumLabels'
 
 export type OrderNote = {
@@ -29,8 +29,9 @@ type OrderNotesPanelProps = {
   onChanged: () => void
 }
 
-export function OrderNotesPanel({ orderId, notes, locale, onChanged }: OrderNotesPanelProps) {
+export function OrderNotesPanel({ orderId, notes, locale: _locale, onChanged }: OrderNotesPanelProps) {
   const { t } = useTranslation()
+  const { formatDateTime } = useLocale()
   const [content, setContent] = useState('')
   const [customerNote, setCustomerNote] = useState(false)
 
@@ -82,7 +83,7 @@ export function OrderNotesPanel({ orderId, notes, locale, onChanged }: OrderNote
                 </Button>
               </div>
               <p className="text-muted-foreground mt-1 text-xs">
-                {formatDisplayDateTime(note.date ?? undefined, locale)}
+                {formatDateTime(note.date ?? '')}
                 {note.added_by ? ` · ${translateNoteAddedBy(t, note.added_by)}` : ''}
                 {note.customer_note ? ` · ${t('orders.noteToCustomer')}` : ''}
               </p>

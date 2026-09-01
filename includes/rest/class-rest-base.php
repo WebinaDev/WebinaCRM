@@ -126,6 +126,14 @@ class WebinoCRM_REST_Base {
 				'recruitment' => 'hrm-recruitment',
 				'performance' => 'hrm-performance',
 				'training'    => 'hrm-training',
+				'me'          => 'hrm-me',
+				'my-payroll'  => 'hrm-my-payroll',
+				'my-time'     => 'hrm-my-time',
+				'my-docs'     => 'hrm-my-docs',
+				'my-insurance'=> 'hrm-my-insurance',
+				'my-org'      => 'hrm-my-org',
+				'my-profile'  => 'hrm-my-profile',
+				'cartable'    => 'hrm-cartable',
 			),
 			'crm'     => array(
 				'leads'         => 'leads',
@@ -194,12 +202,31 @@ class WebinoCRM_REST_Base {
 			return webinocrm_user_can_manage_marketplace();
 		}
 
+		if ( current_user_can( 'manage_options' ) ) {
+			return true;
+		}
+
+		$portal_menu_ids = array(
+			'hrm-self',
+			'hrm-me',
+			'hrm-my-payroll',
+			'hrm-my-time',
+			'hrm-my-docs',
+			'hrm-my-insurance',
+			'hrm-my-org',
+			'hrm-my-profile',
+		);
+		if ( in_array( $slug, $portal_menu_ids, true ) && class_exists( 'WebinoCRM_Hrm_Service' ) ) {
+			return WebinoCRM_Hrm_Service::can_access_hrm_self();
+		}
+		if ( 'hrm-cartable' === $slug && class_exists( 'WebinoCRM_Hrm_Service' ) ) {
+			return WebinoCRM_Hrm_Service::can_manage_hrm() || ! empty( WebinoCRM_Hrm_Service::managed_department_ids() );
+		}
+
 		$role = self::crm_role();
 		if ( in_array( $role, array( 'system_manager', 'administrator' ), true ) && class_exists( 'WebinoCRM_Erp_Module_Registry' ) ) {
-			foreach ( WebinoCRM_Erp_Module_Registry::role_menu_ids() as $allowed_ids ) {
-				if ( in_array( $slug, $allowed_ids, true ) ) {
-					return true;
-				}
+			if ( in_array( $slug, WebinoCRM_Erp_Module_Registry::all_menu_ids(), true ) ) {
+				return true;
 			}
 			if ( in_array( $slug, array( 'dashboard', 'reports', 'settings', 'accounting', 'bale-business', 'logs', 'licenses', 'visitor-statistics' ), true ) ) {
 				return true;
@@ -283,6 +310,11 @@ class WebinoCRM_REST_Base {
 		if ( class_exists( 'WebinoCRM_Sidebar_Menu_Builder' ) ) {
 			$menu = WebinoCRM_Sidebar_Menu_Builder::build_menu( $role );
 			self::collect_menu_capabilities( $out, $menu );
+		}
+		if ( in_array( $role, array( 'system_manager', 'administrator' ), true ) && class_exists( 'WebinoCRM_Erp_Module_Registry' ) ) {
+			foreach ( WebinoCRM_Erp_Module_Registry::all_menu_ids() as $menu_id ) {
+				$out[ 'webinocrm_route_' . sanitize_key( $menu_id ) ] = true;
+			}
 		}
 		return $out;
 	}

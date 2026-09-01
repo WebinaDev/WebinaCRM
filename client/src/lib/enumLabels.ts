@@ -28,6 +28,12 @@ export function translateBotCampaignStatus(t: TFunction, status: string): string
   return translateEnum(t, 'shopBot.campaignStatus', status)
 }
 
+export function translateModirPayamakStatus(t: TFunction, status: string): string {
+  const slug = (status || '').trim().toLowerCase().replace(/\s+/g, '_')
+  if (!slug) return t('common.emptyValue')
+  return translateEnum(t, 'modirpayamak.status', slug)
+}
+
 export type AttributionSourceParts = {
   source?: string
   source_type?: string

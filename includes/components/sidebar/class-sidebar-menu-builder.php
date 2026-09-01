@@ -37,7 +37,7 @@ class WebinoCRM_Sidebar_Menu_Builder {
 				return true;
 			}
 			// Legacy-only keys not in ERP registry.
-			$erp_keys = array( 'hrm', 'finance', 'crm', 'pm', 'scm', 'sales', 'mfg', 'docs', 'distribution', 'admin' );
+			$erp_keys = array( 'hrm', 'finance', 'crm', 'pm', 'scm', 'sales', 'mfg', 'docs', 'distribution', 'admin', 'ai_content' );
 			if ( in_array( $module_key, $erp_keys, true ) ) {
 				return false;
 			}

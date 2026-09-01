@@ -45,7 +45,9 @@ class WebinoCRM_Consultations_Service {
                 'type'         => $type,
                 'type_label'   => ($type === 'in-person') ? 'حضوری' : 'تلفنی',
                 'datetime'     => $datetime,
-                'datetime_display' => !empty($datetime) ? date_i18n('Y/m/d H:i', strtotime($datetime)) : '',
+                'datetime_display' => ! empty( $datetime ) && class_exists( 'WebinoCRM_Date_Formatter' )
+                    ? WebinoCRM_Date_Formatter::format_date( $datetime, 'Y/m/d H:i' )
+                    : ( ! empty( $datetime ) ? date_i18n( 'Y/m/d H:i', strtotime( $datetime ) ) : '' ),
                 'status_slug'  => $status_slug,
                 'status_name'  => $status_name,
                 'notes'        => $p->post_content,

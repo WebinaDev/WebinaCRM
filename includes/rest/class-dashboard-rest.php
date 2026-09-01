@@ -160,6 +160,9 @@ class WebinoCRM_Dashboard_REST {
 		if ( current_user_can( 'read' ) ) {
 			$caps[] = 'read';
 		}
+		if ( current_user_can( 'manage_options' ) ) {
+			$caps[] = 'manage_options';
+		}
 
 		return new WP_REST_Response(
 			array(
