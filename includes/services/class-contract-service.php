@@ -244,6 +244,18 @@ class WebinoCRM_Contract_Service {
 					'installments'         => $inst_data,
 					'is_cancelled'         => 'cancelled' === get_post_meta( $contract_id, '_contract_status', true ),
 					'delete_nonce'         => wp_create_nonce( 'webino_delete_contract_' . $contract_id ),
+					'rahn'                 => ( 'rahn_percent' === get_post_meta( $contract_id, '_project_subscription_model', true ) )
+						? array(
+							'F'         => (float) get_post_meta( $contract_id, '_rahn_fixed', true ),
+							'p'         => (float) get_post_meta( $contract_id, '_rahn_percent', true ),
+							'p_percent' => (float) get_post_meta( $contract_id, '_rahn_percent', true ) * 100.0,
+							'clause'    => (string) get_post_meta( $contract_id, '_rahn_clause', true ),
+							's_hat'     => (float) get_post_meta( $contract_id, '_rahn_s_hat', true ),
+							'duration'  => (int) get_post_meta( $contract_id, '_rahn_duration', true ),
+							'locked_at' => (string) get_post_meta( $contract_id, '_rahn_locked_at', true ),
+							'quote_id'  => (int) get_post_meta( $contract_id, '_rahn_quote_id', true ),
+						)
+						: null,
 				),
 				'related_projects' => array_map(
 					static function ( $p ) {
@@ -264,6 +276,7 @@ class WebinoCRM_Contract_Service {
 				'models'           => array(
 					array( 'value' => 'onetime', 'label' => 'یکبار پرداخت' ),
 					array( 'value' => 'subscription', 'label' => 'اشتراکی' ),
+					array( 'value' => 'rahn_percent', 'label' => 'رهن‌درصد' ),
 				),
 			)
 		);

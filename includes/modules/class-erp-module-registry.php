@@ -242,6 +242,7 @@ class WebinoCRM_Erp_Module_Registry {
 						'children' => array(
 							array( 'id' => 'invoices', 'path' => 'sales/invoices', 'title' => __( 'پیش‌فاکتورها', 'webinocrm' ), 'icon' => 'ri-file-list-3-line' ),
 							array( 'id' => 'services', 'path' => 'sales/catalog', 'title' => __( 'خدمات و محصولات', 'webinocrm' ), 'icon' => 'ri-service-line' ),
+							array( 'id' => 'rahn-percent', 'path' => 'sales/rahn-percent', 'title' => __( 'رهن‌درصد', 'webinocrm' ), 'icon' => 'ri-percent-line' ),
 							array( 'id' => 'campaigns', 'path' => 'sales/campaigns', 'title' => __( 'کمپین‌ها', 'webinocrm' ), 'icon' => 'ri-megaphone-line' ),
 						),
 					),
@@ -733,12 +734,13 @@ class WebinoCRM_Erp_Module_Registry {
 	 */
 	public static function role_menu_ids() {
 		return array(
-			'sales_consultant' => array( 'dashboard', 'leads', 'contracts', 'customers' ),
+			'sales_consultant' => array( 'dashboard', 'leads', 'contracts', 'customers', 'rahn-percent' ),
 			'finance_manager'  => array(
 				'dashboard',
 				'reports',
 				'docs/contracts',
 				'sales/invoices',
+				'rahn-percent',
 				'accounting',
 				'accounting-persons',
 				'accounting-products',

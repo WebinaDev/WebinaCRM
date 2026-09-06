@@ -1,1 +1,0 @@
-import{C as e,Cr as t}from"./dashboard-shared-BZgt2jTd.js";var n=t();function r({amount:t,locale:r,className:i}){return(0,n.jsx)(e,{amount:Number.isFinite(t)?t:0,currency:`IRT`,locale:r,className:i})}export{r as t};

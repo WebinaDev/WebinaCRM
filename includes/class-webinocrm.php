@@ -86,6 +86,7 @@ class WebinoCRM {
         require_once WEBINOCRM_PLUGIN_DIR . 'includes/class-dashboard-rewrite.php';
         require_once WEBINOCRM_PLUGIN_DIR . 'includes/class-dashboard-assets.php';
         require_once WEBINOCRM_PLUGIN_DIR . 'includes/class-webinocrm-dashboard-ssr.php';
+        require_once WEBINOCRM_PLUGIN_DIR . 'includes/class-rahn-public-rewrite.php';
         require_once WEBINOCRM_PLUGIN_DIR . 'includes/class-modules.php';
         require_once WEBINOCRM_PLUGIN_DIR . 'includes/components/sidebar/class-sidebar-menu-builder.php';
         require_once WEBINOCRM_PLUGIN_DIR . 'includes/class-dashboard-app.php';
@@ -241,6 +242,27 @@ class WebinoCRM {
         new WebinoCRM_Login_Ajax_Handler();
         new WebinoCRM_Dashboard_Router();
         webinocrm_dashboard();
+        WebinoCRM_Rahn_Public_Rewrite::init();
+        // Ensure rahn tables exist on existing installs + flush rewrite once.
+        add_action(
+            'init',
+            static function () {
+                if ( ! class_exists( 'WebinoCRM_Rahn_Service' ) && is_readable( WEBINOCRM_PLUGIN_DIR . 'includes/services/class-rahn-service.php' ) ) {
+                    require_once WEBINOCRM_PLUGIN_DIR . 'includes/services/class-rahn-service.php';
+                }
+                if ( ! class_exists( 'WebinoCRM_Rahn_Service' ) ) {
+                    return;
+                }
+                $had_schema = false !== get_option( WebinoCRM_Rahn_Service::SCHEMA_OPTION, false );
+                WebinoCRM_Rahn_Service::maybe_install_tables();
+                if ( ! $had_schema || '1' === (string) get_option( 'webinocrm_rahn_flush_rewrites', '' ) ) {
+                    WebinoCRM_Rahn_Public_Rewrite::register_rewrites();
+                    flush_rewrite_rules( false );
+                    delete_option( 'webinocrm_rahn_flush_rewrites' );
+                }
+            },
+            20
+        );
         new WebinoCRM_Cache_Optimizer();
         new WebinoCRM_Database_Optimizer();
         new WebinoCRM_Bale_REST_API();

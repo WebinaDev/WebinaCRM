@@ -632,6 +632,19 @@ export function ContractsPage() {
               </Alert>
             )}
 
+            {editingContract?.rahn?.clause ? (
+              <Alert className="mb-4">
+                <AlertDescription>
+                  <div className="font-medium mb-1">{t("pages.contracts.rahnClause")}</div>
+                  <div className="leading-7">{editingContract.rahn.clause}</div>
+                  <div className="text-xs text-muted-foreground mt-2">
+                    F={formatNumber(Math.round(editingContract.rahn.F))} · p=
+                    {formatNumber(Math.round(editingContract.rahn.p_percent * 100) / 100)}%
+                  </div>
+                </AlertDescription>
+              </Alert>
+            ) : null}
+
             {fromLeadId && leadForContract && !editingContract && (
               <Alert className="mb-4">
                 <AlertDescription>

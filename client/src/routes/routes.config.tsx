@@ -62,6 +62,7 @@ const ROUTE_ENTRIES: RouteEntry[] = [
   { paths: ['docs/files', 'documents'], menuId: 'documents', load: () => import('@/pages/crm/documents-page'), exportName: 'DocumentsPage' },
   { paths: ['sales/invoices', 'sales/invoices/*', 'invoices', 'invoices/*'], menuId: 'invoices', load: () => import('@/pages/crm/invoices-page'), exportName: 'InvoicesPage' },
   { paths: ['sales/catalog', 'sales/catalog/*', 'services', 'services/*'], menuId: 'services', load: () => import('@/pages/crm/services-page'), exportName: 'ServicesPage' },
+  { paths: ['sales/rahn-percent', 'sales/rahn-percent/*'], menuId: 'rahn-percent', load: () => import('@/pages/crm/rahn-percent-page'), exportName: 'RahnPercentPage' },
   { paths: ['sales/campaigns', 'sales/campaigns/*', 'campaigns', 'campaigns/*'], menuId: 'campaigns', load: () => import('@/pages/crm/campaigns-page'), exportName: 'CampaignsPage' },
   { paths: ['reports', 'reports/*'], menuId: 'reports', load: () => import('@/pages/crm/reports-page'), exportName: 'ReportsPage' },
   { paths: ['mfg', 'mfg/'], menuId: 'mfg-overview', load: () => import('@/pages/crm/mfg-overview-page'), exportName: 'MfgOverviewPage' },

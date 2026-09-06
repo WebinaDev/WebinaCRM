@@ -35,6 +35,11 @@ class WebinoCRM_Installer {
         require_once WEBINOCRM_PLUGIN_DIR . 'includes/class-dashboard-router.php';
         WebinoCRM_Dashboard_Router::activate();
 
+        // Public rahn calculator rewrite
+        require_once WEBINOCRM_PLUGIN_DIR . 'includes/class-rahn-public-rewrite.php';
+        WebinoCRM_Rahn_Public_Rewrite::activate();
+        update_option( 'webinocrm_rahn_flush_rewrites', '1', false );
+
         // Hard cut-over migration: rename legacy identifiers to Webino naming.
         self::run_hard_cutover_migration();
 
@@ -598,6 +603,20 @@ class WebinoCRM_Installer {
         self::create_hrm_tables();
         require_once WEBINOCRM_PLUGIN_DIR . 'includes/modules/hrm/class-hrm-schema.php';
         WebinoCRM_Hrm_Schema::ensure();
+
+        // Rahn-percent quotes + monthly statements
+        self::create_rahn_tables();
+    }
+
+    /**
+     * Create rahn-percent module tables.
+     *
+     * @return void
+     */
+    public static function create_rahn_tables() {
+        require_once WEBINOCRM_PLUGIN_DIR . 'includes/services/class-rahn-service.php';
+        WebinoCRM_Rahn_Service::install_tables();
+        update_option( WebinoCRM_Rahn_Service::SCHEMA_OPTION, WebinoCRM_Rahn_Service::SCHEMA_VERSION, false );
     }
 
     /**

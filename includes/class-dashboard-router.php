@@ -68,6 +68,13 @@ class WebinoCRM_Dashboard_Router {
             'roles' => ['system_manager', 'finance_manager', 'team_member', 'client'],
             'partial' => 'page-pro-invoices',
         ],
+
+        // Rahn-percent calculator
+        'rahn-percent' => [
+            'title' => __( 'رهن‌درصد', 'webinocrm' ),
+            'icon' => 'ri-percent-line',
+            'roles' => ['system_manager', 'finance_manager', 'sales_consultant'],
+        ],
         
         // Tickets
         'tickets' => [

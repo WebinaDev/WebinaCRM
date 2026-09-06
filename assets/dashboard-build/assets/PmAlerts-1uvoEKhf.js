@@ -1,0 +1,1 @@
+import{ct as e,lt as t,wr as n}from"./dashboard-shared-sdMd6G1s.js";var r=n();function i({error:n,success:i}){return(0,r.jsxs)(r.Fragment,{children:[n?(0,r.jsx)(e,{variant:`destructive`,children:(0,r.jsx)(t,{children:n})}):null,i?(0,r.jsx)(e,{children:(0,r.jsx)(t,{children:i})}):null]})}export{i as t};

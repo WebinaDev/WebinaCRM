@@ -356,6 +356,29 @@ class WebinoCRM_REST_Warehouse_Controller extends WebinoCRM_REST_Controller_Base
 	}
 }
 
+class WebinoCRM_REST_Rahn_Controller extends WebinoCRM_REST_Controller_Base {
+	public static function register_routes() {
+		$cap = 'rahn-percent';
+		WebinoCRM_REST_Registry::register_service_route( 'GET', '/rahn/settings', array( 'WebinoCRM_Rahn_Service', 'settings_get' ), $cap );
+		WebinoCRM_REST_Registry::register_service_route( 'POST', '/rahn/settings', array( 'WebinoCRM_Rahn_Service', 'settings_save' ), $cap );
+		WebinoCRM_REST_Registry::register_service_route( 'POST', '/rahn/calculate', array( 'WebinoCRM_Rahn_Service', 'calculate' ), $cap );
+		WebinoCRM_REST_Registry::register_service_route( 'GET', '/rahn/quotes', array( 'WebinoCRM_Rahn_Service', 'quotes_list' ), $cap );
+		WebinoCRM_REST_Registry::register_service_route( 'POST', '/rahn/quotes', array( 'WebinoCRM_Rahn_Service', 'quote_save' ), $cap );
+		WebinoCRM_REST_Registry::register_service_route( 'POST', '/rahn/quotes/(?P<id>\d+)/lock', array( 'WebinoCRM_Rahn_Service', 'quote_lock' ), $cap );
+		WebinoCRM_REST_Registry::register_service_route( 'POST', '/rahn/quotes/(?P<id>\d+)/contract', array( 'WebinoCRM_Rahn_Service', 'quote_to_contract' ), $cap );
+		WebinoCRM_REST_Registry::register_service_route( 'DELETE', '/rahn/quotes/(?P<id>\d+)', array( 'WebinoCRM_Rahn_Service', 'quote_delete' ), $cap );
+		WebinoCRM_REST_Registry::register_service_route( 'GET', '/rahn/contracts', array( 'WebinoCRM_Rahn_Service', 'contracts_list' ), $cap );
+		WebinoCRM_REST_Registry::register_service_route( 'POST', '/rahn/statements/calculate', array( 'WebinoCRM_Rahn_Service', 'statement_calculate' ), $cap );
+		WebinoCRM_REST_Registry::register_service_route( 'POST', '/rahn/statements', array( 'WebinoCRM_Rahn_Service', 'statement_save' ), $cap );
+		WebinoCRM_REST_Registry::register_service_route( 'GET', '/rahn/statements', array( 'WebinoCRM_Rahn_Service', 'statements_list' ), $cap );
+
+		// Public share endpoints (no auth).
+		WebinoCRM_REST_Registry::register_service_route( 'GET', '/rahn/public/(?P<token>[a-zA-Z0-9]+)', array( 'WebinoCRM_Rahn_Service', 'public_get' ), 'public' );
+		WebinoCRM_REST_Registry::register_service_route( 'POST', '/rahn/public/(?P<token>[a-zA-Z0-9]+)/calculate', array( 'WebinoCRM_Rahn_Service', 'public_calculate' ), 'public' );
+		WebinoCRM_REST_Registry::register_service_route( 'POST', '/rahn/public/(?P<token>[a-zA-Z0-9]+)/submit', array( 'WebinoCRM_Rahn_Service', 'public_submit' ), 'public' );
+	}
+}
+
 class WebinoCRM_REST_Crm_Controllers {
 	public static function register_all() {
 		WebinoCRM_REST_Appointments_Controller::register_routes();
@@ -385,5 +408,6 @@ class WebinoCRM_REST_Crm_Controllers {
 		WebinoCRM_REST_Visitor_Controller::register_routes();
 		WebinoCRM_REST_Warehouse_Controller::register_routes();
 		WebinoCRM_REST_Hrm_Controller::register_routes();
+		WebinoCRM_REST_Rahn_Controller::register_routes();
 	}
 }

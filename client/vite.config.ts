@@ -44,6 +44,10 @@ export default defineConfig({
     emptyOutDir: true,
     manifest: true,
     rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, 'index.html'),
+        'rahn-public': path.resolve(__dirname, 'rahn-public.html'),
+      },
       output: {
         entryFileNames: 'assets/[name]-[hash].js',
         chunkFileNames: 'assets/[name]-[hash].js',

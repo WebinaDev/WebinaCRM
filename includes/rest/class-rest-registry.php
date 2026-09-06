@@ -186,12 +186,18 @@ class WebinoCRM_REST_Registry {
 		if ( ! empty( $url['release_id'] ) && empty( $params['release_id'] ) ) {
 			$params['release_id'] = (string) $url['release_id'];
 		}
+		if ( ! empty( $url['token'] ) && empty( $params['token'] ) ) {
+			$params['token'] = (string) $url['token'];
+		}
 		if ( empty( $url['id'] ) ) {
 			return $params;
 		}
 		$id     = (string) $url['id'];
 		$action = (string) $request->get_param( 'webinocrm_ajax_action' );
 
+		if ( empty( $params['id'] ) ) {
+			$params['id'] = $id;
+		}
 		if ( ! isset( $params['id'] ) && preg_match( '/_(get|delete|save|post|confirm)(_|$)/', $action ) ) {
 			$params['id'] = $id;
 		}
@@ -207,6 +213,7 @@ class WebinoCRM_REST_Registry {
 			'position' => 'position_id',
 			'category' => 'category_id',
 			'response' => 'response_id',
+			'quote'    => 'quote_id',
 		);
 		foreach ( $maps as $needle => $key ) {
 			if ( str_contains( $action, $needle ) && empty( $params[ $key ] ) ) {

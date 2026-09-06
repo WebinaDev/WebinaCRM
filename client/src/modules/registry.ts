@@ -276,6 +276,7 @@ export const ERP_MODULES: ErpModuleDef[] = [
         children: [
           { id: 'invoices', path: 'sales/invoices', titleKey: 'nav.erp.sales.invoices', icon: 'ri-file-list-3-line' },
           { id: 'services', path: 'sales/catalog', titleKey: 'nav.erp.sales.catalog', icon: 'ri-service-line' },
+          { id: 'rahn-percent', path: 'sales/rahn-percent', titleKey: 'nav.erp.sales.rahnPercent', icon: 'ri-percent-line' },
           { id: 'campaigns', path: 'sales/campaigns', titleKey: 'nav.erp.sales.campaigns', icon: 'ri-megaphone-line' },
         ],
       },

@@ -61,6 +61,9 @@ class WebinoCRM_Services_Loader {
 			'class-hrm-recruitment-service.php',
 			'class-hrm-performance-service.php',
 			'class-hrm-training-service.php',
+			'class-rahn-calculator.php',
+			'class-rahn-settings.php',
+			'class-rahn-service.php',
 		);
 
 		foreach ( $services as $file ) {
@@ -105,6 +108,7 @@ class WebinoCRM_Services_Loader {
 			'WebinoCRM_Hrm_Recruitment_Service',
 			'WebinoCRM_Hrm_Performance_Service',
 			'WebinoCRM_Hrm_Training_Service',
+			'WebinoCRM_Rahn_Service',
 		);
 
 		foreach ( $register as $class ) {

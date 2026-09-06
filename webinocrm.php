@@ -3,7 +3,7 @@
  * Plugin Name:       WebinoERP
  * Plugin URI:        https://Webinoco.com/
  * Description:       A complete CRM and Project Management solution for Social Marketing agencies.
- * Version:           3.4.0
+ * Version:           3.5.0
  * Author:            Arsalan Arghavan
  * Author URI:        https://ArsalanArghavan.ir/
  * License:           GPL v2 or later
@@ -17,7 +17,7 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 // Define Plugin Constants
-define( 'WEBINOCRM_VERSION', '3.4.0' );
+define( 'WEBINOCRM_VERSION', '3.5.0' );
 define( 'WEBINOCRM_PLUGIN_FILE', __FILE__ );
 define( 'WEBINOCRM_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'WEBINOCRM_PLUGIN_URL', plugin_dir_url( __FILE__ ) );

@@ -36,6 +36,16 @@ export interface ContractDetail {
   installments: { amount: string; due_date: string; due_date_gregorian: string; status: string }[]
   is_cancelled: boolean
   delete_nonce: string
+  rahn?: {
+    F: number
+    p: number
+    p_percent: number
+    clause: string
+    s_hat: number
+    duration: number
+    locked_at: string
+    quote_id: number
+  } | null
 }
 
 export interface GetContractsResponse {

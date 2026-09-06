@@ -1,0 +1,1 @@
+import{a as e}from"./rolldown-runtime-C-57s9n3.js";import{Tr as t}from"./dashboard-shared-sdMd6G1s.js";var n=e(t(),1);function r(e=1){let[t,r]=(0,n.useState)(e),[i,a]=(0,n.useState)(1);return{currentPage:t,setCurrentPage:r,totalPages:i,setTotalPages:a,resetPage:(0,n.useCallback)(()=>r(1),[])}}export{r as t};
