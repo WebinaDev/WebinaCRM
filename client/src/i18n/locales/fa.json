@@ -93,6 +93,7 @@
   "nav.erp.sales.modirpayamak": "مدیرپیامک",
   "nav.erp.distribution.marketplaceProducts": "بازارچه / محصولات",
   "nav.erp.distribution.marketplaceGitea": "سرور پکیج (Gitea)",
+  "nav.erp.distribution.marketplaceBasalam": "باسلام (OAuth)",
   "nav.erp.distribution.marketplaceCategories": "دسته‌های بازارچه",
   "nav.erp.distribution.marketplaceOrders": "سفارش‌های بازارچه",
   "nav.erp.distribution.licenses": "لایسنس‌های مارکت‌پلیس",

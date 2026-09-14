@@ -292,6 +292,7 @@ class WebinoCRM_Erp_Module_Registry {
 						'children' => array(
 							array( 'id' => 'marketplace-products', 'path' => 'admin/marketplace/products', 'title' => __( 'بازارچه / محصولات', 'webinocrm' ), 'icon' => 'ri-store-2-line' ),
 							array( 'id' => 'marketplace-gitea', 'path' => 'admin/marketplace/gitea', 'title' => __( 'سرور پکیج (Gitea)', 'webinocrm' ), 'icon' => 'ri-git-branch-line' ),
+							array( 'id' => 'marketplace-basalam', 'path' => 'admin/marketplace/basalam', 'title' => __( 'باسلام (OAuth)', 'webinocrm' ), 'icon' => 'ri-store-3-line' ),
 							array( 'id' => 'marketplace-categories', 'path' => 'admin/marketplace/categories', 'title' => __( 'دسته‌های بازارچه', 'webinocrm' ), 'icon' => 'ri-folder-line' ),
 							array( 'id' => 'marketplace-orders', 'path' => 'admin/marketplace/orders', 'title' => __( 'سفارش‌های بازارچه', 'webinocrm' ), 'icon' => 'ri-store-2-line' ),
 							array( 'id' => 'licenses', 'path' => 'admin/licenses', 'title' => __( 'لایسنس‌های مارکت‌پلیس', 'webinocrm' ), 'icon' => 'ri-key-2-line' ),
@@ -619,6 +620,7 @@ class WebinoCRM_Erp_Module_Registry {
 		return array(
 			'marketplace-products',
 			'marketplace-gitea',
+			'marketplace-basalam',
 			'marketplace-categories',
 			'marketplace-orders',
 			'licenses',

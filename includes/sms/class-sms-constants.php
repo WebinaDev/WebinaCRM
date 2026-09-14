@@ -136,8 +136,8 @@ final class WebinoCRM_Sms_Constants {
 
 		if ( array_key_exists( $event_key, $events ) && is_array( $events[ $event_key ] ) ) {
 			return array(
-				'customer' => true === (bool) ( $events[ $event_key ]['customer'] ?? false ),
-				'admin'    => true === (bool) ( $events[ $event_key ]['admin'] ?? false ),
+				'customer' => ! empty( $events[ $event_key ]['customer'] ),
+				'admin'    => ! empty( $events[ $event_key ]['admin'] ),
 			);
 		}
 
@@ -151,10 +151,10 @@ final class WebinoCRM_Sms_Constants {
 			if ( self::normalize_event_key( (string) $key ) !== $event_key ) {
 				continue;
 			}
-			if ( true === (bool) ( $toggle['customer'] ?? false ) ) {
+			if ( ! empty( $toggle['customer'] ) ) {
 				$customer = true;
 			}
-			if ( true === (bool) ( $toggle['admin'] ?? false ) ) {
+			if ( ! empty( $toggle['admin'] ) ) {
 				$admin = true;
 			}
 		}

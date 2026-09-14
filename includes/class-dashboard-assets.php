@@ -383,6 +383,21 @@ class WebinoCRM_Dashboard_Assets {
 				$css_path = '';
 			}
 		}
+		// Rolldown may leave css empty in an older build-entry; recover from manifest.
+		if ( '' === $css_rel ) {
+			$from_manifest = self::resolve_vite_entry_assets( $build_dir );
+			if ( is_array( $from_manifest ) && ! empty( $from_manifest['css'] ) ) {
+				$css_rel  = (string) $from_manifest['css'];
+				$css_path = (string) $from_manifest['css_path'];
+			}
+		}
+		if ( '' === $css_rel ) {
+			$discovered = self::discover_hashed_entry_assets( $build_dir );
+			if ( is_array( $discovered ) && ! empty( $discovered['css'] ) ) {
+				$css_rel  = (string) $discovered['css'];
+				$css_path = (string) $discovered['css_path'];
+			}
+		}
 		return array(
 			'js'       => $js_rel,
 			'css'      => $css_rel,
@@ -403,38 +418,45 @@ class WebinoCRM_Dashboard_Assets {
 			return null;
 		}
 
-		$js_files = glob( $assets_dir . 'index-*.js' );
+		$js_files = glob( $assets_dir . '{index,main}-*.js', GLOB_BRACE );
+		if ( ! is_array( $js_files ) || empty( $js_files ) ) {
+			$js_files = glob( $assets_dir . 'index-*.js' );
+		}
+		if ( ! is_array( $js_files ) || empty( $js_files ) ) {
+			$js_files = glob( $assets_dir . 'main-*.js' );
+		}
 		if ( ! is_array( $js_files ) || empty( $js_files ) ) {
 			return null;
 		}
 
+		usort(
+			$js_files,
+			static function ( $a, $b ) {
+				return filemtime( $b ) <=> filemtime( $a );
+			}
+		);
 		$js_path = $js_files[0];
-		if ( count( $js_files ) > 1 ) {
+		$js_rel  = 'assets/' . basename( $js_path );
+
+		$css_rel  = '';
+		$css_path = '';
+		$css_files = glob( $assets_dir . '{index,src,main}-*.css', GLOB_BRACE );
+		if ( ! is_array( $css_files ) || empty( $css_files ) ) {
+			$css_files = array_merge(
+				glob( $assets_dir . 'index-*.css' ) ?: array(),
+				glob( $assets_dir . 'src-*.css' ) ?: array(),
+				glob( $assets_dir . 'main-*.css' ) ?: array()
+			);
+		}
+		if ( is_array( $css_files ) && ! empty( $css_files ) ) {
 			usort(
-				$js_files,
+				$css_files,
 				static function ( $a, $b ) {
 					return filemtime( $b ) <=> filemtime( $a );
 				}
 			);
-			$js_path = $js_files[0];
-		}
-
-		$js_rel = 'assets/' . basename( $js_path );
-		$css_rel  = '';
-		$css_path = '';
-		$css_files = glob( $assets_dir . 'index-*.css' );
-		if ( is_array( $css_files ) && ! empty( $css_files ) ) {
 			$css_path = $css_files[0];
-			if ( count( $css_files ) > 1 ) {
-				usort(
-					$css_files,
-					static function ( $a, $b ) {
-						return filemtime( $b ) <=> filemtime( $a );
-					}
-				);
-				$css_path = $css_files[0];
-			}
-			$css_rel = 'assets/' . basename( $css_path );
+			$css_rel  = 'assets/' . basename( $css_path );
 		}
 
 		return array(
@@ -553,6 +575,33 @@ class WebinoCRM_Dashboard_Assets {
 			if ( ! is_readable( $css_path ) ) {
 				$css_rel  = '';
 				$css_path = '';
+			}
+		}
+		// CSS may live on imported chunks (Rolldown / Vite 8).
+		if ( '' === $css_rel && ! empty( $entry['imports'] ) && is_array( $entry['imports'] ) ) {
+			foreach ( $entry['imports'] as $import_key ) {
+				if ( empty( $manifest[ $import_key ]['css'][0] ) ) {
+					continue;
+				}
+				$candidate = ltrim( (string) $manifest[ $import_key ]['css'][0], '/' );
+				if ( is_readable( $build_dir . $candidate ) ) {
+					$css_rel  = $candidate;
+					$css_path = $build_dir . $candidate;
+					break;
+				}
+			}
+		}
+		if ( '' === $css_rel ) {
+			foreach ( $manifest as $chunk ) {
+				if ( ! is_array( $chunk ) || empty( $chunk['css'][0] ) ) {
+					continue;
+				}
+				$candidate = ltrim( (string) $chunk['css'][0], '/' );
+				if ( is_readable( $build_dir . $candidate ) ) {
+					$css_rel  = $candidate;
+					$css_path = $build_dir . $candidate;
+					break;
+				}
 			}
 		}
 

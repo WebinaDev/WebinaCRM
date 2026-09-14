@@ -157,6 +157,46 @@ final class WebinoCRM_Sms_Template_Service {
 	}
 
 	/**
+	 * Keep template.enabled aligned with dashboard event switches (settings.events).
+	 *
+	 * @param string                         $domain Domain.
+	 * @param array<string,array<string,bool>> $events Events map.
+	 * @return void
+	 */
+	public static function sync_enabled_from_events( $domain, array $events ) {
+		$domain = WebinoCRM_License_Manager::normalize_domain( $domain );
+		foreach ( $events as $event_key => $toggle ) {
+			$event_key = sanitize_key( (string) $event_key );
+			if ( ! WebinoCRM_Sms_Constants::is_valid_event_key( $event_key ) || ! is_array( $toggle ) ) {
+				continue;
+			}
+			$pairs = array(
+				WebinoCRM_Sms_Constants::TPL_ORDER_CUSTOMER => ! empty( $toggle['customer'] ),
+				WebinoCRM_Sms_Constants::TPL_ORDER_ADMIN    => ! empty( $toggle['admin'] ),
+			);
+			foreach ( $pairs as $scope => $enabled ) {
+				$tpl = self::get_one( $domain, $scope, $event_key );
+				if ( ! $tpl ) {
+					continue;
+				}
+				$current = ! empty( $tpl['enabled'] );
+				if ( $current === (bool) $enabled ) {
+					continue;
+				}
+				self::upsert(
+					$domain,
+					$scope,
+					$event_key,
+					(string) $tpl['body'],
+					(bool) $enabled,
+					(string) ( $tpl['pattern_code'] ?? '' ),
+					null
+				);
+			}
+		}
+	}
+
+	/**
 	 * @param mixed $raw Raw.
 	 * @return array<string,string>
 	 */

@@ -90,7 +90,7 @@ export function ModirPayamakTicketsPage() {
   const sendReply = async () => {
     if (!detailId || !reply.trim()) return
     setReplying(true)
-    const res = await edgeReplyTicket(detailId, { message: reply.trim(), body: reply.trim() })
+    const res = await edgeReplyTicket(detailId, { description: reply.trim() })
     setReplying(false)
     if (applyResponse({ success: res.ok, message: res.message }, { successMessage: t("common.saved") })) {
       setReply("")

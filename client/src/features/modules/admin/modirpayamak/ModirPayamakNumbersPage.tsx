@@ -60,8 +60,8 @@ export function ModirPayamakNumbersPage() {
   const { t } = useLocale()
   const { layoutProps, setSuccess, setError, applyResponse } = useCrmFeedback()
   const { configured } = useModirPayamakConfigured()
-  const loader = useCallback(() => edgeListNumbers(), [])
-  const { items, raw, loading } = useModirPayamakEdge(loader)
+  const loader = useCallback(() => edgeListNumbers({ page: 1, per_page: 100 }), [])
+  const { items, raw, loading, error: edgeError } = useModirPayamakEdge(loader)
   const [copied, setCopied] = useState<string | null>(null)
   const [attachOpen, setAttachOpen] = useState(false)
   const [detachOpen, setDetachOpen] = useState(false)
@@ -74,6 +74,10 @@ export function ModirPayamakNumbersPage() {
   const [domains, setDomains] = useState<string[]>([])
   const [attachmentsByNumber, setAttachmentsByNumber] = useState<AttachmentMap>({})
   const [saving, setSaving] = useState(false)
+
+  useEffect(() => {
+    if (edgeError) setError(edgeError)
+  }, [edgeError, setError])
 
   const refreshAttachments = useCallback(async () => {
     const res = await getModirPayamakCustomers()

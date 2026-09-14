@@ -77,9 +77,26 @@ final class WebinoCRM_Sms_Order_Messages_Service {
 			'recipient_role' => (string) ( $row['recipient_role'] ?? '' ),
 			'event_key'      => $event_key,
 			'phone'          => $phone,
+			'reason'         => self::extract_reason( $row ),
 			'created_at'     => $created,
 			'time'           => $time,
 		);
+	}
+
+	/**
+	 * @param array<string,mixed> $row DB row.
+	 * @return string
+	 */
+	private static function extract_reason( array $row ) {
+		$body = (string) ( $row['message_body'] ?? '' );
+		if ( '' === $body ) {
+			return '';
+		}
+		$decoded = json_decode( $body, true );
+		if ( ! is_array( $decoded ) ) {
+			return '';
+		}
+		return sanitize_key( (string) ( $decoded['reason'] ?? '' ) );
 	}
 
 	/**

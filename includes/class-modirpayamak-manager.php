@@ -381,7 +381,11 @@ class WebinoCRM_ModirPayamak_Manager {
 		$cost  = max( 0.0001, (float) $quote['cost_toman'] );
 
 		if ( (float) $account['balance'] < $cost ) {
-			return new WP_Error( 'insufficient_balance', __( 'Insufficient SMS credit. Please top up.', 'webinocrm' ), array( 'status' => 402 ) );
+			return new WP_Error(
+				'insufficient_balance',
+				__( 'Insufficient SMS credit. Please top up.', 'webinocrm' ),
+				array( 'status' => 402 )
+			);
 		}
 
 		global $wpdb;
@@ -403,7 +407,12 @@ class WebinoCRM_ModirPayamak_Manager {
 		$deduct = self::deduct_for_send( $domain, $cost, $msg_id, (string) ( $quote['note'] ?? '' ) );
 		if ( is_wp_error( $deduct ) ) {
 			$wpdb->update( self::table( 'messages' ), array( 'status' => 'failed' ), array( 'id' => $msg_id ) );
-			return $deduct;
+			$err_data = $deduct->get_error_data();
+			if ( ! is_array( $err_data ) ) {
+				$err_data = array();
+			}
+			$err_data['message_id'] = $msg_id;
+			return new WP_Error( $deduct->get_error_code(), $deduct->get_error_message(), $err_data );
 		}
 
 		$result = WebinoCRM_ModirPayamak_Edge_Client::send( $payload );
@@ -434,7 +443,14 @@ class WebinoCRM_ModirPayamak_Manager {
 				__( 'Refund failed send', 'webinocrm' ),
 				false
 			);
-			return new WP_Error( 'send_failed', $result['message'] ?: __( 'SMS send failed.', 'webinocrm' ), array( 'status' => 502 ) );
+			return new WP_Error(
+				'send_failed',
+				$result['message'] ?: __( 'SMS send failed.', 'webinocrm' ),
+				array(
+					'status'     => 502,
+					'message_id' => $msg_id,
+				)
+			);
 		}
 
 		return array(

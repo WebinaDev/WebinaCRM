@@ -76,6 +76,10 @@ class WebinoCRM {
         require_once WEBINOCRM_PLUGIN_DIR . 'includes/integrations/class-elementor-lead-integration.php';
         require_once WEBINOCRM_PLUGIN_DIR . 'includes/integrations/class-bale-rest-api.php';
         require_once WEBINOCRM_PLUGIN_DIR . 'includes/ajax/trait-ajax-service-delegate.php';
+
+        // Basalam OAuth proxy (Webina-owned client for merchant Dashboard SSO)
+        require_once WEBINOCRM_PLUGIN_DIR . 'includes/integrations/basalam/class-basalam-oauth-proxy.php';
+        WebinoCRM_Basalam_OAuth_Proxy::init();
         
         // Login Page and AJAX Handler
         require_once WEBINOCRM_PLUGIN_DIR . 'includes/class-login-page.php';

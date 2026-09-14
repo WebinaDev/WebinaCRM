@@ -233,10 +233,14 @@ class WebinoCRM_Sms_API {
 		$domain = WebinoCRM_License_Manager::normalize_domain( (string) ( $body['domain'] ?? '' ) );
 		$input  = is_array( $body['settings'] ?? null ) ? $body['settings'] : $body;
 		unset( $input['domain'] );
+		$settings = WebinoCRM_Sms_Settings_Service::save( $domain, WebinoCRM_Sms_Constants::SCOPE_SHOP, $input );
+		if ( isset( $input['events'] ) && is_array( $input['events'] ) ) {
+			WebinoCRM_Sms_Template_Service::sync_enabled_from_events( $domain, $settings['events'] ?? array() );
+		}
 		return new WP_REST_Response(
 			array(
 				'ok'       => true,
-				'settings' => WebinoCRM_Sms_Settings_Service::save( $domain, WebinoCRM_Sms_Constants::SCOPE_SHOP, $input ),
+				'settings' => $settings,
 			),
 			200
 		);
@@ -589,12 +593,15 @@ class WebinoCRM_Sms_API {
 	 * @return WP_REST_Response
 	 */
 	public function list_drafts( $request ) {
-		$edge = WebinoCRM_ModirPayamak_Edge_Client::list_drafts(
-			array(
-				'page'     => max( 1, (int) $request->get_param( 'page' ) ),
-				'per_page' => min( 100, max( 1, (int) $request->get_param( 'per_page' ) ) ),
-			)
+		$query = array(
+			'page'     => max( 1, (int) $request->get_param( 'page' ) ),
+			'per_page' => min( 100, max( 1, (int) ( $request->get_param( 'per_page' ) ?: 50 ) ) ),
 		);
+		$group = $request->get_param( 'draft_group_id' );
+		if ( $group ) {
+			$query['draft_group_id'] = $group;
+		}
+		$edge = WebinoCRM_ModirPayamak_Edge_Client::list_drafts( $query );
 		return new WP_REST_Response( array( 'ok' => ! empty( $edge['ok'] ), 'data' => $edge['data'], 'meta' => $edge['meta'] ), 200 );
 	}
 

@@ -1,8 +1,7 @@
-import { useCallback, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import {
@@ -12,6 +11,13 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import {
   Table,
   TableBody,
@@ -25,6 +31,7 @@ import {
   edgeCreateDraft,
   edgeDeleteDraft,
   edgeField,
+  edgeListDraftGroups,
   edgeListDrafts,
   type EdgeRow,
 } from "@/api/modirpayamak-edge"
@@ -33,39 +40,91 @@ import { CrmPageLayout } from "@/features/shared/layout/CrmPageLayout"
 import { useCrmFeedback } from "@/features/shared/hooks/useCrmFeedback"
 import { PmConfirmDialog } from "@/features/shared/pm/PmConfirmDialog"
 import { PmEmptyState } from "@/features/shared/pm/PmEmptyState"
-import { useModirPayamakEdge } from "./hooks/useModirPayamakEdge"
 import { ModirPayamakBreadcrumb } from "./components/ModirPayamakBreadcrumb"
 import { ModirPayamakJsonDebug } from "./components/ModirPayamakJsonDebug"
 import { ModirPayamakNotConfigured } from "./components/ModirPayamakNotConfigured"
 import { useModirPayamakConfigured } from "./hooks/useModirPayamakConfigured"
+import { mapModirPayamakError } from "./modirpayamak-errors"
 import { DraftingCompass, Plus, Send, Trash2 } from "lucide-react"
 
 export function ModirPayamakDraftsPage() {
   const { t, isRtl, formatDateTime } = useLocale()
   const navigate = useNavigate()
-  const { layoutProps, applyResponse } = useCrmFeedback()
+  const { layoutProps, setError, applyResponse } = useCrmFeedback()
   const { configured } = useModirPayamakConfigured()
-  const loader = useCallback(() => edgeListDrafts(), [])
-  const { items, raw, loading, reload } = useModirPayamakEdge(loader)
+
+  const [groups, setGroups] = useState<EdgeRow[]>([])
+  const [groupId, setGroupId] = useState<string>("")
+  const [items, setItems] = useState<EdgeRow[]>([])
+  const [raw, setRaw] = useState<unknown>(null)
+  const [loading, setLoading] = useState(true)
 
   const [createOpen, setCreateOpen] = useState(false)
-  const [title, setTitle] = useState("")
   const [message, setMessage] = useState("")
   const [creating, setCreating] = useState(false)
   const [deleteId, setDeleteId] = useState<number | null>(null)
   const [deleting, setDeleting] = useState(false)
 
   const draftId = (row: EdgeRow) => Number(edgeField(row, "id", "draft_id")) || 0
+  const groupKey = (row: EdgeRow) => edgeField(row, "id", "draft_group_id")
+
+  const loadGroups = useCallback(async () => {
+    const res = await edgeListDraftGroups()
+    if (res.error) {
+      setGroups([])
+      setError(mapModirPayamakError(res.error, t))
+      return
+    }
+    setGroups(res.items)
+    setRaw(res.raw)
+    if (!groupId && res.items[0]) {
+      setGroupId(groupKey(res.items[0]))
+    }
+  }, [groupId, setError, t])
+
+  const loadDrafts = useCallback(async () => {
+    if (!groupId || groupId === "—") {
+      setItems([])
+      setLoading(false)
+      return
+    }
+    setLoading(true)
+    setError(null)
+    const res = await edgeListDrafts({ draft_group_id: groupId })
+    if (res.error) {
+      setItems([])
+      setError(mapModirPayamakError(res.error, t))
+    } else {
+      setItems(res.items)
+      setRaw(res.raw)
+    }
+    setLoading(false)
+  }, [groupId, setError, t])
+
+  useEffect(() => {
+    void (async () => {
+      setLoading(true)
+      await loadGroups()
+      setLoading(false)
+    })()
+  }, [loadGroups])
+
+  useEffect(() => {
+    void loadDrafts()
+  }, [loadDrafts])
 
   const createDraft = async () => {
+    if (!groupId || groupId === "—") return
     setCreating(true)
-    const res = await edgeCreateDraft({ title: title.trim(), message: message.trim(), body: message.trim() })
+    const res = await edgeCreateDraft({
+      draft_group_id: Number(groupId) || groupId,
+      message: message.trim(),
+    })
     setCreating(false)
     if (applyResponse({ success: res.ok, message: res.message }, { successMessage: t("common.saved") })) {
       setCreateOpen(false)
-      setTitle("")
       setMessage("")
-      void reload()
+      void loadDrafts()
     }
   }
 
@@ -76,13 +135,13 @@ export function ModirPayamakDraftsPage() {
     setDeleting(false)
     if (applyResponse({ success: res.ok, message: res.message }, { successMessage: t("common.deleted") })) {
       setDeleteId(null)
-      void reload()
+      void loadDrafts()
     }
   }
 
   const useDraft = (row: EdgeRow) => {
     const text = edgeField(row, "message", "body", "text")
-    navigate(`/admin/integrations/modirpayamak/send?message=${encodeURIComponent(text)}`)
+    navigate(`/admin/integrations/modirpayamak/send?message=${encodeURIComponent(text === "—" ? "" : text)}`)
   }
 
   return (
@@ -90,7 +149,7 @@ export function ModirPayamakDraftsPage() {
       title={t("pages.modirpayamak.draftsTitle")}
       {...layoutProps}
       actions={
-        <Button size="sm" onClick={() => setCreateOpen(true)}>
+        <Button size="sm" disabled={!groupId || groupId === "—"} onClick={() => setCreateOpen(true)}>
           <Plus className="me-2 h-4 w-4" />
           {t("pages.modirpayamak.addDraft")}
         </Button>
@@ -99,10 +158,29 @@ export function ModirPayamakDraftsPage() {
       <ModirPayamakBreadcrumb current={t("pages.modirpayamak.draftsTitle")} />
       <ModirPayamakNotConfigured configured={configured ?? true} />
 
+      <div className="mb-4 max-w-sm space-y-2">
+        <Label>{t("pages.modirpayamak.draftGroup")}</Label>
+        <Select value={groupId || undefined} onValueChange={setGroupId}>
+          <SelectTrigger>
+            <SelectValue placeholder={t("pages.modirpayamak.draftGroup")} />
+          </SelectTrigger>
+          <SelectContent>
+            {groups.map((g, i) => {
+              const id = groupKey(g)
+              return (
+                <SelectItem key={id || i} value={id}>
+                  {edgeField(g, "title", "name", "id")}
+                </SelectItem>
+              )
+            })}
+          </SelectContent>
+        </Select>
+      </div>
+
       {loading ? (
         <Card>
           <CardContent className="p-0">
-            <TableListSkeleton rows={8} columns={4} />
+            <TableListSkeleton rows={8} columns={3} />
           </CardContent>
         </Card>
       ) : items.length === 0 ? (
@@ -113,7 +191,6 @@ export function ModirPayamakDraftsPage() {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>{t("pages.modirpayamak.name")}</TableHead>
                   <TableHead>{t("pages.modirpayamak.message")}</TableHead>
                   <TableHead>{t("pages.modirpayamak.colDate")}</TableHead>
                   <TableHead className="w-[100px]">{t("common.actions")}</TableHead>
@@ -122,7 +199,6 @@ export function ModirPayamakDraftsPage() {
               <TableBody>
                 {items.map((row, i) => (
                   <TableRow key={draftId(row) || i}>
-                    <TableCell>{edgeField(row, "title", "name", "subject")}</TableCell>
                     <TableCell className="max-w-md truncate">
                       {edgeField(row, "message", "body", "text")}
                     </TableCell>
@@ -160,17 +236,13 @@ export function ModirPayamakDraftsPage() {
           </DialogHeader>
           <div className="space-y-3">
             <div className="space-y-2">
-              <Label>{t("pages.modirpayamak.name")}</Label>
-              <Input value={title} onChange={(e) => setTitle(e.target.value)} />
-            </div>
-            <div className="space-y-2">
               <Label>{t("pages.modirpayamak.message")}</Label>
               <Textarea rows={4} value={message} onChange={(e) => setMessage(e.target.value)} />
             </div>
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setCreateOpen(false)}>{t("common.cancel")}</Button>
-            <Button disabled={creating} onClick={() => void createDraft()}>{t("common.save")}</Button>
+            <Button disabled={creating || !message.trim()} onClick={() => void createDraft()}>{t("common.save")}</Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>

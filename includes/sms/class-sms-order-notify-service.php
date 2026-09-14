@@ -11,6 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Sends customer + admin SMS for order events (pattern-only).
+ * Dashboard event switches (settings.events) are the sole enable gate per role.
  */
 final class WebinoCRM_Sms_Order_Notify_Service {
 
@@ -23,6 +24,7 @@ final class WebinoCRM_Sms_Order_Notify_Service {
 	public static function notify( $domain, $event_key, array $order, array $options = array() ) {
 		$domain    = WebinoCRM_License_Manager::normalize_domain( $domain );
 		$event_key = WebinoCRM_Sms_Constants::normalize_event_key( $event_key );
+		$order_id  = (int) ( $order['id'] ?? 0 );
 
 		if ( ! WebinoCRM_Sms_Constants::is_valid_event_key( $event_key ) ) {
 			return new WP_Error( 'invalid_event', __( 'Unknown order SMS event.', 'webinocrm' ), array( 'status' => 400 ) );
@@ -30,21 +32,23 @@ final class WebinoCRM_Sms_Order_Notify_Service {
 
 		$shop = WebinoCRM_Sms_Settings_Service::get( $domain, WebinoCRM_Sms_Constants::SCOPE_SHOP );
 		if ( empty( $shop['enabled'] ) ) {
+			self::log_skip( $domain, $order_id, 'system', $event_key, 'disabled' );
 			return array( 'ok' => true, 'skipped' => true, 'reason' => 'disabled' );
 		}
 
 		$events = WebinoCRM_Sms_Constants::resolve_event_toggles( $shop, $event_key );
 		if ( empty( $options['force_customer'] ) ) {
-			$events['customer'] = true === (bool) ( $events['customer'] ?? false );
+			$events['customer'] = ! empty( $events['customer'] );
 		} else {
 			$events['customer'] = true;
 		}
 		if ( empty( $options['force_admin'] ) ) {
-			$events['admin'] = true === (bool) ( $events['admin'] ?? false );
+			$events['admin'] = ! empty( $events['admin'] );
 		} else {
 			$events['admin'] = true;
 		}
 		if ( ! $events['customer'] && ! $events['admin'] ) {
+			self::log_skip( $domain, $order_id, 'system', $event_key, 'event_off' );
 			return array( 'ok' => true, 'skipped' => true, 'reason' => 'event_off' );
 		}
 
@@ -66,17 +70,20 @@ final class WebinoCRM_Sms_Order_Notify_Service {
 		if ( $events['customer'] ) {
 			$phone = WebinoCRM_Sms_Template_Service::normalize_phone( (string) ( $order['customer_phone'] ?? '' ) );
 			if ( strlen( $phone ) > 4 ) {
-				$results['customer'] = self::send_for_role(
-					$domain,
-					WebinoCRM_Sms_Constants::TPL_ORDER_CUSTOMER,
-					$event_key,
-					$phone,
-					$vars,
-					$from,
-					'customer',
-					(int) ( $order['id'] ?? 0 )
+				$results['customer'] = self::normalize_role_result(
+					self::send_for_role(
+						$domain,
+						WebinoCRM_Sms_Constants::TPL_ORDER_CUSTOMER,
+						$event_key,
+						$phone,
+						$vars,
+						$from,
+						'customer',
+						$order_id
+					)
 				);
 			} else {
+				self::log_skip( $domain, $order_id, 'customer', $event_key, 'no_phone' );
 				$results['customer'] = array( 'skipped' => true, 'reason' => 'no_phone' );
 			}
 		}
@@ -86,25 +93,49 @@ final class WebinoCRM_Sms_Order_Notify_Service {
 			if ( ! empty( $options['admin_phones'] ) && is_array( $options['admin_phones'] ) ) {
 				$admin_phones = $options['admin_phones'];
 			}
+			$sent_any = false;
 			foreach ( $admin_phones as $admin_phone ) {
 				$phone = WebinoCRM_Sms_Template_Service::normalize_phone( (string) $admin_phone );
 				if ( '' === $phone ) {
 					continue;
 				}
-				$results['admin'][] = self::send_for_role(
-					$domain,
-					WebinoCRM_Sms_Constants::TPL_ORDER_ADMIN,
-					$event_key,
-					$phone,
-					$vars,
-					$from,
-					'admin',
-					(int) ( $order['id'] ?? 0 )
+				$sent_any           = true;
+				$results['admin'][] = self::normalize_role_result(
+					self::send_for_role(
+						$domain,
+						WebinoCRM_Sms_Constants::TPL_ORDER_ADMIN,
+						$event_key,
+						$phone,
+						$vars,
+						$from,
+						'admin',
+						$order_id
+					)
 				);
+			}
+			if ( ! $sent_any ) {
+				self::log_skip( $domain, $order_id, 'admin', $event_key, 'no_admin_phone' );
+				$results['admin'][] = array( 'skipped' => true, 'reason' => 'no_admin_phone' );
 			}
 		}
 
 		return array( 'ok' => true, 'results' => $results );
+	}
+
+	/**
+	 * @param array<string,mixed>|WP_Error $result Role send result.
+	 * @return array<string,mixed>
+	 */
+	private static function normalize_role_result( $result ) {
+		if ( is_wp_error( $result ) ) {
+			return array(
+				'ok'      => false,
+				'skipped' => false,
+				'reason'  => sanitize_key( (string) $result->get_error_code() ) ?: 'send_failed',
+				'message' => $result->get_error_message(),
+			);
+		}
+		return is_array( $result ) ? $result : array( 'ok' => false, 'reason' => 'send_failed' );
 	}
 
 	/**
@@ -120,10 +151,12 @@ final class WebinoCRM_Sms_Order_Notify_Service {
 	 */
 	private static function send_for_role( $domain, $scope, $event_key, $phone, array $vars, $from, $role, $order_id ) {
 		$tpl = WebinoCRM_Sms_Template_Service::get_one( $domain, $scope, $event_key );
-		if ( ! $tpl || empty( $tpl['enabled'] ) ) {
-			return array( 'skipped' => true, 'reason' => 'template_disabled' );
+		if ( ! $tpl ) {
+			self::log_skip( $domain, $order_id, $role, $event_key, 'template_missing', $phone );
+			return array( 'skipped' => true, 'reason' => 'template_missing' );
 		}
 		if ( empty( $tpl['body'] ) ) {
+			self::log_skip( $domain, $order_id, $role, $event_key, 'empty_template', $phone );
 			return array( 'skipped' => true, 'reason' => 'empty_template' );
 		}
 
@@ -138,7 +171,7 @@ final class WebinoCRM_Sms_Order_Notify_Service {
 			&& '' !== $code;
 
 		if ( ! $synced ) {
-			self::log_skip( $domain, $order_id, $role, $event_key, 'pattern_missing' );
+			self::log_skip( $domain, $order_id, $role, $event_key, 'pattern_missing', $phone );
 			return array(
 				'skipped' => true,
 				'reason'  => 'pattern_missing',
@@ -164,6 +197,20 @@ final class WebinoCRM_Sms_Order_Notify_Service {
 		);
 
 		if ( is_wp_error( $result ) ) {
+			$data   = $result->get_error_data();
+			$msg_id = is_array( $data ) ? (int) ( $data['message_id'] ?? 0 ) : 0;
+			if ( $msg_id > 0 ) {
+				self::tag_message_log( $domain, $msg_id, 'order', (string) $order_id, $role, $event_key );
+			} else {
+				self::log_skip(
+					$domain,
+					$order_id,
+					$role,
+					$event_key,
+					sanitize_key( (string) $result->get_error_code() ) ?: 'send_failed',
+					$phone
+				);
+			}
 			return $result;
 		}
 
@@ -178,18 +225,27 @@ final class WebinoCRM_Sms_Order_Notify_Service {
 	 * @param string $role Role.
 	 * @param string $event_key Event.
 	 * @param string $reason Reason.
+	 * @param string $phone Optional recipient phone.
 	 * @return void
 	 */
-	private static function log_skip( $domain, $order_id, $role, $event_key, $reason ) {
+	private static function log_skip( $domain, $order_id, $role, $event_key, $reason, $phone = '' ) {
+		if ( $order_id <= 0 ) {
+			return;
+		}
 		global $wpdb;
 		$table = WebinoCRM_ModirPayamak_Manager::table( 'messages' );
+		$recipients = array();
+		$phone      = WebinoCRM_Sms_Template_Service::normalize_phone( (string) $phone );
+		if ( '' !== $phone ) {
+			$recipients[] = $phone;
+		}
 		$wpdb->insert(
 			$table,
 			array(
-				'domain'        => WebinoCRM_License_Manager::normalize_domain( $domain ),
-				'sending_type'  => 'pattern',
-				'recipients'    => '[]',
-				'message_body'  => wp_json_encode(
+				'domain'         => WebinoCRM_License_Manager::normalize_domain( $domain ),
+				'sending_type'   => 'pattern',
+				'recipients'     => wp_json_encode( $recipients ),
+				'message_body'   => wp_json_encode(
 					array(
 						'event_key' => $event_key,
 						'reason'    => $reason,
@@ -197,8 +253,8 @@ final class WebinoCRM_Sms_Order_Notify_Service {
 						'role'      => $role,
 					)
 				),
-				'cost'          => 0,
-				'status'        => 'skipped',
+				'cost'           => 0,
+				'status'         => 'skipped',
 				'context_type'   => 'order',
 				'context_id'     => (string) $order_id,
 				'recipient_role' => $role,

@@ -93,6 +93,7 @@
   "nav.erp.sales.modirpayamak": "ModirPayamak SMS",
   "nav.erp.distribution.marketplaceProducts": "Marketplace / products",
   "nav.erp.distribution.marketplaceGitea": "Package server (Gitea)",
+  "nav.erp.distribution.marketplaceBasalam": "Basalam (OAuth)",
   "nav.erp.distribution.marketplaceCategories": "Marketplace categories",
   "nav.erp.distribution.marketplaceOrders": "Marketplace orders",
   "nav.erp.distribution.licenses": "Marketplace licenses",

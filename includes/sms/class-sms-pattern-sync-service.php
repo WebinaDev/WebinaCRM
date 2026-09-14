@@ -72,7 +72,9 @@ final class WebinoCRM_Sms_Pattern_Sync_Service {
 					: WebinoCRM_Sms_Constants::default_customer_template( $event_key );
 			}
 		}
-		$enabled = $tpl ? ! empty( $tpl['enabled'] ) : true;
+		$shop    = WebinoCRM_Sms_Settings_Service::get( $domain, WebinoCRM_Sms_Constants::SCOPE_SHOP );
+		$toggles = WebinoCRM_Sms_Constants::resolve_event_toggles( $shop, $event_key );
+		$enabled = ( 'order_admin' === $scope ) ? ! empty( $toggles['admin'] ) : ! empty( $toggles['customer'] );
 		WebinoCRM_Sms_Template_Service::upsert( $domain, $scope, $event_key, $body, $enabled, $code, $param_map ?: null );
 		$tpl = WebinoCRM_Sms_Template_Service::get_one( $domain, $scope, $event_key );
 		if ( ! $tpl ) {
@@ -233,7 +235,10 @@ final class WebinoCRM_Sms_Pattern_Sync_Service {
 			return new WP_Error( 'pattern_sync_failed', $error, array( 'status' => 502 ) );
 		}
 
-		WebinoCRM_Sms_Template_Service::upsert( $domain, $scope, $event_key, $body, true, $code );
+		$shop    = WebinoCRM_Sms_Settings_Service::get( $domain, WebinoCRM_Sms_Constants::SCOPE_SHOP );
+		$toggles = WebinoCRM_Sms_Constants::resolve_event_toggles( $shop, $event_key );
+		$enabled = ( 'order_admin' === $scope ) ? ! empty( $toggles['admin'] ) : ! empty( $toggles['customer'] );
+		WebinoCRM_Sms_Template_Service::upsert( $domain, $scope, $event_key, $body, $enabled, $code );
 
 		return array(
 			'ok'            => true,

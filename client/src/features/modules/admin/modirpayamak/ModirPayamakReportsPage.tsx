@@ -20,6 +20,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { TableListSkeleton } from "@/components/TableListSkeleton"
+import { DatePicker } from "@/components/ui/date-picker"
 import { getModirPayamakMessages } from "@/api/modirpayamak"
 import { getAjaxMessage } from "@/api/client"
 import {
@@ -54,6 +55,8 @@ export function ModirPayamakReportsPage() {
   const [page, setPage] = useState(1)
   const [recipient, setRecipient] = useState("")
   const [statusFilter, setStatusFilter] = useState("")
+  const [dateFrom, setDateFrom] = useState("")
+  const [dateTo, setDateTo] = useState("")
   const [domainInput, setDomainInput] = useState(domainFilter)
   const [items, setItems] = useState<EdgeRow[]>([])
   const [localMessages, setLocalMessages] = useState<Array<Record<string, unknown>>>([])
@@ -94,9 +97,17 @@ export function ModirPayamakReportsPage() {
       return
     }
     const filters: Record<string, unknown> = {}
-    if (recipient.trim()) filters.recipient = recipient.trim()
-    if (statusFilter.trim()) filters.status = statusFilter.trim()
-    if (domainFilter.trim()) filters.domain = domainFilter.trim()
+    if (recipient.trim()) filters.number = recipient.trim()
+    if (statusFilter.trim()) filters.state_id = statusFilter.trim()
+    if (domainFilter.trim()) filters.username = domainFilter.trim()
+    if (dateFrom.trim()) {
+      const ts = Math.floor(new Date(`${dateFrom.trim()}T00:00:00`).getTime() / 1000)
+      if (Number.isFinite(ts)) filters.create_from_date = String(ts)
+    }
+    if (dateTo.trim()) {
+      const ts = Math.floor(new Date(`${dateTo.trim()}T23:59:59`).getTime() / 1000)
+      if (Number.isFinite(ts)) filters.create_to_date = String(ts)
+    }
     const res =
       tab === "outbox"
         ? await edgeReportOutbox(page, 20, filters)
@@ -112,7 +123,7 @@ export function ModirPayamakReportsPage() {
       setRaw(res.raw)
     }
     setLoading(false)
-  }, [domainFilter, page, recipient, setError, statusFilter, tab, t])
+  }, [dateFrom, dateTo, domainFilter, page, recipient, setError, statusFilter, tab, t])
 
   useEffect(() => {
     void load()
@@ -168,8 +179,20 @@ export function ModirPayamakReportsPage() {
                 </div>
                 <div className="space-y-1">
                   <Label>{t("pages.modirpayamak.status")}</Label>
-                  <Input value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="w-[140px]" />
+                  <Input value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)} className="w-[140px]" placeholder="state_id" />
                 </div>
+                {tab === "outbox" ? (
+                  <>
+                    <div className="space-y-1">
+                      <Label>{t("pages.modirpayamak.dateFrom")}</Label>
+                      <DatePicker value={dateFrom} onChange={setDateFrom} className="w-[160px]" />
+                    </div>
+                    <div className="space-y-1">
+                      <Label>{t("pages.modirpayamak.dateTo")}</Label>
+                      <DatePicker value={dateTo} onChange={setDateTo} className="w-[160px]" />
+                    </div>
+                  </>
+                ) : null}
               </>
             ) : null}
           </PmFilterBar>

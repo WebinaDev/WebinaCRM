@@ -90,6 +90,7 @@ const ROUTE_ENTRIES: RouteEntry[] = [
   { paths: ['admin/marketplace/modules/new', 'marketplace/modules/new'], menuId: 'marketplace-products', load: () => import('@/pages/crm/marketplace-module-detail-page'), exportName: 'MarketplaceModuleDetailPage' },
   { paths: ['admin/marketplace/modules/:id', 'marketplace/modules/:id'], menuId: 'marketplace-products', load: () => import('@/pages/crm/marketplace-module-detail-page'), exportName: 'MarketplaceModuleDetailPage' },
   { paths: ['admin/marketplace/gitea', 'marketplace/gitea'], menuId: 'marketplace-products', load: () => import('@/pages/crm/marketplace-gitea-page'), exportName: 'MarketplaceGiteaSettingsPage' },
+  { paths: ['admin/marketplace/basalam', 'marketplace/basalam'], menuId: 'marketplace-products', load: () => import('@/pages/crm/marketplace-basalam-page'), exportName: 'MarketplaceBasalamSettingsPage' },
   { paths: ['admin/marketplace/orders', 'marketplace/orders'], menuId: 'marketplace-orders', load: () => import('@/pages/crm/marketplace-orders-page'), exportName: 'MarketplaceOrdersPage' },
   { paths: ['admin/logs', 'logs'], menuId: 'logs', load: () => import('@/pages/crm/logs-page'), exportName: 'LogsPage' },
   { paths: ['admin/analytics/visitors', 'visitor-statistics'], menuId: 'visitor-statistics', load: () => import('@/pages/crm/visitor-statistics-page'), exportName: 'VisitorStatisticsPage' },

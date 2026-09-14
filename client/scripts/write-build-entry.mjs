@@ -18,8 +18,29 @@ if (!entry?.file) {
 }
 
 const js = String(entry.file).replace(/^\//, '')
-const css =
-  Array.isArray(entry.css) && entry.css[0] ? String(entry.css[0]).replace(/^\//, '') : ''
+
+/** Resolve CSS from entry or imported chunks (Rolldown may attach CSS to _src-* chunks). */
+function resolveCss(manifestObj, entryChunk) {
+  if (Array.isArray(entryChunk.css) && entryChunk.css[0]) {
+    return String(entryChunk.css[0]).replace(/^\//, '')
+  }
+  if (Array.isArray(entryChunk.imports)) {
+    for (const key of entryChunk.imports) {
+      const chunk = manifestObj[key]
+      if (Array.isArray(chunk?.css) && chunk.css[0]) {
+        return String(chunk.css[0]).replace(/^\//, '')
+      }
+    }
+  }
+  for (const chunk of Object.values(manifestObj)) {
+    if (Array.isArray(chunk?.css) && chunk.css[0]) {
+      return String(chunk.css[0]).replace(/^\//, '')
+    }
+  }
+  return ''
+}
+
+const css = resolveCss(manifest, entry)
 
 let shared = ''
 if (Array.isArray(entry.imports)) {
@@ -56,5 +77,10 @@ if (css) {
   copyFileSync(cssSrc, resolve(buildDir, 'assets/index.css'))
 }
 console.log('[write-build-entry] compat aliases -> assets/index.js', basename(js))
+if (css) {
+  console.log('[write-build-entry] compat aliases -> assets/index.css', basename(css))
+} else {
+  console.warn('[write-build-entry] WARNING: no CSS found in Vite manifest')
+}
 
 console.log('[write-build-entry]', payload)

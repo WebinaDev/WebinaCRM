@@ -67,8 +67,8 @@ class WebinoCRM_ModirPayamak_Edge_Client {
 				'Accept'        => 'application/json',
 			),
 		);
-		if ( in_array( $args['method'], array( 'POST', 'PUT', 'PATCH' ), true ) && $body ) {
-			$args['body'] = wp_json_encode( $body );
+		if ( in_array( $args['method'], array( 'POST', 'PUT', 'PATCH' ), true ) ) {
+			$args['body'] = wp_json_encode( $body ? $body : new stdClass() );
 		}
 
 		$response = wp_remote_request( $url, $args );
@@ -108,6 +108,22 @@ class WebinoCRM_ModirPayamak_Edge_Client {
 			'message' => (string) $message,
 			'raw'     => '',
 		);
+	}
+
+	/**
+	 * Normalize pagination query args.
+	 *
+	 * @param array<string,mixed> $query Query.
+	 * @return array<string,mixed>
+	 */
+	private static function with_pagination( array $query ) {
+		if ( ! isset( $query['page'] ) ) {
+			$query['page'] = 1;
+		}
+		if ( ! isset( $query['per_page'] ) && ! isset( $query['limit'] ) ) {
+			$query['per_page'] = 50;
+		}
+		return $query;
 	}
 
 	// --- Auth ---
@@ -181,17 +197,22 @@ class WebinoCRM_ModirPayamak_Edge_Client {
 	}
 
 	public static function report_outbox_by_id( $outbox_id ) {
-		return self::request( 'GET', 'api/report/outbox/' . rawurlencode( (string) $outbox_id ) );
+		return self::request(
+			'GET',
+			'api/report/by_bulk',
+			array(),
+			array( 'messages_outbox_id' => (string) $outbox_id )
+		);
 	}
 
 	public static function report_inbox( $page = 1, $limit = 20, array $filters = array() ) {
 		return self::request(
 			'POST',
-			'api/report/inbox',
+			'api/report/messages-inbox',
 			array(
-				'page'    => (int) $page,
-				'limit'   => (int) $limit,
-				'filters' => $filters,
+				'page'     => (int) $page,
+				'per_page' => (int) $limit,
+				'filters'  => $filters,
 			)
 		);
 	}
@@ -216,7 +237,7 @@ class WebinoCRM_ModirPayamak_Edge_Client {
 	 */
 	public static function report_bulk_recipients( $outbox_id, array $query = array() ) {
 		$query['bulk_id'] = (string) $outbox_id;
-		return self::request( 'GET', 'api/report/bulk-recipient', array(), $query );
+		return self::request( 'GET', 'api/report/recipients', array(), self::with_pagination( $query ) );
 	}
 
 	// --- Payment ---
@@ -226,7 +247,7 @@ class WebinoCRM_ModirPayamak_Edge_Client {
 
 	// --- Patterns ---
 	public static function list_patterns( array $query = array() ) {
-		return self::request( 'GET', 'api/patterns', array(), $query );
+		return self::request( 'GET', 'api/patterns', array(), self::with_pagination( $query ) );
 	}
 
 	public static function get_pattern( $code ) {
@@ -314,7 +335,7 @@ class WebinoCRM_ModirPayamak_Edge_Client {
 
 	// --- Phonebook ---
 	public static function list_phonebooks( array $query = array() ) {
-		return self::request( 'GET', 'api/phonebooks', array(), $query );
+		return self::request( 'GET', 'api/phonebooks/list-new', array(), self::with_pagination( $query ) );
 	}
 
 	public static function create_phonebook( array $payload ) {
@@ -326,25 +347,49 @@ class WebinoCRM_ModirPayamak_Edge_Client {
 	}
 
 	public static function delete_phonebook( $id ) {
-		return self::request( 'DELETE', 'api/phonebooks/' . (int) $id );
+		return self::request(
+			'POST',
+			'api/phonebooks/delete-list',
+			array(
+				'listPhonebooks' => array( (int) $id ),
+			)
+		);
 	}
 
 	public static function list_phonebook_numbers( $phonebook_id, array $query = array() ) {
-		return self::request( 'GET', 'api/phonebooks/' . (int) $phonebook_id . '/numbers', array(), $query );
+		$query['phonebook_id'] = (string) (int) $phonebook_id;
+		return self::request( 'GET', 'api/phonebooks/numbers/contact-list', array(), self::with_pagination( $query ) );
 	}
 
 	public static function store_phonebook_number( $phonebook_id, array $payload ) {
-		return self::request( 'POST', 'api/phonebooks/' . (int) $phonebook_id . '/numbers', $payload );
+		$item = $payload;
+		if ( empty( $item['phonebook_id'] ) ) {
+			$item['phonebook_id'] = (string) (int) $phonebook_id;
+		}
+		$list = isset( $payload['list'] ) && is_array( $payload['list'] ) ? $payload['list'] : array( $item );
+		return self::request(
+			'POST',
+			'api/phonebooks/numbers/add-list-new',
+			array( 'list' => array_values( $list ) )
+		);
 	}
 
 	// --- Numbers ---
 	public static function list_numbers( array $query = array() ) {
-		return self::request( 'GET', 'api/numbers', array(), $query );
+		return self::request( 'GET', 'api/number/numbers', array(), self::with_pagination( $query ) );
+	}
+
+	public static function assign_number( array $payload ) {
+		return self::request( 'POST', 'api/numbers/assign', $payload );
+	}
+
+	public static function unassign_number( array $payload ) {
+		return self::request( 'POST', 'api/numbers/unassign', $payload );
 	}
 
 	// --- Users (reseller) ---
 	public static function list_users( array $query = array() ) {
-		return self::request( 'GET', 'api/user', array(), $query );
+		return self::request( 'GET', 'api/user/list', array(), self::with_pagination( $query ) );
 	}
 
 	public static function create_user( array $payload ) {
@@ -352,46 +397,72 @@ class WebinoCRM_ModirPayamak_Edge_Client {
 	}
 
 	public static function show_user( $user_id ) {
-		return self::request( 'GET', 'api/user/' . rawurlencode( (string) $user_id ) );
+		return self::request(
+			'GET',
+			'api/user/show',
+			array(),
+			array( 'user_id' => (string) $user_id )
+		);
 	}
 
 	public static function update_user( $user_id, array $payload ) {
-		return self::request( 'PUT', 'api/user/' . rawurlencode( (string) $user_id ), $payload );
+		if ( empty( $payload['user_id'] ) ) {
+			$payload['user_id'] = is_numeric( $user_id ) ? (int) $user_id : $user_id;
+		}
+		return self::request( 'POST', 'api/user/update', $payload );
 	}
 
-	// --- Packages ---
+	// --- Packages (Edge ACL) ---
 	public static function list_packages( array $query = array() ) {
-		return self::request( 'GET', 'api/packages', array(), $query );
+		return self::request( 'GET', 'api/acl/package/list', array(), self::with_pagination( $query ) );
 	}
 
 	// --- Drafts ---
+	public static function list_draft_groups( array $query = array() ) {
+		return self::request( 'GET', 'api/user/draft/group/list', array(), self::with_pagination( $query ) );
+	}
+
 	public static function list_drafts( array $query = array() ) {
-		return self::request( 'GET', 'api/drafts', array(), $query );
+		return self::request( 'GET', 'api/user/draft/list', array(), $query );
 	}
 
 	public static function create_draft( array $payload ) {
-		return self::request( 'POST', 'api/drafts', $payload );
+		return self::request( 'POST', 'api/user/draft', $payload );
 	}
 
 	public static function delete_draft( $id ) {
-		return self::request( 'DELETE', 'api/drafts/' . (int) $id );
+		return self::request(
+			'POST',
+			'api/user/draft/delete',
+			array(
+				'draft_ids' => array( (int) $id ),
+			)
+		);
 	}
 
 	// --- Tickets ---
 	public static function list_tickets( array $query = array() ) {
-		return self::request( 'GET', 'api/tickets', array(), $query );
+		return self::request( 'GET', 'api/ticket', array(), self::with_pagination( $query ) );
 	}
 
 	public static function create_ticket( array $payload ) {
-		return self::request( 'POST', 'api/tickets', $payload );
+		return self::request( 'POST', 'api/ticket', $payload );
 	}
 
 	public static function show_ticket( $id ) {
-		return self::request( 'GET', 'api/tickets/' . (int) $id );
+		return self::request(
+			'GET',
+			'api/ticket/show',
+			array(),
+			array( 'ticket_id' => (int) $id )
+		);
 	}
 
 	public static function reply_ticket( $id, array $payload ) {
-		return self::request( 'POST', 'api/tickets/' . (int) $id . '/reply', $payload );
+		if ( empty( $payload['ticket_id'] ) ) {
+			$payload['ticket_id'] = (int) $id;
+		}
+		return self::request( 'POST', 'api/ticket/interaction', $payload );
 	}
 
 	/**
