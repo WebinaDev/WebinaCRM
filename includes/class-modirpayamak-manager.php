@@ -145,6 +145,104 @@ class WebinoCRM_ModirPayamak_Manager {
 	}
 
 	/**
+	 * Struck list price for SMS ads UI (Toman).
+	 *
+	 * @return float
+	 */
+	public static function price_list() {
+		$list = (float) WebinoCRM_Settings_Handler::get_setting( 'modirpayamak_sms_price_list', 1350 );
+		return max( self::price_per_unit(), $list );
+	}
+
+	/**
+	 * @return float
+	 */
+	public static function notif_price_per_unit() {
+		return max( 1, (float) WebinoCRM_Settings_Handler::get_setting( 'modirpayamak_notif_price_per_unit', 499 ) );
+	}
+
+	/**
+	 * @return float
+	 */
+	public static function notif_price_list() {
+		$list = (float) WebinoCRM_Settings_Handler::get_setting( 'modirpayamak_notif_price_list', 1000 );
+		return max( self::notif_price_per_unit(), $list );
+	}
+
+	/**
+	 * Volume discount tiers sorted by min ascending.
+	 *
+	 * @return array<int,array{min:int,discount_percent:float}>
+	 */
+	public static function volume_tiers() {
+		$raw = WebinoCRM_Settings_Handler::get_setting(
+			'modirpayamak_sms_volume_tiers',
+			'[{"min":100,"discount_percent":5},{"min":500,"discount_percent":10},{"min":1000,"discount_percent":15}]'
+		);
+		if ( is_array( $raw ) ) {
+			$decoded = $raw;
+		} else {
+			$decoded = json_decode( (string) $raw, true );
+		}
+		if ( ! is_array( $decoded ) ) {
+			return array();
+		}
+		$out = array();
+		foreach ( $decoded as $tier ) {
+			if ( ! is_array( $tier ) ) {
+				continue;
+			}
+			$out[] = array(
+				'min'              => max( 1, (int) ( $tier['min'] ?? 0 ) ),
+				'discount_percent' => max( 0, min( 90, (float) ( $tier['discount_percent'] ?? 0 ) ) ),
+			);
+		}
+		usort(
+			$out,
+			static function ( $a, $b ) {
+				return (int) $a['min'] <=> (int) $b['min'];
+			}
+		);
+		return $out;
+	}
+
+	/**
+	 * Best volume discount percent for a recipient count.
+	 *
+	 * @param int $recipient_count Count.
+	 * @return float
+	 */
+	public static function volume_discount_percent( $recipient_count ) {
+		$n = max( 0, (int) $recipient_count );
+		$best = 0.0;
+		foreach ( self::volume_tiers() as $tier ) {
+			if ( $n >= (int) $tier['min'] ) {
+				$best = (float) $tier['discount_percent'];
+			}
+		}
+		return $best;
+	}
+
+	/**
+	 * Apply volume discount to a Toman cost.
+	 *
+	 * @param float $cost_toman Cost.
+	 * @param int   $recipient_count Recipients.
+	 * @return array{cost_toman:float,discount_percent:float}
+	 */
+	public static function apply_volume_discount( $cost_toman, $recipient_count ) {
+		$pct = self::volume_discount_percent( $recipient_count );
+		$cost = max( 0, (float) $cost_toman );
+		if ( $pct > 0 ) {
+			$cost = round( $cost * ( 1 - ( $pct / 100 ) ), 2 );
+		}
+		return array(
+			'cost_toman'       => $cost,
+			'discount_percent' => $pct,
+		);
+	}
+
+	/**
 	 * @param string $domain Domain.
 	 * @return array<string,mixed>|null
 	 */
@@ -378,7 +476,15 @@ class WebinoCRM_ModirPayamak_Manager {
 		$payload['from_number'] = $from;
 
 		$quote = self::quote_payload( $payload );
-		$cost  = max( 0.0001, (float) $quote['cost_toman'] );
+		$cost_base = max( 0.0001, (float) $quote['cost_toman'] );
+		$recipients = self::extract_recipients( $payload );
+		$vol = self::apply_volume_discount( $cost_base, count( $recipients ) );
+		$channel = sanitize_key( (string) ( $payload['channel'] ?? 'sms' ) );
+		if ( 'notification' === $channel || 'notif' === $channel ) {
+			$n = max( 1, count( $recipients ) );
+			$vol = self::apply_volume_discount( self::notif_price_per_unit() * $n, $n );
+		}
+		$cost = max( 0.0001, (float) $vol['cost_toman'] );
 
 		if ( (float) $account['balance'] < $cost ) {
 			return new WP_Error(
@@ -592,14 +698,18 @@ class WebinoCRM_ModirPayamak_Manager {
 	public static function format_account_public( $account ) {
 		$domain = (string) ( $account['domain'] ?? '' );
 		return array(
-			'id'             => (int) ( $account['id'] ?? 0 ),
-			'domain'         => $domain,
-			'balance'        => (float) ( $account['balance'] ?? 0 ),
-			'default_from'   => (string) ( $account['default_from'] ?? '' ),
-			'status'         => (string) ( $account['status'] ?? self::STATUS_ACTIVE ),
-			'expires_at'     => $account['expires_at'] ?? null,
-			'price_per_unit' => self::price_per_unit(),
-			'numbers'        => $domain ? self::get_domain_numbers( $domain ) : array(),
+			'id'                   => (int) ( $account['id'] ?? 0 ),
+			'domain'               => $domain,
+			'balance'              => (float) ( $account['balance'] ?? 0 ),
+			'default_from'         => (string) ( $account['default_from'] ?? '' ),
+			'status'               => (string) ( $account['status'] ?? self::STATUS_ACTIVE ),
+			'expires_at'           => $account['expires_at'] ?? null,
+			'price_per_unit'       => self::price_per_unit(),
+			'price_list'           => self::price_list(),
+			'notif_price_per_unit' => self::notif_price_per_unit(),
+			'notif_price_list'     => self::notif_price_list(),
+			'volume_tiers'         => self::volume_tiers(),
+			'numbers'              => $domain ? self::get_domain_numbers( $domain ) : array(),
 		);
 	}
 

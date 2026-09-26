@@ -1,1 +1,0 @@
-import{wr as e}from"./dashboard-shared-V2q8HrHL.js";import{t}from"./SettingsModulePage-iQRdVVFk.js";var n=e();function r(){return(0,n.jsx)(t,{moduleId:`general`})}export{r as SettingsGeneralPage};

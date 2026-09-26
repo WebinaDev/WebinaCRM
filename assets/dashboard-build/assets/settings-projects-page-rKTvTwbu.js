@@ -1,0 +1,1 @@
+import{wr as e}from"./dashboard-shared-B79XWjbk.js";import{t}from"./SettingsModulePage-Bb7ZAFc_.js";var n=e();function r(){return(0,n.jsx)(t,{moduleId:`projects`})}export{r as SettingsProjectsPage};

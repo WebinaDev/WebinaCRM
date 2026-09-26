@@ -322,19 +322,59 @@ class WebinoCRM_ModirPayamak_API {
 		}
 		$domain = WebinoCRM_License_Manager::normalize_domain( (string) ( $body['domain'] ?? '' ) );
 		unset( $body['domain'] );
+		$channel = sanitize_key( (string) ( $body['channel'] ?? 'sms' ) );
 		$edge = WebinoCRM_ModirPayamak_Edge_Client::calculate_price( $body );
 		$quote = WebinoCRM_ModirPayamak_Manager::quote_payload( $body );
+		$recipient_count = (int) ( $quote['recipient_count'] ?? 0 );
+		if ( $recipient_count < 1 && ! empty( $body['recipient_count'] ) ) {
+			$recipient_count = max( 1, (int) $body['recipient_count'] );
+		}
+
+		// Notification channel: flat unit × recipients (Edge SMS still used for delivery in v1).
+		if ( 'notification' === $channel || 'notif' === $channel ) {
+			$unit = WebinoCRM_ModirPayamak_Manager::notif_price_per_unit();
+			$n    = max( 1, $recipient_count );
+			$base = $unit * $n;
+			$vol  = WebinoCRM_ModirPayamak_Manager::apply_volume_discount( $base, $n );
+			return new WP_REST_Response(
+				array(
+					'ok'                   => true,
+					'edge'                 => $edge['data'] ?? null,
+					'customer_cost'        => (float) $vol['cost_toman'],
+					'cost_before_discount' => (float) $base,
+					'discount_percent'     => (float) $vol['discount_percent'],
+					'cost_rial'            => (float) $vol['cost_toman'] * 10,
+					'parts'                => $n,
+					'line_type'            => 'notification',
+					'encoding'             => 'fa',
+					'quote'                => $quote,
+					'channel'              => 'notification',
+					'price_per_unit'       => $unit,
+					'price_list'           => WebinoCRM_ModirPayamak_Manager::notif_price_list(),
+					'volume_tiers'         => WebinoCRM_ModirPayamak_Manager::volume_tiers(),
+				),
+				200
+			);
+		}
+
+		$base = (float) $quote['cost_toman'];
+		$vol  = WebinoCRM_ModirPayamak_Manager::apply_volume_discount( $base, $recipient_count );
 		return new WP_REST_Response(
 			array(
-				'ok'             => ! empty( $edge['ok'] ) || true,
-				'edge'           => $edge['data'] ?? null,
-				'customer_cost'  => (float) $quote['cost_toman'],
-				'cost_rial'      => (float) $quote['cost_rial'],
-				'parts'          => (int) $quote['parts'],
-				'line_type'      => (string) $quote['line_type'],
-				'encoding'       => (string) $quote['encoding'],
-				'quote'          => $quote,
-				'price_per_unit' => WebinoCRM_ModirPayamak_Manager::price_per_unit(),
+				'ok'                   => ! empty( $edge['ok'] ) || true,
+				'edge'                 => $edge['data'] ?? null,
+				'customer_cost'        => (float) $vol['cost_toman'],
+				'cost_before_discount' => $base,
+				'discount_percent'     => (float) $vol['discount_percent'],
+				'cost_rial'            => (float) $quote['cost_rial'],
+				'parts'                => (int) $quote['parts'],
+				'line_type'            => (string) $quote['line_type'],
+				'encoding'             => (string) $quote['encoding'],
+				'quote'                => $quote,
+				'channel'              => 'sms',
+				'price_per_unit'       => WebinoCRM_ModirPayamak_Manager::price_per_unit(),
+				'price_list'           => WebinoCRM_ModirPayamak_Manager::price_list(),
+				'volume_tiers'         => WebinoCRM_ModirPayamak_Manager::volume_tiers(),
 			),
 			200
 		);
